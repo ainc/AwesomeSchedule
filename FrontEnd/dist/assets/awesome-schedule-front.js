@@ -32,6 +32,18 @@ define('awesome-schedule-front/components/app-version', ['exports', 'ember-cli-a
 define('awesome-schedule-front/controllers/array', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Controller;
 });
+define('awesome-schedule-front/controllers/calendarTile', ['exports'], function (exports) {
+	//We can store the basic calendar information here, dates, times etc. Named it calendarTile in hopes that we can use this type of information to build the blocks of our calendar.
+	exports['default'] = Ember.Controller.extend({
+		d0: 'Sunday',
+		d1: 'Monday',
+		d2: 'Tuesday',
+		d3: 'Wednesday',
+		d4: 'Thursday',
+		d5: 'Friday',
+		d6: 'Saturday'
+	});
+});
 define('awesome-schedule-front/controllers/object', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Controller;
 });
@@ -113,7 +125,13 @@ define("awesome-schedule-front/templates/application", ["exports"], function (ex
         var el2 = dom.createTextNode("Under Development");
         dom.appendChild(el1, el2);
         dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n\n");
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("h3");
+        var el2 = dom.createComment("");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
         dom.appendChild(el0, el1);
         var el1 = dom.createComment("");
         dom.appendChild(el0, el1);
@@ -122,11 +140,12 @@ define("awesome-schedule-front/templates/application", ["exports"], function (ex
         return el0;
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var morphs = new Array(1);
-        morphs[0] = dom.createMorphAt(fragment, 2, 2, contextualElement);
+        var morphs = new Array(2);
+        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [2]), 0, 0);
+        morphs[1] = dom.createMorphAt(fragment, 4, 4, contextualElement);
         return morphs;
       },
-      statements: [["content", "outlet", ["loc", [null, [3, 0], [3, 10]]]]],
+      statements: [["content", "d1", ["loc", [null, [2, 4], [2, 10]]]], ["content", "outlet", ["loc", [null, [3, 0], [3, 10]]]]],
       locals: [],
       templates: []
     };
@@ -158,7 +177,7 @@ catch(err) {
 });
 
 if (!runningTests) {
-  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+ae9a28e4"});
+  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+4650bbbf"});
 }
 
 /* jshint ignore:end */
