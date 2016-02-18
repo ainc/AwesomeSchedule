@@ -6,6 +6,9 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+	this.route('calendar');
+	this.route('admin');
+	this.route('coach');
 });
 
 export default Router;
