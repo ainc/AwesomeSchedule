@@ -116,7 +116,7 @@ define("awesome-schedule-front/templates/application", ["exports"], function (ex
             },
             "end": {
               "line": 4,
-              "column": 31
+              "column": 49
             }
           },
           "moduleName": "awesome-schedule-front/templates/application.hbs"
@@ -150,7 +150,7 @@ define("awesome-schedule-front/templates/application", ["exports"], function (ex
             },
             "end": {
               "line": 5,
-              "column": 30
+              "column": 48
             }
           },
           "moduleName": "awesome-schedule-front/templates/application.hbs"
@@ -184,7 +184,7 @@ define("awesome-schedule-front/templates/application", ["exports"], function (ex
             },
             "end": {
               "line": 6,
-              "column": 32
+              "column": 50
             }
           },
           "moduleName": "awesome-schedule-front/templates/application.hbs"
@@ -291,7 +291,7 @@ define("awesome-schedule-front/templates/application", ["exports"], function (ex
         morphs[3] = dom.createMorphAt(dom.childAt(fragment, [4]), 1, 1);
         return morphs;
       },
-      statements: [["block", "link-to", ["calendar"], [], 0, null, ["loc", [null, [4, 0], [4, 43]]]], ["block", "link-to", ["admin"], [], 1, null, ["loc", [null, [5, 0], [5, 42]]]], ["block", "link-to", ["coach"], [], 2, null, ["loc", [null, [6, 0], [6, 44]]]], ["content", "outlet", ["loc", [null, [10, 0], [10, 10]]]]],
+      statements: [["block", "link-to", ["calendar"], ["class", "navButton"], 0, null, ["loc", [null, [4, 0], [4, 61]]]], ["block", "link-to", ["admin"], ["class", "navButton"], 1, null, ["loc", [null, [5, 0], [5, 60]]]], ["block", "link-to", ["coach"], ["class", "navButton"], 2, null, ["loc", [null, [6, 0], [6, 62]]]], ["content", "outlet", ["loc", [null, [10, 0], [10, 10]]]]],
       locals: [],
       templates: [child0, child1, child2]
     };
@@ -323,7 +323,7 @@ catch(err) {
 });
 
 if (!runningTests) {
-  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+a5440edc"});
+  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+0515a357"});
 }
 
 /* jshint ignore:end */

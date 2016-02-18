@@ -2,11 +2,17 @@
 	background-color: dimgray;
 }
 
-#ember454{
+
+/*Navigation buttons at the top of the page*/
+.navButton{
 	background-color:#d81213;
 	padding:10px;
 	border-radius: 4px;
 	text-decoration:none;
 	color:white;
+	font-size:16px;
+    font-family: monospace;
 
 }
+
+
