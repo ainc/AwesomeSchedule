@@ -12,7 +12,11 @@
 	color:white;
 	font-size:16px;
     font-family: monospace;
-
 }
 
-
+.calendarWrapper{
+	width:90%;
+	height:90%;
+	box-shadow: 5px;
+	background-color:white;
+}

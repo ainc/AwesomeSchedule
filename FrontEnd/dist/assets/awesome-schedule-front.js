@@ -32,17 +32,14 @@ define('awesome-schedule-front/components/app-version', ['exports', 'ember-cli-a
 define('awesome-schedule-front/controllers/array', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Controller;
 });
-define('awesome-schedule-front/controllers/calendarTile', ['exports'], function (exports) {
-	//We can store the basic calendar information here, dates, times etc. Named it calendarTile in hopes that we can use this type of information to build the blocks of our calendar.
-	exports['default'] = Ember.Controller.extend({
-		d0: 'Sunday',
-		d1: 'Monday',
-		d2: 'Tuesday',
-		d3: 'Wednesday',
-		d4: 'Thursday',
-		d5: 'Friday',
-		d6: 'Saturday'
-	});
+define("awesome-schedule-front/controllers/calendar", ["exports"], function (exports) {
+  exports["default"] = Ember.Controller.extend({
+    /*actions: {
+      toggleBody() {
+        this.toggleProperty('isExpanded');
+      }
+    }*/
+  });
 });
 define('awesome-schedule-front/controllers/object', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Controller;
@@ -297,6 +294,45 @@ define("awesome-schedule-front/templates/application", ["exports"], function (ex
     };
   })());
 });
+define("awesome-schedule-front/templates/calendar", ["exports"], function (exports) {
+  exports["default"] = Ember.HTMLBars.template((function () {
+    return {
+      meta: {
+        "revision": "Ember@1.13.12",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 4,
+            "column": 6
+          }
+        },
+        "moduleName": "awesome-schedule-front/templates/calendar.hbs"
+      },
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createElement("div");
+        dom.setAttribute(el1, "class", "calendarWrapper");
+        var el2 = dom.createTextNode("\n	\n	\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes() {
+        return [];
+      },
+      statements: [],
+      locals: [],
+      templates: []
+    };
+  })());
+});
 /* jshint ignore:start */
 
 /* jshint ignore:end */
@@ -323,7 +359,7 @@ catch(err) {
 });
 
 if (!runningTests) {
-  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+0515a357"});
+  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+3628f80f"});
 }
 
 /* jshint ignore:end */
