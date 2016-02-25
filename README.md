@@ -24,8 +24,11 @@ from the command line, navigate inside AwesomeScheduleFront, from there use "emb
 
 
 ###Special thanks to###
+
 Bourbon - bourbon.io
+
 Neat -    ^
+
 Brocolli-sass - https://www.npmjs.com/package/broccoli-sass
 
 
