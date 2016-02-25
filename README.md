@@ -22,3 +22,10 @@
 from the command line, navigate inside AwesomeScheduleFront, from there use "ember serve" (must have [ember](http://emberjs.com) correctly installed). You may then open a web browser and navigate to localhost:4200 to see the app.
 
 
+
+###Special thanks to###
+Bourbon - bourbon.io
+Neat -    ^
+Brocolli-sass - https://www.npmjs.com/package/broccoli-sass
+
+
