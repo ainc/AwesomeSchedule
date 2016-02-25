@@ -27,7 +27,7 @@
 }
 
 #logo{
-	background-image: url('/assets/images/logo.png');
+	background-image: url('./assets/images/logo.png');
 }
 
 .logoTileWrapper{
@@ -35,3 +35,11 @@
 	height:50px;
 	background-color:"white";
 }
+
+.blankTile{
+	min-width:30px;
+	min-height:40px;
+	border-radius:2px;
+	background-color:blue;
+}
+
