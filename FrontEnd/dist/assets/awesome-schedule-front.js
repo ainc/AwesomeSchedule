@@ -3,6 +3,11 @@
 
 /* jshint ignore:end */
 
+define("awesome-schedule-front/adapters/application", ["exports", "ember-data"], function (exports, _emberData) {
+    exports["default"] = _emberData["default"].RESTAdapter.extend({
+        namespace: 'api'
+    });
+});
 define('awesome-schedule-front/app', ['exports', 'ember', 'ember/resolver', 'ember/load-initializers', 'awesome-schedule-front/config/environment'], function (exports, _ember, _emberResolver, _emberLoadInitializers, _awesomeScheduleFrontConfigEnvironment) {
 
   var App = undefined;
@@ -238,10 +243,15 @@ define('awesome-schedule-front/components/logo-tile', ['exports', 'ember'], func
 define('awesome-schedule-front/controllers/array', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Controller;
 });
-define('awesome-schedule-front/controllers/calendar', ['exports'], function (exports) {
-  exports['default'] = Ember.Controller.extend({
-    wrapper: 'calendarWrapper'
-  });
+define("awesome-schedule-front/controllers/calendar", ["exports"], function (exports) {
+    exports["default"] = Ember.Controller.extend({
+        wrapper: 'calendarWrapper'
+    });
+
+    $.ajax({
+        type: "POST",
+        url: "/api/test"
+    });
 });
 define('awesome-schedule-front/controllers/object', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Controller;
@@ -774,7 +784,7 @@ define("awesome-schedule-front/templates/application", ["exports"], function (ex
         var el2 = dom.createTextNode("\n");
         dom.appendChild(el1, el2);
         var el2 = dom.createElement("h3");
-        var el3 = dom.createTextNode("An app for the modern day workplace.");
+        var el3 = dom.createTextNode("An app for the modern day workplace. ");
         dom.appendChild(el2, el3);
         dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n");
@@ -4643,7 +4653,7 @@ catch(err) {
 });
 
 if (!runningTests) {
-  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+99a396a5"});
+  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+57945605"});
 }
 
 /* jshint ignore:end */

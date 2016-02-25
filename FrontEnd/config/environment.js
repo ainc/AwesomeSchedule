@@ -2,6 +2,10 @@
 
 module.exports = function(environment) {
   var ENV = {
+    contentSecurityPolicy: {
+      'style-src': "'self' 'unsafe-inline'",
+      'connect-src': "'self' http://localhost:9029"
+    },
     modulePrefix: 'awesome-schedule-front',
     environment: environment,
     baseURL: '/',

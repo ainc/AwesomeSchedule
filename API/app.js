@@ -11,8 +11,16 @@ var app = express();
 
 app.use('/', router);
 
+app.use(function (request, response, next) {
+    response.header("Access-Control-Allow-Origin", "http://localhost:4200");
+    response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    response.header("Access-Control-Allow-Resource", "*");
+    response.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+    next();
+});
+
 // Start Server
-var server. app.listen(9029, function() {
+var server = app.listen(9029, function() {
     var host = server.address().address;
     var port = server.address().port;
 
