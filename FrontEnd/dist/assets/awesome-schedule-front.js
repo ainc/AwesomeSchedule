@@ -219,14 +219,8 @@ define('awesome-schedule-front/components/bs-textarea', ['exports', 'ember-boots
 define('awesome-schedule-front/components/day-tile', ['exports', 'ember'], function (exports, _ember) {
 	exports['default'] = _ember['default'].Component.extend({
 		wrapperEmpty: 'blankTile',
-		wrapperFilled: 'colorTile',
-		d0: 'Sunday',
-		d1: 'Monday',
-		d2: 'Tuesday',
-		d3: 'Wednesday',
-		d4: 'Thursday',
-		d5: 'Friday',
-		d6: 'Saturday'
+		wrapperFilled: 'colorTile'
+
 	});
 });
 define('awesome-schedule-front/components/ember-wormhole', ['exports', 'ember-wormhole/components/ember-wormhole'], function (exports, _emberWormholeComponentsEmberWormhole) {
@@ -764,17 +758,11 @@ define("awesome-schedule-front/templates/application", ["exports"], function (ex
         var el2 = dom.createTextNode("\n");
         dom.appendChild(el1, el2);
         dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n\n");
+        var el1 = dom.createTextNode("\n\n\n");
         dom.appendChild(el0, el1);
-        var el1 = dom.createElement("div");
-        var el2 = dom.createTextNode("\n");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createComment("");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n");
-        dom.appendChild(el1, el2);
+        var el1 = dom.createComment("");
         dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n\n");
+        var el1 = dom.createTextNode("\n\n\n");
         dom.appendChild(el0, el1);
         var el1 = dom.createComment(" Everything in the footer section on this page will load throughout the entire app.");
         dom.appendChild(el0, el1);
@@ -798,7 +786,7 @@ define("awesome-schedule-front/templates/application", ["exports"], function (ex
         morphs[0] = dom.createMorphAt(element0, 3, 3);
         morphs[1] = dom.createMorphAt(element0, 5, 5);
         morphs[2] = dom.createMorphAt(element0, 7, 7);
-        morphs[3] = dom.createMorphAt(dom.childAt(fragment, [4]), 1, 1);
+        morphs[3] = dom.createMorphAt(fragment, 4, 4, contextualElement);
         return morphs;
       },
       statements: [["block", "link-to", ["calendar"], ["class", "navButton"], 0, null, ["loc", [null, [4, 0], [4, 61]]]], ["block", "link-to", ["admin"], ["class", "navButton"], 1, null, ["loc", [null, [5, 0], [5, 60]]]], ["block", "link-to", ["coach"], ["class", "navButton"], 2, null, ["loc", [null, [6, 0], [6, 62]]]], ["content", "outlet", ["loc", [null, [10, 0], [10, 10]]]]],
@@ -819,7 +807,7 @@ define("awesome-schedule-front/templates/calendar", ["exports"], function (expor
             "column": 0
           },
           "end": {
-            "line": 7,
+            "line": 13,
             "column": 10
           }
         },
@@ -831,32 +819,60 @@ define("awesome-schedule-front/templates/calendar", ["exports"], function (expor
       buildFragment: function buildFragment(dom) {
         var el0 = dom.createDocumentFragment();
         var el1 = dom.createElement("section");
-        var el2 = dom.createTextNode("\n	");
+        var el2 = dom.createTextNode("\n        ");
         dom.appendChild(el1, el2);
-        var el2 = dom.createElement("div");
-        dom.setAttribute(el2, "class", "topRow");
+        var el2 = dom.createElement("table");
+        dom.setAttribute(el2, "class", "calendarTable");
         var el3 = dom.createTextNode("\n		");
         dom.appendChild(el2, el3);
-        var el3 = dom.createElement("span");
-        dom.setAttribute(el3, "class", "topRowItem");
+        var el3 = dom.createElement("th");
+        dom.setAttribute(el3, "class", "logoHeader");
         var el4 = dom.createComment("");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n		");
         dom.appendChild(el2, el3);
-        var el3 = dom.createElement("span");
-        dom.setAttribute(el3, "class", "topRowItem");
+        var el3 = dom.createElement("th");
         var el4 = dom.createComment("");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n		");
         dom.appendChild(el2, el3);
-        var el3 = dom.createElement("span");
-        dom.setAttribute(el3, "class", "topRowItem");
+        var el3 = dom.createElement("th");
         var el4 = dom.createComment("");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n	");
+        var el3 = dom.createTextNode("\n                ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("th");
+        var el4 = dom.createComment("");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n                ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("th");
+        var el4 = dom.createComment("");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n                ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("th");
+        var el4 = dom.createComment("");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n                ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("th");
+        var el4 = dom.createComment("");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n                ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("th");
+        var el4 = dom.createComment("");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n                \n	");
         dom.appendChild(el2, el3);
         dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n");
@@ -867,14 +883,19 @@ define("awesome-schedule-front/templates/calendar", ["exports"], function (expor
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
         var element0 = dom.childAt(fragment, [0]);
         var element1 = dom.childAt(element0, [1]);
-        var morphs = new Array(4);
+        var morphs = new Array(9);
         morphs[0] = dom.createAttrMorph(element0, 'class');
         morphs[1] = dom.createMorphAt(dom.childAt(element1, [1]), 0, 0);
         morphs[2] = dom.createMorphAt(dom.childAt(element1, [3]), 0, 0);
         morphs[3] = dom.createMorphAt(dom.childAt(element1, [5]), 0, 0);
+        morphs[4] = dom.createMorphAt(dom.childAt(element1, [7]), 0, 0);
+        morphs[5] = dom.createMorphAt(dom.childAt(element1, [9]), 0, 0);
+        morphs[6] = dom.createMorphAt(dom.childAt(element1, [11]), 0, 0);
+        morphs[7] = dom.createMorphAt(dom.childAt(element1, [13]), 0, 0);
+        morphs[8] = dom.createMorphAt(dom.childAt(element1, [15]), 0, 0);
         return morphs;
       },
-      statements: [["attribute", "class", ["get", "wrapper", ["loc", [null, [1, 19], [1, 26]]]]], ["content", "logo-tile", ["loc", [null, [3, 27], [3, 40]]]], ["content", "day-tile", ["loc", [null, [4, 27], [4, 39]]]], ["content", "day-tile", ["loc", [null, [5, 27], [5, 39]]]]],
+      statements: [["attribute", "class", ["get", "wrapper", ["loc", [null, [1, 18], [1, 25]]]]], ["content", "logo-tile", ["loc", [null, [3, 27], [3, 40]]]], ["inline", "day-tile", [], ["day", "Sunday"], ["loc", [null, [4, 6], [4, 31]]]], ["inline", "day-tile", [], ["day", "Monday"], ["loc", [null, [5, 6], [5, 31]]]], ["inline", "day-tile", [], ["day", "Tuesday"], ["loc", [null, [6, 20], [6, 46]]]], ["inline", "day-tile", [], ["day", "Wednesday"], ["loc", [null, [7, 20], [7, 48]]]], ["inline", "day-tile", [], ["day", "Thursday"], ["loc", [null, [8, 20], [8, 47]]]], ["inline", "day-tile", [], ["day", "Friday"], ["loc", [null, [9, 20], [9, 45]]]], ["inline", "day-tile", [], ["day", "Saturday"], ["loc", [null, [10, 20], [10, 47]]]]],
       locals: [],
       templates: []
     };
@@ -2791,7 +2812,14 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
       buildFragment: function buildFragment(dom) {
         var el0 = dom.createDocumentFragment();
         var el1 = dom.createElement("div");
-        var el2 = dom.createTextNode("\n\n");
+        var el2 = dom.createTextNode("\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("h3");
+        dom.setAttribute(el2, "class", "calendarHeadings");
+        var el3 = dom.createComment("");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n");
         dom.appendChild(el1, el2);
         dom.appendChild(el0, el1);
         var el1 = dom.createTextNode("\n");
@@ -2804,12 +2832,13 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
         var element0 = dom.childAt(fragment, [0]);
-        var morphs = new Array(2);
+        var morphs = new Array(3);
         morphs[0] = dom.createAttrMorph(element0, 'class');
-        morphs[1] = dom.createMorphAt(fragment, 2, 2, contextualElement);
+        morphs[1] = dom.createMorphAt(dom.childAt(element0, [1]), 0, 0);
+        morphs[2] = dom.createMorphAt(fragment, 2, 2, contextualElement);
         return morphs;
       },
-      statements: [["attribute", "class", ["get", "wrapperEmpty", ["loc", [null, [1, 15], [1, 27]]]]], ["content", "yield", ["loc", [null, [4, 0], [4, 9]]]]],
+      statements: [["attribute", "class", ["get", "wrapperEmpty", ["loc", [null, [1, 15], [1, 27]]]]], ["content", "day", ["loc", [null, [2, 35], [2, 42]]]], ["content", "yield", ["loc", [null, [4, 0], [4, 9]]]]],
       locals: [],
       templates: []
     };
@@ -4573,7 +4602,7 @@ define("awesome-schedule-front/templates/components/logo-tile", ["exports"], fun
           },
           "end": {
             "line": 8,
-            "column": 9
+            "column": 0
           }
         },
         "moduleName": "awesome-schedule-front/templates/components/logo-tile.hbs"
@@ -4583,45 +4612,25 @@ define("awesome-schedule-front/templates/components/logo-tile", ["exports"], fun
       hasRendered: false,
       buildFragment: function buildFragment(dom) {
         var el0 = dom.createDocumentFragment();
-        var el1 = dom.createTextNode("\n");
+        var el1 = dom.createTextNode("\n\n\n");
         dom.appendChild(el0, el1);
-        var el1 = dom.createElement("script");
-        dom.setAttribute(el1, "type", "text/x-handlebars");
-        dom.setAttribute(el1, "id", "components/logo-tile");
+        var el1 = dom.createElement("span");
         var el2 = dom.createTextNode("\n");
         dom.appendChild(el1, el2);
-        var el2 = dom.createElement("div");
-        dom.setAttribute(el2, "class", "logoTileWrapper");
-        var el3 = dom.createTextNode("\n");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("h2");
-        var el4 = dom.createTextNode("hello");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("img");
-        dom.setAttribute(el3, "id", "logo");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n");
-        dom.appendChild(el2, el3);
+        var el2 = dom.createElement("img");
+        dom.setAttribute(el2, "src", "public/assets/images/logo.png");
         dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n");
         dom.appendChild(el1, el2);
         dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n");
-        dom.appendChild(el0, el1);
-        var el1 = dom.createComment("");
+        var el1 = dom.createTextNode("\n\n");
         dom.appendChild(el0, el1);
         return el0;
       },
-      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var morphs = new Array(1);
-        morphs[0] = dom.createMorphAt(fragment, 3, 3, contextualElement);
-        dom.insertBoundary(fragment, null);
-        return morphs;
+      buildRenderNodes: function buildRenderNodes() {
+        return [];
       },
-      statements: [["content", "yield", ["loc", [null, [8, 0], [8, 9]]]]],
+      statements: [],
       locals: [],
       templates: []
     };
@@ -4653,7 +4662,7 @@ catch(err) {
 });
 
 if (!runningTests) {
-  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+57945605"});
+  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+28994886"});
 }
 
 /* jshint ignore:end */

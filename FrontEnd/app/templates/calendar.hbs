@@ -1,7 +1,13 @@
-<section class = {{wrapper}}>
-	<div class = "topRow">
-		<span class="topRowItem">{{logo-tile}}</span>
-		<span class="topRowItem">{{day-tile}}</span>
-		<span class="topRowItem">{{day-tile}}</span>
-	</div>
+<section class ={{wrapper}}>
+        <table class = "calendarTable">
+		<th class = "logoHeader">{{logo-tile}}</th>
+		<th>{{day-tile day="Sunday"}}</th>
+		<th>{{day-tile day="Monday"}}</th>
+                <th>{{day-tile day="Tuesday"}}</th>
+                <th>{{day-tile day="Wednesday"}}</th>
+                <th>{{day-tile day="Thursday"}}</th>
+                <th>{{day-tile day="Friday"}}</th>
+                <th>{{day-tile day="Saturday"}}</th>
+                
+	</table>
 </section>
