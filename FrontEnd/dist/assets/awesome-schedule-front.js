@@ -4623,11 +4623,11 @@ define("awesome-schedule-front/templates/components/logo-tile", ["exports"], fun
         var el0 = dom.createDocumentFragment();
         var el1 = dom.createTextNode("\n\n\n");
         dom.appendChild(el0, el1);
-        var el1 = dom.createElement("span");
+        var el1 = dom.createElement("div");
         var el2 = dom.createTextNode("\n");
         dom.appendChild(el1, el2);
         var el2 = dom.createElement("img");
-        dom.setAttribute(el2, "src", "public/assets/images/logo.png");
+        dom.setAttribute(el2, "src", "assets/images/logo.png");
         dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n");
         dom.appendChild(el1, el2);
@@ -4671,7 +4671,7 @@ catch(err) {
 });
 
 if (!runningTests) {
-  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+628380ca"});
+  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+627ad12e"});
 }
 
 /* jshint ignore:end */
