@@ -1,65 +1,81 @@
-.ember-application{
-	background-color: dimgray;
-}
+html {
+  box-sizing: border-box; }
 
+*, *::after, *::before {
+  box-sizing: inherit; }
+
+.ember-application {
+  background-color: dimgray; }
 
 /*Navigation buttons at the top of the page*/
-.navButton{
-	background-color:#d81213;
-	padding:10px;
-	border-radius: 4px;
-	text-decoration:none;
-	color:white;
-	font-size:16px;
-    font-family: monospace;
-}
+.navButton {
+  background-color: #d81213;
+  padding: 10px;
+  border-radius: 4px;
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  font-family: monospace; }
 
-.calendarWrapper{
-	width:90%;
-	height:90%;
-	box-shadow: 5px;
-	background-color:#E2E0E0;
-	border-radius:8px;
-	min-height:300px;
-	min-width:300px;
-        margin-top:30px;
+.calendarWrapper {
+  width: 90%;
+  height: 90%;
+  box-shadow: 5px;
+  background-color: #E2E0E0;
+  border-radius: 8px;
+  min-height: 300px;
+  min-width: 300px;
+  margin-top: 30px; }
 
+#logo {
+  background-image: url("./assets/images/logo.png"); }
 
-}
+.logoTileWrapper {
+  width: 100%;
+  height: 100%;
+  background-color: "white"; }
 
-#logo{
-	background-image: url('./assets/images/logo.png');
-}
+.blankTile {
+  min-width: 100%;
+  min-height: 100%;
+  background-color: gray; }
 
-.logoTileWrapper{
-	width:100%;
-	height:100%;
-	background-color:"white";
-}
+table.calendarTable {
+  width: 100%; }
 
-.blankTile{
-	min-width:100%;
-	min-height:100%;
-	
-	background-color:gray;
-}
+th {
+  width: 10%;
+  border-width: 20px;
+  border-color: black;
+  background-color: gray; }
 
+th.logoHeader {
+  width: 15%; }
 
-table.calendarTable{
-    width:100%;
-}
+h3.calendarHeadings {
+  font-size: 20px; }
 
-th{
-    width:10%;
-    border-width:20px;
-    border-color: black;
-    background-color:gray;
-}
+topRow {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto; }
+  topRow::after {
+    clear: both;
+    content: "";
+    display: table; }
 
-th.logoHeader{
-    width:15%;
-}
+logoHeader {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 14.70196%; }
+  logoHeader:last-child {
+    margin-right: 0; }
 
-h3.calendarHeadings{
-    font-size:20px;
-}
+dayTileHeader {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 6.17215%; }
+  dayTileHeader:last-child {
+    margin-right: 0; }
