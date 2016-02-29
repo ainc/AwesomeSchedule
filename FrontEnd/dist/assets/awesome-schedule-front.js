@@ -807,7 +807,7 @@ define("awesome-schedule-front/templates/calendar", ["exports"], function (expor
             "column": 0
           },
           "end": {
-            "line": 27,
+            "line": 20,
             "column": 10
           }
         },
@@ -818,63 +818,71 @@ define("awesome-schedule-front/templates/calendar", ["exports"], function (expor
       hasRendered: false,
       buildFragment: function buildFragment(dom) {
         var el0 = dom.createDocumentFragment();
-        var el1 = dom.createComment("<section class ={{wrapper}}>\n        <table class = \"calendarTable\">\n		<th class = \"logoHeader\">{{logo-tile}}</th>\n		<th>{{day-tile day=\"Sunday\"}}</th>\n		<th>{{day-tile day=\"Monday\"}}</th>\n                <th>{{day-tile day=\"Tuesday\"}}</th>\n                <th>{{day-tile day=\"Wednesday\"}}</th>\n                <th>{{day-tile day=\"Thursday\"}}</th>\n                <th>{{day-tile day=\"Friday\"}}</th>\n                <th>{{day-tile day=\"Saturday\"}}</th>\n                \n	</table>\n</section>");
-        dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n\n");
-        dom.appendChild(el0, el1);
         var el1 = dom.createElement("section");
-        var el2 = dom.createTextNode("\n        ");
+        var el2 = dom.createTextNode("\n");
         dom.appendChild(el1, el2);
-        var el2 = dom.createElement("topRow");
-        var el3 = dom.createTextNode("\n		");
+        var el2 = dom.createElement("calendarContainer");
+        var el3 = dom.createTextNode("\n");
         dom.appendChild(el2, el3);
-        var el3 = dom.createElement("logoHeader");
-        var el4 = dom.createComment("");
+        var el3 = dom.createElement("calendarViewMain");
+        var el4 = dom.createTextNode("\n        \n		");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("logoHeader");
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n		");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("dayTileHeader");
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n		");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("dayTileHeader");
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n                ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("dayTileHeader");
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n                ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("dayTileHeader");
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n                ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("dayTileHeader");
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n                ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("dayTileHeader");
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n                ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("dayTileHeader");
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n                \n	\n	");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n		");
+        var el3 = dom.createTextNode("\n	");
         dom.appendChild(el2, el3);
-        var el3 = dom.createElement("dayTileHeader");
-        var el4 = dom.createComment("");
+        var el3 = dom.createElement("calendarViewCoaches");
+        var el4 = dom.createTextNode("\n		\n	");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n		");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("dayTileHeader");
-        var el4 = dom.createComment("");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n                ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("dayTileHeader");
-        var el4 = dom.createComment("");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n                ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("dayTileHeader");
-        var el4 = dom.createComment("");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n                ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("dayTileHeader");
-        var el4 = dom.createComment("");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n                ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("dayTileHeader");
-        var el4 = dom.createComment("");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n                ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("dayTileHeader");
-        var el4 = dom.createComment("");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n                \n	");
+        var el3 = dom.createTextNode("\n	");
         dom.appendChild(el2, el3);
         dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n");
@@ -883,8 +891,8 @@ define("awesome-schedule-front/templates/calendar", ["exports"], function (expor
         return el0;
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var element0 = dom.childAt(fragment, [2]);
-        var element1 = dom.childAt(element0, [1]);
+        var element0 = dom.childAt(fragment, [0]);
+        var element1 = dom.childAt(element0, [1, 1]);
         var morphs = new Array(9);
         morphs[0] = dom.createAttrMorph(element0, 'class');
         morphs[1] = dom.createMorphAt(dom.childAt(element1, [1]), 0, 0);
@@ -897,7 +905,7 @@ define("awesome-schedule-front/templates/calendar", ["exports"], function (expor
         morphs[8] = dom.createMorphAt(dom.childAt(element1, [15]), 0, 0);
         return morphs;
       },
-      statements: [["attribute", "class", ["get", "wrapper", ["loc", [null, [15, 18], [15, 25]]]]], ["content", "logo-tile", ["loc", [null, [17, 14], [17, 27]]]], ["inline", "day-tile", [], ["day", "Sunday"], ["loc", [null, [18, 17], [18, 42]]]], ["inline", "day-tile", [], ["day", "Monday"], ["loc", [null, [19, 17], [19, 42]]]], ["inline", "day-tile", [], ["day", "Tuesday"], ["loc", [null, [20, 31], [20, 57]]]], ["inline", "day-tile", [], ["day", "Wednesday"], ["loc", [null, [21, 31], [21, 59]]]], ["inline", "day-tile", [], ["day", "Thursday"], ["loc", [null, [22, 31], [22, 58]]]], ["inline", "day-tile", [], ["day", "Friday"], ["loc", [null, [23, 31], [23, 56]]]], ["inline", "day-tile", [], ["day", "Saturday"], ["loc", [null, [24, 31], [24, 58]]]]],
+      statements: [["attribute", "class", ["get", "wrapper", ["loc", [null, [1, 18], [1, 25]]]]], ["content", "logo-tile", ["loc", [null, [5, 14], [5, 27]]]], ["inline", "day-tile", [], ["day", "Sunday"], ["loc", [null, [6, 17], [6, 42]]]], ["inline", "day-tile", [], ["day", "Monday"], ["loc", [null, [7, 17], [7, 42]]]], ["inline", "day-tile", [], ["day", "Tuesday"], ["loc", [null, [8, 31], [8, 57]]]], ["inline", "day-tile", [], ["day", "Wednesday"], ["loc", [null, [9, 31], [9, 59]]]], ["inline", "day-tile", [], ["day", "Thursday"], ["loc", [null, [10, 31], [10, 58]]]], ["inline", "day-tile", [], ["day", "Friday"], ["loc", [null, [11, 31], [11, 56]]]], ["inline", "day-tile", [], ["day", "Saturday"], ["loc", [null, [12, 31], [12, 58]]]]],
       locals: [],
       templates: []
     };
@@ -2816,8 +2824,7 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
         var el1 = dom.createElement("div");
         var el2 = dom.createTextNode("\n    ");
         dom.appendChild(el1, el2);
-        var el2 = dom.createElement("h3");
-        dom.setAttribute(el2, "class", "calendarHeadings");
+        var el2 = dom.createElement("p");
         var el3 = dom.createComment("");
         dom.appendChild(el2, el3);
         dom.appendChild(el1, el2);
@@ -2840,7 +2847,7 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
         morphs[2] = dom.createMorphAt(fragment, 2, 2, contextualElement);
         return morphs;
       },
-      statements: [["attribute", "class", ["get", "wrapperEmpty", ["loc", [null, [1, 15], [1, 27]]]]], ["content", "day", ["loc", [null, [2, 35], [2, 42]]]], ["content", "yield", ["loc", [null, [4, 0], [4, 9]]]]],
+      statements: [["attribute", "class", ["get", "wrapperEmpty", ["loc", [null, [1, 15], [1, 27]]]]], ["content", "day", ["loc", [null, [2, 7], [2, 14]]]], ["content", "yield", ["loc", [null, [4, 0], [4, 9]]]]],
       locals: [],
       templates: []
     };
@@ -4664,7 +4671,7 @@ catch(err) {
 });
 
 if (!runningTests) {
-  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+5a0e49ae"});
+  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+628380ca"});
 }
 
 /* jshint ignore:end */

@@ -37,45 +37,44 @@ html {
 
 .blankTile {
   min-width: 100%;
-  min-height: 100%;
-  background-color: gray; }
+  min-height: 100%; }
 
-table.calendarTable {
-  width: 100%; }
-
-th {
-  width: 10%;
-  border-width: 20px;
-  border-color: black;
-  background-color: gray; }
-
-th.logoHeader {
-  width: 15%; }
-
-h3.calendarHeadings {
-  font-size: 20px; }
-
-topRow {
+calendarContainer {
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto; }
-  topRow::after {
+  calendarContainer::after {
     clear: both;
     content: "";
     display: table; }
 
-logoHeader {
+calendarViewMain {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 82.94039%;
+  background-color: gray; }
+  calendarViewMain:last-child {
+    margin-right: 0; }
+  calendarViewMain logoHeader {
+    float: left;
+    display: block;
+    margin-right: 2.84259%;
+    width: 17.72593%; }
+    calendarViewMain logoHeader:last-child {
+      margin-right: 0; }
+  calendarViewMain dayTileHeader {
+    float: left;
+    display: block;
+    margin-right: 2.84259%;
+    width: 7.44167%; }
+    calendarViewMain dayTileHeader:last-child {
+      margin-right: 0; }
+
+calendarViewCoaches {
   float: left;
   display: block;
   margin-right: 2.35765%;
   width: 14.70196%; }
-  logoHeader:last-child {
-    margin-right: 0; }
-
-dayTileHeader {
-  float: left;
-  display: block;
-  margin-right: 2.35765%;
-  width: 6.17215%; }
-  dayTileHeader:last-child {
+  calendarViewCoaches:last-child {
     margin-right: 0; }

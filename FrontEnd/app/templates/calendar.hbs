@@ -1,19 +1,7 @@
-<!--<section class ={{wrapper}}>
-        <table class = "calendarTable">
-		<th class = "logoHeader">{{logo-tile}}</th>
-		<th>{{day-tile day="Sunday"}}</th>
-		<th>{{day-tile day="Monday"}}</th>
-                <th>{{day-tile day="Tuesday"}}</th>
-                <th>{{day-tile day="Wednesday"}}</th>
-                <th>{{day-tile day="Thursday"}}</th>
-                <th>{{day-tile day="Friday"}}</th>
-                <th>{{day-tile day="Saturday"}}</th>
-                
-	</table>
-</section>-->
-
 <section class ={{wrapper}}>
-        <topRow>
+<calendarContainer>
+<calendarViewMain>
+        
 		<logoHeader>{{logo-tile}}</logoHeader>
 		<dayTileHeader>{{day-tile day="Sunday"}}</dayTileHeader>
 		<dayTileHeader>{{day-tile day="Monday"}}</dayTileHeader>
@@ -23,5 +11,10 @@
                 <dayTileHeader>{{day-tile day="Friday"}}</dayTileHeader>
                 <dayTileHeader>{{day-tile day="Saturday"}}</dayTileHeader>
                 
-	</topRow>
+	
+	</calendarViewMain>
+	<calendarViewCoaches>
+		
+	</calendarViewCoaches>
+	</calendarContainer>
 </section>
