@@ -2,6 +2,14 @@
 
 var express = require("express");
 var router = require("./controllers/router.js");
+var path = require('path');
+
+global.database = function(filepath) {
+    return require( path.join(path.resolve(__dirname), '../Database') + "/" + filepath );
+}
+
+var boom = database('test1.js');
+boom.datatest();
 
 // Setup Middleware
 
