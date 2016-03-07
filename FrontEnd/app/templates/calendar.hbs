@@ -3,19 +3,39 @@
 	
 	<calendarViewMain>
         
-		<logoHeader>{{logo-tile}}</logoHeader>
-		<dayTileHeader>{{day-tile day="Sunday"}}</dayTileHeader>
-		<dayTileHeader>{{day-tile day="Monday"}}</dayTileHeader>
-        <dayTileHeader>{{day-tile day="Tuesday"}}</dayTileHeader>
-        <dayTileHeader>{{day-tile day="Wednesday"}}</dayTileHeader>
-        <dayTileHeader>{{day-tile day="Thursday"}}</dayTileHeader>
-        <dayTileHeader>{{day-tile day="Friday"}}</dayTileHeader>
-        <dayTileHeader>{{day-tile day="Saturday"}}</dayTileHeader>
+		<logoHeader>{{logo-tile logo=true}}</logoHeader>
+		<dayTileHeader>{{day-tile header=true day="Sunday"}}</dayTileHeader>
+		<dayTileHeader>{{day-tile header=true day="Monday"}}</dayTileHeader>
+        <dayTileHeader>{{day-tile header=true day="Tuesday"}}</dayTileHeader>
+        <dayTileHeader>{{day-tile header=true day="Wednesday"}}</dayTileHeader>
+        <dayTileHeader>{{day-tile header=true day="Thursday"}}</dayTileHeader>
+        <dayTileHeader>{{day-tile header=true day="Friday"}}</dayTileHeader>
+        <dayTileHeader>{{day-tile header=true day="Saturday"}}</dayTileHeader>
+
                 
 	</calendarViewMain>
 
 	<calendarViewCoaches>
-		
+		{{coach-sidebar header = true}}
+	</calendarViewCoaches>
+
+
+	<calendarViewMain>
+        
+		<logoHeader>{{logo-tile logo=false}}</logoHeader>
+		<dayTileHeader>{{day-tile header=true day="Sunday"}}</dayTileHeader>
+		<dayTileHeader>{{day-tile header=true day="Monday"}}</dayTileHeader>
+        <dayTileHeader>{{day-tile header=true day="Tuesday"}}</dayTileHeader>
+        <dayTileHeader>{{day-tile header=true day="Wednesday"}}</dayTileHeader>
+        <dayTileHeader>{{day-tile header=true day="Thursday"}}</dayTileHeader>
+        <dayTileHeader>{{day-tile header=true day="Friday"}}</dayTileHeader>
+        <dayTileHeader>{{day-tile header=true day="Saturday"}}</dayTileHeader>
+
+                
+	</calendarViewMain>
+
+	<calendarViewCoaches>
+		{{coach-sidebar header = true}}
 	</calendarViewCoaches>
 	
 	</calendarContainer>

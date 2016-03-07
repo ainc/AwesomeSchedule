@@ -1,7 +1,12 @@
+<!--This component is used for the left most column of the calendar page. It will hold the logo if the top row, or week dates otherwise.-->
 
-
-
+{{#if logo}}
 <div>
-<img src = "assets/images/logo.png">
+<img id = "logo" src = "assets/images/logo.png">
 </div>
-
+{{else}}
+<div>
+	<p>{{currentDate}}</p>
+</div>
+{{/if}}
+{{yield}}

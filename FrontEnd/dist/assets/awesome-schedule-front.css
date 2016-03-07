@@ -17,6 +17,7 @@ html {
   font-size: 16px;
   font-family: monospace; }
 
+/*-----------------------------CALENDAR RELATED CSS-------------------------------*/
 .calendarWrapper {
   width: 90%;
   height: 90%;
@@ -28,7 +29,8 @@ html {
   margin-top: 30px; }
 
 #logo {
-  background-image: url("./assets/images/logo.png"); }
+  width: 70%;
+  margin-left: 5%; }
 
 .logoTileWrapper {
   width: 100%;
@@ -37,7 +39,8 @@ html {
 
 .blankTile {
   min-width: 100%;
-  min-height: 100%; }
+  min-height: 100%;
+  margin-top: 17px; }
 
 calendarContainer {
   max-width: 1200px;
@@ -78,3 +81,5 @@ calendarViewCoaches {
   width: 14.70196%; }
   calendarViewCoaches:last-child {
     margin-right: 0; }
+
+/*-----------------------------END CALENDAR RELATED CSS-------------------------------*/

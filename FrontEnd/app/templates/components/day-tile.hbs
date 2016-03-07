@@ -1,4 +1,10 @@
+<!--This component is for the calendar page's day tiles-->
+{{#if header}}
 <div class = {{wrapperEmpty}}>
     <p>{{day}}</p>
 </div>
+
+{{else}} <!--Its not a header tile, populate it with information-->
+
+{{/if}}
 {{yield}}

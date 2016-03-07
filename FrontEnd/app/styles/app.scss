@@ -4,7 +4,7 @@
 .ember-application{
 	background-color: dimgray;
 }
-//Just testing the things
+
 
 /*Navigation buttons at the top of the page*/
 .navButton{
@@ -17,6 +17,8 @@
     font-family: monospace;
 }
 
+/*-----------------------------CALENDAR RELATED CSS-------------------------------*/
+//The outer shell of the calendar page
 .calendarWrapper{
 	width:90%;
 	height:90%;
@@ -31,7 +33,9 @@
 }
 
 #logo{
-	background-image: url('./assets/images/logo.png');
+	width:70%;
+	margin-left:5%;
+
 }
 
 .logoTileWrapper{
@@ -44,6 +48,7 @@
 	min-width:100%;
 	min-height:100%;
 	//background-color:gray;
+	margin-top:17px;
 }
 
 
@@ -63,3 +68,7 @@ calendarViewMain{
 calendarViewCoaches{
 	@include span-columns(2);
 }
+
+
+
+/*-----------------------------END CALENDAR RELATED CSS-------------------------------*/
