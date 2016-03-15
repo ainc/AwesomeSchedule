@@ -25,7 +25,7 @@
 	box-shadow: 5px;
 	background-color:#E2E0E0;
 	border-radius:8px;
-	min-height:300px;
+	min-height:500px;
 	min-width:300px;
     margin-top:30px;
 
@@ -44,30 +44,54 @@
 	background-color:"white";
 }
 
+
+.headerTileSTTS{
+	width:100%;
+	height:100%;
+	background-color:#d81213;
+                 
+                    
+}
+.headerTileMWF{
+	width:100%;
+	height:100%;
+	background-color:dimgray;
+                    
+       
+}
 .blankTile{
 	min-width:100%;
 	min-height:100%;
-	//background-color:gray;
-	margin-top:17px;
-}
-
-
-
-
-calendarContainer{
-	@include outer-container;
-}
-
-calendarViewMain{
-	@include span-columns(10);
 	background-color:gray;
-	logoHeader{	@include span-columns(2 of 10); }
-	dayTileHeader{ @include span-columns(1 of 10); }
+	//margin-top:17px;
 }
 
-calendarViewCoaches{
+//Anything related to the sass compilation of the view, normal CSS should be edited above
+calendarContainer{
+            @include outer-container;
+            
+            calendarRow{
+             @include row(table);
+             height:100%;
+                    calendarViewMain{
+                        @include span-columns(10);
+                        background-color:#E2E0E0;
+                        @include display(block-collapse);
+                        logoHeader{	@include span-columns(2 of 10); height:100%}
+                        dayTileHeader{ @include span-columns(1 of 10); height:100%;    }
+                        blankTile{ @include span-columns(1 of 10);      }
+                    }
+
+            calendarViewCoaches{
 	@include span-columns(2);
+                    max-width:100px;
+                    @include display(block-collapse);
+            }
+            }
 }
+
+
+
 
 
 

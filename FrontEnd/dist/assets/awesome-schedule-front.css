@@ -24,7 +24,7 @@ html {
   box-shadow: 5px;
   background-color: #E2E0E0;
   border-radius: 8px;
-  min-height: 300px;
+  min-height: 500px;
   min-width: 300px;
   margin-top: 30px; }
 
@@ -37,10 +37,20 @@ html {
   height: 100%;
   background-color: "white"; }
 
+.headerTileSTTS {
+  width: 100%;
+  height: 100%;
+  background-color: #d81213; }
+
+.headerTileMWF {
+  width: 100%;
+  height: 100%;
+  background-color: dimgray; }
+
 .blankTile {
   min-width: 100%;
   min-height: 100%;
-  margin-top: 17px; }
+  background-color: gray; }
 
 calendarContainer {
   max-width: 1200px;
@@ -50,36 +60,31 @@ calendarContainer {
     clear: both;
     content: "";
     display: table; }
-
-calendarViewMain {
-  float: left;
-  display: block;
-  margin-right: 2.35765%;
-  width: 82.94039%;
-  background-color: gray; }
-  calendarViewMain:last-child {
-    margin-right: 0; }
-  calendarViewMain logoHeader {
-    float: left;
-    display: block;
-    margin-right: 2.84259%;
-    width: 17.72593%; }
-    calendarViewMain logoHeader:last-child {
-      margin-right: 0; }
-  calendarViewMain dayTileHeader {
-    float: left;
-    display: block;
-    margin-right: 2.84259%;
-    width: 7.44167%; }
-    calendarViewMain dayTileHeader:last-child {
-      margin-right: 0; }
-
-calendarViewCoaches {
-  float: left;
-  display: block;
-  margin-right: 2.35765%;
-  width: 14.70196%; }
-  calendarViewCoaches:last-child {
-    margin-right: 0; }
+  calendarContainer calendarRow {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    height: 100%; }
+    calendarContainer calendarRow calendarViewMain {
+      display: table-cell;
+      width: 83.33333%;
+      background-color: #E2E0E0;
+      display: block-collapse; }
+      calendarContainer calendarRow calendarViewMain logoHeader {
+        display: table-cell;
+        width: 20%;
+        height: 100%; }
+      calendarContainer calendarRow calendarViewMain dayTileHeader {
+        display: table-cell;
+        width: 10%;
+        height: 100%; }
+      calendarContainer calendarRow calendarViewMain blankTile {
+        display: table-cell;
+        width: 10%; }
+    calendarContainer calendarRow calendarViewCoaches {
+      display: table-cell;
+      width: 16.66667%;
+      max-width: 100px;
+      display: block-collapse; }
 
 /*-----------------------------END CALENDAR RELATED CSS-------------------------------*/
