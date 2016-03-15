@@ -3,7 +3,8 @@ import Ember from 'ember';
 export default Ember.Component.extend({
                     wrapperSTTS: 'headerTileSTTS',
                     wrapperMWF: 'headerTileMWF',
-	wrapperEmpty: 'blankTile',
+	wrapperEmptySTTS: 'blankTileSTTS',
+                wrapperEmptyMWF:'blankTileMWF',
 	wrapperFilled: 'colorTile',
 	
 });

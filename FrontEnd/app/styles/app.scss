@@ -32,38 +32,102 @@
 
 }
 
+#tile{
+    min-width:100px;
+    
+   // max-width:100%;
+}
+
 #logo{
-	width:70%;
-	margin-left:5%;
+	width:100%;
+                max-width:177px;
+        
+
 
 }
 
-.logoTileWrapper{
+.logoTileWrapper {
 	width:100%;
 	height:100%;
-	background-color:"white";
+                
+	background-color:inherit;
+                border-right-color:black;
+                border-right-width:2px;
+                border-right-style:solid;
+}
+
+ .weekTileWrapper {
+	width:100%;
+	height:100%;
+	background-color:#d81213;
+                border-right-color:black;
+                border-right-width:2px;
+                border-right-style:solid;
+              border-bottom-style:solid;
+              border-bottom-width:2px;
+                border-bottom-color:white;
+                height:inherit;
+                padding:none;
+                position:relative;
+                height:100px;
+                
+        
 }
 
 
 .headerTileSTTS{
-	width:100%;
+	width:inherit;
 	height:100%;
 	background-color:#d81213;
+        border-bottom-style:solid;
+              border-bottom-width:2px;
+                border-bottom-color:white;
+                
+                padding:none;
+                position:relative;
+             min-height:75px;
                  
                     
 }
 .headerTileMWF{
-	width:100%;
+	width:inherit;
 	height:100%;
-	background-color:dimgray;
+	background-color:#ABABAB;
+        border-bottom-style:solid;
+              border-bottom-width:2px;
+                border-bottom-color:white;
+                
+                padding:none;
+                position:relative;
+                min-height:75px;
                     
        
 }
-.blankTile{
+.blankTileSTTS{
 	min-width:100%;
-	min-height:100%;
-	background-color:gray;
+	min-height:100px;
+                height:100%;
+	background-color:#E2E0E0;
 	//margin-top:17px;
+        border-bottom-style:solid;
+              border-bottom-width:2px;
+                border-bottom-color:white;
+                
+                position:relative;
+                
+}
+.blankTileMWF{
+	min-width:100%;
+	min-height:100px;
+                height:100%;
+	background-color:#ABABAB;
+	//margin-top:17px;
+        border-bottom-style:solid;
+              border-bottom-width:2px;
+                border-bottom-color:white;
+                
+                position:relative;
+                
 }
 
 //Anything related to the sass compilation of the view, normal CSS should be edited above
@@ -75,9 +139,16 @@ calendarContainer{
              height:100%;
                     calendarViewMain{
                         @include span-columns(10);
+                        word-spacing:-.25em;
                         background-color:#E2E0E0;
-                        @include display(block-collapse);
-                        logoHeader{	@include span-columns(2 of 10); height:100%}
+                        
+                        position:relative;
+                        @include display(-webkit-box);
+                        width:100%;
+                        height:100%;
+                        margin: 0 0 0 0;
+                        padding:0 0 0 0;
+                        logoHeader{	@include span-columns(2 of 10); }
                         dayTileHeader{ @include span-columns(1 of 10); height:100%;    }
                         blankTile{ @include span-columns(1 of 10);      }
                     }
@@ -85,7 +156,10 @@ calendarContainer{
             calendarViewCoaches{
 	@include span-columns(2);
                     max-width:100px;
-                    @include display(block-collapse);
+                 border-left-style:solid;
+                 border-left-width:2px;
+                 border-left-color:black;
+                    
             }
             }
 }

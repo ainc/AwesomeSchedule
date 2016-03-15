@@ -74,7 +74,7 @@ define('awesome-schedule-front/tests/helpers/format-date.jshint', ['exports'], f
   QUnit.module('JSHint - helpers');
   QUnit.test('helpers/format-date.js should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'helpers/format-date.js should pass jshint.\nhelpers/format-date.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nhelpers/format-date.js: line 3, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\nhelpers/format-date.js: line 9, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n3 errors');
+    assert.ok(false, 'helpers/format-date.js should pass jshint.\nhelpers/format-date.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nhelpers/format-date.js: line 3, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\nhelpers/format-date.js: line 10, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n3 errors');
   });
 });
 define('awesome-schedule-front/tests/helpers/module-for-acceptance', ['exports', 'qunit', 'awesome-schedule-front/tests/helpers/start-app', 'awesome-schedule-front/tests/helpers/destroy-app'], function (exports, _qunit, _awesomeScheduleFrontTestsHelpersStartApp, _awesomeScheduleFrontTestsHelpersDestroyApp) {
