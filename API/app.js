@@ -8,8 +8,12 @@ global.database = function(filepath) {
     return require( path.join(path.resolve(__dirname), '../Database') + "/" + filepath );
 }
 
-var boom = database('test1.js');
-boom.datatest();
+// test function to connect to database
+var boom = database('test1.js').test().then(function(value) {
+    console.log(value);
+}, function(value) {
+    console.log(value);
+});
 
 // Setup Middleware
 
