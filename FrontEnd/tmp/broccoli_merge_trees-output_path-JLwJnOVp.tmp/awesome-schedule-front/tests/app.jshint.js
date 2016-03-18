@@ -1,1 +1,0 @@
-/Users/Roodey/Documents/Awesome Inc/AwesomeSchedule/FrontEnd/tmp/broccoli_merge_trees-input_base_path-GtYQLG1P.tmp/1/awesome-schedule-front/tests/app.jshint.js

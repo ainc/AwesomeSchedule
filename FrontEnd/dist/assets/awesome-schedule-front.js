@@ -35,7 +35,10 @@ define('awesome-schedule-front/components/app-version', ['exports', 'ember-cli-a
   });
 });
 define('awesome-schedule-front/components/bio-box', ['exports', 'ember'], function (exports, _ember) {
-  exports['default'] = _ember['default'].Component.extend({});
+        exports['default'] = _ember['default'].Component.extend({
+                bioWrapper: 'bioWrapper',
+                activityButton: 'activityButton'
+        });
 });
 define('awesome-schedule-front/components/bs-accordion-item', ['exports', 'ember-bootstrap/components/bs-accordion-item'], function (exports, _emberBootstrapComponentsBsAccordionItem) {
   Object.defineProperty(exports, 'default', {
@@ -220,7 +223,9 @@ define('awesome-schedule-front/components/bs-textarea', ['exports', 'ember-boots
   });
 });
 define('awesome-schedule-front/components/coach-day', ['exports', 'ember'], function (exports, _ember) {
-  exports['default'] = _ember['default'].Component.extend({});
+        exports['default'] = _ember['default'].Component.extend({
+                coachTile: 'coachDayTileWrapper'
+        });
 });
 define('awesome-schedule-front/components/coach-sidebar', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Component.extend({});
@@ -514,6 +519,19 @@ define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/mix
   QUnit.test('modules/ember-bootstrap/mixins/type-class.js should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(false, 'modules/ember-bootstrap/mixins/type-class.js should pass jshint.\nmodules/ember-bootstrap/mixins/type-class.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/mixins/type-class.js: line 9, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n2 errors');
+  });
+});
+define('awesome-schedule-front/helpers/contact-info', ['exports', 'ember'], function (exports, _ember) {
+  exports.contactInfo = contactInfo;
+
+  function contactInfo(params /*, hash*/) {
+    return params;
+  }
+
+  exports['default'] = _ember['default'].Helper.helper(contactInfo);
+
+  _ember['default'].Handlebars.helper('contactInfo', function (person) {
+    return person.get('firstName') + ' ' + person.get('lastName') + '\n' + person.get('address') + '\n' + person.get('email') + '\n' + person.get('phoneNumber');
   });
 });
 define('awesome-schedule-front/helpers/format-date', ['exports', 'ember'], function (exports, _ember) {
@@ -1296,8 +1314,8 @@ define("awesome-schedule-front/templates/coach", ["exports"], function (exports)
             "column": 0
           },
           "end": {
-            "line": 1,
-            "column": 46
+            "line": 56,
+            "column": 6
           }
         },
         "moduleName": "awesome-schedule-front/templates/coach.hbs"
@@ -1309,17 +1327,253 @@ define("awesome-schedule-front/templates/coach", ["exports"], function (exports)
         var el0 = dom.createDocumentFragment();
         var el1 = dom.createElement("div");
         dom.setAttribute(el1, "class", "coachWrapper");
-        var el2 = dom.createElement("h2");
-        var el3 = dom.createTextNode("Test");
+        var el2 = dom.createTextNode("\n    \n   \n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("div");
+        dom.setAttribute(el2, "class", "coachLeftSide");
+        var el3 = dom.createTextNode("                     ");
         dom.appendChild(el2, el3);
+        var el3 = dom.createComment("For left side of screen. Bio, hour tracker");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n        ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createComment("");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("                                  ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createComment("ADD BOOLEAN TO HANDLEBAR CALL LATER");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n       ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createComment("");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n       \n    ");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n    \n    \n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("div");
+        dom.setAttribute(el2, "class", "coachCalendar");
+        var el3 = dom.createTextNode("                      ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createComment("For calendar, subscribe button. ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n        ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("div");
+        dom.setAttribute(el3, "class", "grid-items");
+        var el4 = dom.createTextNode("\n  ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("a");
+        dom.setAttribute(el4, "href", "javascript:void(0)");
+        dom.setAttribute(el4, "class", "grid-item");
+        var el5 = dom.createTextNode("\n    ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("img");
+        dom.setAttribute(el5, "src", "https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1.png");
+        dom.setAttribute(el5, "alt", "");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n    ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("h1");
+        var el6 = dom.createTextNode("Grid Item");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n    ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("p");
+        var el6 = dom.createTextNode("Lorem ipsum dolor sit amet, elit. Rem, illum.");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n  ");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n  ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("a");
+        dom.setAttribute(el4, "href", "javascript:void(0)");
+        dom.setAttribute(el4, "class", "grid-item grid-item-big grid-item-image");
+        var el5 = dom.createTextNode("\n    ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("img");
+        dom.setAttribute(el5, "src", "https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_2.png");
+        dom.setAttribute(el5, "alt", "");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n    ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("h1");
+        var el6 = dom.createTextNode("Grid Item With an Image");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n    ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("p");
+        var el6 = dom.createTextNode("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, illum.");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n  ");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n  ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("a");
+        dom.setAttribute(el4, "href", "javascript:void(0)");
+        dom.setAttribute(el4, "class", "grid-item grid-item-big");
+        var el5 = dom.createTextNode("\n    ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("img");
+        dom.setAttribute(el5, "src", "https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_3.png");
+        dom.setAttribute(el5, "alt", "");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n    ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("h1");
+        var el6 = dom.createTextNode("Another Wide Item");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n    ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("p");
+        var el6 = dom.createTextNode("Lorem ipsum consectetur dolor sit amet, consectetur adipisicing elit. Rem, illum.");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n  ");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n  ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("a");
+        dom.setAttribute(el4, "href", "javascript:void(0)");
+        dom.setAttribute(el4, "class", "grid-item");
+        var el5 = dom.createTextNode("\n    ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("img");
+        dom.setAttribute(el5, "src", "https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_2.png");
+        dom.setAttribute(el5, "alt", "");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n    ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("h1");
+        var el6 = dom.createTextNode("Last Grid Item");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n    ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("p");
+        var el6 = dom.createTextNode("Lorem ipsum dolor sit amet, elit. Rem, illum.");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n  ");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n  ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("a");
+        dom.setAttribute(el4, "href", "javascript:void(0)");
+        dom.setAttribute(el4, "class", "grid-item");
+        var el5 = dom.createTextNode("\n    ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("img");
+        dom.setAttribute(el5, "src", "https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_2.png");
+        dom.setAttribute(el5, "alt", "");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n    ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("h1");
+        var el6 = dom.createTextNode("Last Grid Item");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n    ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("p");
+        var el6 = dom.createTextNode("Lorem ipsum dolor sit amet, elit. Rem, illum.");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n  ");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n  ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("a");
+        dom.setAttribute(el4, "href", "javascript:void(0)");
+        dom.setAttribute(el4, "class", "grid-item");
+        var el5 = dom.createTextNode("\n    ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("img");
+        dom.setAttribute(el5, "src", "https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_3.png");
+        dom.setAttribute(el5, "alt", "");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n    ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("h1");
+        var el6 = dom.createTextNode("A Grid Item");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n    ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("p");
+        var el6 = dom.createTextNode("Lorem ipsum dolor sit amet, elit. Rem, illum.");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n  ");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n  ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("a");
+        dom.setAttribute(el4, "href", "javascript:void(0)");
+        dom.setAttribute(el4, "class", "grid-item");
+        var el5 = dom.createTextNode("\n    ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("img");
+        dom.setAttribute(el5, "src", "https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1.png");
+        dom.setAttribute(el5, "alt", "");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n    ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("h1");
+        var el6 = dom.createTextNode("Item");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n    ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("p");
+        var el6 = dom.createTextNode("Lorem ipsum dolor sit amet, elit. Rem, illum.");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n  ");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n    \n    \n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("div");
+        dom.setAttribute(el2, "class", "coachRightSide");
+        var el3 = dom.createTextNode("                         ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createComment("For unsubscribe button");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n        \n    ");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n    \n");
         dom.appendChild(el1, el2);
         dom.appendChild(el0, el1);
         return el0;
       },
-      buildRenderNodes: function buildRenderNodes() {
-        return [];
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var element0 = dom.childAt(fragment, [0, 1]);
+        var morphs = new Array(2);
+        morphs[0] = dom.createMorphAt(element0, 3, 3);
+        morphs[1] = dom.createMorphAt(element0, 7, 7);
+        return morphs;
       },
-      statements: [],
+      statements: [["content", "bio-box", ["loc", [null, [5, 8], [5, 19]]]], ["content", "hour-tracker", ["loc", [null, [6, 7], [6, 23]]]]],
       locals: [],
       templates: []
     };
@@ -1337,8 +1591,8 @@ define("awesome-schedule-front/templates/components/bio-box", ["exports"], funct
             "column": 0
           },
           "end": {
-            "line": 2,
-            "column": 0
+            "line": 16,
+            "column": 104
           }
         },
         "moduleName": "awesome-schedule-front/templates/components/bio-box.hbs"
@@ -1352,15 +1606,71 @@ define("awesome-schedule-front/templates/components/bio-box", ["exports"], funct
         dom.appendChild(el0, el1);
         var el1 = dom.createTextNode("\n");
         dom.appendChild(el0, el1);
+        var el1 = dom.createElement("div");
+        var el2 = dom.createTextNode("\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("img");
+        dom.setAttribute(el2, "class", "profilePic");
+        dom.setAttribute(el2, "src", "assets/images/profPic.png");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("div");
+        dom.setAttribute(el1, "class", "activeRow");
+        var el2 = dom.createTextNode("\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("div");
+        dom.setAttribute(el2, "class", "activityButton");
+        var el3 = dom.createTextNode("\n    \n    ");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("div");
+        dom.setAttribute(el2, "class", "inactivityButton");
+        var el3 = dom.createTextNode("\n        \n    ");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("<p>{{contact-info joey}}</p>------------------ FOR WHEN THE DATABASE CAN GIVE INFORMATION.");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("p");
+        dom.setAttribute(el1, "class", "contactInfo");
+        var el2 = dom.createTextNode("Rabbit Dale ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("br");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("1024 Basic Ave");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("br");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("gotaluvme07@hotmail.com");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("br");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("1(800-302-4088");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
         return el0;
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var morphs = new Array(1);
+        var element0 = dom.childAt(fragment, [2]);
+        var morphs = new Array(2);
         morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+        morphs[1] = dom.createAttrMorph(element0, 'class');
         dom.insertBoundary(fragment, 0);
         return morphs;
       },
-      statements: [["content", "yield", ["loc", [null, [1, 0], [1, 9]]]]],
+      statements: [["content", "yield", ["loc", [null, [1, 0], [1, 9]]]], ["attribute", "class", ["get", "bioWrapper", ["loc", [null, [2, 14], [2, 24]]]]]],
       locals: [],
       templates: []
     };
@@ -5497,8 +5807,8 @@ define("awesome-schedule-front/templates/components/hour-tracker", ["exports"], 
             "column": 0
           },
           "end": {
-            "line": 2,
-            "column": 0
+            "line": 5,
+            "column": 6
           }
         },
         "moduleName": "awesome-schedule-front/templates/components/hour-tracker.hbs"
@@ -5510,7 +5820,12 @@ define("awesome-schedule-front/templates/components/hour-tracker", ["exports"], 
         var el0 = dom.createDocumentFragment();
         var el1 = dom.createComment("");
         dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n");
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("div");
+        dom.setAttribute(el1, "class", "hourTracker");
+        var el2 = dom.createTextNode("\n    \n");
+        dom.appendChild(el1, el2);
         dom.appendChild(el0, el1);
         return el0;
       },
@@ -5742,7 +6057,7 @@ catch(err) {
 });
 
 if (!runningTests) {
-  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+499d413a"});
+  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+6180fc54"});
 }
 
 /* jshint ignore:end */

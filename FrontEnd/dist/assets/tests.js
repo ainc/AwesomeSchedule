@@ -88,6 +88,15 @@ define('awesome-schedule-front/tests/controllers/calendar.jshint', ['exports'], 
     assert.ok(false, 'controllers/calendar.js should pass jshint.\ncontrollers/calendar.js: line 1, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n1 error');
   });
 });
+define('awesome-schedule-front/tests/helpers/contact-info.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - helpers');
+  QUnit.test('helpers/contact-info.js should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(false, 'helpers/contact-info.js should pass jshint.\nhelpers/contact-info.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nhelpers/contact-info.js: line 3, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\nhelpers/contact-info.js: line 7, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n3 errors');
+  });
+});
 define('awesome-schedule-front/tests/helpers/destroy-app', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = destroyApp;
 
@@ -1178,6 +1187,25 @@ define('awesome-schedule-front/tests/test-helper.jshint', ['exports'], function 
   QUnit.test('test-helper.js should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'test-helper.js should pass jshint.');
+  });
+});
+define('awesome-schedule-front/tests/unit/helpers/contact-info-test', ['exports', 'awesome-schedule-front/helpers/contact-info', 'qunit'], function (exports, _awesomeScheduleFrontHelpersContactInfo, _qunit) {
+
+  (0, _qunit.module)('Unit | Helper | contact info');
+
+  // Replace this with your real tests.
+  (0, _qunit.test)('it works', function (assert) {
+    var result = (0, _awesomeScheduleFrontHelpersContactInfo.contactInfo)(42);
+    assert.ok(result);
+  });
+});
+define('awesome-schedule-front/tests/unit/helpers/contact-info-test.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - unit/helpers');
+  QUnit.test('unit/helpers/contact-info-test.js should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/helpers/contact-info-test.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/unit/helpers/format-date-test', ['exports', 'awesome-schedule-front/helpers/format-date', 'qunit'], function (exports, _awesomeScheduleFrontHelpersFormatDate, _qunit) {
