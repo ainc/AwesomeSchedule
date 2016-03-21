@@ -32,7 +32,8 @@ html {
 
 #logo {
   max-width: 100%;
-  max-height: 80px; }
+  max-height: 80px;
+  vertical-align: top; }
 
 /*Logo Tile Wrapper. this and weekTileWrapper make up the left most column.*/
 .logoTileWrapper {
