@@ -3398,7 +3398,7 @@ define("awesome-schedule-front/templates/components/coach-calendar", ["exports"]
           },
           "end": {
             "line": 2,
-            "column": 0
+            "column": 13
           }
         },
         "moduleName": "awesome-schedule-front/templates/components/coach-calendar.hbs"
@@ -3492,7 +3492,13 @@ define("awesome-schedule-front/templates/components/coach-sidebar", ["exports"],
         buildFragment: function buildFragment(dom) {
           var el0 = dom.createDocumentFragment();
           var el1 = dom.createElement("div");
-          var el2 = dom.createTextNode("\n     Coaches\n");
+          var el2 = dom.createTextNode("\n     ");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createElement("p");
+          var el3 = dom.createTextNode("Coaches");
+          dom.appendChild(el2, el3);
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode("\n");
           dom.appendChild(el1, el2);
           dom.appendChild(el0, el1);
           var el1 = dom.createTextNode("	\n");
@@ -5730,14 +5736,11 @@ define("awesome-schedule-front/templates/components/logo-tile", ["exports"], fun
           var el0 = dom.createDocumentFragment();
           var el1 = dom.createElement("div");
           dom.setAttribute(el1, "id", "tile");
-          var el2 = dom.createTextNode("\n    ");
+          var el2 = dom.createTextNode("\n   ");
           dom.appendChild(el1, el2);
-          var el2 = dom.createElement("div");
-          dom.setAttribute(el2, "class", "logo");
-          var el3 = dom.createElement("img");
-          dom.setAttribute(el3, "id", "logo");
-          dom.setAttribute(el3, "src", "assets/images/logo.png");
-          dom.appendChild(el2, el3);
+          var el2 = dom.createElement("img");
+          dom.setAttribute(el2, "id", "logo");
+          dom.setAttribute(el2, "src", "assets/images/logo.png");
           dom.appendChild(el1, el2);
           var el2 = dom.createTextNode("\n");
           dom.appendChild(el1, el2);
@@ -5920,7 +5923,7 @@ catch(err) {
 });
 
 if (!runningTests) {
-  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+b820a897"});
+  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+1a1865d2"});
 }
 
 /* jshint ignore:end */
