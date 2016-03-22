@@ -25,7 +25,9 @@ html {
   background-color: #E2E0E0;
   min-height: 500px;
   min-width: 300px;
-  margin-top: 30px; }
+  margin-top: 30px;
+  max-width: 1200px;
+  margin-left: 125px; }
 
 #tile {
   min-width: 100px; }
@@ -113,6 +115,7 @@ calendarContainer {
     display: table;
     width: 100%;
     table-layout: fixed;
+    max-width: 1200px;
     height: 100%; }
     calendarContainer calendarRow calendarViewMain {
       width: 100%;
@@ -165,7 +168,10 @@ calendarContainer {
 
 .coachCalendar {
   display: table-cell;
-  width: 58.33333%; }
+  width: 58.33333%;
+  vertical-align: top;
+  padding-top: 30px;
+  padding-bottom: 30px; }
 
 .coachRightSide {
   display: table-cell;
@@ -173,7 +179,7 @@ calendarContainer {
 
 /*----SECTION 1 RELATED----*/
 .profilePic {
-  width: 50%;
+  width: 25%;
   padding-top: 5px;
   padding-bottom: 17px; }
 

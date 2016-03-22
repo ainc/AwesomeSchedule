@@ -25,15 +25,6 @@ define('awesome-schedule-front/tests/components/bio-box.jshint', ['exports'], fu
     assert.ok(false, 'components/bio-box.js should pass jshint.\ncomponents/bio-box.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\ncomponents/bio-box.js: line 3, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n2 errors');
   });
 });
-define('awesome-schedule-front/tests/components/coach-calendar.jshint', ['exports'], function (exports) {
-  'use strict';
-
-  QUnit.module('JSHint - components');
-  QUnit.test('components/coach-calendar.js should pass jshint', function (assert) {
-    assert.expect(1);
-    assert.ok(false, 'components/coach-calendar.js should pass jshint.\ncomponents/coach-calendar.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\ncomponents/coach-calendar.js: line 3, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n2 errors');
-  });
-});
 define('awesome-schedule-front/tests/components/coach-day.jshint', ['exports'], function (exports) {
   'use strict';
 

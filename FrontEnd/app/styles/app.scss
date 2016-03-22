@@ -29,6 +29,8 @@
 	min-height:500px;
 	min-width:300px;
     margin-top:30px;
+    max-width:1200px;
+    margin-left:125px;
 
 
 }
@@ -140,6 +142,7 @@ calendarContainer{
             calendarRow{
               @include fill-parent();
              @include row(table);
+             max-width:1200px;
              
              height:100%;
                     calendarViewMain{
@@ -206,6 +209,9 @@ calendarContainer{
 //Section 2. Calendar for classes and scheduling
 .coachCalendar{
     @include span-columns(7);
+    vertical-align:top;
+    padding-top:30px;
+    padding-bottom:30px;
     
 }
 
@@ -218,7 +224,7 @@ calendarContainer{
 
 /*----SECTION 1 RELATED----*/
 .profilePic{
-    width:50%;
+    width:25%;
     padding-top:5px;
     padding-bottom:17px;
 }
