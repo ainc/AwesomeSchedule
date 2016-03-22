@@ -9,6 +9,7 @@ Router.map(function() {
 	this.route('calendar');
 	this.route('admin');
 	this.route('coach');
+	this.route('login');
 });
 
 export default Router;

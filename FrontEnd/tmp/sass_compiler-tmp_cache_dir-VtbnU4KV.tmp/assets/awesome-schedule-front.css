@@ -1,0 +1,240 @@
+html {
+  box-sizing: border-box; }
+
+*, *::after, *::before {
+  box-sizing: inherit; }
+
+.ember-application {
+  background-color: white; }
+
+/*Navigation buttons at the top of the page*/
+.navButton {
+  background-color: #d81213;
+  padding: 10px;
+  border-radius: 4px;
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  font-family: monospace; }
+
+/*-----------------------------CALENDAR RELATED CSS-------------------------------*/
+.calendarWrapper {
+  width: 90%;
+  height: 90%;
+  box-shadow: 5px;
+  background-color: #E2E0E0;
+  min-height: 500px;
+  min-width: 300px;
+  margin-top: 30px;
+  max-width: 1200px;
+  margin-left: 125px; }
+
+#tile {
+  min-width: 100px; }
+
+#logo {
+  max-width: 100%;
+  max-height: 80px;
+  vertical-align: top; }
+
+/*Logo Tile Wrapper. this and weekTileWrapper make up the left most column.*/
+.logoTileWrapper {
+  width: 100%;
+  height: 100%;
+  background-color: inherit;
+  border-right-color: black;
+  border-right-width: 2px;
+  border-right-style: solid; }
+
+/*For displaying of the week dates. Left most column*/
+.weekTileWrapper {
+  width: 100%;
+  height: 100%;
+  background-color: #d81213;
+  border-right-color: black;
+  border-right-width: 2px;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: white;
+  height: inherit;
+  padding: none;
+  position: relative;
+  height: 100px; }
+
+/*Tile styling for the calendar. STTS means sunday tuesday thursday saturday. MWF = Monday Wednesday Friday*/
+.headerTileSTTS {
+  min-width: 100%;
+  height: 80px;
+  background-color: #d81213;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: white;
+  position: relative; }
+
+.headerTileMWF {
+  min-width: 100%;
+  height: 80px;
+  background-color: #ABABAB;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: white;
+  position: relative; }
+
+.blankTileSTTS {
+  min-width: 100%;
+  min-height: 100px;
+  height: 100%;
+  background-color: #E2E0E0;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: white;
+  position: relative; }
+
+.blankTileMWF {
+  min-width: 100%;
+  min-height: 100px;
+  height: 100%;
+  background-color: #ABABAB;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: white;
+  position: relative; }
+
+calendarContainer {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%; }
+  calendarContainer::after {
+    clear: both;
+    content: "";
+    display: table; }
+  calendarContainer calendarRow {
+    width: 100%;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    max-width: 1200px;
+    height: 100%; }
+    calendarContainer calendarRow calendarViewMain {
+      width: 100%;
+      display: table-cell;
+      width: 83.33333%;
+      background-color: #E2E0E0;
+      position: relative;
+      display: -webkit-box;
+      width: 100%;
+      height: 100%;
+      margin: 0 0 0 0;
+      padding: 0 0 0 0; }
+      calendarContainer calendarRow calendarViewMain logoHeader {
+        display: table-cell;
+        width: 10%; }
+      calendarContainer calendarRow calendarViewMain dayTileHeader {
+        display: table-cell;
+        width: 10%; }
+      calendarContainer calendarRow calendarViewMain blankTile {
+        display: table-cell;
+        width: 10%; }
+    calendarContainer calendarRow calendarViewCoaches {
+      display: table-cell;
+      width: 16.66667%;
+      max-width: 100px;
+      border-left-style: solid;
+      border-left-width: 2px;
+      border-left-color: black; }
+
+/*-----------------------------END CALENDAR RELATED CSS-------------------------------*/
+/*---------------------------COACH RELATED CSS----------------------------------------*/
+.coachWrapper {
+  background-color: #3C3C3C;
+  min-height: 300px;
+  min-width: 100%;
+  margin-top: 30px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto; }
+  .coachWrapper::after {
+    clear: both;
+    content: "";
+    display: table; }
+
+.coachLeftSide {
+  display: table-cell;
+  width: 33.33333%;
+  padding-left: 20px;
+  padding-top: 15px; }
+
+.coachCalendar {
+  display: table-cell;
+  width: 58.33333%;
+  vertical-align: top;
+  padding-top: 30px;
+  padding-bottom: 30px; }
+
+.coachRightSide {
+  display: table-cell;
+  width: 8.33333%; }
+
+/*----SECTION 1 RELATED----*/
+.profilePic {
+  width: 25%;
+  padding-top: 5px;
+  padding-bottom: 17px; }
+
+.contactInfo {
+  color: red; }
+
+.activeRow {
+  display: block;
+  width: 125px;
+  padding-bottom: 10px; }
+  .activeRow::after {
+    clear: both;
+    content: "";
+    display: table; }
+
+.activityButton {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 48.82117%;
+  height: 30px;
+  width: 50%;
+  margin: 0 0 0 0;
+  background-color: red; }
+  .activityButton:last-child {
+    margin-right: 0; }
+
+.inactivityButton {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 48.82117%;
+  height: 30px;
+  width: 50%;
+  margin: 0 0 0 0;
+  background-color: white; }
+  .inactivityButton:last-child {
+    margin-right: 0; }
+
+.hourTracker {
+  width: 200px;
+  background-color: red;
+  height: 40px;
+  border-radius: 4px;
+  margin-bottom: 30px;
+  margin-top: 90px; }
+
+/*----SECTION 2 RELATED----*/
+.coachCalendarWrapper {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto; }
+  .coachCalendarWrapper::after {
+    clear: both;
+    content: "";
+    display: table; }
+
+/*---------------------------END COACH RELATED CSS----------------------------------------*/
