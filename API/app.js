@@ -1,12 +1,17 @@
-// Module Dependencies
+// Module Dependencies and Setup Middleware
 
 var express = require("express");
-var router = require("./controllers/router.js");
 var path = require('path');
+var app = express();
+var cookieParser = require('cookie-parser');
+app.use(cookieParser());
 
+// Allows the router to use whatever is in the Database folder with the function database(filepath)
 global.database = function(filepath) {
     return require( path.join(path.resolve(__dirname), '../Database') + "/" + filepath );
 }
+
+var router = require("./controllers/router.js");
 
 // test function to connect to database
 var boom = database('test1.js').test().then(function(value) {
@@ -15,11 +20,7 @@ var boom = database('test1.js').test().then(function(value) {
     console.log(value);
 });
 
-// Setup Middleware
-
-var app = express();
-
-// Routes
+// Allow Proxy
 
 app.use('/', router);
 
