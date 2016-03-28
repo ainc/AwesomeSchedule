@@ -19,7 +19,9 @@
 
 ###To test the ember app###
 
-from the command line, navigate inside AwesomeScheduleFront, from there use "ember serve" (must have [ember](http://emberjs.com) correctly installed). You may then open a web browser and navigate to localhost:4200 to see the app.
+First: in a separate terminal tab within the AwesomeSchedule folder, navigate inside the API folder, from there use "node app.js"
+
+from the command line, navigate inside FrontEnd, from there use "ember serve" (must have [ember](http://emberjs.com) correctly installed). You may then open a web browser and navigate to localhost:4200 to see the app.
 
 
 
