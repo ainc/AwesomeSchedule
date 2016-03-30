@@ -4,9 +4,9 @@ module.exports = {
     RSVP : require('../API/node_modules/rsvp'),
 
     connection: mysql.createConnection({
-        host : '*',
-        user : '*',
-        password : '*',
-        database : '*'
+        host : 'delphi.cs.uky.edu',
+        user : 'kpla223',
+        password : 'u0750441',
+        database : 'kpla223'
     }),
 }

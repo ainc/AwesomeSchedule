@@ -254,7 +254,16 @@ define('awesome-schedule-front/components/hour-tracker', ['exports', 'ember'], f
 define('awesome-schedule-front/components/logo-tile', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Component.extend({
     logoTile: 'logoTileWrapper',
-    weekTile: 'weekTileWrapper'
+    weekTile: 'weekTileWrapper',
+    getDate: function getDate() {
+      $.ajax({
+        type: "POST",
+        url: "/api/gimmieDatDate"
+      }).done(function (value) {
+        //Server returns a value and the client-side code displays it
+        // Blaaaaah
+      });
+    }
   });
 });
 define('awesome-schedule-front/components/submit-info', ['exports', 'ember'], function (exports, _ember) {
@@ -6196,7 +6205,9 @@ define("awesome-schedule-front/templates/components/logo-tile", ["exports"], fun
           dom.appendChild(el1, el2);
           var el2 = dom.createTextNode(" ");
           dom.appendChild(el1, el2);
-          var el2 = dom.createComment("");
+          var el2 = dom.createElement("p");
+          var el3 = dom.createComment("");
+          dom.appendChild(el2, el3);
           dom.appendChild(el1, el2);
           var el2 = dom.createTextNode("\n");
           dom.appendChild(el1, el2);
@@ -6209,10 +6220,10 @@ define("awesome-schedule-front/templates/components/logo-tile", ["exports"], fun
           var element0 = dom.childAt(fragment, [0]);
           var morphs = new Array(2);
           morphs[0] = dom.createAttrMorph(element0, 'class');
-          morphs[1] = dom.createMorphAt(element0, 3, 3);
+          morphs[1] = dom.createMorphAt(dom.childAt(element0, [3]), 0, 0);
           return morphs;
         },
-        statements: [["attribute", "class", ["get", "weekTile", ["loc", [null, [8, 15], [8, 23]]]]], ["content", "currentDate", ["loc", [null, [9, 17], [9, 32]]]]],
+        statements: [["attribute", "class", ["get", "weekTile", ["loc", [null, [8, 15], [8, 23]]]]], ["content", "getDate", ["loc", [null, [9, 20], [9, 31]]]]],
         locals: [],
         templates: []
       };
@@ -6315,8 +6326,8 @@ define("awesome-schedule-front/templates/login", ["exports"], function (exports)
             "column": 0
           },
           "end": {
-            "line": 2,
-            "column": 51
+            "line": 5,
+            "column": 6
           }
         },
         "moduleName": "awesome-schedule-front/templates/login.hbs"
@@ -6326,23 +6337,35 @@ define("awesome-schedule-front/templates/login", ["exports"], function (exports)
       hasRendered: false,
       buildFragment: function buildFragment(dom) {
         var el0 = dom.createDocumentFragment();
-        var el1 = dom.createComment("");
-        dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n");
-        dom.appendChild(el0, el1);
-        var el1 = dom.createComment("");
+        var el1 = dom.createElement("div");
+        dom.setAttribute(el1, "class", "loginWrapper");
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("h2");
+        var el3 = dom.createTextNode("Please Login");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createComment("");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createComment("");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
         dom.appendChild(el0, el1);
         return el0;
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var element0 = dom.childAt(fragment, [0]);
         var morphs = new Array(2);
-        morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
-        morphs[1] = dom.createMorphAt(fragment, 2, 2, contextualElement);
-        dom.insertBoundary(fragment, 0);
-        dom.insertBoundary(fragment, null);
+        morphs[0] = dom.createMorphAt(element0, 3, 3);
+        morphs[1] = dom.createMorphAt(element0, 5, 5);
         return morphs;
       },
-      statements: [["inline", "textarea", [], ["name", "username", "placeholder", "Username or email"], ["loc", [null, [1, 0], [1, 60]]]], ["inline", "textarea", [], ["name", "password", "placeholder", "Password"], ["loc", [null, [2, 0], [2, 51]]]]],
+      statements: [["inline", "textarea", [], ["name", "username", "placeholder", "Username or email"], ["loc", [null, [3, 0], [3, 60]]]], ["inline", "textarea", [], ["name", "password", "placeholder", "Password"], ["loc", [null, [4, 0], [4, 51]]]]],
       locals: [],
       templates: []
     };
@@ -6374,7 +6397,7 @@ catch(err) {
 });
 
 if (!runningTests) {
-  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+098bf2a8"});
+  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+2718f1c6"});
 }
 
 /* jshint ignore:end */
