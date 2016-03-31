@@ -3,9 +3,13 @@
 
 /* jshint ignore:end */
 
-define("awesome-schedule-front/adapters/application", ["exports", "ember-data"], function (exports, _emberData) {
-    exports["default"] = _emberData["default"].RESTAdapter.extend({
-        namespace: 'api'
+define('awesome-schedule-front/adapters/application', ['exports', 'ember-data'], function (exports, _emberData) {
+    exports['default'] = _emberData['default'].RESTAdapter.extend({
+        namespace: 'api',
+        ajax: Ember.inject.service(),
+        model: function model() {
+            return this.get('ajax').request('/gimmieDatDate');
+        }
     });
 });
 define('awesome-schedule-front/app', ['exports', 'ember', 'ember/resolver', 'ember/load-initializers', 'awesome-schedule-front/config/environment'], function (exports, _ember, _emberResolver, _emberLoadInitializers, _awesomeScheduleFrontConfigEnvironment) {
@@ -252,19 +256,11 @@ define('awesome-schedule-front/components/hour-tracker', ['exports', 'ember'], f
   exports['default'] = _ember['default'].Component.extend({});
 });
 define('awesome-schedule-front/components/logo-tile', ['exports', 'ember'], function (exports, _ember) {
-  exports['default'] = _ember['default'].Component.extend({
-    logoTile: 'logoTileWrapper',
-    weekTile: 'weekTileWrapper',
-    getDate: function getDate() {
-      $.ajax({
-        type: "POST",
-        url: "/api/gimmieDatDate"
-      }).done(function (value) {
-        //Server returns a value and the client-side code displays it
-        // Blaaaaah
-      });
-    }
-  });
+   exports['default'] = _ember['default'].Component.extend({
+      logoTile: 'logoTileWrapper',
+      weekTile: 'weekTileWrapper'
+
+   });
 });
 define('awesome-schedule-front/components/submit-info', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Component.extend({});
@@ -654,6 +650,25 @@ define('awesome-schedule-front/initializers/load-bootstrap-config', ['exports', 
 });
 define('awesome-schedule-front/initializers/modals-container', ['exports', 'ember-bootstrap/initializers/modals-container'], function (exports, _emberBootstrapInitializersModalsContainer) {
   exports['default'] = _emberBootstrapInitializersModalsContainer['default'];
+});
+define('awesome-schedule-front/models/coaches', ['exports', 'ember-data'], function (exports, _emberData) {
+	exports['default'] = _emberData['default'].Model.extend({
+		CoID: _emberData['default'].attr(),
+		name: _emberData['default'].attr('string'),
+		active: _emberData['default'].attr(),
+		startDate: _emberData['default'].attr('date'),
+		endDate: _emberData['default'].attr('date'),
+		RaID: _emberData['default'].attr(),
+		isAdmin: _emberData['default'].attr(),
+		username: _emberData['default'].attr('string'),
+		password: _emberData['default'].attr('string'),
+		email: _emberData['default'].attr('string'),
+		phone: _emberData['default'].attr('phone'),
+		model: function model(params) {
+			return this.store.find('person', 1);
+		}
+
+	});
 });
 define('awesome-schedule-front/router', ['exports', 'ember', 'awesome-schedule-front/config/environment'], function (exports, _ember, _awesomeScheduleFrontConfigEnvironment) {
 
@@ -6223,7 +6238,7 @@ define("awesome-schedule-front/templates/components/logo-tile", ["exports"], fun
           morphs[1] = dom.createMorphAt(dom.childAt(element0, [3]), 0, 0);
           return morphs;
         },
-        statements: [["attribute", "class", ["get", "weekTile", ["loc", [null, [8, 15], [8, 23]]]]], ["content", "getDate", ["loc", [null, [9, 20], [9, 31]]]]],
+        statements: [["attribute", "class", ["get", "weekTile", ["loc", [null, [8, 15], [8, 23]]]]], ["content", "person.name", ["loc", [null, [9, 20], [9, 35]]]]],
         locals: [],
         templates: []
       };
@@ -6397,7 +6412,7 @@ catch(err) {
 });
 
 if (!runningTests) {
-  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+2718f1c6"});
+  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+72df61dc"});
 }
 
 /* jshint ignore:end */

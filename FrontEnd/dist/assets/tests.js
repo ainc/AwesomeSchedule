@@ -4,7 +4,7 @@ define('awesome-schedule-front/tests/adapters/application.jshint', ['exports'], 
   QUnit.module('JSHint - adapters');
   QUnit.test('adapters/application.js should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'adapters/application.js should pass jshint.\nadapters/application.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nadapters/application.js: line 3, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n2 errors');
+    assert.ok(false, 'adapters/application.js should pass jshint.\nadapters/application.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nadapters/application.js: line 3, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\nadapters/application.js: line 6, col 7, \'concise methods\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\n\n3 errors');
   });
 });
 define('awesome-schedule-front/tests/app.jshint', ['exports'], function (exports) {
@@ -1305,6 +1305,15 @@ define('awesome-schedule-front/tests/integration/components/submit-info-test.jsh
     assert.ok(true, 'integration/components/submit-info-test.js should pass jshint.');
   });
 });
+define('awesome-schedule-front/tests/models/coaches.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - models');
+  QUnit.test('models/coaches.js should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(false, 'models/coaches.js should pass jshint.\nmodels/coaches.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodels/coaches.js: line 3, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n2 errors');
+  });
+});
 define('awesome-schedule-front/tests/router.jshint', ['exports'], function (exports) {
   'use strict';
 
@@ -1363,6 +1372,28 @@ define('awesome-schedule-front/tests/unit/helpers/format-date-test.jshint', ['ex
   QUnit.test('unit/helpers/format-date-test.js should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'unit/helpers/format-date-test.js should pass jshint.');
+  });
+});
+define('awesome-schedule-front/tests/unit/models/coaches-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
+
+  (0, _emberQunit.moduleForModel)('coaches', 'Unit | Model | coaches', {
+    // Specify the other units that are required for this test.
+    needs: []
+  });
+
+  (0, _emberQunit.test)('it exists', function (assert) {
+    var model = this.subject();
+    // let store = this.store();
+    assert.ok(!!model);
+  });
+});
+define('awesome-schedule-front/tests/unit/models/coaches-test.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - unit/models');
+  QUnit.test('unit/models/coaches-test.js should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/models/coaches-test.js should pass jshint.');
   });
 });
 /* jshint ignore:start */
