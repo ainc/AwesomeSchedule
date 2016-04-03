@@ -1,7 +1,15 @@
 module.exports = function(req,res) {
 
     console.log("Freddy Got Fingered");
+    res.header("Access-Control-Allow-Origin", "*");
+    res.send({ 
+        "test": [
+                    {
 
-    res.send("Freddy also got fingered.");
+                        name: "Freddy also got fingered."
+    
+                    }
+                ]
+    });
 
 }
