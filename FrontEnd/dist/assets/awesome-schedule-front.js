@@ -716,42 +716,21 @@ define('awesome-schedule-front/routes/coaches', ['exports', 'ember'], function (
         }
     });
 });
-define('awesome-schedule-front/routes/test', ['exports', 'ember'], function (exports, _ember) {
-  exports['default'] = _ember['default'].Route.extend({
-    ajax: _ember['default'].inject.service(),
-    actions: {
-      sendRequest: function sendRequest() {
-        return this.get('ajax').request('/api/gimmieDatDate', {
-          method: 'POST',
-          data: {
-            foo: 'bar'
-          }
-        });
-      }
-    },
-    model: function model() {
-      //          
-      //            var that = this;
-      //            $.ajax({
-      //                  type: "POST",
-      //                 url: "/api/gimmieDatDate",
-      //               }).then(function(value){
-      //                   console.log(value);
-      //                   var data = {
-      //                       id: '3',
-      //                      
-      //                       type:'test',
-      //                       attributes:{
-      //                           name: "chili"
-      //                       }
-      //                   };
-      //                   that.store.push(('test',data));
-      //                  
-      //                  
-      //               });
-      return this.get('ajax').request('/test');
-    }
+define('awesome-schedule-front/routes/test', ['exports', 'ember', 'ember-ajax/services/ajax'], function (exports, _ember, _emberAjaxServicesAjax) {
+    exports['default'] = _ember['default'].Route.extend({
+        ajax: _ember['default'].inject.service(),
 
+        model: function model() {
+            return this.get('ajax').request('http://localhost:9029/api/gimmieDatDate', { method: 'POST' });
+        }
+    });
+});
+define('awesome-schedule-front/services/ajax', ['exports', 'ember-ajax/services/ajax'], function (exports, _emberAjaxServicesAjax) {
+  Object.defineProperty(exports, 'default', {
+    enumerable: true,
+    get: function get() {
+      return _emberAjaxServicesAjax['default'];
+    }
   });
 });
 define("awesome-schedule-front/templates/application", ["exports"], function (exports) {
@@ -759,7 +738,8 @@ define("awesome-schedule-front/templates/application", ["exports"], function (ex
     var child0 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": false,
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -773,6 +753,7 @@ define("awesome-schedule-front/templates/application", ["exports"], function (ex
           },
           "moduleName": "awesome-schedule-front/templates/application.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -793,7 +774,8 @@ define("awesome-schedule-front/templates/application", ["exports"], function (ex
     var child1 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": false,
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -807,6 +789,7 @@ define("awesome-schedule-front/templates/application", ["exports"], function (ex
           },
           "moduleName": "awesome-schedule-front/templates/application.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -827,7 +810,8 @@ define("awesome-schedule-front/templates/application", ["exports"], function (ex
     var child2 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": false,
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -841,6 +825,7 @@ define("awesome-schedule-front/templates/application", ["exports"], function (ex
           },
           "moduleName": "awesome-schedule-front/templates/application.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -861,7 +846,8 @@ define("awesome-schedule-front/templates/application", ["exports"], function (ex
     var child3 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": false,
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -875,6 +861,7 @@ define("awesome-schedule-front/templates/application", ["exports"], function (ex
           },
           "moduleName": "awesome-schedule-front/templates/application.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -894,7 +881,11 @@ define("awesome-schedule-front/templates/application", ["exports"], function (ex
     })();
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type", "multiple-nodes"]
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -908,6 +899,7 @@ define("awesome-schedule-front/templates/application", ["exports"], function (ex
         },
         "moduleName": "awesome-schedule-front/templates/application.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -988,7 +980,8 @@ define("awesome-schedule-front/templates/calendar", ["exports"], function (expor
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": false,
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -1002,6 +995,7 @@ define("awesome-schedule-front/templates/calendar", ["exports"], function (expor
         },
         "moduleName": "awesome-schedule-front/templates/calendar.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -1441,7 +1435,10 @@ define("awesome-schedule-front/templates/coach", ["exports"], function (exports)
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "triple-curlies"
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -1455,6 +1452,7 @@ define("awesome-schedule-front/templates/coach", ["exports"], function (exports)
         },
         "moduleName": "awesome-schedule-front/templates/coach.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -1945,7 +1943,11 @@ define("awesome-schedule-front/templates/coaches", ["exports"], function (export
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type"]
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -1959,6 +1961,7 @@ define("awesome-schedule-front/templates/coaches", ["exports"], function (export
         },
         "moduleName": "awesome-schedule-front/templates/coaches.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -1986,7 +1989,11 @@ define("awesome-schedule-front/templates/components/bio-box", ["exports"], funct
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type", "multiple-nodes"]
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -2000,6 +2007,7 @@ define("awesome-schedule-front/templates/components/bio-box", ["exports"], funct
         },
         "moduleName": "awesome-schedule-front/templates/components/bio-box.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -2084,7 +2092,8 @@ define("awesome-schedule-front/templates/components/bs-accordion-item", ["export
     var child0 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": false,
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -2098,6 +2107,7 @@ define("awesome-schedule-front/templates/components/bs-accordion-item", ["export
           },
           "moduleName": "awesome-schedule-front/templates/components/bs-accordion-item.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -2130,7 +2140,11 @@ define("awesome-schedule-front/templates/components/bs-accordion-item", ["export
     })();
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["multiple-nodes", "wrong-type"]
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -2144,6 +2158,7 @@ define("awesome-schedule-front/templates/components/bs-accordion-item", ["export
         },
         "moduleName": "awesome-schedule-front/templates/components/bs-accordion-item.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -2200,7 +2215,8 @@ define("awesome-schedule-front/templates/components/bs-alert", ["exports"], func
       var child0 = (function () {
         return {
           meta: {
-            "revision": "Ember@1.13.12",
+            "fragmentReason": false,
+            "revision": "Ember@2.4.0",
             "loc": {
               "source": null,
               "start": {
@@ -2214,6 +2230,7 @@ define("awesome-schedule-front/templates/components/bs-alert", ["exports"], func
             },
             "moduleName": "awesome-schedule-front/templates/components/bs-alert.hbs"
           },
+          isEmpty: false,
           arity: 0,
           cachedFragment: null,
           hasRendered: false,
@@ -2248,7 +2265,11 @@ define("awesome-schedule-front/templates/components/bs-alert", ["exports"], func
       })();
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": {
+            "name": "missing-wrapper",
+            "problems": ["wrong-type", "multiple-nodes"]
+          },
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -2262,6 +2283,7 @@ define("awesome-schedule-front/templates/components/bs-alert", ["exports"], func
           },
           "moduleName": "awesome-schedule-front/templates/components/bs-alert.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -2289,7 +2311,11 @@ define("awesome-schedule-front/templates/components/bs-alert", ["exports"], func
     })();
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type"]
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -2303,6 +2329,7 @@ define("awesome-schedule-front/templates/components/bs-alert", ["exports"], func
         },
         "moduleName": "awesome-schedule-front/templates/components/bs-alert.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -2330,7 +2357,10 @@ define("awesome-schedule-front/templates/components/bs-button", ["exports"], fun
     var child0 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": {
+            "name": "triple-curlies"
+          },
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -2344,6 +2374,7 @@ define("awesome-schedule-front/templates/components/bs-button", ["exports"], fun
           },
           "moduleName": "awesome-schedule-front/templates/components/bs-button.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -2368,7 +2399,11 @@ define("awesome-schedule-front/templates/components/bs-button", ["exports"], fun
     })();
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type", "multiple-nodes"]
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -2382,6 +2417,7 @@ define("awesome-schedule-front/templates/components/bs-button", ["exports"], fun
         },
         "moduleName": "awesome-schedule-front/templates/components/bs-button.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -2414,7 +2450,11 @@ define("awesome-schedule-front/templates/components/bs-form-element", ["exports"
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type"]
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -2428,6 +2468,7 @@ define("awesome-schedule-front/templates/components/bs-form-element", ["exports"
         },
         "moduleName": "awesome-schedule-front/templates/components/bs-form-element.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -2455,7 +2496,8 @@ define("awesome-schedule-front/templates/components/bs-form-group", ["exports"],
     var child0 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": false,
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -2469,6 +2511,7 @@ define("awesome-schedule-front/templates/components/bs-form-group", ["exports"],
           },
           "moduleName": "awesome-schedule-front/templates/components/bs-form-group.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -2496,7 +2539,11 @@ define("awesome-schedule-front/templates/components/bs-form-group", ["exports"],
     })();
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type", "multiple-nodes"]
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -2510,6 +2557,7 @@ define("awesome-schedule-front/templates/components/bs-form-group", ["exports"],
         },
         "moduleName": "awesome-schedule-front/templates/components/bs-form-group.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -2541,7 +2589,11 @@ define("awesome-schedule-front/templates/components/bs-form", ["exports"], funct
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type"]
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -2555,6 +2607,7 @@ define("awesome-schedule-front/templates/components/bs-form", ["exports"], funct
         },
         "moduleName": "awesome-schedule-front/templates/components/bs-form.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -2582,7 +2635,8 @@ define("awesome-schedule-front/templates/components/bs-modal-dialog", ["exports"
     var child0 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": false,
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -2596,6 +2650,7 @@ define("awesome-schedule-front/templates/components/bs-modal-dialog", ["exports"
           },
           "moduleName": "awesome-schedule-front/templates/components/bs-modal-dialog.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -2623,7 +2678,8 @@ define("awesome-schedule-front/templates/components/bs-modal-dialog", ["exports"
       var child0 = (function () {
         return {
           meta: {
-            "revision": "Ember@1.13.12",
+            "fragmentReason": false,
+            "revision": "Ember@2.4.0",
             "loc": {
               "source": null,
               "start": {
@@ -2637,6 +2693,7 @@ define("awesome-schedule-front/templates/components/bs-modal-dialog", ["exports"
             },
             "moduleName": "awesome-schedule-front/templates/components/bs-modal-dialog.hbs"
           },
+          isEmpty: false,
           arity: 0,
           cachedFragment: null,
           hasRendered: false,
@@ -2662,7 +2719,8 @@ define("awesome-schedule-front/templates/components/bs-modal-dialog", ["exports"
       })();
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": false,
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -2676,6 +2734,7 @@ define("awesome-schedule-front/templates/components/bs-modal-dialog", ["exports"
           },
           "moduleName": "awesome-schedule-front/templates/components/bs-modal-dialog.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -2700,7 +2759,8 @@ define("awesome-schedule-front/templates/components/bs-modal-dialog", ["exports"
     var child2 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": false,
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -2714,6 +2774,7 @@ define("awesome-schedule-front/templates/components/bs-modal-dialog", ["exports"
           },
           "moduleName": "awesome-schedule-front/templates/components/bs-modal-dialog.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -2740,7 +2801,8 @@ define("awesome-schedule-front/templates/components/bs-modal-dialog", ["exports"
     var child3 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": false,
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -2754,6 +2816,7 @@ define("awesome-schedule-front/templates/components/bs-modal-dialog", ["exports"
           },
           "moduleName": "awesome-schedule-front/templates/components/bs-modal-dialog.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -2779,7 +2842,10 @@ define("awesome-schedule-front/templates/components/bs-modal-dialog", ["exports"
     })();
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "triple-curlies"
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -2793,6 +2859,7 @@ define("awesome-schedule-front/templates/components/bs-modal-dialog", ["exports"
         },
         "moduleName": "awesome-schedule-front/templates/components/bs-modal-dialog.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -2842,7 +2909,11 @@ define("awesome-schedule-front/templates/components/bs-modal-footer", ["exports"
     var child0 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": {
+            "name": "missing-wrapper",
+            "problems": ["wrong-type"]
+          },
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -2856,6 +2927,7 @@ define("awesome-schedule-front/templates/components/bs-modal-footer", ["exports"
           },
           "moduleName": "awesome-schedule-front/templates/components/bs-modal-footer.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -2884,7 +2956,8 @@ define("awesome-schedule-front/templates/components/bs-modal-footer", ["exports"
         var child0 = (function () {
           return {
             meta: {
-              "revision": "Ember@1.13.12",
+              "fragmentReason": false,
+              "revision": "Ember@2.4.0",
               "loc": {
                 "source": null,
                 "start": {
@@ -2898,6 +2971,7 @@ define("awesome-schedule-front/templates/components/bs-modal-footer", ["exports"
               },
               "moduleName": "awesome-schedule-front/templates/components/bs-modal-footer.hbs"
             },
+            isEmpty: false,
             arity: 0,
             cachedFragment: null,
             hasRendered: false,
@@ -2922,7 +2996,8 @@ define("awesome-schedule-front/templates/components/bs-modal-footer", ["exports"
         var child1 = (function () {
           return {
             meta: {
-              "revision": "Ember@1.13.12",
+              "fragmentReason": false,
+              "revision": "Ember@2.4.0",
               "loc": {
                 "source": null,
                 "start": {
@@ -2936,6 +3011,7 @@ define("awesome-schedule-front/templates/components/bs-modal-footer", ["exports"
               },
               "moduleName": "awesome-schedule-front/templates/components/bs-modal-footer.hbs"
             },
+            isEmpty: false,
             arity: 0,
             cachedFragment: null,
             hasRendered: false,
@@ -2959,7 +3035,8 @@ define("awesome-schedule-front/templates/components/bs-modal-footer", ["exports"
         })();
         return {
           meta: {
-            "revision": "Ember@1.13.12",
+            "fragmentReason": false,
+            "revision": "Ember@2.4.0",
             "loc": {
               "source": null,
               "start": {
@@ -2973,6 +3050,7 @@ define("awesome-schedule-front/templates/components/bs-modal-footer", ["exports"
             },
             "moduleName": "awesome-schedule-front/templates/components/bs-modal-footer.hbs"
           },
+          isEmpty: false,
           arity: 0,
           cachedFragment: null,
           hasRendered: false,
@@ -3005,7 +3083,8 @@ define("awesome-schedule-front/templates/components/bs-modal-footer", ["exports"
         var child0 = (function () {
           return {
             meta: {
-              "revision": "Ember@1.13.12",
+              "fragmentReason": false,
+              "revision": "Ember@2.4.0",
               "loc": {
                 "source": null,
                 "start": {
@@ -3019,6 +3098,7 @@ define("awesome-schedule-front/templates/components/bs-modal-footer", ["exports"
               },
               "moduleName": "awesome-schedule-front/templates/components/bs-modal-footer.hbs"
             },
+            isEmpty: false,
             arity: 0,
             cachedFragment: null,
             hasRendered: false,
@@ -3042,7 +3122,8 @@ define("awesome-schedule-front/templates/components/bs-modal-footer", ["exports"
         })();
         return {
           meta: {
-            "revision": "Ember@1.13.12",
+            "fragmentReason": false,
+            "revision": "Ember@2.4.0",
             "loc": {
               "source": null,
               "start": {
@@ -3056,6 +3137,7 @@ define("awesome-schedule-front/templates/components/bs-modal-footer", ["exports"
             },
             "moduleName": "awesome-schedule-front/templates/components/bs-modal-footer.hbs"
           },
+          isEmpty: false,
           arity: 0,
           cachedFragment: null,
           hasRendered: false,
@@ -3081,7 +3163,8 @@ define("awesome-schedule-front/templates/components/bs-modal-footer", ["exports"
       })();
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": false,
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -3095,6 +3178,7 @@ define("awesome-schedule-front/templates/components/bs-modal-footer", ["exports"
           },
           "moduleName": "awesome-schedule-front/templates/components/bs-modal-footer.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -3118,7 +3202,11 @@ define("awesome-schedule-front/templates/components/bs-modal-footer", ["exports"
     })();
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type"]
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -3132,6 +3220,7 @@ define("awesome-schedule-front/templates/components/bs-modal-footer", ["exports"
         },
         "moduleName": "awesome-schedule-front/templates/components/bs-modal-footer.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -3159,7 +3248,11 @@ define("awesome-schedule-front/templates/components/bs-modal-header", ["exports"
     var child0 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": {
+            "name": "modifiers",
+            "modifiers": ["action"]
+          },
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -3173,6 +3266,7 @@ define("awesome-schedule-front/templates/components/bs-modal-header", ["exports"
           },
           "moduleName": "awesome-schedule-front/templates/components/bs-modal-header.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -3208,7 +3302,8 @@ define("awesome-schedule-front/templates/components/bs-modal-header", ["exports"
     var child1 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": false,
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -3222,6 +3317,7 @@ define("awesome-schedule-front/templates/components/bs-modal-header", ["exports"
           },
           "moduleName": "awesome-schedule-front/templates/components/bs-modal-header.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -3248,7 +3344,8 @@ define("awesome-schedule-front/templates/components/bs-modal-header", ["exports"
     var child2 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": false,
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -3262,6 +3359,7 @@ define("awesome-schedule-front/templates/components/bs-modal-header", ["exports"
           },
           "moduleName": "awesome-schedule-front/templates/components/bs-modal-header.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -3290,7 +3388,11 @@ define("awesome-schedule-front/templates/components/bs-modal-header", ["exports"
     })();
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type", "multiple-nodes"]
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -3304,6 +3406,7 @@ define("awesome-schedule-front/templates/components/bs-modal-header", ["exports"
         },
         "moduleName": "awesome-schedule-front/templates/components/bs-modal-header.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -3335,7 +3438,8 @@ define("awesome-schedule-front/templates/components/bs-modal", ["exports"], func
       var child0 = (function () {
         return {
           meta: {
-            "revision": "Ember@1.13.12",
+            "fragmentReason": false,
+            "revision": "Ember@2.4.0",
             "loc": {
               "source": null,
               "start": {
@@ -3349,6 +3453,7 @@ define("awesome-schedule-front/templates/components/bs-modal", ["exports"], func
             },
             "moduleName": "awesome-schedule-front/templates/components/bs-modal.hbs"
           },
+          isEmpty: false,
           arity: 0,
           cachedFragment: null,
           hasRendered: false,
@@ -3375,7 +3480,8 @@ define("awesome-schedule-front/templates/components/bs-modal", ["exports"], func
       var child1 = (function () {
         return {
           meta: {
-            "revision": "Ember@1.13.12",
+            "fragmentReason": false,
+            "revision": "Ember@2.4.0",
             "loc": {
               "source": null,
               "start": {
@@ -3389,6 +3495,7 @@ define("awesome-schedule-front/templates/components/bs-modal", ["exports"], func
             },
             "moduleName": "awesome-schedule-front/templates/components/bs-modal.hbs"
           },
+          isEmpty: false,
           arity: 0,
           cachedFragment: null,
           hasRendered: false,
@@ -3416,7 +3523,11 @@ define("awesome-schedule-front/templates/components/bs-modal", ["exports"], func
       })();
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": {
+            "name": "missing-wrapper",
+            "problems": ["wrong-type", "multiple-nodes"]
+          },
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -3430,6 +3541,7 @@ define("awesome-schedule-front/templates/components/bs-modal", ["exports"], func
           },
           "moduleName": "awesome-schedule-front/templates/components/bs-modal.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -3460,7 +3572,11 @@ define("awesome-schedule-front/templates/components/bs-modal", ["exports"], func
     })();
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type"]
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -3474,6 +3590,7 @@ define("awesome-schedule-front/templates/components/bs-modal", ["exports"], func
         },
         "moduleName": "awesome-schedule-front/templates/components/bs-modal.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -3502,7 +3619,8 @@ define("awesome-schedule-front/templates/components/bs-progress-bar", ["exports"
       var child0 = (function () {
         return {
           meta: {
-            "revision": "Ember@1.13.12",
+            "fragmentReason": false,
+            "revision": "Ember@2.4.0",
             "loc": {
               "source": null,
               "start": {
@@ -3516,6 +3634,7 @@ define("awesome-schedule-front/templates/components/bs-progress-bar", ["exports"
             },
             "moduleName": "awesome-schedule-front/templates/components/bs-progress-bar.hbs"
           },
+          isEmpty: false,
           arity: 0,
           cachedFragment: null,
           hasRendered: false,
@@ -3542,7 +3661,8 @@ define("awesome-schedule-front/templates/components/bs-progress-bar", ["exports"
       var child1 = (function () {
         return {
           meta: {
-            "revision": "Ember@1.13.12",
+            "fragmentReason": false,
+            "revision": "Ember@2.4.0",
             "loc": {
               "source": null,
               "start": {
@@ -3556,6 +3676,7 @@ define("awesome-schedule-front/templates/components/bs-progress-bar", ["exports"
             },
             "moduleName": "awesome-schedule-front/templates/components/bs-progress-bar.hbs"
           },
+          isEmpty: false,
           arity: 0,
           cachedFragment: null,
           hasRendered: false,
@@ -3581,7 +3702,8 @@ define("awesome-schedule-front/templates/components/bs-progress-bar", ["exports"
       })();
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": false,
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -3595,6 +3717,7 @@ define("awesome-schedule-front/templates/components/bs-progress-bar", ["exports"
           },
           "moduleName": "awesome-schedule-front/templates/components/bs-progress-bar.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -3620,7 +3743,8 @@ define("awesome-schedule-front/templates/components/bs-progress-bar", ["exports"
       var child0 = (function () {
         return {
           meta: {
-            "revision": "Ember@1.13.12",
+            "fragmentReason": false,
+            "revision": "Ember@2.4.0",
             "loc": {
               "source": null,
               "start": {
@@ -3634,6 +3758,7 @@ define("awesome-schedule-front/templates/components/bs-progress-bar", ["exports"
             },
             "moduleName": "awesome-schedule-front/templates/components/bs-progress-bar.hbs"
           },
+          isEmpty: false,
           arity: 0,
           cachedFragment: null,
           hasRendered: false,
@@ -3663,7 +3788,8 @@ define("awesome-schedule-front/templates/components/bs-progress-bar", ["exports"
       var child1 = (function () {
         return {
           meta: {
-            "revision": "Ember@1.13.12",
+            "fragmentReason": false,
+            "revision": "Ember@2.4.0",
             "loc": {
               "source": null,
               "start": {
@@ -3677,6 +3803,7 @@ define("awesome-schedule-front/templates/components/bs-progress-bar", ["exports"
             },
             "moduleName": "awesome-schedule-front/templates/components/bs-progress-bar.hbs"
           },
+          isEmpty: false,
           arity: 0,
           cachedFragment: null,
           hasRendered: false,
@@ -3707,7 +3834,8 @@ define("awesome-schedule-front/templates/components/bs-progress-bar", ["exports"
       })();
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": false,
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -3721,6 +3849,7 @@ define("awesome-schedule-front/templates/components/bs-progress-bar", ["exports"
           },
           "moduleName": "awesome-schedule-front/templates/components/bs-progress-bar.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -3745,7 +3874,11 @@ define("awesome-schedule-front/templates/components/bs-progress-bar", ["exports"
     })();
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type"]
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -3759,6 +3892,7 @@ define("awesome-schedule-front/templates/components/bs-progress-bar", ["exports"
         },
         "moduleName": "awesome-schedule-front/templates/components/bs-progress-bar.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -3786,7 +3920,11 @@ define("awesome-schedule-front/templates/components/bs-progress", ["exports"], f
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type"]
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -3800,6 +3938,7 @@ define("awesome-schedule-front/templates/components/bs-progress", ["exports"], f
         },
         "moduleName": "awesome-schedule-front/templates/components/bs-progress.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -3828,7 +3967,10 @@ define("awesome-schedule-front/templates/components/bs-select", ["exports"], fun
     var child0 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": {
+            "name": "triple-curlies"
+          },
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -3842,6 +3984,7 @@ define("awesome-schedule-front/templates/components/bs-select", ["exports"], fun
           },
           "moduleName": "awesome-schedule-front/templates/components/bs-select.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -3877,7 +4020,8 @@ define("awesome-schedule-front/templates/components/bs-select", ["exports"], fun
     var child1 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": false,
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -3891,6 +4035,7 @@ define("awesome-schedule-front/templates/components/bs-select", ["exports"], fun
           },
           "moduleName": "awesome-schedule-front/templates/components/bs-select.hbs"
         },
+        isEmpty: false,
         arity: 1,
         cachedFragment: null,
         hasRendered: false,
@@ -3925,7 +4070,11 @@ define("awesome-schedule-front/templates/components/bs-select", ["exports"], fun
     })();
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type", "multiple-nodes"]
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -3939,6 +4088,7 @@ define("awesome-schedule-front/templates/components/bs-select", ["exports"], fun
         },
         "moduleName": "awesome-schedule-front/templates/components/bs-select.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -3970,7 +4120,11 @@ define("awesome-schedule-front/templates/components/coach-day", ["exports"], fun
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type"]
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -3984,6 +4138,7 @@ define("awesome-schedule-front/templates/components/coach-day", ["exports"], fun
         },
         "moduleName": "awesome-schedule-front/templates/components/coach-day.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -4012,7 +4167,8 @@ define("awesome-schedule-front/templates/components/coach-sidebar", ["exports"],
     var child0 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": false,
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -4026,6 +4182,7 @@ define("awesome-schedule-front/templates/components/coach-sidebar", ["exports"],
           },
           "moduleName": "awesome-schedule-front/templates/components/coach-sidebar.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -4059,7 +4216,8 @@ define("awesome-schedule-front/templates/components/coach-sidebar", ["exports"],
     var child1 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": false,
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -4073,6 +4231,7 @@ define("awesome-schedule-front/templates/components/coach-sidebar", ["exports"],
           },
           "moduleName": "awesome-schedule-front/templates/components/coach-sidebar.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -4094,7 +4253,11 @@ define("awesome-schedule-front/templates/components/coach-sidebar", ["exports"],
     })();
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type", "multiple-nodes"]
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -4108,6 +4271,7 @@ define("awesome-schedule-front/templates/components/coach-sidebar", ["exports"],
         },
         "moduleName": "awesome-schedule-front/templates/components/coach-sidebar.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -4145,7 +4309,8 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
       var child0 = (function () {
         return {
           meta: {
-            "revision": "Ember@1.13.12",
+            "fragmentReason": false,
+            "revision": "Ember@2.4.0",
             "loc": {
               "source": null,
               "start": {
@@ -4159,6 +4324,7 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
             },
             "moduleName": "awesome-schedule-front/templates/components/day-tile.hbs"
           },
+          isEmpty: false,
           arity: 0,
           cachedFragment: null,
           hasRendered: false,
@@ -4192,7 +4358,8 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
       var child1 = (function () {
         return {
           meta: {
-            "revision": "Ember@1.13.12",
+            "fragmentReason": false,
+            "revision": "Ember@2.4.0",
             "loc": {
               "source": null,
               "start": {
@@ -4206,6 +4373,7 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
             },
             "moduleName": "awesome-schedule-front/templates/components/day-tile.hbs"
           },
+          isEmpty: false,
           arity: 0,
           cachedFragment: null,
           hasRendered: false,
@@ -4238,7 +4406,8 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
       })();
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": false,
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -4252,6 +4421,7 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
           },
           "moduleName": "awesome-schedule-front/templates/components/day-tile.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -4277,7 +4447,8 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
       var child0 = (function () {
         return {
           meta: {
-            "revision": "Ember@1.13.12",
+            "fragmentReason": false,
+            "revision": "Ember@2.4.0",
             "loc": {
               "source": null,
               "start": {
@@ -4291,6 +4462,7 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
             },
             "moduleName": "awesome-schedule-front/templates/components/day-tile.hbs"
           },
+          isEmpty: false,
           arity: 0,
           cachedFragment: null,
           hasRendered: false,
@@ -4324,7 +4496,8 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
       var child1 = (function () {
         return {
           meta: {
-            "revision": "Ember@1.13.12",
+            "fragmentReason": false,
+            "revision": "Ember@2.4.0",
             "loc": {
               "source": null,
               "start": {
@@ -4338,6 +4511,7 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
             },
             "moduleName": "awesome-schedule-front/templates/components/day-tile.hbs"
           },
+          isEmpty: false,
           arity: 0,
           cachedFragment: null,
           hasRendered: false,
@@ -4370,7 +4544,8 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
       })();
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": false,
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -4384,6 +4559,7 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
           },
           "moduleName": "awesome-schedule-front/templates/components/day-tile.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -4416,7 +4592,11 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
     })();
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type", "multiple-nodes"]
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -4430,6 +4610,7 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
         },
         "moduleName": "awesome-schedule-front/templates/components/day-tile.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -4464,7 +4645,10 @@ define("awesome-schedule-front/templates/components/form-element/errors", ["expo
     var child0 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": {
+            "name": "triple-curlies"
+          },
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -4478,6 +4662,7 @@ define("awesome-schedule-front/templates/components/form-element/errors", ["expo
           },
           "moduleName": "awesome-schedule-front/templates/components/form-element/errors.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -4506,7 +4691,11 @@ define("awesome-schedule-front/templates/components/form-element/errors", ["expo
     })();
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type"]
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -4520,6 +4709,7 @@ define("awesome-schedule-front/templates/components/form-element/errors", ["expo
         },
         "moduleName": "awesome-schedule-front/templates/components/form-element/errors.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -4547,7 +4737,10 @@ define("awesome-schedule-front/templates/components/form-element/feedback-icon",
     var child0 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": {
+            "name": "triple-curlies"
+          },
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -4561,6 +4754,7 @@ define("awesome-schedule-front/templates/components/form-element/feedback-icon",
           },
           "moduleName": "awesome-schedule-front/templates/components/form-element/feedback-icon.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -4588,7 +4782,11 @@ define("awesome-schedule-front/templates/components/form-element/feedback-icon",
     })();
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type"]
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -4602,6 +4800,7 @@ define("awesome-schedule-front/templates/components/form-element/feedback-icon",
         },
         "moduleName": "awesome-schedule-front/templates/components/form-element/feedback-icon.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -4628,7 +4827,10 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/chec
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "triple-curlies"
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -4642,6 +4844,7 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/chec
         },
         "moduleName": "awesome-schedule-front/templates/components/form-element/horizontal/checkbox.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -4700,7 +4903,8 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/defa
       var child0 = (function () {
         return {
           meta: {
-            "revision": "Ember@1.13.12",
+            "fragmentReason": false,
+            "revision": "Ember@2.4.0",
             "loc": {
               "source": null,
               "start": {
@@ -4714,6 +4918,7 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/defa
             },
             "moduleName": "awesome-schedule-front/templates/components/form-element/horizontal/default.hbs"
           },
+          isEmpty: false,
           arity: 0,
           cachedFragment: null,
           hasRendered: false,
@@ -4740,7 +4945,8 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/defa
       var child1 = (function () {
         return {
           meta: {
-            "revision": "Ember@1.13.12",
+            "fragmentReason": false,
+            "revision": "Ember@2.4.0",
             "loc": {
               "source": null,
               "start": {
@@ -4754,6 +4960,7 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/defa
             },
             "moduleName": "awesome-schedule-front/templates/components/form-element/horizontal/default.hbs"
           },
+          isEmpty: false,
           arity: 0,
           cachedFragment: null,
           hasRendered: false,
@@ -4779,7 +4986,11 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/defa
       })();
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": {
+            "name": "missing-wrapper",
+            "problems": ["multiple-nodes"]
+          },
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -4793,6 +5004,7 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/defa
           },
           "moduleName": "awesome-schedule-front/templates/components/form-element/horizontal/default.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -4848,7 +5060,8 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/defa
       var child0 = (function () {
         return {
           meta: {
-            "revision": "Ember@1.13.12",
+            "fragmentReason": false,
+            "revision": "Ember@2.4.0",
             "loc": {
               "source": null,
               "start": {
@@ -4862,6 +5075,7 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/defa
             },
             "moduleName": "awesome-schedule-front/templates/components/form-element/horizontal/default.hbs"
           },
+          isEmpty: false,
           arity: 0,
           cachedFragment: null,
           hasRendered: false,
@@ -4888,7 +5102,8 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/defa
       var child1 = (function () {
         return {
           meta: {
-            "revision": "Ember@1.13.12",
+            "fragmentReason": false,
+            "revision": "Ember@2.4.0",
             "loc": {
               "source": null,
               "start": {
@@ -4902,6 +5117,7 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/defa
             },
             "moduleName": "awesome-schedule-front/templates/components/form-element/horizontal/default.hbs"
           },
+          isEmpty: false,
           arity: 0,
           cachedFragment: null,
           hasRendered: false,
@@ -4927,7 +5143,8 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/defa
       })();
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": false,
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -4941,6 +5158,7 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/defa
           },
           "moduleName": "awesome-schedule-front/templates/components/form-element/horizontal/default.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -4984,7 +5202,11 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/defa
     })();
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type"]
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -4998,6 +5220,7 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/defa
         },
         "moduleName": "awesome-schedule-front/templates/components/form-element/horizontal/default.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -5025,7 +5248,11 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/sele
     var child0 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": {
+            "name": "missing-wrapper",
+            "problems": ["multiple-nodes"]
+          },
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -5039,6 +5266,7 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/sele
           },
           "moduleName": "awesome-schedule-front/templates/components/form-element/horizontal/select.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -5093,7 +5321,8 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/sele
     var child1 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": false,
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -5107,6 +5336,7 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/sele
           },
           "moduleName": "awesome-schedule-front/templates/components/form-element/horizontal/select.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -5150,7 +5380,11 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/sele
     })();
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type"]
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -5164,6 +5398,7 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/sele
         },
         "moduleName": "awesome-schedule-front/templates/components/form-element/horizontal/select.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -5191,7 +5426,11 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/text
     var child0 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": {
+            "name": "missing-wrapper",
+            "problems": ["multiple-nodes"]
+          },
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -5205,6 +5444,7 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/text
           },
           "moduleName": "awesome-schedule-front/templates/components/form-element/horizontal/textarea.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -5259,7 +5499,8 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/text
     var child1 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": false,
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -5273,6 +5514,7 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/text
           },
           "moduleName": "awesome-schedule-front/templates/components/form-element/horizontal/textarea.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -5316,7 +5558,11 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/text
     })();
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type"]
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -5330,6 +5576,7 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/text
         },
         "moduleName": "awesome-schedule-front/templates/components/form-element/horizontal/textarea.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -5356,7 +5603,10 @@ define("awesome-schedule-front/templates/components/form-element/inline/checkbox
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "triple-curlies"
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -5370,6 +5620,7 @@ define("awesome-schedule-front/templates/components/form-element/inline/checkbox
         },
         "moduleName": "awesome-schedule-front/templates/components/form-element/inline/checkbox.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -5414,7 +5665,10 @@ define("awesome-schedule-front/templates/components/form-element/inline/default"
     var child0 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": {
+            "name": "triple-curlies"
+          },
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -5428,6 +5682,7 @@ define("awesome-schedule-front/templates/components/form-element/inline/default"
           },
           "moduleName": "awesome-schedule-front/templates/components/form-element/inline/default.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -5459,7 +5714,8 @@ define("awesome-schedule-front/templates/components/form-element/inline/default"
     var child1 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": false,
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -5473,6 +5729,7 @@ define("awesome-schedule-front/templates/components/form-element/inline/default"
           },
           "moduleName": "awesome-schedule-front/templates/components/form-element/inline/default.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -5499,7 +5756,8 @@ define("awesome-schedule-front/templates/components/form-element/inline/default"
     var child2 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": false,
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -5513,6 +5771,7 @@ define("awesome-schedule-front/templates/components/form-element/inline/default"
           },
           "moduleName": "awesome-schedule-front/templates/components/form-element/inline/default.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -5538,7 +5797,11 @@ define("awesome-schedule-front/templates/components/form-element/inline/default"
     })();
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type", "multiple-nodes"]
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -5552,6 +5815,7 @@ define("awesome-schedule-front/templates/components/form-element/inline/default"
         },
         "moduleName": "awesome-schedule-front/templates/components/form-element/inline/default.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -5586,7 +5850,10 @@ define("awesome-schedule-front/templates/components/form-element/inline/select",
     var child0 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": {
+            "name": "triple-curlies"
+          },
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -5600,6 +5867,7 @@ define("awesome-schedule-front/templates/components/form-element/inline/select",
           },
           "moduleName": "awesome-schedule-front/templates/components/form-element/inline/select.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -5630,7 +5898,11 @@ define("awesome-schedule-front/templates/components/form-element/inline/select",
     })();
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type", "multiple-nodes"]
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -5644,6 +5916,7 @@ define("awesome-schedule-front/templates/components/form-element/inline/select",
         },
         "moduleName": "awesome-schedule-front/templates/components/form-element/inline/select.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -5680,7 +5953,10 @@ define("awesome-schedule-front/templates/components/form-element/inline/textarea
     var child0 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": {
+            "name": "triple-curlies"
+          },
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -5694,6 +5970,7 @@ define("awesome-schedule-front/templates/components/form-element/inline/textarea
           },
           "moduleName": "awesome-schedule-front/templates/components/form-element/inline/textarea.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -5724,7 +6001,11 @@ define("awesome-schedule-front/templates/components/form-element/inline/textarea
     })();
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type", "multiple-nodes"]
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -5738,6 +6019,7 @@ define("awesome-schedule-front/templates/components/form-element/inline/textarea
         },
         "moduleName": "awesome-schedule-front/templates/components/form-element/inline/textarea.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -5777,7 +6059,11 @@ define("awesome-schedule-front/templates/components/form-element/vertical/checkb
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["multiple-nodes", "wrong-type"]
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -5791,6 +6077,7 @@ define("awesome-schedule-front/templates/components/form-element/vertical/checkb
         },
         "moduleName": "awesome-schedule-front/templates/components/form-element/vertical/checkbox.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -5841,7 +6128,10 @@ define("awesome-schedule-front/templates/components/form-element/vertical/defaul
     var child0 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": {
+            "name": "triple-curlies"
+          },
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -5855,6 +6145,7 @@ define("awesome-schedule-front/templates/components/form-element/vertical/defaul
           },
           "moduleName": "awesome-schedule-front/templates/components/form-element/vertical/default.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -5886,7 +6177,8 @@ define("awesome-schedule-front/templates/components/form-element/vertical/defaul
     var child1 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": false,
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -5900,6 +6192,7 @@ define("awesome-schedule-front/templates/components/form-element/vertical/defaul
           },
           "moduleName": "awesome-schedule-front/templates/components/form-element/vertical/default.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -5926,7 +6219,8 @@ define("awesome-schedule-front/templates/components/form-element/vertical/defaul
     var child2 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": false,
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -5940,6 +6234,7 @@ define("awesome-schedule-front/templates/components/form-element/vertical/defaul
           },
           "moduleName": "awesome-schedule-front/templates/components/form-element/vertical/default.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -5965,7 +6260,11 @@ define("awesome-schedule-front/templates/components/form-element/vertical/defaul
     })();
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type", "multiple-nodes"]
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -5979,6 +6278,7 @@ define("awesome-schedule-front/templates/components/form-element/vertical/defaul
         },
         "moduleName": "awesome-schedule-front/templates/components/form-element/vertical/default.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -6017,7 +6317,10 @@ define("awesome-schedule-front/templates/components/form-element/vertical/select
     var child0 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": {
+            "name": "triple-curlies"
+          },
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -6031,6 +6334,7 @@ define("awesome-schedule-front/templates/components/form-element/vertical/select
           },
           "moduleName": "awesome-schedule-front/templates/components/form-element/vertical/select.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -6061,7 +6365,11 @@ define("awesome-schedule-front/templates/components/form-element/vertical/select
     })();
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type", "multiple-nodes"]
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -6075,6 +6383,7 @@ define("awesome-schedule-front/templates/components/form-element/vertical/select
         },
         "moduleName": "awesome-schedule-front/templates/components/form-element/vertical/select.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -6111,7 +6420,10 @@ define("awesome-schedule-front/templates/components/form-element/vertical/textar
     var child0 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": {
+            "name": "triple-curlies"
+          },
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -6125,6 +6437,7 @@ define("awesome-schedule-front/templates/components/form-element/vertical/textar
           },
           "moduleName": "awesome-schedule-front/templates/components/form-element/vertical/textarea.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -6155,7 +6468,11 @@ define("awesome-schedule-front/templates/components/form-element/vertical/textar
     })();
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type", "multiple-nodes"]
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -6169,6 +6486,7 @@ define("awesome-schedule-front/templates/components/form-element/vertical/textar
         },
         "moduleName": "awesome-schedule-front/templates/components/form-element/vertical/textarea.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -6208,7 +6526,11 @@ define("awesome-schedule-front/templates/components/hour-tracker", ["exports"], 
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type", "multiple-nodes"]
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -6222,6 +6544,7 @@ define("awesome-schedule-front/templates/components/hour-tracker", ["exports"], 
         },
         "moduleName": "awesome-schedule-front/templates/components/hour-tracker.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -6255,7 +6578,8 @@ define("awesome-schedule-front/templates/components/logo-tile", ["exports"], fun
     var child0 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": false,
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -6269,6 +6593,7 @@ define("awesome-schedule-front/templates/components/logo-tile", ["exports"], fun
           },
           "moduleName": "awesome-schedule-front/templates/components/logo-tile.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -6301,55 +6626,10 @@ define("awesome-schedule-front/templates/components/logo-tile", ["exports"], fun
       };
     })();
     var child1 = (function () {
-      var child0 = (function () {
-        return {
-          meta: {
-            "revision": "Ember@1.13.12",
-            "loc": {
-              "source": null,
-              "start": {
-                "line": 9,
-                "column": 4
-              },
-              "end": {
-                "line": 11,
-                "column": 4
-              }
-            },
-            "moduleName": "awesome-schedule-front/templates/components/logo-tile.hbs"
-          },
-          arity: 1,
-          cachedFragment: null,
-          hasRendered: false,
-          buildFragment: function buildFragment(dom) {
-            var el0 = dom.createDocumentFragment();
-            var el1 = dom.createTextNode("    Week Of ");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createElement("br");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createTextNode(" ");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createElement("p");
-            var el2 = dom.createComment("");
-            dom.appendChild(el1, el2);
-            dom.appendChild(el0, el1);
-            var el1 = dom.createTextNode("\n");
-            dom.appendChild(el0, el1);
-            return el0;
-          },
-          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-            var morphs = new Array(1);
-            morphs[0] = dom.createMorphAt(dom.childAt(fragment, [3]), 0, 0);
-            return morphs;
-          },
-          statements: [["content", "c", ["loc", [null, [10, 20], [10, 25]]]]],
-          locals: ["c"],
-          templates: []
-        };
-      })();
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": false,
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -6363,6 +6643,7 @@ define("awesome-schedule-front/templates/components/logo-tile", ["exports"], fun
           },
           "moduleName": "awesome-schedule-front/templates/components/logo-tile.hbs"
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -6370,9 +6651,15 @@ define("awesome-schedule-front/templates/components/logo-tile", ["exports"], fun
           var el0 = dom.createDocumentFragment();
           var el1 = dom.createElement("div");
           dom.setAttribute(el1, "id", "tile");
-          var el2 = dom.createTextNode("\n");
+          var el2 = dom.createTextNode("\n \n    Week Of ");
           dom.appendChild(el1, el2);
-          var el2 = dom.createComment("");
+          var el2 = dom.createElement("br");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode(" ");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createElement("p");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode("\n   \n");
           dom.appendChild(el1, el2);
           dom.appendChild(el0, el1);
           var el1 = dom.createTextNode("\n");
@@ -6381,19 +6668,22 @@ define("awesome-schedule-front/templates/components/logo-tile", ["exports"], fun
         },
         buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
           var element0 = dom.childAt(fragment, [0]);
-          var morphs = new Array(2);
+          var morphs = new Array(1);
           morphs[0] = dom.createAttrMorph(element0, 'class');
-          morphs[1] = dom.createMorphAt(element0, 1, 1);
           return morphs;
         },
-        statements: [["attribute", "class", ["get", "weekTile", ["loc", [null, [8, 15], [8, 23]]]]], ["block", "each", [["get", "model", ["loc", [null, [9, 17], [9, 22]]]]], [], 0, null, ["loc", [null, [9, 4], [11, 13]]]]],
+        statements: [["attribute", "class", ["get", "weekTile", ["loc", [null, [8, 15], [8, 23]]]]]],
         locals: [],
-        templates: [child0]
+        templates: []
       };
     })();
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type", "multiple-nodes"]
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -6407,6 +6697,7 @@ define("awesome-schedule-front/templates/components/logo-tile", ["exports"], fun
         },
         "moduleName": "awesome-schedule-front/templates/components/logo-tile.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -6440,7 +6731,11 @@ define("awesome-schedule-front/templates/components/submit-info", ["exports"], f
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type"]
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -6454,6 +6749,7 @@ define("awesome-schedule-front/templates/components/submit-info", ["exports"], f
         },
         "moduleName": "awesome-schedule-front/templates/components/submit-info.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -6481,7 +6777,10 @@ define("awesome-schedule-front/templates/login", ["exports"], function (exports)
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": {
+          "name": "triple-curlies"
+        },
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -6495,6 +6794,7 @@ define("awesome-schedule-front/templates/login", ["exports"], function (exports)
         },
         "moduleName": "awesome-schedule-front/templates/login.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -6539,7 +6839,8 @@ define("awesome-schedule-front/templates/test", ["exports"], function (exports) 
     var child0 = (function () {
       return {
         meta: {
-          "revision": "Ember@1.13.12",
+          "fragmentReason": false,
+          "revision": "Ember@2.4.0",
           "loc": {
             "source": null,
             "start": {
@@ -6553,7 +6854,8 @@ define("awesome-schedule-front/templates/test", ["exports"], function (exports) 
           },
           "moduleName": "awesome-schedule-front/templates/test.hbs"
         },
-        arity: 1,
+        isEmpty: false,
+        arity: 0,
         cachedFragment: null,
         hasRendered: false,
         buildFragment: function buildFragment(dom) {
@@ -6573,14 +6875,15 @@ define("awesome-schedule-front/templates/test", ["exports"], function (exports) 
           morphs[0] = dom.createMorphAt(dom.childAt(fragment, [1]), 0, 0);
           return morphs;
         },
-        statements: [["content", "t.name", ["loc", [null, [8, 8], [8, 18]]]]],
-        locals: ["t"],
+        statements: [["content", "test.name", ["loc", [null, [8, 8], [8, 21]]]]],
+        locals: [],
         templates: []
       };
     })();
     return {
       meta: {
-        "revision": "Ember@1.13.12",
+        "fragmentReason": false,
+        "revision": "Ember@2.4.0",
         "loc": {
           "source": null,
           "start": {
@@ -6594,6 +6897,7 @@ define("awesome-schedule-front/templates/test", ["exports"], function (exports) 
         },
         "moduleName": "awesome-schedule-front/templates/test.hbs"
       },
+      isEmpty: false,
       arity: 0,
       cachedFragment: null,
       hasRendered: false,
@@ -6622,7 +6926,7 @@ define("awesome-schedule-front/templates/test", ["exports"], function (exports) 
         morphs[0] = dom.createMorphAt(dom.childAt(fragment, [1, 1]), 1, 1);
         return morphs;
       },
-      statements: [["block", "each", [["get", "model", ["loc", [null, [7, 17], [7, 22]]]]], [], 0, null, ["loc", [null, [7, 4], [9, 13]]]]],
+      statements: [["block", "each", [["get", "test", ["loc", [null, [7, 12], [7, 16]]]], ["get", "in", ["loc", [null, [7, 17], [7, 19]]]], ["get", "model", ["loc", [null, [7, 20], [7, 25]]]]], [], 0, null, ["loc", [null, [7, 4], [9, 13]]]]],
       locals: [],
       templates: [child0]
     };
@@ -6654,7 +6958,7 @@ catch(err) {
 });
 
 if (!runningTests) {
-  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+d4c3b3b9"});
+  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+1e3ee047"});
 }
 
 /* jshint ignore:end */

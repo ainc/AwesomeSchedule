@@ -15,5 +15,8 @@
     "bootstrap": "~3.3.5",
     "neat": "~1.7.3",
     "bourbon": "~4.2.6"
+  },
+  "devDependencies": {
+    "ember": "2.4.0"
   }
 }
