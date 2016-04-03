@@ -1,19 +1,19 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-	CoID: DS.attr(),
+	CoID: DS.attr('number'),
 	name: DS.attr('string'),
-	active: DS.attr(),
+	active: DS.attr('boolean', {defaultValue: true}),
 	startDate: DS.attr('date'),
 	endDate: DS.attr('date'),
-	RaID: DS.attr(),
-	isAdmin: DS.attr(),
+	RaID: DS.attr('number'),
+	isAdmin: DS.attr('boolean', {defaultValue: false}),
 	username: DS.attr('string'),
 	password: DS.attr('string'),
 	email: DS.attr('string'),
 	phone: DS.attr('phone'),
-	model: function(params){
-    	return this.store.find('person',1);
+	model: function(){
+    	return this.store.find('gimmieDatDate');
     
     }
   

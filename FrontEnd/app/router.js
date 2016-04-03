@@ -6,10 +6,11 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-	this.route('calendar');
-	this.route('admin');
-	this.route('coach');
-	this.route('login');
+  this.route('calendar');
+  this.route('admin');
+  this.route('coach');
+  this.route('login');
+  this.route('coaches');
 });
 
 export default Router;

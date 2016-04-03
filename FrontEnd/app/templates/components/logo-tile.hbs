@@ -6,7 +6,9 @@
 </div>
 {{else}}
 <div class = {{weekTile}} id="tile">
-    Week Of <br> <p>{{person.name}}</p>
+    {{#each c in model}}
+    Week Of <br> <p>{{c}}</p>
+    {{/each}}
 </div>
 {{/if}}
 {{yield}}

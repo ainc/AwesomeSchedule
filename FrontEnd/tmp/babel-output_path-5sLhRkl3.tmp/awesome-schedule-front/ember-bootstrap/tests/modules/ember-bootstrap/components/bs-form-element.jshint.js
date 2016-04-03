@@ -1,0 +1,7 @@
+define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/components/bs-form-element.jshint', ['exports'], function (exports) {
+  QUnit.module('JSHint - modules/ember-bootstrap/components/bs-form-element.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(false, 'modules/ember-bootstrap/components/bs-form-element.js should pass jshint.\nmodules/ember-bootstrap/components/bs-form-element.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-form-element.js: line 2, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-form-element.js: line 3, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-form-element.js: line 108, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-form-element.js: line 413, col 12, \'template literal syntax\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-form-element.js: line 412, col 5, \'let\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\n\n6 errors');
+  });
+});
