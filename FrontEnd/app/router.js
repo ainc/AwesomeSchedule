@@ -11,6 +11,7 @@ Router.map(function() {
   this.route('coach');
   this.route('login');
   this.route('coaches');
+  this.route('test');
 });
 
 export default Router;

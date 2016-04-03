@@ -6,7 +6,12 @@
 define('awesome-schedule-front/adapters/application', ['exports', 'ember-data'], function (exports, _emberData) {
     exports['default'] = _emberData['default'].RESTAdapter.extend({
         namespace: 'api',
-        host: 'http//localhost:9029'
+        host: 'http://localhost:9029',
+        pathForType: function pathForType(type) {
+            var camelized = Ember.String.camelize(type);
+            return Ember.String.singularize(camelized);
+        }
+
     });
 });
 define('awesome-schedule-front/app', ['exports', 'ember', 'ember/resolver', 'ember/load-initializers', 'awesome-schedule-front/config/environment'], function (exports, _ember, _emberResolver, _emberLoadInitializers, _awesomeScheduleFrontConfigEnvironment) {
@@ -265,18 +270,23 @@ define('awesome-schedule-front/components/submit-info', ['exports', 'ember'], fu
 define('awesome-schedule-front/controllers/array', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Controller;
 });
-define("awesome-schedule-front/controllers/calendar", ["exports"], function (exports) {
-    exports["default"] = Ember.Controller.extend({
+define('awesome-schedule-front/controllers/calendar', ['exports'], function (exports) {
+    exports['default'] = Ember.Controller.extend({
         wrapper: 'calendarWrapper'
     });
 
+    /*
     $.ajax({
         type: "POST",
-        url: "/api/test"
+        url: "/api/test",
     });
+    */
 });
 define('awesome-schedule-front/controllers/object', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Controller;
+});
+define('awesome-schedule-front/controllers/test', ['exports', 'ember'], function (exports, _ember) {
+        exports['default'] = _ember['default'].Controller.extend({});
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/components/bs-accordion-item.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/components/bs-accordion-item.js');
@@ -666,6 +676,12 @@ define('awesome-schedule-front/models/coaches', ['exports', 'ember-data'], funct
 
 	});
 });
+define('awesome-schedule-front/models/test', ['exports', 'ember-data'], function (exports, _emberData) {
+        exports['default'] = _emberData['default'].Model.extend({
+                name: _emberData['default'].attr('string')
+
+        });
+});
 define('awesome-schedule-front/router', ['exports', 'ember', 'awesome-schedule-front/config/environment'], function (exports, _ember, _awesomeScheduleFrontConfigEnvironment) {
 
   var Router = _ember['default'].Router.extend({
@@ -678,6 +694,7 @@ define('awesome-schedule-front/router', ['exports', 'ember', 'awesome-schedule-f
     this.route('coach');
     this.route('login');
     this.route('coaches');
+    this.route('test');
   });
 
   exports['default'] = Router;
@@ -698,6 +715,44 @@ define('awesome-schedule-front/routes/coaches', ['exports', 'ember'], function (
             return this.store.find('gimmieDatDate');
         }
     });
+});
+define('awesome-schedule-front/routes/test', ['exports', 'ember'], function (exports, _ember) {
+  exports['default'] = _ember['default'].Route.extend({
+    ajax: _ember['default'].inject.service(),
+    actions: {
+      sendRequest: function sendRequest() {
+        return this.get('ajax').request('/api/gimmieDatDate', {
+          method: 'POST',
+          data: {
+            foo: 'bar'
+          }
+        });
+      }
+    },
+    model: function model() {
+      //          
+      //            var that = this;
+      //            $.ajax({
+      //                  type: "POST",
+      //                 url: "/api/gimmieDatDate",
+      //               }).then(function(value){
+      //                   console.log(value);
+      //                   var data = {
+      //                       id: '3',
+      //                      
+      //                       type:'test',
+      //                       attributes:{
+      //                           name: "chili"
+      //                       }
+      //                   };
+      //                   that.store.push(('test',data));
+      //                  
+      //                  
+      //               });
+      return this.get('ajax').request('/test');
+    }
+
+  });
 });
 define("awesome-schedule-front/templates/application", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
@@ -6479,6 +6534,100 @@ define("awesome-schedule-front/templates/login", ["exports"], function (exports)
     };
   })());
 });
+define("awesome-schedule-front/templates/test", ["exports"], function (exports) {
+  exports["default"] = Ember.HTMLBars.template((function () {
+    var child0 = (function () {
+      return {
+        meta: {
+          "revision": "Ember@1.13.12",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 7,
+              "column": 4
+            },
+            "end": {
+              "line": 9,
+              "column": 4
+            }
+          },
+          "moduleName": "awesome-schedule-front/templates/test.hbs"
+        },
+        arity: 1,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("    ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createElement("li");
+          var el2 = dom.createComment("");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(dom.childAt(fragment, [1]), 0, 0);
+          return morphs;
+        },
+        statements: [["content", "t.name", ["loc", [null, [8, 8], [8, 18]]]]],
+        locals: ["t"],
+        templates: []
+      };
+    })();
+    return {
+      meta: {
+        "revision": "Ember@1.13.12",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 12,
+            "column": 0
+          }
+        },
+        "moduleName": "awesome-schedule-front/templates/test.hbs"
+      },
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("div");
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("ul");
+        var el3 = dom.createTextNode("\n    \n   \n");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createComment("");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var morphs = new Array(1);
+        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [1, 1]), 1, 1);
+        return morphs;
+      },
+      statements: [["block", "each", [["get", "model", ["loc", [null, [7, 17], [7, 22]]]]], [], 0, null, ["loc", [null, [7, 4], [9, 13]]]]],
+      locals: [],
+      templates: [child0]
+    };
+  })());
+});
 /* jshint ignore:start */
 
 /* jshint ignore:end */
@@ -6505,7 +6654,7 @@ catch(err) {
 });
 
 if (!runningTests) {
-  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+6997c665"});
+  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+d4c3b3b9"});
 }
 
 /* jshint ignore:end */
