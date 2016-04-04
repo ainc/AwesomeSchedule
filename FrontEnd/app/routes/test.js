@@ -5,7 +5,7 @@ export default Ember.Route.extend({
     ajax: Ember.inject.service(),
         
     model: function() {
-        //return this.get('ajax').request('http://localhost:9029/api/gimmieDatDate', {method: 'POST'});
-        return this.get('ajax').request('/test');
+        return this.get('ajax').request('http://localhost:9029/api/gimmieDatDate', {method: 'POST'});
+        //return this.get('ajax').request('/test');
     }
 });
