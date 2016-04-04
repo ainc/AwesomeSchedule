@@ -1,7 +1,7 @@
 {
   "name": "ember-cli-test-loader",
   "main": "test-loader.js",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "homepage": "https://github.com/rjackson/ember-cli-test-loader",
   "description": "Test loader for Ember CLI projects.",
   "license": "MIT",
@@ -21,13 +21,13 @@
   "keywords": [
     "ember-cli"
   ],
-  "_release": "0.2.1",
+  "_release": "0.2.2",
   "_resolution": {
     "type": "version",
-    "tag": "v0.2.1",
-    "commit": "3348d801089279296c38f31ae14d9c4d115ce154"
+    "tag": "v0.2.2",
+    "commit": "5c184b79b279ba0438bce0dd30b696efbc030a64"
   },
   "_source": "git://github.com/ember-cli/ember-cli-test-loader.git",
-  "_target": "0.2.1",
+  "_target": "0.2.2",
   "_originalSource": "ember-cli-test-loader"
 }

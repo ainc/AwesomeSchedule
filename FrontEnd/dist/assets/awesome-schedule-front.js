@@ -1,15 +1,18 @@
 "use strict";
+
 /* jshint ignore:start */
+
+
 
 /* jshint ignore:end */
 
-define('awesome-schedule-front/adapters/application', ['exports', 'ember-data'], function (exports, _emberData) {
+define('awesome-schedule-front/adapters/application', ['exports', 'ember-data', 'ember'], function (exports, _emberData, _ember) {
     exports['default'] = _emberData['default'].RESTAdapter.extend({
         namespace: 'api',
         host: 'http://localhost:9029',
         pathForType: function pathForType(type) {
-            var camelized = Ember.String.camelize(type);
-            return Ember.String.singularize(camelized);
+            var camelized = _ember['default'].String.camelize(type);
+            return _ember['default'].String.singularize(camelized);
         }
 
     });
@@ -270,8 +273,8 @@ define('awesome-schedule-front/components/submit-info', ['exports', 'ember'], fu
 define('awesome-schedule-front/controllers/array', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Controller;
 });
-define('awesome-schedule-front/controllers/calendar', ['exports'], function (exports) {
-    exports['default'] = Ember.Controller.extend({
+define('awesome-schedule-front/controllers/calendar', ['exports', 'ember'], function (exports, _ember) {
+    exports['default'] = _ember['default'].Controller.extend({
         wrapper: 'calendarWrapper'
     });
 
@@ -292,245 +295,245 @@ define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/com
   QUnit.module('JSHint - modules/ember-bootstrap/components/bs-accordion-item.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/components/bs-accordion-item.js should pass jshint.\nmodules/ember-bootstrap/components/bs-accordion-item.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-accordion-item.js: line 2, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-accordion-item.js: line 3, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-accordion-item.js: line 17, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-accordion-item.js: line 54, col 5, \'concise methods\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\n\n5 errors');
+    assert.ok(true, 'modules/ember-bootstrap/components/bs-accordion-item.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/components/bs-accordion.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/components/bs-accordion.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/components/bs-accordion.js should pass jshint.\nmodules/ember-bootstrap/components/bs-accordion.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-accordion.js: line 30, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-accordion.js: line 43, col 5, \'concise methods\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\n\n3 errors');
+    assert.ok(true, 'modules/ember-bootstrap/components/bs-accordion.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/components/bs-alert.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/components/bs-alert.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/components/bs-alert.js should pass jshint.\nmodules/ember-bootstrap/components/bs-alert.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-alert.js: line 2, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-alert.js: line 22, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n3 errors');
+    assert.ok(true, 'modules/ember-bootstrap/components/bs-alert.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/components/bs-button-group.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/components/bs-button-group.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/components/bs-button-group.js should pass jshint.\nmodules/ember-bootstrap/components/bs-button-group.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-button-group.js: line 2, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-button-group.js: line 3, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-button-group.js: line 61, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n4 errors');
+    assert.ok(true, 'modules/ember-bootstrap/components/bs-button-group.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/components/bs-button.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/components/bs-button.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/components/bs-button.js should pass jshint.\nmodules/ember-bootstrap/components/bs-button.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-button.js: line 2, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-button.js: line 3, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-button.js: line 4, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-button.js: line 79, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n5 errors');
+    assert.ok(true, 'modules/ember-bootstrap/components/bs-button.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/components/bs-collapse.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/components/bs-collapse.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/components/bs-collapse.js should pass jshint.\nmodules/ember-bootstrap/components/bs-collapse.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-collapse.js: line 19, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-collapse.js: line 111, col 44, \'template literal syntax\' is only available in ES6 (use \'esversion: 6\').\n\n3 errors');
+    assert.ok(true, 'modules/ember-bootstrap/components/bs-collapse.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/components/bs-dropdown-button.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/components/bs-dropdown-button.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/components/bs-dropdown-button.js should pass jshint.\nmodules/ember-bootstrap/components/bs-dropdown-button.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-dropdown-button.js: line 2, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-dropdown-button.js: line 14, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n3 errors');
+    assert.ok(true, 'modules/ember-bootstrap/components/bs-dropdown-button.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/components/bs-dropdown-menu.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/components/bs-dropdown-menu.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/components/bs-dropdown-menu.js should pass jshint.\nmodules/ember-bootstrap/components/bs-dropdown-menu.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-dropdown-menu.js: line 12, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n2 errors');
+    assert.ok(true, 'modules/ember-bootstrap/components/bs-dropdown-menu.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/components/bs-dropdown-toggle.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/components/bs-dropdown-toggle.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/components/bs-dropdown-toggle.js should pass jshint.\nmodules/ember-bootstrap/components/bs-dropdown-toggle.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-dropdown-toggle.js: line 2, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-dropdown-toggle.js: line 16, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n3 errors');
+    assert.ok(true, 'modules/ember-bootstrap/components/bs-dropdown-toggle.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/components/bs-dropdown.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/components/bs-dropdown.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/components/bs-dropdown.js should pass jshint.\nmodules/ember-bootstrap/components/bs-dropdown.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-dropdown.js: line 2, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-dropdown.js: line 3, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-dropdown.js: line 65, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-dropdown.js: line 127, col 9, \'concise methods\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\nmodules/ember-bootstrap/components/bs-dropdown.js: line 131, col 9, \'concise methods\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\nmodules/ember-bootstrap/components/bs-dropdown.js: line 135, col 9, \'concise methods\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\n\n7 errors');
+    assert.ok(true, 'modules/ember-bootstrap/components/bs-dropdown.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/components/bs-form-element.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/components/bs-form-element.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/components/bs-form-element.js should pass jshint.\nmodules/ember-bootstrap/components/bs-form-element.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-form-element.js: line 2, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-form-element.js: line 3, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-form-element.js: line 108, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-form-element.js: line 413, col 12, \'template literal syntax\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-form-element.js: line 412, col 5, \'let\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\n\n6 errors');
+    assert.ok(true, 'modules/ember-bootstrap/components/bs-form-element.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/components/bs-form-group.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/components/bs-form-group.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/components/bs-form-group.js should pass jshint.\nmodules/ember-bootstrap/components/bs-form-group.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-form-group.js: line 2, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-form-group.js: line 23, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n3 errors');
+    assert.ok(true, 'modules/ember-bootstrap/components/bs-form-group.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/components/bs-form.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/components/bs-form.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/components/bs-form.js should pass jshint.\nmodules/ember-bootstrap/components/bs-form.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-form.js: line 2, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-form.js: line 53, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n3 errors');
+    assert.ok(true, 'modules/ember-bootstrap/components/bs-form.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/components/bs-input.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/components/bs-input.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/components/bs-input.js should pass jshint.\nmodules/ember-bootstrap/components/bs-input.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-input.js: line 10, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n2 errors');
+    assert.ok(true, 'modules/ember-bootstrap/components/bs-input.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/components/bs-modal-body.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/components/bs-modal-body.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/components/bs-modal-body.js should pass jshint.\nmodules/ember-bootstrap/components/bs-modal-body.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-modal-body.js: line 11, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n2 errors');
+    assert.ok(true, 'modules/ember-bootstrap/components/bs-modal-body.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/components/bs-modal-dialog.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/components/bs-modal-dialog.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/components/bs-modal-dialog.js should pass jshint.\nmodules/ember-bootstrap/components/bs-modal-dialog.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-modal-dialog.js: line 11, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-modal-dialog.js: line 135, col 3, \'concise methods\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\nmodules/ember-bootstrap/components/bs-modal-dialog.js: line 142, col 3, \'concise methods\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\n\n4 errors');
+    assert.ok(true, 'modules/ember-bootstrap/components/bs-modal-dialog.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/components/bs-modal-footer.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/components/bs-modal-footer.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/components/bs-modal-footer.js should pass jshint.\nmodules/ember-bootstrap/components/bs-modal-footer.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-modal-footer.js: line 2, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-modal-footer.js: line 12, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n3 errors');
+    assert.ok(true, 'modules/ember-bootstrap/components/bs-modal-footer.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/components/bs-modal-header.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/components/bs-modal-header.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/components/bs-modal-header.js should pass jshint.\nmodules/ember-bootstrap/components/bs-modal-header.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-modal-header.js: line 2, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-modal-header.js: line 12, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n3 errors');
+    assert.ok(true, 'modules/ember-bootstrap/components/bs-modal-header.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/components/bs-modal.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/components/bs-modal.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/components/bs-modal.js should pass jshint.\nmodules/ember-bootstrap/components/bs-modal.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-modal.js: line 118, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-modal.js: line 386, col 5, \'concise methods\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\nmodules/ember-bootstrap/components/bs-modal.js: line 393, col 5, \'concise methods\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\nmodules/ember-bootstrap/components/bs-modal.js: line 415, col 3, \'concise methods\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\nmodules/ember-bootstrap/components/bs-modal.js: line 463, col 3, \'concise methods\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\nmodules/ember-bootstrap/components/bs-modal.js: line 485, col 3, \'concise methods\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\nmodules/ember-bootstrap/components/bs-modal.js: line 489, col 26, \'arrow function syntax (=>)\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-modal.js: line 506, col 3, \'concise methods\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\nmodules/ember-bootstrap/components/bs-modal.js: line 561, col 3, \'concise methods\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\nmodules/ember-bootstrap/components/bs-modal.js: line 573, col 3, \'concise methods\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\nmodules/ember-bootstrap/components/bs-modal.js: line 581, col 3, \'concise methods\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\nmodules/ember-bootstrap/components/bs-modal.js: line 593, col 3, \'concise methods\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\nmodules/ember-bootstrap/components/bs-modal.js: line 604, col 3, \'concise methods\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\nmodules/ember-bootstrap/components/bs-modal.js: line 607, col 7, \'let\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\nmodules/ember-bootstrap/components/bs-modal.js: line 618, col 3, \'concise methods\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\nmodules/ember-bootstrap/components/bs-modal.js: line 630, col 3, \'concise methods\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\nmodules/ember-bootstrap/components/bs-modal.js: line 649, col 3, \'concise methods\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\nmodules/ember-bootstrap/components/bs-modal.js: line 656, col 3, \'concise methods\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\n\n19 errors');
+    assert.ok(true, 'modules/ember-bootstrap/components/bs-modal.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/components/bs-progress-bar.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/components/bs-progress-bar.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/components/bs-progress-bar.js should pass jshint.\nmodules/ember-bootstrap/components/bs-progress-bar.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-progress-bar.js: line 2, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-progress-bar.js: line 38, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-progress-bar.js: line 176, col 44, \'template literal syntax\' is only available in ES6 (use \'esversion: 6\').\n\n4 errors');
+    assert.ok(true, 'modules/ember-bootstrap/components/bs-progress-bar.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/components/bs-progress.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/components/bs-progress.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/components/bs-progress.js should pass jshint.\nmodules/ember-bootstrap/components/bs-progress.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-progress.js: line 10, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n2 errors');
+    assert.ok(true, 'modules/ember-bootstrap/components/bs-progress.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/components/bs-select.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/components/bs-select.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/components/bs-select.js should pass jshint.\nmodules/ember-bootstrap/components/bs-select.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-select.js: line 10, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-select.js: line 22, col 3, \'concise methods\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\nmodules/ember-bootstrap/components/bs-select.js: line 23, col 17, \'spread/rest operator\' is only available in ES6 (use \'esversion: 6\').\n\n4 errors');
+    assert.ok(true, 'modules/ember-bootstrap/components/bs-select.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/components/bs-textarea.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/components/bs-textarea.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/components/bs-textarea.js should pass jshint.\nmodules/ember-bootstrap/components/bs-textarea.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/components/bs-textarea.js: line 10, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n2 errors');
+    assert.ok(true, 'modules/ember-bootstrap/components/bs-textarea.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/config.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/config.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/config.js should pass jshint.\nmodules/ember-bootstrap/config.js: line 17, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n1 error');
+    assert.ok(true, 'modules/ember-bootstrap/config.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/helpers/is-equal.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/helpers/is-equal.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/helpers/is-equal.js should pass jshint.\nmodules/ember-bootstrap/helpers/is-equal.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/helpers/is-equal.js: line 3, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/helpers/is-equal.js: line 7, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n3 errors');
+    assert.ok(true, 'modules/ember-bootstrap/helpers/is-equal.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/helpers/is-not.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/helpers/is-not.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/helpers/is-not.js should pass jshint.\nmodules/ember-bootstrap/helpers/is-not.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/helpers/is-not.js: line 3, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/helpers/is-not.js: line 7, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n3 errors');
+    assert.ok(true, 'modules/ember-bootstrap/helpers/is-not.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/helpers/read-path.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/helpers/read-path.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/helpers/read-path.js should pass jshint.\nmodules/ember-bootstrap/helpers/read-path.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/helpers/read-path.js: line 3, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/helpers/read-path.js: line 7, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n3 errors');
+    assert.ok(true, 'modules/ember-bootstrap/helpers/read-path.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/initializers/modals-container.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/initializers/modals-container.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/initializers/modals-container.js should pass jshint.\nmodules/ember-bootstrap/initializers/modals-container.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/initializers/modals-container.js: line 4, col 1, \'const\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\nmodules/ember-bootstrap/initializers/modals-container.js: line 11, col 3, \'const\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\nmodules/ember-bootstrap/initializers/modals-container.js: line 12, col 3, \'const\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\nmodules/ember-bootstrap/initializers/modals-container.js: line 22, col 3, \'const\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\nmodules/ember-bootstrap/initializers/modals-container.js: line 23, col 3, \'const\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\nmodules/ember-bootstrap/initializers/modals-container.js: line 27, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n7 errors');
+    assert.ok(true, 'modules/ember-bootstrap/initializers/modals-container.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/mixins/component-child.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/mixins/component-child.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/mixins/component-child.js should pass jshint.\nmodules/ember-bootstrap/mixins/component-child.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/mixins/component-child.js: line 2, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/mixins/component-child.js: line 11, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n3 errors');
+    assert.ok(true, 'modules/ember-bootstrap/mixins/component-child.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/mixins/component-parent.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/mixins/component-parent.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/mixins/component-parent.js should pass jshint.\nmodules/ember-bootstrap/mixins/component-parent.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/mixins/component-parent.js: line 9, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n2 errors');
+    assert.ok(true, 'modules/ember-bootstrap/mixins/component-parent.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/mixins/dropdown-toggle.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/mixins/dropdown-toggle.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/mixins/dropdown-toggle.js should pass jshint.\nmodules/ember-bootstrap/mixins/dropdown-toggle.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/mixins/dropdown-toggle.js: line 2, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/mixins/dropdown-toggle.js: line 10, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n3 errors');
+    assert.ok(true, 'modules/ember-bootstrap/mixins/dropdown-toggle.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/mixins/modal-closer.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/mixins/modal-closer.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/mixins/modal-closer.js should pass jshint.\nmodules/ember-bootstrap/mixins/modal-closer.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/mixins/modal-closer.js: line 7, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n2 errors');
+    assert.ok(true, 'modules/ember-bootstrap/mixins/modal-closer.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/mixins/size-class.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/mixins/size-class.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/mixins/size-class.js should pass jshint.\nmodules/ember-bootstrap/mixins/size-class.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/mixins/size-class.js: line 10, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n2 errors');
+    assert.ok(true, 'modules/ember-bootstrap/mixins/size-class.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/mixins/sub-component.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/mixins/sub-component.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/mixins/sub-component.js should pass jshint.\nmodules/ember-bootstrap/mixins/sub-component.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/mixins/sub-component.js: line 7, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n2 errors');
+    assert.ok(true, 'modules/ember-bootstrap/mixins/sub-component.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/mixins/type-class.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/mixins/type-class.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'modules/ember-bootstrap/mixins/type-class.js should pass jshint.\nmodules/ember-bootstrap/mixins/type-class.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodules/ember-bootstrap/mixins/type-class.js: line 9, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n2 errors');
+    assert.ok(true, 'modules/ember-bootstrap/mixins/type-class.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/helpers/contact-info', ['exports', 'ember'], function (exports, _ember) {
@@ -546,8 +549,8 @@ define('awesome-schedule-front/helpers/contact-info', ['exports', 'ember'], func
     return person.get('firstName') + ' ' + person.get('lastName') + '\n' + person.get('address') + '\n' + person.get('email') + '\n' + person.get('phoneNumber');
   });
 });
-define('awesome-schedule-front/helpers/format-date', ['exports', 'ember'], function (exports, _ember) {});
-
+define("awesome-schedule-front/helpers/format-date", ["exports"], function (exports) {});
+//import Ember from 'ember';
 //
 //
 // var moment = require('moment');
@@ -588,6 +591,9 @@ define('awesome-schedule-front/helpers/is-not', ['exports', 'ember-bootstrap/hel
     }
   });
 });
+define('awesome-schedule-front/helpers/pluralize', ['exports', 'ember-inflector/lib/helpers/pluralize'], function (exports, _emberInflectorLibHelpersPluralize) {
+  exports['default'] = _emberInflectorLibHelpersPluralize['default'];
+});
 define('awesome-schedule-front/helpers/read-path', ['exports', 'ember-bootstrap/helpers/read-path'], function (exports, _emberBootstrapHelpersReadPath) {
   Object.defineProperty(exports, 'default', {
     enumerable: true,
@@ -602,10 +608,79 @@ define('awesome-schedule-front/helpers/read-path', ['exports', 'ember-bootstrap/
     }
   });
 });
+define('awesome-schedule-front/helpers/singularize', ['exports', 'ember-inflector/lib/helpers/singularize'], function (exports, _emberInflectorLibHelpersSingularize) {
+  exports['default'] = _emberInflectorLibHelpersSingularize['default'];
+});
 define('awesome-schedule-front/initializers/app-version', ['exports', 'ember-cli-app-version/initializer-factory', 'awesome-schedule-front/config/environment'], function (exports, _emberCliAppVersionInitializerFactory, _awesomeScheduleFrontConfigEnvironment) {
   exports['default'] = {
     name: 'App Version',
     initialize: (0, _emberCliAppVersionInitializerFactory['default'])(_awesomeScheduleFrontConfigEnvironment['default'].APP.name, _awesomeScheduleFrontConfigEnvironment['default'].APP.version)
+  };
+});
+define('awesome-schedule-front/initializers/container-debug-adapter', ['exports', 'ember-resolver/container-debug-adapter'], function (exports, _emberResolverContainerDebugAdapter) {
+  exports['default'] = {
+    name: 'container-debug-adapter',
+
+    initialize: function initialize() {
+      var app = arguments[1] || arguments[0];
+
+      app.register('container-debug-adapter:main', _emberResolverContainerDebugAdapter['default']);
+      app.inject('container-debug-adapter:main', 'namespace', 'application:main');
+    }
+  };
+});
+define('awesome-schedule-front/initializers/data-adapter', ['exports', 'ember'], function (exports, _ember) {
+
+  /*
+    This initializer is here to keep backwards compatibility with code depending
+    on the `data-adapter` initializer (before Ember Data was an addon).
+  
+    Should be removed for Ember Data 3.x
+  */
+
+  exports['default'] = {
+    name: 'data-adapter',
+    before: 'store',
+    initialize: _ember['default'].K
+  };
+});
+define('awesome-schedule-front/initializers/ember-data', ['exports', 'ember-data/setup-container', 'ember-data/-private/core'], function (exports, _emberDataSetupContainer, _emberDataPrivateCore) {
+
+  /*
+  
+    This code initializes Ember-Data onto an Ember application.
+  
+    If an Ember.js developer defines a subclass of DS.Store on their application,
+    as `App.StoreService` (or via a module system that resolves to `service:store`)
+    this code will automatically instantiate it and make it available on the
+    router.
+  
+    Additionally, after an application's controllers have been injected, they will
+    each have the store made available to them.
+  
+    For example, imagine an Ember.js application with the following classes:
+  
+    App.StoreService = DS.Store.extend({
+      adapter: 'custom'
+    });
+  
+    App.PostsController = Ember.ArrayController.extend({
+      // ...
+    });
+  
+    When the application is initialized, `App.ApplicationStore` will automatically be
+    instantiated, and the instance of `App.PostsController` will have its `store`
+    property set to that instance.
+  
+    Note that this code will only be run if the `ember-application` package is
+    loaded. If Ember Data is being used in an environment other than a
+    typical application (e.g., node.js where only `ember-runtime` is available),
+    this code will be ignored.
+  */
+
+  exports['default'] = {
+    name: 'ember-data',
+    initialize: _emberDataSetupContainer['default']
   };
 });
 define('awesome-schedule-front/initializers/export-application-global', ['exports', 'ember', 'awesome-schedule-front/config/environment'], function (exports, _ember, _awesomeScheduleFrontConfigEnvironment) {
@@ -642,6 +717,21 @@ define('awesome-schedule-front/initializers/export-application-global', ['export
     initialize: initialize
   };
 });
+define('awesome-schedule-front/initializers/injectStore', ['exports', 'ember'], function (exports, _ember) {
+
+  /*
+    This initializer is here to keep backwards compatibility with code depending
+    on the `injectStore` initializer (before Ember Data was an addon).
+  
+    Should be removed for Ember Data 3.x
+  */
+
+  exports['default'] = {
+    name: 'injectStore',
+    before: 'store',
+    initialize: _ember['default'].K
+  };
+});
 define('awesome-schedule-front/initializers/load-bootstrap-config', ['exports', 'awesome-schedule-front/config/environment', 'ember-bootstrap/config'], function (exports, _awesomeScheduleFrontConfigEnvironment, _emberBootstrapConfig) {
   exports.initialize = initialize;
 
@@ -656,6 +746,42 @@ define('awesome-schedule-front/initializers/load-bootstrap-config', ['exports', 
 });
 define('awesome-schedule-front/initializers/modals-container', ['exports', 'ember-bootstrap/initializers/modals-container'], function (exports, _emberBootstrapInitializersModalsContainer) {
   exports['default'] = _emberBootstrapInitializersModalsContainer['default'];
+});
+define('awesome-schedule-front/initializers/store', ['exports', 'ember'], function (exports, _ember) {
+
+  /*
+    This initializer is here to keep backwards compatibility with code depending
+    on the `store` initializer (before Ember Data was an addon).
+  
+    Should be removed for Ember Data 3.x
+  */
+
+  exports['default'] = {
+    name: 'store',
+    after: 'ember-data',
+    initialize: _ember['default'].K
+  };
+});
+define('awesome-schedule-front/initializers/transforms', ['exports', 'ember'], function (exports, _ember) {
+
+  /*
+    This initializer is here to keep backwards compatibility with code depending
+    on the `transforms` initializer (before Ember Data was an addon).
+  
+    Should be removed for Ember Data 3.x
+  */
+
+  exports['default'] = {
+    name: 'transforms',
+    before: 'store',
+    initialize: _ember['default'].K
+  };
+});
+define("awesome-schedule-front/instance-initializers/ember-data", ["exports", "ember-data/-private/instance-initializers/initialize-store-service"], function (exports, _emberDataPrivateInstanceInitializersInitializeStoreService) {
+  exports["default"] = {
+    name: "ember-data",
+    initialize: _emberDataPrivateInstanceInitializersInitializeStoreService["default"]
+  };
 });
 define('awesome-schedule-front/models/coaches', ['exports', 'ember-data'], function (exports, _emberData) {
 	exports['default'] = _emberData['default'].Model.extend({
@@ -681,6 +807,9 @@ define('awesome-schedule-front/models/test', ['exports', 'ember-data'], function
                 name: _emberData['default'].attr('string')
 
         });
+});
+define('awesome-schedule-front/resolver', ['exports', 'ember-resolver'], function (exports, _emberResolver) {
+  exports['default'] = _emberResolver['default'];
 });
 define('awesome-schedule-front/router', ['exports', 'ember', 'awesome-schedule-front/config/environment'], function (exports, _ember, _awesomeScheduleFrontConfigEnvironment) {
 
@@ -716,12 +845,15 @@ define('awesome-schedule-front/routes/coaches', ['exports', 'ember'], function (
         }
     });
 });
-define('awesome-schedule-front/routes/test', ['exports', 'ember', 'ember-ajax/services/ajax'], function (exports, _ember, _emberAjaxServicesAjax) {
+define('awesome-schedule-front/routes/test', ['exports', 'ember'], function (exports, _ember) {
+    //import AjaxService from 'ember-ajax/services/ajax';
+
     exports['default'] = _ember['default'].Route.extend({
         ajax: _ember['default'].inject.service(),
 
         model: function model() {
-            return this.get('ajax').request('http://localhost:9029/api/gimmieDatDate', { method: 'POST' });
+            //return this.get('ajax').request('http://localhost:9029/api/gimmieDatDate', {method: 'POST'});
+            return this.get('ajax').request('/test');
         }
     });
 });
@@ -739,7 +871,7 @@ define("awesome-schedule-front/templates/application", ["exports"], function (ex
       return {
         meta: {
           "fragmentReason": false,
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -775,7 +907,7 @@ define("awesome-schedule-front/templates/application", ["exports"], function (ex
       return {
         meta: {
           "fragmentReason": false,
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -811,7 +943,7 @@ define("awesome-schedule-front/templates/application", ["exports"], function (ex
       return {
         meta: {
           "fragmentReason": false,
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -847,7 +979,7 @@ define("awesome-schedule-front/templates/application", ["exports"], function (ex
       return {
         meta: {
           "fragmentReason": false,
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -885,7 +1017,7 @@ define("awesome-schedule-front/templates/application", ["exports"], function (ex
           "name": "missing-wrapper",
           "problems": ["wrong-type", "multiple-nodes"]
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -981,7 +1113,7 @@ define("awesome-schedule-front/templates/calendar", ["exports"], function (expor
     return {
       meta: {
         "fragmentReason": false,
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -1438,7 +1570,7 @@ define("awesome-schedule-front/templates/coach", ["exports"], function (exports)
         "fragmentReason": {
           "name": "triple-curlies"
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -1947,7 +2079,7 @@ define("awesome-schedule-front/templates/coaches", ["exports"], function (export
           "name": "missing-wrapper",
           "problems": ["wrong-type"]
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -1993,7 +2125,7 @@ define("awesome-schedule-front/templates/components/bio-box", ["exports"], funct
           "name": "missing-wrapper",
           "problems": ["wrong-type", "multiple-nodes"]
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -2093,7 +2225,7 @@ define("awesome-schedule-front/templates/components/bs-accordion-item", ["export
       return {
         meta: {
           "fragmentReason": false,
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -2144,7 +2276,7 @@ define("awesome-schedule-front/templates/components/bs-accordion-item", ["export
           "name": "missing-wrapper",
           "problems": ["multiple-nodes", "wrong-type"]
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -2216,7 +2348,7 @@ define("awesome-schedule-front/templates/components/bs-alert", ["exports"], func
         return {
           meta: {
             "fragmentReason": false,
-            "revision": "Ember@2.4.0",
+            "revision": "Ember@2.4.3",
             "loc": {
               "source": null,
               "start": {
@@ -2269,7 +2401,7 @@ define("awesome-schedule-front/templates/components/bs-alert", ["exports"], func
             "name": "missing-wrapper",
             "problems": ["wrong-type", "multiple-nodes"]
           },
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -2315,7 +2447,7 @@ define("awesome-schedule-front/templates/components/bs-alert", ["exports"], func
           "name": "missing-wrapper",
           "problems": ["wrong-type"]
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -2360,7 +2492,7 @@ define("awesome-schedule-front/templates/components/bs-button", ["exports"], fun
           "fragmentReason": {
             "name": "triple-curlies"
           },
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -2403,7 +2535,7 @@ define("awesome-schedule-front/templates/components/bs-button", ["exports"], fun
           "name": "missing-wrapper",
           "problems": ["wrong-type", "multiple-nodes"]
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -2454,7 +2586,7 @@ define("awesome-schedule-front/templates/components/bs-form-element", ["exports"
           "name": "missing-wrapper",
           "problems": ["wrong-type"]
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -2497,7 +2629,7 @@ define("awesome-schedule-front/templates/components/bs-form-group", ["exports"],
       return {
         meta: {
           "fragmentReason": false,
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -2543,7 +2675,7 @@ define("awesome-schedule-front/templates/components/bs-form-group", ["exports"],
           "name": "missing-wrapper",
           "problems": ["wrong-type", "multiple-nodes"]
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -2593,7 +2725,7 @@ define("awesome-schedule-front/templates/components/bs-form", ["exports"], funct
           "name": "missing-wrapper",
           "problems": ["wrong-type"]
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -2636,7 +2768,7 @@ define("awesome-schedule-front/templates/components/bs-modal-dialog", ["exports"
       return {
         meta: {
           "fragmentReason": false,
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -2679,7 +2811,7 @@ define("awesome-schedule-front/templates/components/bs-modal-dialog", ["exports"
         return {
           meta: {
             "fragmentReason": false,
-            "revision": "Ember@2.4.0",
+            "revision": "Ember@2.4.3",
             "loc": {
               "source": null,
               "start": {
@@ -2720,7 +2852,7 @@ define("awesome-schedule-front/templates/components/bs-modal-dialog", ["exports"
       return {
         meta: {
           "fragmentReason": false,
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -2760,7 +2892,7 @@ define("awesome-schedule-front/templates/components/bs-modal-dialog", ["exports"
       return {
         meta: {
           "fragmentReason": false,
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -2802,7 +2934,7 @@ define("awesome-schedule-front/templates/components/bs-modal-dialog", ["exports"
       return {
         meta: {
           "fragmentReason": false,
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -2845,7 +2977,7 @@ define("awesome-schedule-front/templates/components/bs-modal-dialog", ["exports"
         "fragmentReason": {
           "name": "triple-curlies"
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -2913,7 +3045,7 @@ define("awesome-schedule-front/templates/components/bs-modal-footer", ["exports"
             "name": "missing-wrapper",
             "problems": ["wrong-type"]
           },
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -2957,7 +3089,7 @@ define("awesome-schedule-front/templates/components/bs-modal-footer", ["exports"
           return {
             meta: {
               "fragmentReason": false,
-              "revision": "Ember@2.4.0",
+              "revision": "Ember@2.4.3",
               "loc": {
                 "source": null,
                 "start": {
@@ -2997,7 +3129,7 @@ define("awesome-schedule-front/templates/components/bs-modal-footer", ["exports"
           return {
             meta: {
               "fragmentReason": false,
-              "revision": "Ember@2.4.0",
+              "revision": "Ember@2.4.3",
               "loc": {
                 "source": null,
                 "start": {
@@ -3036,7 +3168,7 @@ define("awesome-schedule-front/templates/components/bs-modal-footer", ["exports"
         return {
           meta: {
             "fragmentReason": false,
-            "revision": "Ember@2.4.0",
+            "revision": "Ember@2.4.3",
             "loc": {
               "source": null,
               "start": {
@@ -3084,7 +3216,7 @@ define("awesome-schedule-front/templates/components/bs-modal-footer", ["exports"
           return {
             meta: {
               "fragmentReason": false,
-              "revision": "Ember@2.4.0",
+              "revision": "Ember@2.4.3",
               "loc": {
                 "source": null,
                 "start": {
@@ -3123,7 +3255,7 @@ define("awesome-schedule-front/templates/components/bs-modal-footer", ["exports"
         return {
           meta: {
             "fragmentReason": false,
-            "revision": "Ember@2.4.0",
+            "revision": "Ember@2.4.3",
             "loc": {
               "source": null,
               "start": {
@@ -3164,7 +3296,7 @@ define("awesome-schedule-front/templates/components/bs-modal-footer", ["exports"
       return {
         meta: {
           "fragmentReason": false,
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -3206,7 +3338,7 @@ define("awesome-schedule-front/templates/components/bs-modal-footer", ["exports"
           "name": "missing-wrapper",
           "problems": ["wrong-type"]
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -3252,7 +3384,7 @@ define("awesome-schedule-front/templates/components/bs-modal-header", ["exports"
             "name": "modifiers",
             "modifiers": ["action"]
           },
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -3303,7 +3435,7 @@ define("awesome-schedule-front/templates/components/bs-modal-header", ["exports"
       return {
         meta: {
           "fragmentReason": false,
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -3345,7 +3477,7 @@ define("awesome-schedule-front/templates/components/bs-modal-header", ["exports"
       return {
         meta: {
           "fragmentReason": false,
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -3392,7 +3524,7 @@ define("awesome-schedule-front/templates/components/bs-modal-header", ["exports"
           "name": "missing-wrapper",
           "problems": ["wrong-type", "multiple-nodes"]
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -3439,7 +3571,7 @@ define("awesome-schedule-front/templates/components/bs-modal", ["exports"], func
         return {
           meta: {
             "fragmentReason": false,
-            "revision": "Ember@2.4.0",
+            "revision": "Ember@2.4.3",
             "loc": {
               "source": null,
               "start": {
@@ -3481,7 +3613,7 @@ define("awesome-schedule-front/templates/components/bs-modal", ["exports"], func
         return {
           meta: {
             "fragmentReason": false,
-            "revision": "Ember@2.4.0",
+            "revision": "Ember@2.4.3",
             "loc": {
               "source": null,
               "start": {
@@ -3527,7 +3659,7 @@ define("awesome-schedule-front/templates/components/bs-modal", ["exports"], func
             "name": "missing-wrapper",
             "problems": ["wrong-type", "multiple-nodes"]
           },
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -3576,7 +3708,7 @@ define("awesome-schedule-front/templates/components/bs-modal", ["exports"], func
           "name": "missing-wrapper",
           "problems": ["wrong-type"]
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -3620,7 +3752,7 @@ define("awesome-schedule-front/templates/components/bs-progress-bar", ["exports"
         return {
           meta: {
             "fragmentReason": false,
-            "revision": "Ember@2.4.0",
+            "revision": "Ember@2.4.3",
             "loc": {
               "source": null,
               "start": {
@@ -3662,7 +3794,7 @@ define("awesome-schedule-front/templates/components/bs-progress-bar", ["exports"
         return {
           meta: {
             "fragmentReason": false,
-            "revision": "Ember@2.4.0",
+            "revision": "Ember@2.4.3",
             "loc": {
               "source": null,
               "start": {
@@ -3703,7 +3835,7 @@ define("awesome-schedule-front/templates/components/bs-progress-bar", ["exports"
       return {
         meta: {
           "fragmentReason": false,
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -3744,7 +3876,7 @@ define("awesome-schedule-front/templates/components/bs-progress-bar", ["exports"
         return {
           meta: {
             "fragmentReason": false,
-            "revision": "Ember@2.4.0",
+            "revision": "Ember@2.4.3",
             "loc": {
               "source": null,
               "start": {
@@ -3789,7 +3921,7 @@ define("awesome-schedule-front/templates/components/bs-progress-bar", ["exports"
         return {
           meta: {
             "fragmentReason": false,
-            "revision": "Ember@2.4.0",
+            "revision": "Ember@2.4.3",
             "loc": {
               "source": null,
               "start": {
@@ -3835,7 +3967,7 @@ define("awesome-schedule-front/templates/components/bs-progress-bar", ["exports"
       return {
         meta: {
           "fragmentReason": false,
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -3878,7 +4010,7 @@ define("awesome-schedule-front/templates/components/bs-progress-bar", ["exports"
           "name": "missing-wrapper",
           "problems": ["wrong-type"]
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -3924,7 +4056,7 @@ define("awesome-schedule-front/templates/components/bs-progress", ["exports"], f
           "name": "missing-wrapper",
           "problems": ["wrong-type"]
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -3970,7 +4102,7 @@ define("awesome-schedule-front/templates/components/bs-select", ["exports"], fun
           "fragmentReason": {
             "name": "triple-curlies"
           },
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -4021,7 +4153,7 @@ define("awesome-schedule-front/templates/components/bs-select", ["exports"], fun
       return {
         meta: {
           "fragmentReason": false,
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -4074,7 +4206,7 @@ define("awesome-schedule-front/templates/components/bs-select", ["exports"], fun
           "name": "missing-wrapper",
           "problems": ["wrong-type", "multiple-nodes"]
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -4124,7 +4256,7 @@ define("awesome-schedule-front/templates/components/coach-day", ["exports"], fun
           "name": "missing-wrapper",
           "problems": ["wrong-type"]
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -4168,7 +4300,7 @@ define("awesome-schedule-front/templates/components/coach-sidebar", ["exports"],
       return {
         meta: {
           "fragmentReason": false,
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -4217,7 +4349,7 @@ define("awesome-schedule-front/templates/components/coach-sidebar", ["exports"],
       return {
         meta: {
           "fragmentReason": false,
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -4257,7 +4389,7 @@ define("awesome-schedule-front/templates/components/coach-sidebar", ["exports"],
           "name": "missing-wrapper",
           "problems": ["wrong-type", "multiple-nodes"]
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -4310,7 +4442,7 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
         return {
           meta: {
             "fragmentReason": false,
-            "revision": "Ember@2.4.0",
+            "revision": "Ember@2.4.3",
             "loc": {
               "source": null,
               "start": {
@@ -4359,7 +4491,7 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
         return {
           meta: {
             "fragmentReason": false,
-            "revision": "Ember@2.4.0",
+            "revision": "Ember@2.4.3",
             "loc": {
               "source": null,
               "start": {
@@ -4407,7 +4539,7 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
       return {
         meta: {
           "fragmentReason": false,
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -4448,7 +4580,7 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
         return {
           meta: {
             "fragmentReason": false,
-            "revision": "Ember@2.4.0",
+            "revision": "Ember@2.4.3",
             "loc": {
               "source": null,
               "start": {
@@ -4497,7 +4629,7 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
         return {
           meta: {
             "fragmentReason": false,
-            "revision": "Ember@2.4.0",
+            "revision": "Ember@2.4.3",
             "loc": {
               "source": null,
               "start": {
@@ -4545,7 +4677,7 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
       return {
         meta: {
           "fragmentReason": false,
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -4596,7 +4728,7 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
           "name": "missing-wrapper",
           "problems": ["wrong-type", "multiple-nodes"]
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -4648,7 +4780,7 @@ define("awesome-schedule-front/templates/components/form-element/errors", ["expo
           "fragmentReason": {
             "name": "triple-curlies"
           },
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -4695,7 +4827,7 @@ define("awesome-schedule-front/templates/components/form-element/errors", ["expo
           "name": "missing-wrapper",
           "problems": ["wrong-type"]
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -4740,7 +4872,7 @@ define("awesome-schedule-front/templates/components/form-element/feedback-icon",
           "fragmentReason": {
             "name": "triple-curlies"
           },
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -4786,7 +4918,7 @@ define("awesome-schedule-front/templates/components/form-element/feedback-icon",
           "name": "missing-wrapper",
           "problems": ["wrong-type"]
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -4830,7 +4962,7 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/chec
         "fragmentReason": {
           "name": "triple-curlies"
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -4904,7 +5036,7 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/defa
         return {
           meta: {
             "fragmentReason": false,
-            "revision": "Ember@2.4.0",
+            "revision": "Ember@2.4.3",
             "loc": {
               "source": null,
               "start": {
@@ -4946,7 +5078,7 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/defa
         return {
           meta: {
             "fragmentReason": false,
-            "revision": "Ember@2.4.0",
+            "revision": "Ember@2.4.3",
             "loc": {
               "source": null,
               "start": {
@@ -4990,7 +5122,7 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/defa
             "name": "missing-wrapper",
             "problems": ["multiple-nodes"]
           },
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -5061,7 +5193,7 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/defa
         return {
           meta: {
             "fragmentReason": false,
-            "revision": "Ember@2.4.0",
+            "revision": "Ember@2.4.3",
             "loc": {
               "source": null,
               "start": {
@@ -5103,7 +5235,7 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/defa
         return {
           meta: {
             "fragmentReason": false,
-            "revision": "Ember@2.4.0",
+            "revision": "Ember@2.4.3",
             "loc": {
               "source": null,
               "start": {
@@ -5144,7 +5276,7 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/defa
       return {
         meta: {
           "fragmentReason": false,
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -5206,7 +5338,7 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/defa
           "name": "missing-wrapper",
           "problems": ["wrong-type"]
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -5252,7 +5384,7 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/sele
             "name": "missing-wrapper",
             "problems": ["multiple-nodes"]
           },
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -5322,7 +5454,7 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/sele
       return {
         meta: {
           "fragmentReason": false,
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -5384,7 +5516,7 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/sele
           "name": "missing-wrapper",
           "problems": ["wrong-type"]
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -5430,7 +5562,7 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/text
             "name": "missing-wrapper",
             "problems": ["multiple-nodes"]
           },
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -5500,7 +5632,7 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/text
       return {
         meta: {
           "fragmentReason": false,
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -5562,7 +5694,7 @@ define("awesome-schedule-front/templates/components/form-element/horizontal/text
           "name": "missing-wrapper",
           "problems": ["wrong-type"]
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -5606,7 +5738,7 @@ define("awesome-schedule-front/templates/components/form-element/inline/checkbox
         "fragmentReason": {
           "name": "triple-curlies"
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -5668,7 +5800,7 @@ define("awesome-schedule-front/templates/components/form-element/inline/default"
           "fragmentReason": {
             "name": "triple-curlies"
           },
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -5715,7 +5847,7 @@ define("awesome-schedule-front/templates/components/form-element/inline/default"
       return {
         meta: {
           "fragmentReason": false,
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -5757,7 +5889,7 @@ define("awesome-schedule-front/templates/components/form-element/inline/default"
       return {
         meta: {
           "fragmentReason": false,
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -5801,7 +5933,7 @@ define("awesome-schedule-front/templates/components/form-element/inline/default"
           "name": "missing-wrapper",
           "problems": ["wrong-type", "multiple-nodes"]
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -5853,7 +5985,7 @@ define("awesome-schedule-front/templates/components/form-element/inline/select",
           "fragmentReason": {
             "name": "triple-curlies"
           },
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -5902,7 +6034,7 @@ define("awesome-schedule-front/templates/components/form-element/inline/select",
           "name": "missing-wrapper",
           "problems": ["wrong-type", "multiple-nodes"]
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -5956,7 +6088,7 @@ define("awesome-schedule-front/templates/components/form-element/inline/textarea
           "fragmentReason": {
             "name": "triple-curlies"
           },
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -6005,7 +6137,7 @@ define("awesome-schedule-front/templates/components/form-element/inline/textarea
           "name": "missing-wrapper",
           "problems": ["wrong-type", "multiple-nodes"]
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -6063,7 +6195,7 @@ define("awesome-schedule-front/templates/components/form-element/vertical/checkb
           "name": "missing-wrapper",
           "problems": ["multiple-nodes", "wrong-type"]
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -6131,7 +6263,7 @@ define("awesome-schedule-front/templates/components/form-element/vertical/defaul
           "fragmentReason": {
             "name": "triple-curlies"
           },
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -6178,7 +6310,7 @@ define("awesome-schedule-front/templates/components/form-element/vertical/defaul
       return {
         meta: {
           "fragmentReason": false,
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -6220,7 +6352,7 @@ define("awesome-schedule-front/templates/components/form-element/vertical/defaul
       return {
         meta: {
           "fragmentReason": false,
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -6264,7 +6396,7 @@ define("awesome-schedule-front/templates/components/form-element/vertical/defaul
           "name": "missing-wrapper",
           "problems": ["wrong-type", "multiple-nodes"]
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -6320,7 +6452,7 @@ define("awesome-schedule-front/templates/components/form-element/vertical/select
           "fragmentReason": {
             "name": "triple-curlies"
           },
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -6369,7 +6501,7 @@ define("awesome-schedule-front/templates/components/form-element/vertical/select
           "name": "missing-wrapper",
           "problems": ["wrong-type", "multiple-nodes"]
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -6423,7 +6555,7 @@ define("awesome-schedule-front/templates/components/form-element/vertical/textar
           "fragmentReason": {
             "name": "triple-curlies"
           },
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -6472,7 +6604,7 @@ define("awesome-schedule-front/templates/components/form-element/vertical/textar
           "name": "missing-wrapper",
           "problems": ["wrong-type", "multiple-nodes"]
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -6530,7 +6662,7 @@ define("awesome-schedule-front/templates/components/hour-tracker", ["exports"], 
           "name": "missing-wrapper",
           "problems": ["wrong-type", "multiple-nodes"]
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -6579,7 +6711,7 @@ define("awesome-schedule-front/templates/components/logo-tile", ["exports"], fun
       return {
         meta: {
           "fragmentReason": false,
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -6629,7 +6761,7 @@ define("awesome-schedule-front/templates/components/logo-tile", ["exports"], fun
       return {
         meta: {
           "fragmentReason": false,
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -6683,7 +6815,7 @@ define("awesome-schedule-front/templates/components/logo-tile", ["exports"], fun
           "name": "missing-wrapper",
           "problems": ["wrong-type", "multiple-nodes"]
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -6735,7 +6867,7 @@ define("awesome-schedule-front/templates/components/submit-info", ["exports"], f
           "name": "missing-wrapper",
           "problems": ["wrong-type"]
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -6780,7 +6912,7 @@ define("awesome-schedule-front/templates/login", ["exports"], function (exports)
         "fragmentReason": {
           "name": "triple-curlies"
         },
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -6840,7 +6972,7 @@ define("awesome-schedule-front/templates/test", ["exports"], function (exports) 
       return {
         meta: {
           "fragmentReason": false,
-          "revision": "Ember@2.4.0",
+          "revision": "Ember@2.4.3",
           "loc": {
             "source": null,
             "start": {
@@ -6883,7 +7015,7 @@ define("awesome-schedule-front/templates/test", ["exports"], function (exports) 
     return {
       meta: {
         "fragmentReason": false,
-        "revision": "Ember@2.4.0",
+        "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
           "start": {
@@ -6934,6 +7066,8 @@ define("awesome-schedule-front/templates/test", ["exports"], function (exports) 
 });
 /* jshint ignore:start */
 
+
+
 /* jshint ignore:end */
 
 /* jshint ignore:start */
@@ -6957,8 +7091,12 @@ catch(err) {
 
 });
 
+/* jshint ignore:end */
+
+/* jshint ignore:start */
+
 if (!runningTests) {
-  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+1e3ee047"});
+  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+4e950e40"});
 }
 
 /* jshint ignore:end */

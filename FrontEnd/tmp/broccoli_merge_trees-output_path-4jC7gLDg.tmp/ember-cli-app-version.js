@@ -1,1 +1,0 @@
-/home/roodey/Documents/Awesome/AwesomeSchedule/FrontEnd/tmp/reexporter-output_path-ED8ear22.tmp/reexports/ember-cli-app-version.js

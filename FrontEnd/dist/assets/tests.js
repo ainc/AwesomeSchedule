@@ -4,7 +4,7 @@ define('awesome-schedule-front/tests/adapters/application.jshint', ['exports'], 
   QUnit.module('JSHint - adapters/application.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'adapters/application.js should pass jshint.\nadapters/application.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nadapters/application.js: line 3, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n2 errors');
+    assert.ok(true, 'adapters/application.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/app.jshint', ['exports'], function (exports) {
@@ -13,7 +13,7 @@ define('awesome-schedule-front/tests/app.jshint', ['exports'], function (exports
   QUnit.module('JSHint - app.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'app.js should pass jshint.\napp.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\napp.js: line 2, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\napp.js: line 3, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\napp.js: line 4, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\napp.js: line 6, col 1, \'let\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\napp.js: line 13, col 3, \'object short notation\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\napp.js: line 18, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n7 errors');
+    assert.ok(true, 'app.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/components/bio-box.jshint', ['exports'], function (exports) {
@@ -22,7 +22,7 @@ define('awesome-schedule-front/tests/components/bio-box.jshint', ['exports'], fu
   QUnit.module('JSHint - components/bio-box.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'components/bio-box.js should pass jshint.\ncomponents/bio-box.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\ncomponents/bio-box.js: line 3, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n2 errors');
+    assert.ok(true, 'components/bio-box.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/components/coach-day.jshint', ['exports'], function (exports) {
@@ -31,7 +31,7 @@ define('awesome-schedule-front/tests/components/coach-day.jshint', ['exports'], 
   QUnit.module('JSHint - components/coach-day.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'components/coach-day.js should pass jshint.\ncomponents/coach-day.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\ncomponents/coach-day.js: line 3, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n2 errors');
+    assert.ok(true, 'components/coach-day.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/components/coach-sidebar.jshint', ['exports'], function (exports) {
@@ -40,7 +40,7 @@ define('awesome-schedule-front/tests/components/coach-sidebar.jshint', ['exports
   QUnit.module('JSHint - components/coach-sidebar.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'components/coach-sidebar.js should pass jshint.\ncomponents/coach-sidebar.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\ncomponents/coach-sidebar.js: line 3, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n2 errors');
+    assert.ok(true, 'components/coach-sidebar.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/components/day-tile.jshint', ['exports'], function (exports) {
@@ -49,7 +49,7 @@ define('awesome-schedule-front/tests/components/day-tile.jshint', ['exports'], f
   QUnit.module('JSHint - components/day-tile.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'components/day-tile.js should pass jshint.\ncomponents/day-tile.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\ncomponents/day-tile.js: line 3, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n2 errors');
+    assert.ok(true, 'components/day-tile.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/components/hour-tracker.jshint', ['exports'], function (exports) {
@@ -58,7 +58,7 @@ define('awesome-schedule-front/tests/components/hour-tracker.jshint', ['exports'
   QUnit.module('JSHint - components/hour-tracker.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'components/hour-tracker.js should pass jshint.\ncomponents/hour-tracker.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\ncomponents/hour-tracker.js: line 3, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n2 errors');
+    assert.ok(true, 'components/hour-tracker.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/components/logo-tile.jshint', ['exports'], function (exports) {
@@ -67,7 +67,7 @@ define('awesome-schedule-front/tests/components/logo-tile.jshint', ['exports'], 
   QUnit.module('JSHint - components/logo-tile.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'components/logo-tile.js should pass jshint.\ncomponents/logo-tile.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\ncomponents/logo-tile.js: line 3, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n2 errors');
+    assert.ok(true, 'components/logo-tile.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/components/submit-info.jshint', ['exports'], function (exports) {
@@ -76,7 +76,7 @@ define('awesome-schedule-front/tests/components/submit-info.jshint', ['exports']
   QUnit.module('JSHint - components/submit-info.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'components/submit-info.js should pass jshint.\ncomponents/submit-info.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\ncomponents/submit-info.js: line 3, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n2 errors');
+    assert.ok(true, 'components/submit-info.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/controllers/calendar.jshint', ['exports'], function (exports) {
@@ -85,7 +85,7 @@ define('awesome-schedule-front/tests/controllers/calendar.jshint', ['exports'], 
   QUnit.module('JSHint - controllers/calendar.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'controllers/calendar.js should pass jshint.\ncontrollers/calendar.js: line 1, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n1 error');
+    assert.ok(true, 'controllers/calendar.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/controllers/test.jshint', ['exports'], function (exports) {
@@ -94,7 +94,7 @@ define('awesome-schedule-front/tests/controllers/test.jshint', ['exports'], func
   QUnit.module('JSHint - controllers/test.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'controllers/test.js should pass jshint.\ncontrollers/test.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\ncontrollers/test.js: line 3, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n2 errors');
+    assert.ok(true, 'controllers/test.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/helpers/contact-info.jshint', ['exports'], function (exports) {
@@ -103,7 +103,7 @@ define('awesome-schedule-front/tests/helpers/contact-info.jshint', ['exports'], 
   QUnit.module('JSHint - helpers/contact-info.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'helpers/contact-info.js should pass jshint.\nhelpers/contact-info.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nhelpers/contact-info.js: line 3, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\nhelpers/contact-info.js: line 7, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n3 errors');
+    assert.ok(true, 'helpers/contact-info.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/helpers/destroy-app', ['exports', 'ember'], function (exports, _ember) {
@@ -128,7 +128,7 @@ define('awesome-schedule-front/tests/helpers/format-date.jshint', ['exports'], f
   QUnit.module('JSHint - helpers/format-date.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'helpers/format-date.js should pass jshint.\nhelpers/format-date.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\n\n1 error');
+    assert.ok(true, 'helpers/format-date.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/helpers/module-for-acceptance', ['exports', 'qunit', 'awesome-schedule-front/tests/helpers/start-app', 'awesome-schedule-front/tests/helpers/destroy-app'], function (exports, _qunit, _awesomeScheduleFrontTestsHelpersStartApp, _awesomeScheduleFrontTestsHelpersDestroyApp) {
@@ -163,9 +163,9 @@ define('awesome-schedule-front/tests/helpers/module-for-acceptance.jshint', ['ex
     assert.ok(true, 'helpers/module-for-acceptance.js should pass jshint.');
   });
 });
-define('awesome-schedule-front/tests/helpers/resolver', ['exports', 'ember/resolver', 'awesome-schedule-front/config/environment'], function (exports, _emberResolver, _awesomeScheduleFrontConfigEnvironment) {
+define('awesome-schedule-front/tests/helpers/resolver', ['exports', 'awesome-schedule-front/resolver', 'awesome-schedule-front/config/environment'], function (exports, _awesomeScheduleFrontResolver, _awesomeScheduleFrontConfigEnvironment) {
 
-  var resolver = _emberResolver['default'].create();
+  var resolver = _awesomeScheduleFrontResolver['default'].create();
 
   resolver.namespace = {
     modulePrefix: _awesomeScheduleFrontConfigEnvironment['default'].modulePrefix,
@@ -224,7 +224,11 @@ define('awesome-schedule-front/tests/integration/components/bio-box-test', ['exp
     this.render(Ember.HTMLBars.template((function () {
       return {
         meta: {
-          'revision': 'Ember@1.13.12',
+          'fragmentReason': {
+            'name': 'missing-wrapper',
+            'problems': ['wrong-type']
+          },
+          'revision': 'Ember@2.4.3',
           'loc': {
             'source': null,
             'start': {
@@ -237,6 +241,7 @@ define('awesome-schedule-front/tests/integration/components/bio-box-test', ['exp
             }
           }
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -266,7 +271,8 @@ define('awesome-schedule-front/tests/integration/components/bio-box-test', ['exp
       var child0 = (function () {
         return {
           meta: {
-            'revision': 'Ember@1.13.12',
+            'fragmentReason': false,
+            'revision': 'Ember@2.4.3',
             'loc': {
               'source': null,
               'start': {
@@ -279,6 +285,7 @@ define('awesome-schedule-front/tests/integration/components/bio-box-test', ['exp
               }
             }
           },
+          isEmpty: false,
           arity: 0,
           cachedFragment: null,
           hasRendered: false,
@@ -299,7 +306,11 @@ define('awesome-schedule-front/tests/integration/components/bio-box-test', ['exp
 
       return {
         meta: {
-          'revision': 'Ember@1.13.12',
+          'fragmentReason': {
+            'name': 'missing-wrapper',
+            'problems': ['wrong-type']
+          },
+          'revision': 'Ember@2.4.3',
           'loc': {
             'source': null,
             'start': {
@@ -312,6 +323,7 @@ define('awesome-schedule-front/tests/integration/components/bio-box-test', ['exp
             }
           }
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -362,7 +374,11 @@ define('awesome-schedule-front/tests/integration/components/coach-calendar-test'
     this.render(Ember.HTMLBars.template((function () {
       return {
         meta: {
-          'revision': 'Ember@1.13.12',
+          'fragmentReason': {
+            'name': 'missing-wrapper',
+            'problems': ['wrong-type']
+          },
+          'revision': 'Ember@2.4.3',
           'loc': {
             'source': null,
             'start': {
@@ -375,6 +391,7 @@ define('awesome-schedule-front/tests/integration/components/coach-calendar-test'
             }
           }
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -404,7 +421,8 @@ define('awesome-schedule-front/tests/integration/components/coach-calendar-test'
       var child0 = (function () {
         return {
           meta: {
-            'revision': 'Ember@1.13.12',
+            'fragmentReason': false,
+            'revision': 'Ember@2.4.3',
             'loc': {
               'source': null,
               'start': {
@@ -417,6 +435,7 @@ define('awesome-schedule-front/tests/integration/components/coach-calendar-test'
               }
             }
           },
+          isEmpty: false,
           arity: 0,
           cachedFragment: null,
           hasRendered: false,
@@ -437,7 +456,11 @@ define('awesome-schedule-front/tests/integration/components/coach-calendar-test'
 
       return {
         meta: {
-          'revision': 'Ember@1.13.12',
+          'fragmentReason': {
+            'name': 'missing-wrapper',
+            'problems': ['wrong-type']
+          },
+          'revision': 'Ember@2.4.3',
           'loc': {
             'source': null,
             'start': {
@@ -450,6 +473,7 @@ define('awesome-schedule-front/tests/integration/components/coach-calendar-test'
             }
           }
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -500,7 +524,11 @@ define('awesome-schedule-front/tests/integration/components/coach-day-test', ['e
     this.render(Ember.HTMLBars.template((function () {
       return {
         meta: {
-          'revision': 'Ember@1.13.12',
+          'fragmentReason': {
+            'name': 'missing-wrapper',
+            'problems': ['wrong-type']
+          },
+          'revision': 'Ember@2.4.3',
           'loc': {
             'source': null,
             'start': {
@@ -513,6 +541,7 @@ define('awesome-schedule-front/tests/integration/components/coach-day-test', ['e
             }
           }
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -542,7 +571,8 @@ define('awesome-schedule-front/tests/integration/components/coach-day-test', ['e
       var child0 = (function () {
         return {
           meta: {
-            'revision': 'Ember@1.13.12',
+            'fragmentReason': false,
+            'revision': 'Ember@2.4.3',
             'loc': {
               'source': null,
               'start': {
@@ -555,6 +585,7 @@ define('awesome-schedule-front/tests/integration/components/coach-day-test', ['e
               }
             }
           },
+          isEmpty: false,
           arity: 0,
           cachedFragment: null,
           hasRendered: false,
@@ -575,7 +606,11 @@ define('awesome-schedule-front/tests/integration/components/coach-day-test', ['e
 
       return {
         meta: {
-          'revision': 'Ember@1.13.12',
+          'fragmentReason': {
+            'name': 'missing-wrapper',
+            'problems': ['wrong-type']
+          },
+          'revision': 'Ember@2.4.3',
           'loc': {
             'source': null,
             'start': {
@@ -588,6 +623,7 @@ define('awesome-schedule-front/tests/integration/components/coach-day-test', ['e
             }
           }
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -638,7 +674,11 @@ define('awesome-schedule-front/tests/integration/components/coach-sidebar-test',
     this.render(Ember.HTMLBars.template((function () {
       return {
         meta: {
-          'revision': 'Ember@1.13.12',
+          'fragmentReason': {
+            'name': 'missing-wrapper',
+            'problems': ['wrong-type']
+          },
+          'revision': 'Ember@2.4.3',
           'loc': {
             'source': null,
             'start': {
@@ -651,6 +691,7 @@ define('awesome-schedule-front/tests/integration/components/coach-sidebar-test',
             }
           }
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -680,7 +721,8 @@ define('awesome-schedule-front/tests/integration/components/coach-sidebar-test',
       var child0 = (function () {
         return {
           meta: {
-            'revision': 'Ember@1.13.12',
+            'fragmentReason': false,
+            'revision': 'Ember@2.4.3',
             'loc': {
               'source': null,
               'start': {
@@ -693,6 +735,7 @@ define('awesome-schedule-front/tests/integration/components/coach-sidebar-test',
               }
             }
           },
+          isEmpty: false,
           arity: 0,
           cachedFragment: null,
           hasRendered: false,
@@ -713,7 +756,11 @@ define('awesome-schedule-front/tests/integration/components/coach-sidebar-test',
 
       return {
         meta: {
-          'revision': 'Ember@1.13.12',
+          'fragmentReason': {
+            'name': 'missing-wrapper',
+            'problems': ['wrong-type']
+          },
+          'revision': 'Ember@2.4.3',
           'loc': {
             'source': null,
             'start': {
@@ -726,6 +773,7 @@ define('awesome-schedule-front/tests/integration/components/coach-sidebar-test',
             }
           }
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -776,7 +824,11 @@ define('awesome-schedule-front/tests/integration/components/day-tile-test', ['ex
     this.render(Ember.HTMLBars.template((function () {
       return {
         meta: {
-          'revision': 'Ember@1.13.12',
+          'fragmentReason': {
+            'name': 'missing-wrapper',
+            'problems': ['wrong-type']
+          },
+          'revision': 'Ember@2.4.3',
           'loc': {
             'source': null,
             'start': {
@@ -789,6 +841,7 @@ define('awesome-schedule-front/tests/integration/components/day-tile-test', ['ex
             }
           }
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -818,7 +871,8 @@ define('awesome-schedule-front/tests/integration/components/day-tile-test', ['ex
       var child0 = (function () {
         return {
           meta: {
-            'revision': 'Ember@1.13.12',
+            'fragmentReason': false,
+            'revision': 'Ember@2.4.3',
             'loc': {
               'source': null,
               'start': {
@@ -831,6 +885,7 @@ define('awesome-schedule-front/tests/integration/components/day-tile-test', ['ex
               }
             }
           },
+          isEmpty: false,
           arity: 0,
           cachedFragment: null,
           hasRendered: false,
@@ -851,7 +906,11 @@ define('awesome-schedule-front/tests/integration/components/day-tile-test', ['ex
 
       return {
         meta: {
-          'revision': 'Ember@1.13.12',
+          'fragmentReason': {
+            'name': 'missing-wrapper',
+            'problems': ['wrong-type']
+          },
+          'revision': 'Ember@2.4.3',
           'loc': {
             'source': null,
             'start': {
@@ -864,6 +923,7 @@ define('awesome-schedule-front/tests/integration/components/day-tile-test', ['ex
             }
           }
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -914,7 +974,11 @@ define('awesome-schedule-front/tests/integration/components/hour-tracker-test', 
     this.render(Ember.HTMLBars.template((function () {
       return {
         meta: {
-          'revision': 'Ember@1.13.12',
+          'fragmentReason': {
+            'name': 'missing-wrapper',
+            'problems': ['wrong-type']
+          },
+          'revision': 'Ember@2.4.3',
           'loc': {
             'source': null,
             'start': {
@@ -927,6 +991,7 @@ define('awesome-schedule-front/tests/integration/components/hour-tracker-test', 
             }
           }
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -956,7 +1021,8 @@ define('awesome-schedule-front/tests/integration/components/hour-tracker-test', 
       var child0 = (function () {
         return {
           meta: {
-            'revision': 'Ember@1.13.12',
+            'fragmentReason': false,
+            'revision': 'Ember@2.4.3',
             'loc': {
               'source': null,
               'start': {
@@ -969,6 +1035,7 @@ define('awesome-schedule-front/tests/integration/components/hour-tracker-test', 
               }
             }
           },
+          isEmpty: false,
           arity: 0,
           cachedFragment: null,
           hasRendered: false,
@@ -989,7 +1056,11 @@ define('awesome-schedule-front/tests/integration/components/hour-tracker-test', 
 
       return {
         meta: {
-          'revision': 'Ember@1.13.12',
+          'fragmentReason': {
+            'name': 'missing-wrapper',
+            'problems': ['wrong-type']
+          },
+          'revision': 'Ember@2.4.3',
           'loc': {
             'source': null,
             'start': {
@@ -1002,6 +1073,7 @@ define('awesome-schedule-front/tests/integration/components/hour-tracker-test', 
             }
           }
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -1052,7 +1124,11 @@ define('awesome-schedule-front/tests/integration/components/logo-tile-test', ['e
     this.render(Ember.HTMLBars.template((function () {
       return {
         meta: {
-          'revision': 'Ember@1.13.12',
+          'fragmentReason': {
+            'name': 'missing-wrapper',
+            'problems': ['wrong-type']
+          },
+          'revision': 'Ember@2.4.3',
           'loc': {
             'source': null,
             'start': {
@@ -1065,6 +1141,7 @@ define('awesome-schedule-front/tests/integration/components/logo-tile-test', ['e
             }
           }
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -1094,7 +1171,8 @@ define('awesome-schedule-front/tests/integration/components/logo-tile-test', ['e
       var child0 = (function () {
         return {
           meta: {
-            'revision': 'Ember@1.13.12',
+            'fragmentReason': false,
+            'revision': 'Ember@2.4.3',
             'loc': {
               'source': null,
               'start': {
@@ -1107,6 +1185,7 @@ define('awesome-schedule-front/tests/integration/components/logo-tile-test', ['e
               }
             }
           },
+          isEmpty: false,
           arity: 0,
           cachedFragment: null,
           hasRendered: false,
@@ -1127,7 +1206,11 @@ define('awesome-schedule-front/tests/integration/components/logo-tile-test', ['e
 
       return {
         meta: {
-          'revision': 'Ember@1.13.12',
+          'fragmentReason': {
+            'name': 'missing-wrapper',
+            'problems': ['wrong-type']
+          },
+          'revision': 'Ember@2.4.3',
           'loc': {
             'source': null,
             'start': {
@@ -1140,6 +1223,7 @@ define('awesome-schedule-front/tests/integration/components/logo-tile-test', ['e
             }
           }
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -1190,7 +1274,11 @@ define('awesome-schedule-front/tests/integration/components/submit-info-test', [
     this.render(Ember.HTMLBars.template((function () {
       return {
         meta: {
-          'revision': 'Ember@1.13.12',
+          'fragmentReason': {
+            'name': 'missing-wrapper',
+            'problems': ['wrong-type']
+          },
+          'revision': 'Ember@2.4.3',
           'loc': {
             'source': null,
             'start': {
@@ -1203,6 +1291,7 @@ define('awesome-schedule-front/tests/integration/components/submit-info-test', [
             }
           }
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -1232,7 +1321,8 @@ define('awesome-schedule-front/tests/integration/components/submit-info-test', [
       var child0 = (function () {
         return {
           meta: {
-            'revision': 'Ember@1.13.12',
+            'fragmentReason': false,
+            'revision': 'Ember@2.4.3',
             'loc': {
               'source': null,
               'start': {
@@ -1245,6 +1335,7 @@ define('awesome-schedule-front/tests/integration/components/submit-info-test', [
               }
             }
           },
+          isEmpty: false,
           arity: 0,
           cachedFragment: null,
           hasRendered: false,
@@ -1265,7 +1356,11 @@ define('awesome-schedule-front/tests/integration/components/submit-info-test', [
 
       return {
         meta: {
-          'revision': 'Ember@1.13.12',
+          'fragmentReason': {
+            'name': 'missing-wrapper',
+            'problems': ['wrong-type']
+          },
+          'revision': 'Ember@2.4.3',
           'loc': {
             'source': null,
             'start': {
@@ -1278,6 +1373,7 @@ define('awesome-schedule-front/tests/integration/components/submit-info-test', [
             }
           }
         },
+        isEmpty: false,
         arity: 0,
         cachedFragment: null,
         hasRendered: false,
@@ -1320,7 +1416,7 @@ define('awesome-schedule-front/tests/models/coaches.jshint', ['exports'], functi
   QUnit.module('JSHint - models/coaches.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'models/coaches.js should pass jshint.\nmodels/coaches.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodels/coaches.js: line 3, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n2 errors');
+    assert.ok(true, 'models/coaches.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/models/test.jshint', ['exports'], function (exports) {
@@ -1329,7 +1425,16 @@ define('awesome-schedule-front/tests/models/test.jshint', ['exports'], function 
   QUnit.module('JSHint - models/test.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'models/test.js should pass jshint.\nmodels/test.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nmodels/test.js: line 3, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n2 errors');
+    assert.ok(true, 'models/test.js should pass jshint.');
+  });
+});
+define('awesome-schedule-front/tests/resolver.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - resolver.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'resolver.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/router.jshint', ['exports'], function (exports) {
@@ -1338,7 +1443,7 @@ define('awesome-schedule-front/tests/router.jshint', ['exports'], function (expo
   QUnit.module('JSHint - router.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'router.js should pass jshint.\nrouter.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nrouter.js: line 2, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nrouter.js: line 4, col 1, \'const\' is available in ES6 (use \'esversion: 6\') or Mozilla JS extensions (use moz).\nrouter.js: line 17, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n4 errors');
+    assert.ok(true, 'router.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/routes/coaches.jshint', ['exports'], function (exports) {
@@ -1347,7 +1452,7 @@ define('awesome-schedule-front/tests/routes/coaches.jshint', ['exports'], functi
   QUnit.module('JSHint - routes/coaches.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'routes/coaches.js should pass jshint.\nroutes/coaches.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nroutes/coaches.js: line 3, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n2 errors');
+    assert.ok(true, 'routes/coaches.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/routes/test.jshint', ['exports'], function (exports) {
@@ -1356,7 +1461,7 @@ define('awesome-schedule-front/tests/routes/test.jshint', ['exports'], function 
   QUnit.module('JSHint - routes/test.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'routes/test.js should pass jshint.\nroutes/test.js: line 1, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nroutes/test.js: line 2, col 1, \'import\' is only available in ES6 (use \'esversion: 6\').\nroutes/test.js: line 4, col 1, \'export\' is only available in ES6 (use \'esversion: 6\').\n\n3 errors');
+    assert.ok(true, 'routes/test.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/test-helper', ['exports', 'awesome-schedule-front/tests/helpers/resolver', 'ember-qunit'], function (exports, _awesomeScheduleFrontTestsHelpersResolver, _emberQunit) {

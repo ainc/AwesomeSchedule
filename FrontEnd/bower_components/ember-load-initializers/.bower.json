@@ -27,5 +27,5 @@
   },
   "_source": "git://github.com/ember-cli/ember-load-initializers.git",
   "_target": "0.1.7",
-  "_originalSource": "ember-load-initializers"
+  "_originalSource": "ember-cli/ember-load-initializers"
 }

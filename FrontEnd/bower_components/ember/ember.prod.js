@@ -6,7 +6,7 @@
  *            Portions Copyright 2008-2011 Apple Inc. All rights reserved.
  * @license   Licensed under MIT license
  *            See https://raw.github.com/emberjs/ember.js/master/LICENSE
- * @version   2.4.0
+ * @version   2.4.3
  */
 
 var enifed, requireModule, require, requirejs, Ember;
@@ -4185,7 +4185,19 @@ enifed('ember-application/system/application', ['exports', 'ember-metal', 'ember
   */
   'use strict';
 
+  exports._resetLegacyAddonWarnings = _resetLegacyAddonWarnings;
+
   var librariesRegistered = false;
+
+  var warnedAboutLegacyViewAddon = false;
+  var warnedAboutLegacyControllerAddon = false;
+
+  // For testing
+
+  function _resetLegacyAddonWarnings() {
+    warnedAboutLegacyViewAddon = false;
+    warnedAboutLegacyControllerAddon = false;
+  }
 
   /**
     An instance of `Ember.Application` is the starting point for every Ember
@@ -4688,6 +4700,16 @@ enifed('ember-application/system/application', ['exports', 'ember-metal', 'ember
         return;
       }
 
+      if (_emberMetal.default.ENV._ENABLE_LEGACY_VIEW_SUPPORT && !warnedAboutLegacyViewAddon) {
+
+        warnedAboutLegacyViewAddon = true;
+      }
+
+      if (_emberMetal.default.ENV._ENABLE_LEGACY_CONTROLLER_SUPPORT && !warnedAboutLegacyControllerAddon) {
+
+        warnedAboutLegacyControllerAddon = true;
+      }
+
       // Even though this returns synchronously, we still need to make sure the
       // boot promise exists for book-keeping purposes: if anything went wrong in
       // the boot process, we need to store the error as a rejection on the boot
@@ -5014,7 +5036,8 @@ enifed('ember-application/system/application', ['exports', 'ember-metal', 'ember
         });
       }
       ```
-       @method visit
+       @public
+      @method visit
       @param url {String} The initial URL to navigate to
       @param options {Ember.ApplicationInstance.BootOptions}
       @return {Promise<Ember.ApplicationInstance, Error>}
@@ -8461,11 +8484,11 @@ enifed('ember-htmlbars/hooks/link-render-node', ['exports', 'ember-htmlbars/util
       var isTruthyVal = _emberMetalStreamsUtils.read(isTruthy);
 
       if (_emberRuntimeUtils.isArray(predicateVal)) {
-        return lengthVal > 0 ? predicateVal : false;
+        return lengthVal > 0 ? coercer(predicateVal) : false;
       }
 
       if (typeof isTruthyVal === 'boolean') {
-        return isTruthyVal;
+        return isTruthyVal ? coercer(predicateVal) : false;
       }
 
       return coercer(predicateVal);
@@ -9880,7 +9903,7 @@ enifed('ember-htmlbars/keywords/outlet', ['exports', 'ember-metal/debug', 'ember
 
   'use strict';
 
-  _emberHtmlbarsTemplatesTopLevelView.default.meta.revision = 'Ember@2.4.0';
+  _emberHtmlbarsTemplatesTopLevelView.default.meta.revision = 'Ember@2.4.3';
 
   /**
     The `{{outlet}}` helper lets you specify where a child routes will render in
@@ -11756,7 +11779,10 @@ enifed('ember-htmlbars/system/lookup-helper', ['exports', 'ember-metal/debug', '
       var owner = env.owner;
       if (validateLazyHelperName(name, owner, env.hooks.keywords)) {
         var helperName = 'helper:' + name;
-        if (owner.hasRegistration(helperName, options)) {
+        // See https://github.com/emberjs/ember.js/issues/13071
+        // See https://bugs.chromium.org/p/v8/issues/detail?id=4839
+        var registered = owner.hasRegistration(helperName, options);
+        if (registered) {
           helper = owner._lookupFactory(helperName, options);
         }
       }
@@ -15457,7 +15483,7 @@ enifed('ember-metal/core', ['exports', 'require'], function (exports, _require) 
   
     @class Ember
     @static
-    @version 2.4.0
+    @version 2.4.3
     @public
   */
 
@@ -15499,11 +15525,11 @@ enifed('ember-metal/core', ['exports', 'require'], function (exports, _require) 
   
     @property VERSION
     @type String
-    @default '2.4.0'
+    @default '2.4.3'
     @static
     @public
   */
-  Ember.VERSION = '2.4.0';
+  Ember.VERSION = '2.4.3';
 
   /**
     The hash of environment variables used to control various configuration
@@ -27026,9 +27052,9 @@ enifed('ember-routing/system/router', ['exports', 'ember-metal/logger', 'ember-m
          didTransition: function() {
           this._super(...arguments);
            return ga('send', 'pageview', {
-              'page': this.get('url'),
-              'title': this.get('url')
-            });
+            'page': this.get('url'),
+            'title': this.get('url')
+          });
         }
       });
       ```
@@ -29389,7 +29415,7 @@ enifed('ember-routing-views/components/link-to', ['exports', 'ember-metal/logger
 
   'use strict';
 
-  _emberHtmlbarsTemplatesLinkTo.default.meta.revision = 'Ember@2.4.0';
+  _emberHtmlbarsTemplatesLinkTo.default.meta.revision = 'Ember@2.4.3';
 
   /**
     `Ember.LinkComponent` renders an element whose `click` event triggers a
@@ -29889,7 +29915,7 @@ enifed('ember-routing-views/views/outlet', ['exports', 'ember-views/views/view',
 
   'use strict';
 
-  _emberHtmlbarsTemplatesTopLevelView.default.meta.revision = 'Ember@2.4.0';
+  _emberHtmlbarsTemplatesTopLevelView.default.meta.revision = 'Ember@2.4.3';
 
   var CoreOutletView = _emberViewsViewsView.default.extend({
     defaultTemplate: _emberHtmlbarsTemplatesTopLevelView.default,
@@ -35856,7 +35882,7 @@ enifed('ember-runtime/system/core_object', ['exports', 'ember-metal/debug', 'emb
             if (mergedProperties && mergedProperties.length && mergedProperties.indexOf(keyName) >= 0) {
               var originalValue = this[keyName];
 
-              value = _emberMetalAssign.default(originalValue, value);
+              value = _emberMetalAssign.default({}, originalValue, value);
             }
 
             if (desc) {
@@ -38815,7 +38841,7 @@ enifed('ember-template-compiler/system/compile_options', ['exports', 'ember-meta
     options.buildMeta = function buildMeta(program) {
       return {
         fragmentReason: fragmentReason(program),
-        revision: 'Ember@2.4.0',
+        revision: 'Ember@2.4.3',
         loc: program.loc,
         moduleName: options.moduleName
       };
@@ -42881,7 +42907,7 @@ enifed('ember-views/views/collection_view', ['exports', 'ember-metal/core', 'emb
 enifed('ember-views/views/container_view', ['exports', 'ember-metal/core', 'ember-metal/debug', 'ember-runtime/mixins/mutable_array', 'ember-runtime/system/native_array', 'ember-views/views/view', 'ember-metal/property_get', 'ember-metal/property_set', 'ember-metal/mixin', 'ember-metal/events', 'ember-htmlbars/templates/container-view'], function (exports, _emberMetalCore, _emberMetalDebug, _emberRuntimeMixinsMutable_array, _emberRuntimeSystemNative_array, _emberViewsViewsView, _emberMetalProperty_get, _emberMetalProperty_set, _emberMetalMixin, _emberMetalEvents, _emberHtmlbarsTemplatesContainerView) {
   'use strict';
 
-  _emberHtmlbarsTemplatesContainerView.default.meta.revision = 'Ember@2.4.0';
+  _emberHtmlbarsTemplatesContainerView.default.meta.revision = 'Ember@2.4.3';
 
   /**
   @module ember

@@ -1,1 +1,0 @@
-/home/roodey/Documents/Awesome/AwesomeSchedule/FrontEnd/tmp/funnel-input_base_path-HeTS4PZ4.tmp/0/components/app-version.js
