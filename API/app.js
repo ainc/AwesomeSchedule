@@ -39,3 +39,4 @@ var server = app.listen(9029, function() {
 
     console.log('Web App listening at http://localhost:9029');
 });
+server.timeout = 3600000;
