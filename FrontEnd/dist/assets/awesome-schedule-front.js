@@ -270,6 +270,21 @@ define('awesome-schedule-front/components/logo-tile', ['exports', 'ember'], func
 define('awesome-schedule-front/components/submit-info', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Component.extend({});
 });
+define('awesome-schedule-front/components/submit-login', ['exports', 'ember'], function (exports, _ember) {
+    exports['default'] = _ember['default'].Component.extend({
+
+        info: [],
+
+        actions: {
+            submit: function submit() {
+
+                this.get('info').pushObject(this.get('username'));
+                this.get('info').pushObject(this.get('password'));
+                this.sendAction('action', this.get('info'));
+            }
+        }
+    });
+});
 define('awesome-schedule-front/controllers/array', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Controller;
 });
@@ -285,11 +300,24 @@ define('awesome-schedule-front/controllers/calendar', ['exports', 'ember'], func
     });
     */
 });
+define('awesome-schedule-front/controllers/login', ['exports', 'ember'], function (exports, _ember) {
+            exports['default'] = _ember['default'].Controller.extend({
+                        loginController: _ember['default'].inject.controller('login'),
+                        login: _ember['default'].computed.reads('loginController.model')
+
+            });
+});
 define('awesome-schedule-front/controllers/object', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Controller;
 });
 define('awesome-schedule-front/controllers/test', ['exports', 'ember'], function (exports, _ember) {
-        exports['default'] = _ember['default'].Controller.extend({});
+    //import Test from '../models/test'
+
+    exports['default'] = _ember['default'].Controller.extend({
+        testController: _ember['default'].inject.controller('test'),
+        test: _ember['default'].computed.reads('testController.model')
+
+    });
 });
 define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/components/bs-accordion-item.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-bootstrap/components/bs-accordion-item.js');
@@ -802,11 +830,25 @@ define('awesome-schedule-front/models/coaches', ['exports', 'ember-data'], funct
 
 	});
 });
-define('awesome-schedule-front/models/test', ['exports', 'ember-data'], function (exports, _emberData) {
-        exports['default'] = _emberData['default'].Model.extend({
-                name: _emberData['default'].attr('string')
+define('awesome-schedule-front/models/login', ['exports', 'ember'], function (exports, _ember) {
+   exports['default'] = _ember['default'].Object.extend({
+      init: function init() {
+         var name = this.get('name');
+         return name;
+         //alert("Hi, my name is " + this.get('name'));
+      }
 
-        });
+   });
+});
+define('awesome-schedule-front/models/test', ['exports', 'ember'], function (exports, _ember) {
+  exports['default'] = _ember['default'].Object.extend({
+    //        init: function() {
+    //            var name = this.get('name');
+    //            return name;
+    //            //alert("Hi, my name is " + this.get('name'));
+    //        },
+    //       
+  });
 });
 define('awesome-schedule-front/resolver', ['exports', 'ember-resolver'], function (exports, _emberResolver) {
   exports['default'] = _emberResolver['default'];
@@ -845,15 +887,60 @@ define('awesome-schedule-front/routes/coaches', ['exports', 'ember'], function (
         }
     });
 });
-define('awesome-schedule-front/routes/test', ['exports', 'ember'], function (exports, _ember) {
+define('awesome-schedule-front/routes/login', ['exports', 'ember'], function (exports, _ember) {
+    exports['default'] = _ember['default'].Route.extend({
+        ajax: _ember['default'].inject.service(),
+        model: function model() {},
+
+        actions: {
+            submitLoginAttempt: function submitLoginAttempt(info) {
+                return this.get('ajax').request('http://localhost:9029/api/basic_auth', { method: 'POST', info: info }).then(function () {
+                    console.log(this.get(info));
+                });
+            }
+        }
+    });
+});
+define('awesome-schedule-front/routes/test', ['exports', 'ember', 'awesome-schedule-front/models/test'], function (exports, _ember, _awesomeScheduleFrontModelsTest) {
     //import AjaxService from 'ember-ajax/services/ajax';
 
     exports['default'] = _ember['default'].Route.extend({
         ajax: _ember['default'].inject.service(),
 
+        bananas: function bananas(param) {
+            var fruit = _awesomeScheduleFrontModelsTest['default'].create({
+                id: 1,
+                name: param.test.name
+            });
+            return fruit;
+        },
+
         model: function model() {
-            //return this.get('ajax').request('http://localhost:9029/api/gimmieDatDate', {method: 'POST'});
-            return this.get('ajax').request('/test');
+            //        (function testies(bananas){
+            //            jQuery.ajax({
+            //                type: "POST",
+            //                url: "http://localhost:9029/api/gimmieDatDate",
+            //            }).done(function(data) {
+            //                    bananas(data);
+            //            });
+            //           
+            //        })();
+            return this.get('ajax').request('http://localhost:9029/api/gimmieDatDate', { method: 'POST' }).then(function (value) {
+                console.log(value["test"][0].name);
+                var tom = _awesomeScheduleFrontModelsTest['default'].create({
+                    id: 1,
+                    name: value["test"][0].name
+                });
+
+                return tom;
+                //return value.test.name;
+            });
+            /*
+            var tom = Test.create({
+                id: 1,
+                name: "Tom Daley"
+            });
+            return tom;*/
         }
     });
 });
@@ -6905,6 +6992,65 @@ define("awesome-schedule-front/templates/components/submit-info", ["exports"], f
     };
   })());
 });
+define("awesome-schedule-front/templates/components/submit-login", ["exports"], function (exports) {
+  exports["default"] = Ember.HTMLBars.template((function () {
+    return {
+      meta: {
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type", "multiple-nodes"]
+        },
+        "revision": "Ember@2.4.3",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 4,
+            "column": 65
+          }
+        },
+        "moduleName": "awesome-schedule-front/templates/components/submit-login.hbs"
+      },
+      isEmpty: false,
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("button");
+        dom.setAttribute(el1, "class", "SubmitLogin");
+        var el2 = dom.createTextNode("Submit");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var element0 = dom.childAt(fragment, [5]);
+        var morphs = new Array(3);
+        morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+        morphs[1] = dom.createMorphAt(fragment, 3, 3, contextualElement);
+        morphs[2] = dom.createElementMorph(element0);
+        return morphs;
+      },
+      statements: [["inline", "input", [], ["value", ["subexpr", "@mut", [["get", "username", ["loc", [null, [2, 14], [2, 22]]]]], [], []], "placeholder", "Username/Email"], ["loc", [null, [2, 0], [2, 53]]]], ["inline", "input", [], ["value", ["subexpr", "@mut", [["get", "password", ["loc", [null, [3, 14], [3, 22]]]]], [], []], "placeholder", "Password"], ["loc", [null, [3, 0], [3, 47]]]], ["element", "action", ["submit"], [], ["loc", [null, [4, 29], [4, 49]]]]],
+      locals: [],
+      templates: []
+    };
+  })());
+});
 define("awesome-schedule-front/templates/login", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
@@ -6920,7 +7066,7 @@ define("awesome-schedule-front/templates/login", ["exports"], function (exports)
             "column": 0
           },
           "end": {
-            "line": 5,
+            "line": 4,
             "column": 6
           }
         },
@@ -6946,21 +7092,15 @@ define("awesome-schedule-front/templates/login", ["exports"], function (exports)
         dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n");
         dom.appendChild(el1, el2);
-        var el2 = dom.createComment("");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n");
-        dom.appendChild(el1, el2);
         dom.appendChild(el0, el1);
         return el0;
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var element0 = dom.childAt(fragment, [0]);
-        var morphs = new Array(2);
-        morphs[0] = dom.createMorphAt(element0, 3, 3);
-        morphs[1] = dom.createMorphAt(element0, 5, 5);
+        var morphs = new Array(1);
+        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [0]), 3, 3);
         return morphs;
       },
-      statements: [["inline", "textarea", [], ["name", "username", "placeholder", "Username or email"], ["loc", [null, [3, 0], [3, 60]]]], ["inline", "textarea", [], ["name", "password", "placeholder", "Password"], ["loc", [null, [4, 0], [4, 51]]]]],
+      statements: [["inline", "submit-login", [], ["action", "submitLoginAttempt"], ["loc", [null, [3, 0], [3, 44]]]]],
       locals: [],
       templates: []
     };
@@ -6968,50 +7108,6 @@ define("awesome-schedule-front/templates/login", ["exports"], function (exports)
 });
 define("awesome-schedule-front/templates/test", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
-    var child0 = (function () {
-      return {
-        meta: {
-          "fragmentReason": false,
-          "revision": "Ember@2.4.3",
-          "loc": {
-            "source": null,
-            "start": {
-              "line": 7,
-              "column": 4
-            },
-            "end": {
-              "line": 9,
-              "column": 4
-            }
-          },
-          "moduleName": "awesome-schedule-front/templates/test.hbs"
-        },
-        isEmpty: false,
-        arity: 0,
-        cachedFragment: null,
-        hasRendered: false,
-        buildFragment: function buildFragment(dom) {
-          var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("    ");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createElement("li");
-          var el2 = dom.createComment("");
-          dom.appendChild(el1, el2);
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n");
-          dom.appendChild(el0, el1);
-          return el0;
-        },
-        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-          var morphs = new Array(1);
-          morphs[0] = dom.createMorphAt(dom.childAt(fragment, [1]), 0, 0);
-          return morphs;
-        },
-        statements: [["content", "test.name", ["loc", [null, [8, 8], [8, 21]]]]],
-        locals: [],
-        templates: []
-      };
-    })();
     return {
       meta: {
         "fragmentReason": false,
@@ -7041,9 +7137,13 @@ define("awesome-schedule-front/templates/test", ["exports"], function (exports) 
         var el2 = dom.createTextNode("\n");
         dom.appendChild(el1, el2);
         var el2 = dom.createElement("ul");
-        var el3 = dom.createTextNode("\n    \n   \n");
+        var el3 = dom.createTextNode("\n    \n   \n    \n    ");
         dom.appendChild(el2, el3);
-        var el3 = dom.createComment("");
+        var el3 = dom.createElement("li");
+        var el4 = dom.createComment("");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    \n");
         dom.appendChild(el2, el3);
         dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n");
@@ -7055,12 +7155,12 @@ define("awesome-schedule-front/templates/test", ["exports"], function (exports) 
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
         var morphs = new Array(1);
-        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [1, 1]), 1, 1);
+        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [1, 1, 1]), 0, 0);
         return morphs;
       },
-      statements: [["block", "each", [["get", "test", ["loc", [null, [7, 12], [7, 16]]]], ["get", "in", ["loc", [null, [7, 17], [7, 19]]]], ["get", "model", ["loc", [null, [7, 20], [7, 25]]]]], [], 0, null, ["loc", [null, [7, 4], [9, 13]]]]],
+      statements: [["content", "test.name", ["loc", [null, [8, 8], [8, 21]]]]],
       locals: [],
-      templates: [child0]
+      templates: []
     };
   })());
 });
@@ -7096,7 +7196,7 @@ catch(err) {
 /* jshint ignore:start */
 
 if (!runningTests) {
-  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+4e950e40"});
+  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+16029da9"});
 }
 
 /* jshint ignore:end */

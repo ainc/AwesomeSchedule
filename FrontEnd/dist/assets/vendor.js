@@ -86987,7 +86987,7 @@ define('ember-data/transform', ['exports', 'ember'], function (exports, _ember) 
 define("ember-data/version", ["exports"], function (exports) {
   "use strict";
 
-  exports["default"] = "2.4.3+a3e2521f85";
+  exports["default"] = "2.4.3";
 });
 define("ember-inflector/index", ["exports", "ember", "ember-inflector/lib/system", "ember-inflector/lib/ext/string"], function (exports, _ember, _emberInflectorLibSystem, _emberInflectorLibExtString) {
   /* global define, module */

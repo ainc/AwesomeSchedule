@@ -79,6 +79,15 @@ define('awesome-schedule-front/tests/components/submit-info.jshint', ['exports']
     assert.ok(true, 'components/submit-info.js should pass jshint.');
   });
 });
+define('awesome-schedule-front/tests/components/submit-login.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - components/submit-login.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'components/submit-login.js should pass jshint.');
+  });
+});
 define('awesome-schedule-front/tests/controllers/calendar.jshint', ['exports'], function (exports) {
   'use strict';
 
@@ -86,6 +95,15 @@ define('awesome-schedule-front/tests/controllers/calendar.jshint', ['exports'], 
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'controllers/calendar.js should pass jshint.');
+  });
+});
+define('awesome-schedule-front/tests/controllers/login.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - controllers/login.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'controllers/login.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/controllers/test.jshint', ['exports'], function (exports) {
@@ -1410,6 +1428,155 @@ define('awesome-schedule-front/tests/integration/components/submit-info-test.jsh
     assert.ok(true, 'integration/components/submit-info-test.js should pass jshint.');
   });
 });
+define('awesome-schedule-front/tests/integration/components/submit-login-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
+
+  (0, _emberQunit.moduleForComponent)('submit-login', 'Integration | Component | submit login', {
+    integration: true
+  });
+
+  (0, _emberQunit.test)('it renders', function (assert) {
+    // Set any properties with this.set('myProperty', 'value');
+    // Handle any actions with this.on('myAction', function(val) { ... });
+
+    this.render(Ember.HTMLBars.template((function () {
+      return {
+        meta: {
+          'fragmentReason': {
+            'name': 'missing-wrapper',
+            'problems': ['wrong-type']
+          },
+          'revision': 'Ember@2.4.3',
+          'loc': {
+            'source': null,
+            'start': {
+              'line': 1,
+              'column': 0
+            },
+            'end': {
+              'line': 1,
+              'column': 16
+            }
+          }
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createComment('');
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+          dom.insertBoundary(fragment, 0);
+          dom.insertBoundary(fragment, null);
+          return morphs;
+        },
+        statements: [['content', 'submit-login', ['loc', [null, [1, 0], [1, 16]]]]],
+        locals: [],
+        templates: []
+      };
+    })()));
+
+    assert.equal(this.$().text().trim(), '');
+
+    // Template block usage:
+    this.render(Ember.HTMLBars.template((function () {
+      var child0 = (function () {
+        return {
+          meta: {
+            'fragmentReason': false,
+            'revision': 'Ember@2.4.3',
+            'loc': {
+              'source': null,
+              'start': {
+                'line': 2,
+                'column': 4
+              },
+              'end': {
+                'line': 4,
+                'column': 4
+              }
+            }
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode('      template block text\n');
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+
+      return {
+        meta: {
+          'fragmentReason': {
+            'name': 'missing-wrapper',
+            'problems': ['wrong-type']
+          },
+          'revision': 'Ember@2.4.3',
+          'loc': {
+            'source': null,
+            'start': {
+              'line': 1,
+              'column': 0
+            },
+            'end': {
+              'line': 5,
+              'column': 2
+            }
+          }
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode('\n');
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment('');
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode('  ');
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+          return morphs;
+        },
+        statements: [['block', 'submit-login', [], [], 0, null, ['loc', [null, [2, 4], [4, 21]]]]],
+        locals: [],
+        templates: [child0]
+      };
+    })()));
+
+    assert.equal(this.$().text().trim(), 'template block text');
+  });
+});
+define('awesome-schedule-front/tests/integration/components/submit-login-test.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - integration/components/submit-login-test.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'integration/components/submit-login-test.js should pass jshint.');
+  });
+});
 define('awesome-schedule-front/tests/models/coaches.jshint', ['exports'], function (exports) {
   'use strict';
 
@@ -1417,6 +1584,15 @@ define('awesome-schedule-front/tests/models/coaches.jshint', ['exports'], functi
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'models/coaches.js should pass jshint.');
+  });
+});
+define('awesome-schedule-front/tests/models/login.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - models/login.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'models/login.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/models/test.jshint', ['exports'], function (exports) {
@@ -1455,6 +1631,15 @@ define('awesome-schedule-front/tests/routes/coaches.jshint', ['exports'], functi
     assert.ok(true, 'routes/coaches.js should pass jshint.');
   });
 });
+define('awesome-schedule-front/tests/routes/login.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - routes/login.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'routes/login.js should pass jshint.');
+  });
+});
 define('awesome-schedule-front/tests/routes/test.jshint', ['exports'], function (exports) {
   'use strict';
 
@@ -1475,6 +1660,28 @@ define('awesome-schedule-front/tests/test-helper.jshint', ['exports'], function 
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'test-helper.js should pass jshint.');
+  });
+});
+define('awesome-schedule-front/tests/unit/controllers/login-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
+
+  (0, _emberQunit.moduleFor)('controller:login', 'Unit | Controller | login', {
+    // Specify the other units that are required for this test.
+    // needs: ['controller:foo']
+  });
+
+  // Replace this with your real tests.
+  (0, _emberQunit.test)('it exists', function (assert) {
+    var controller = this.subject();
+    assert.ok(controller);
+  });
+});
+define('awesome-schedule-front/tests/unit/controllers/login-test.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - unit/controllers/login-test.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/controllers/login-test.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/unit/controllers/test-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
@@ -1559,6 +1766,28 @@ define('awesome-schedule-front/tests/unit/models/coaches-test.jshint', ['exports
     assert.ok(true, 'unit/models/coaches-test.js should pass jshint.');
   });
 });
+define('awesome-schedule-front/tests/unit/models/login-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
+
+  (0, _emberQunit.moduleForModel)('login', 'Unit | Model | login', {
+    // Specify the other units that are required for this test.
+    needs: []
+  });
+
+  (0, _emberQunit.test)('it exists', function (assert) {
+    var model = this.subject();
+    // let store = this.store();
+    assert.ok(!!model);
+  });
+});
+define('awesome-schedule-front/tests/unit/models/login-test.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - unit/models/login-test.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/models/login-test.js should pass jshint.');
+  });
+});
 define('awesome-schedule-front/tests/unit/models/test-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
 
   (0, _emberQunit.moduleForModel)('test', 'Unit | Model | test', {
@@ -1600,6 +1829,27 @@ define('awesome-schedule-front/tests/unit/routes/coaches-test.jshint', ['exports
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'unit/routes/coaches-test.js should pass jshint.');
+  });
+});
+define('awesome-schedule-front/tests/unit/routes/login-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
+
+  (0, _emberQunit.moduleFor)('route:login', 'Unit | Route | login', {
+    // Specify the other units that are required for this test.
+    // needs: ['controller:foo']
+  });
+
+  (0, _emberQunit.test)('it exists', function (assert) {
+    var route = this.subject();
+    assert.ok(route);
+  });
+});
+define('awesome-schedule-front/tests/unit/routes/login-test.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - unit/routes/login-test.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/routes/login-test.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/unit/routes/test-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {

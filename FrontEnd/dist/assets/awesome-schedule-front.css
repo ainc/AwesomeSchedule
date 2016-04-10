@@ -251,4 +251,8 @@ calendarContainer {
 textarea {
   background-color: honeydew; }
 
+.SubmitLogin {
+  .height: 30px;
+  width: 100px; }
+
 /*---------------------------END LOGIN PAGE CSS----------------------------------------*/
