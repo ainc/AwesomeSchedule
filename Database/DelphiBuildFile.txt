@@ -1,0 +1,86 @@
+
+USE `kpla223` ;
+
+-- -----------------------------------------------------
+-- Table `awesomedb`.`rates`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `rates` (
+  `RaID` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'primary key to identify rates',
+  `rate` FLOAT NOT NULL COMMENT 'rates in floating point value',
+  PRIMARY KEY (`RaID`),
+  UNIQUE INDEX `RaID_UNIQUE` (`RaID` ASC))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `awesomedb`.`coaches`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `coaches` (
+  `CoID` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'primary key for coaches',
+  `name` VARCHAR(100) NULL DEFAULT NULL,
+  `active` TINYINT(3) UNSIGNED NULL DEFAULT NULL COMMENT 'are the coaches currently on payroll?',
+  `startDate` DATE NOT NULL COMMENT 'date hired',
+  `endDate` DATE NULL DEFAULT NULL COMMENT 'date left company',
+  `RaID` INT(11) NOT NULL COMMENT 'FK from rates table',
+  `isAdmin` TINYINT(3) NOT NULL COMMENT 'are they an admin? 1 = yes !1 = no',
+  `username` VARCHAR(45) NOT NULL COMMENT 'name to login',
+  `password` VARCHAR(45) NOT NULL COMMENT 'password to login should not be stored in clear text',
+  `email` VARCHAR(45) NOT NULL COMMENT 'stored email for messages and verification also for contact page',
+  `phone` VARCHAR(45) NOT NULL COMMENT 'used for the contact page so admin can schedule them',
+  `picture` VARCHAR(45) NOT NULL COMMENT 'path to the stored picture on the front end',
+  PRIMARY KEY (`CoID`),
+  UNIQUE INDEX `CoID_UNIQUE` (`CoID` ASC),
+  UNIQUE INDEX `email_UNIQUE` (`email' ASC),
+  INDEX `fk_coaches_rates_idx` (`RaID` ASC),
+  CONSTRAINT `fk_coaches_rates`
+    FOREIGN KEY (`RaID`)
+    REFERENCES `rates` (`RaID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `awesomedb`.`hoursworked`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `hoursworked` (
+  `HoursWorkedID` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Hours worked primary key',
+  `payPeriod` INT(11) NOT NULL COMMENT 'what payPeriod we are in',
+  `startTime` DATETIME NOT NULL COMMENT 'start time of their pay for the day',
+  `endTime` DATETIME NOT NULL COMMENT 'end time for their pay for the day',
+  `coaches_CoID` INT(11) NOT NULL COMMENT 'FK from coaches to identify coach',
+  PRIMARY KEY (`HoursWorkedID`),
+  UNIQUE INDEX `HoursWorkedID_UNIQUE` (`HoursWorkedID` ASC),
+  UNIQUE INDEX `payPeriod_UNIQUE` (`payPeriod` ASC),
+  INDEX `fk_hoursworked_coaches1_idx` (`coaches_CoID` ASC),
+  CONSTRAINT `fk_hoursworked_coaches1`
+    FOREIGN KEY (`coaches_CoID`)
+    REFERENCES `coaches` (`CoID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `awesomedb`.`schedule`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `schedule` (
+  `idschedule` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'which scheduling period are we looking at',
+  `payPeriod` INT(11) NOT NULL COMMENT 'which pay period are we in',
+  `startTime` DATETIME NOT NULL COMMENT 'esitmated start time in schedule',
+  `endTime` DATETIME NOT NULL COMMENT 'esitmated start time in schedule',
+  `coaches_CoID` INT(11) NOT NULL COMMENT 'FK from coaches to identify coaches',
+  PRIMARY KEY (`idschedule`, `coaches_CoID`),
+  UNIQUE INDEX `idschedule_UNIQUE` (`idschedule` ASC),
+  UNIQUE INDEX `Coid_UNIQUE` (`CoID` ASC),
+  INDEX `fk_schedule_coaches1_idx` (`coaches_CoID` ASC),
+  CONSTRAINT `fk_schedule_coaches1`
+    FOREIGN KEY (`coaches_CoID`)
+    REFERENCES `coaches` (`CoID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
