@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `coaches` (
   `startDate` DATE NOT NULL COMMENT 'date hired',
   `endDate` DATE NULL DEFAULT NULL COMMENT 'date left company',
   `RaID` INT(11) NOT NULL COMMENT 'FK from rates table',
-  `isAdmin` TINYINT(3) NOT NULL COMMENT 'are they an admin? 1 = yes !1 = no',
+  `isAdmin` TINYINT(1) NOT NULL COMMENT 'are they an admin? !0 = yes 0 = no',
   `username` VARCHAR(45) NOT NULL COMMENT 'name to login',
   `password` VARCHAR(45) NOT NULL COMMENT 'password to login should not be stored in clear text',
   `email` VARCHAR(45) NOT NULL COMMENT 'stored email for messages and verification also for contact page',
