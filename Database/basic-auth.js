@@ -7,7 +7,11 @@ module.exports.authenticate = function(user, pass){
     
     //Insures async pulling of data will return on time
     return new provider.RSVP.Promise(function(resolve, reject) {
-
+        //The query we need:
+        //SELECT username, password, CoID FROM coaches WHERE username = '?' AND password = '?'
+        //if the result is empty then the username and password do not match.
+        //if there is a single result then the usser should login.
+        //if there is more than one result we have a problem.
         //look at felixge's version of node-mysql for more documentation on this (provider is needed)
         provider.connection.query('query', function(err, rows) {
             
