@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS `coaches` (
   `picture` VARCHAR(45) NOT NULL COMMENT 'path to the stored picture on the front end',
   PRIMARY KEY (`CoID`),
   UNIQUE INDEX `CoID_UNIQUE` (`CoID` ASC),
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC),
   UNIQUE INDEX `email_UNIQUE` (`email' ASC),
   INDEX `fk_coaches_rates_idx` (`RaID` ASC),
   CONSTRAINT `fk_coaches_rates`
