@@ -13,7 +13,7 @@ module.exports.authenticate = function(user, pass){
         //if there is a single result then the usser should login.
         //if there is more than one result we have a problem.
         //look at felixge's version of node-mysql for more documentation on this (provider is needed)
-        provider.connection.query('query', function(err, rows) {
+        provider.connection.query('SELECT username, password, CoID FROM coaches WHERE username = '+ connection.escape(user) +' AND password = '+ connection.escape(pass), function(err, rows) {
             
             if (err){ throw err;}
 
