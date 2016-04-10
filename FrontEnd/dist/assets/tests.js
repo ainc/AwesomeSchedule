@@ -1622,13 +1622,13 @@ define('awesome-schedule-front/tests/router.jshint', ['exports'], function (expo
     assert.ok(true, 'router.js should pass jshint.');
   });
 });
-define('awesome-schedule-front/tests/routes/coaches.jshint', ['exports'], function (exports) {
+define('awesome-schedule-front/tests/routes/coach.jshint', ['exports'], function (exports) {
   'use strict';
 
-  QUnit.module('JSHint - routes/coaches.js');
+  QUnit.module('JSHint - routes/coach.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(true, 'routes/coaches.js should pass jshint.');
+    assert.ok(true, 'routes/coach.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/routes/login.jshint', ['exports'], function (exports) {

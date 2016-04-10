@@ -831,14 +831,11 @@ define('awesome-schedule-front/models/coaches', ['exports', 'ember-data'], funct
 	});
 });
 define('awesome-schedule-front/models/login', ['exports', 'ember'], function (exports, _ember) {
-   exports['default'] = _ember['default'].Object.extend({
-      init: function init() {
-         var name = this.get('name');
-         return name;
-         //alert("Hi, my name is " + this.get('name'));
-      }
+    exports['default'] = _ember['default'].Object.extend({
 
-   });
+        init: function init() {}
+
+    });
 });
 define('awesome-schedule-front/models/test', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Object.extend({
@@ -870,32 +867,29 @@ define('awesome-schedule-front/router', ['exports', 'ember', 'awesome-schedule-f
 
   exports['default'] = Router;
 });
-define('awesome-schedule-front/routes/coaches', ['exports', 'ember'], function (exports, _ember) {
+define('awesome-schedule-front/routes/coach', ['exports', 'ember', 'awesome-schedule-front/models/login'], function (exports, _ember, _awesomeScheduleFrontModelsLogin) {
     exports['default'] = _ember['default'].Route.extend({
-        /* ajax: Ember.inject.service(),
-         model(){
-             return this.get('ajax').request('/gimmieDatDate',{
-                 method: 'GET',
-                 data:{
-                     startDate: 'gimmieDatDate'
-                 }
-             });
-         }*/
 
         model: function model() {
-            return this.store.find('gimmieDatDate');
+            console.log(_awesomeScheduleFrontModelsLogin['default'].isLoggedIn);
+            //
         }
     });
 });
-define('awesome-schedule-front/routes/login', ['exports', 'ember'], function (exports, _ember) {
+define('awesome-schedule-front/routes/login', ['exports', 'ember', 'awesome-schedule-front/models/login'], function (exports, _ember, _awesomeScheduleFrontModelsLogin) {
     exports['default'] = _ember['default'].Route.extend({
         ajax: _ember['default'].inject.service(),
         model: function model() {},
 
         actions: {
             submitLoginAttempt: function submitLoginAttempt(info) {
-                return this.get('ajax').request('http://localhost:9029/api/basic_auth', { method: 'POST', info: info }).then(function () {
-                    console.log(this.get(info));
+                return this.get('ajax').request('http://localhost:9029/api/basic_auth', { method: 'POST', data: { username: info[0], password: info[1] }, xhrFields: { crossDomain: true, withCredentials: true } }).then(function (value) {
+                    console.log(value.result.log);
+                    if (value.result.log === 1) {
+                        var login = _awesomeScheduleFrontModelsLogin['default'].create();
+                        login.set('isLoggedIn', 'true');
+                        window.location.href = '/coach';
+                    } else {}
                 });
             }
         }
@@ -7196,7 +7190,7 @@ catch(err) {
 /* jshint ignore:start */
 
 if (!runningTests) {
-  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+16029da9"});
+  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+11efde87"});
 }
 
 /* jshint ignore:end */
