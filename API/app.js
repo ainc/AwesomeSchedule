@@ -13,9 +13,6 @@ global.database = function(filepath) {
 
 // Allows routes to be processed
 var router = require("./controllers/router.js");
-
-// Allow Proxy
-
 app.use('/', router);
 
 // Start Server
