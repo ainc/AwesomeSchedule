@@ -1637,7 +1637,7 @@ define('awesome-schedule-front/tests/routes/login.jshint', ['exports'], function
   QUnit.module('JSHint - routes/login.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(true, 'routes/login.js should pass jshint.');
+    assert.ok(false, 'routes/login.js should pass jshint.\nroutes/login.js: line 2, col 8, \'Login\' is defined but never used.\n\n1 error');
   });
 });
 define('awesome-schedule-front/tests/routes/test.jshint', ['exports'], function (exports) {

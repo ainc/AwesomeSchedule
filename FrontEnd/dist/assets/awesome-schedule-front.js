@@ -886,8 +886,6 @@ define('awesome-schedule-front/routes/login', ['exports', 'ember', 'awesome-sche
                 return this.get('ajax').request('http://localhost:9029/api/basic_auth', { method: 'POST', data: { username: info[0], password: info[1] }, xhrFields: { crossDomain: true, withCredentials: true } }).then(function (value) {
                     console.log(value.result.log);
                     if (value.result.log === 1) {
-                        var login = _awesomeScheduleFrontModelsLogin['default'].create();
-                        login.set('isLoggedIn', 'true');
                         window.location.href = '/coach';
                     } else {}
                 });

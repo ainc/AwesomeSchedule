@@ -2,6 +2,8 @@ import Ember from 'ember';
 import Test from '../models/test';
 //import AjaxService from 'ember-ajax/services/ajax';
 
+
+//PLEASE IGNORE
 export default Ember.Route.extend({
     ajax: Ember.inject.service(),
     

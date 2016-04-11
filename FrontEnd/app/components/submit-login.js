@@ -1,5 +1,8 @@
 import Ember from 'ember';
 
+
+//Submits a login attempt to the login route
+//HTML side for this file stored in /templates/components/
 export default Ember.Component.extend({
       
         info: [],

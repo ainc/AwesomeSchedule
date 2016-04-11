@@ -1,13 +1,10 @@
 import DS from "ember-data";
 import Ember from 'ember';
 
+//This file is the main interaction with the API, it provides the name of the route for the API, as well as the address the API is hosted on.
 export default DS.RESTAdapter.extend({
     namespace: 'api',
     host: 'http://localhost:9029',
-    pathForType: function(type) {
-       var camelized = Ember.String.camelize(type);
-       return Ember.String.singularize(camelized);
-     }
-    
+
 });
 
