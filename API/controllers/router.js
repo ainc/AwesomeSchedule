@@ -14,8 +14,6 @@ router.use(function (request, response, next) {
     next();
 });
 
-router.post('/api/test', require('./routes/test'));
 router.post('/api/basic_auth', urlencodedParser, require('./routes/basic_auth'));
-router.post('/api/gimmieDatDate', require('./routes/gimmieDatDate'))
 
 module.exports = router;

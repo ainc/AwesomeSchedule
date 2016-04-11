@@ -11,14 +11,8 @@ global.database = function(filepath) {
     return require( path.join(path.resolve(__dirname), '../Database') + "/" + filepath );
 }
 
+// Allows routes to be processed
 var router = require("./controllers/router.js");
-
-// test function to connect to database
-var boom = database('test1.js').test().then(function(value) {
-    console.log(value);
-}, function(value) {
-    console.log(value);
-});
 
 // Allow Proxy
 
