@@ -5,4 +5,10 @@ import Ember from 'ember';
 export default Ember.Component.extend({
         bioWrapper: 'bioWrapper',
         activityButton: 'activityButton',
+        ajax: Ember.inject.service(),
+        model: function(){
+            var coo = document.cookie;
+            var cookieArray = coo.split('=');
+            console.log(cookieArray[0]);
+        }
 });

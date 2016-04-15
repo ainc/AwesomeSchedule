@@ -4,7 +4,7 @@ define('awesome-schedule-front/tests/adapters/application.jshint', ['exports'], 
   QUnit.module('JSHint - adapters/application.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(true, 'adapters/application.js should pass jshint.');
+    assert.ok(false, 'adapters/application.js should pass jshint.\nadapters/application.js: line 2, col 8, \'Ember\' is defined but never used.\n\n1 error');
   });
 });
 define('awesome-schedule-front/tests/app.jshint', ['exports'], function (exports) {
@@ -113,15 +113,6 @@ define('awesome-schedule-front/tests/controllers/test.jshint', ['exports'], func
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'controllers/test.js should pass jshint.');
-  });
-});
-define('awesome-schedule-front/tests/helpers/contact-info.jshint', ['exports'], function (exports) {
-  'use strict';
-
-  QUnit.module('JSHint - helpers/contact-info.js');
-  QUnit.test('should pass jshint', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'helpers/contact-info.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/helpers/destroy-app', ['exports', 'ember'], function (exports, _ember) {
@@ -1628,7 +1619,7 @@ define('awesome-schedule-front/tests/routes/coach.jshint', ['exports'], function
   QUnit.module('JSHint - routes/coach.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(true, 'routes/coach.js should pass jshint.');
+    assert.ok(false, 'routes/coach.js should pass jshint.\nroutes/coach.js: line 13, col 180, \'value\' is defined but never used.\n\n1 error');
   });
 });
 define('awesome-schedule-front/tests/routes/login.jshint', ['exports'], function (exports) {

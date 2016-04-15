@@ -7,17 +7,17 @@
 /* jshint ignore:end */
 
 define('awesome-schedule-front/adapters/application', ['exports', 'ember-data', 'ember'], function (exports, _emberData, _ember) {
+
+    //This file is the main interaction with the API, it provides the name of the route for the API, as well as the address the API is hosted on.
     exports['default'] = _emberData['default'].RESTAdapter.extend({
         namespace: 'api',
-        host: 'http://localhost:9029',
-        pathForType: function pathForType(type) {
-            var camelized = _ember['default'].String.camelize(type);
-            return _ember['default'].String.singularize(camelized);
-        }
+        host: 'http://localhost:9029'
 
     });
 });
 define('awesome-schedule-front/app', ['exports', 'ember', 'ember/resolver', 'ember/load-initializers', 'awesome-schedule-front/config/environment'], function (exports, _ember, _emberResolver, _emberLoadInitializers, _awesomeScheduleFrontConfigEnvironment) {
+
+  //Main js file for the app. Created by default for all ember apps
 
   var App = undefined;
 
@@ -44,9 +44,18 @@ define('awesome-schedule-front/components/app-version', ['exports', 'ember-cli-a
   });
 });
 define('awesome-schedule-front/components/bio-box', ['exports', 'ember'], function (exports, _ember) {
+
+        //Javascript side of the bio-box: Which is meant to hold all information about a user on the coach's page.
+        //HTML side for this file stored in /templates/components/bio-box
         exports['default'] = _ember['default'].Component.extend({
                 bioWrapper: 'bioWrapper',
-                activityButton: 'activityButton'
+                activityButton: 'activityButton',
+                ajax: _ember['default'].inject.service(),
+                model: function model() {
+                        var coo = document.cookie;
+                        var cookieArray = coo.split('=');
+                        console.log(cookieArray[0]);
+                }
         });
 });
 define('awesome-schedule-front/components/bs-accordion-item', ['exports', 'ember-bootstrap/components/bs-accordion-item'], function (exports, _emberBootstrapComponentsBsAccordionItem) {
@@ -232,14 +241,24 @@ define('awesome-schedule-front/components/bs-textarea', ['exports', 'ember-boots
   });
 });
 define('awesome-schedule-front/components/coach-day', ['exports', 'ember'], function (exports, _ember) {
+
+        //Unused for now, will become part of the calendar on the coaches page, used for displaying classes
+        //HTML side for this file stored in /templates/components/
         exports['default'] = _ember['default'].Component.extend({
                 coachTile: 'coachDayTileWrapper'
         });
 });
 define('awesome-schedule-front/components/coach-sidebar', ['exports', 'ember'], function (exports, _ember) {
+
+  //The right side of the calendar page, holds all coaches available to teach.
+  //HTML side for this file stored in /templates/components/
   exports['default'] = _ember['default'].Component.extend({});
 });
 define('awesome-schedule-front/components/day-tile', ['exports', 'ember'], function (exports, _ember) {
+
+               //The tiles on the calendar page, the different wrappers are used depending on the data presented in the calendar
+               //HTML side for this file stored in /templates/components/
+
                exports['default'] = _ember['default'].Component.extend({
                               wrapperSTTS: 'headerTileSTTS',
                               wrapperMWF: 'headerTileMWF',
@@ -258,9 +277,14 @@ define('awesome-schedule-front/components/ember-wormhole', ['exports', 'ember-wo
   });
 });
 define('awesome-schedule-front/components/hour-tracker', ['exports', 'ember'], function (exports, _ember) {
+
+  //The component on the coach page that will allow the coaches to see the hours they've worked vs the hours they've been paid
   exports['default'] = _ember['default'].Component.extend({});
 });
 define('awesome-schedule-front/components/logo-tile', ['exports', 'ember'], function (exports, _ember) {
+
+   //The far left tiles of the calendar page, used for displaying the "week of" as well as the Awesome Inc Logo
+   //HTML side for this file stored in /templates/components/
    exports['default'] = _ember['default'].Component.extend({
       logoTile: 'logoTileWrapper',
       weekTile: 'weekTileWrapper'
@@ -271,6 +295,9 @@ define('awesome-schedule-front/components/submit-info', ['exports', 'ember'], fu
   exports['default'] = _ember['default'].Component.extend({});
 });
 define('awesome-schedule-front/components/submit-login', ['exports', 'ember'], function (exports, _ember) {
+
+    //Submits a login attempt to the login route
+    //HTML side for this file stored in /templates/components/
     exports['default'] = _ember['default'].Component.extend({
 
         info: [],
@@ -289,18 +316,15 @@ define('awesome-schedule-front/controllers/array', ['exports', 'ember'], functio
   exports['default'] = _ember['default'].Controller;
 });
 define('awesome-schedule-front/controllers/calendar', ['exports', 'ember'], function (exports, _ember) {
-    exports['default'] = _ember['default'].Controller.extend({
-        wrapper: 'calendarWrapper'
-    });
 
-    /*
-    $.ajax({
-        type: "POST",
-        url: "/api/test",
-    });
-    */
+  //Controllers are used for getting data from the API and displaying it into components. The calendar controller will hold submit calls to the API
+  exports['default'] = _ember['default'].Controller.extend({
+    wrapper: 'calendarWrapper'
+  });
 });
 define('awesome-schedule-front/controllers/login', ['exports', 'ember'], function (exports, _ember) {
+
+            //Controller to handle submiting login attempts to the API
             exports['default'] = _ember['default'].Controller.extend({
                         loginController: _ember['default'].inject.controller('login'),
                         login: _ember['default'].computed.reads('loginController.model')
@@ -311,8 +335,9 @@ define('awesome-schedule-front/controllers/object', ['exports', 'ember'], functi
   exports['default'] = _ember['default'].Controller;
 });
 define('awesome-schedule-front/controllers/test', ['exports', 'ember'], function (exports, _ember) {
-    //import Test from '../models/test'
 
+    //ANYTHING LABELED TEST AS A FILENAME WILL BE REMOVED FOR PRODUCTION CODE
+    //Test is simply meant to be a safe working environment to try ideas for the project
     exports['default'] = _ember['default'].Controller.extend({
         testController: _ember['default'].inject.controller('test'),
         test: _ember['default'].computed.reads('testController.model')
@@ -564,19 +589,6 @@ define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/mix
     assert.ok(true, 'modules/ember-bootstrap/mixins/type-class.js should pass jshint.');
   });
 });
-define('awesome-schedule-front/helpers/contact-info', ['exports', 'ember'], function (exports, _ember) {
-  exports.contactInfo = contactInfo;
-
-  function contactInfo(params /*, hash*/) {
-    return params;
-  }
-
-  exports['default'] = _ember['default'].Helper.helper(contactInfo);
-
-  _ember['default'].Handlebars.helper('contactInfo', function (person) {
-    return person.get('firstName') + ' ' + person.get('lastName') + '\n' + person.get('address') + '\n' + person.get('email') + '\n' + person.get('phoneNumber');
-  });
-});
 define("awesome-schedule-front/helpers/format-date", ["exports"], function (exports) {});
 //import Ember from 'ember';
 //
@@ -591,6 +603,8 @@ define("awesome-schedule-front/helpers/format-date", ["exports"], function (expo
 //});
 //export default Ember.Helper.helper(formatDate);
 //*/
+
+//FORMAT DATE IS A SMALL FILE MEANT TO HELP WITH MAKING DATES APPEAR AS NEEDED. CURRENTLY COMMENTED OUT BECAUSE IT ISN'T WORKING AS INTENDED, WILL BE UNCOMMENTED FOR PRODUCTION
 define('awesome-schedule-front/helpers/is-equal', ['exports', 'ember-bootstrap/helpers/is-equal'], function (exports, _emberBootstrapHelpersIsEqual) {
   Object.defineProperty(exports, 'default', {
     enumerable: true,
@@ -831,6 +845,8 @@ define('awesome-schedule-front/models/coaches', ['exports', 'ember-data'], funct
 	});
 });
 define('awesome-schedule-front/models/login', ['exports', 'ember'], function (exports, _ember) {
+
+    //The login model is eventually going to describe a user who has logged in, holding their username, password, and name so the database won't have to be called as much
     exports['default'] = _ember['default'].Object.extend({
 
         init: function init() {}
@@ -838,6 +854,8 @@ define('awesome-schedule-front/models/login', ['exports', 'ember'], function (ex
     });
 });
 define('awesome-schedule-front/models/test', ['exports', 'ember'], function (exports, _ember) {
+
+  //TEST FILE, PLEASE IGNORE
   exports['default'] = _ember['default'].Object.extend({
     //        init: function() {
     //            var name = this.get('name');
@@ -851,6 +869,8 @@ define('awesome-schedule-front/resolver', ['exports', 'ember-resolver'], functio
   exports['default'] = _emberResolver['default'];
 });
 define('awesome-schedule-front/router', ['exports', 'ember', 'awesome-schedule-front/config/environment'], function (exports, _ember, _awesomeScheduleFrontConfigEnvironment) {
+
+  //Controls all of the different navigation abilities for the app. this.route designates a new route for the app.
 
   var Router = _ember['default'].Router.extend({
     location: _awesomeScheduleFrontConfigEnvironment['default'].locationType
@@ -867,24 +887,33 @@ define('awesome-schedule-front/router', ['exports', 'ember', 'awesome-schedule-f
 
   exports['default'] = Router;
 });
-define('awesome-schedule-front/routes/coach', ['exports', 'ember', 'awesome-schedule-front/models/login'], function (exports, _ember, _awesomeScheduleFrontModelsLogin) {
-    exports['default'] = _ember['default'].Route.extend({
+define('awesome-schedule-front/routes/coach', ['exports', 'ember'], function (exports, _ember) {
 
+    //Performs a test to ensure the user is logged in, passes a true or false to the coach template (when implemented)
+    exports['default'] = _ember['default'].Route.extend({
+        ajax: _ember['default'].inject.service(),
         model: function model() {
-            console.log(_awesomeScheduleFrontModelsLogin['default'].isLoggedIn);
-            //
+            var coo = document.cookie;
+            var cookieArray = coo.split('=');
+            console.log(cookieArray[0]);
+
+            return this.get('ajax').request('http://localhost:9029/api/coaches/' + cookieArray[0], { method: 'POST', xhrFields: { crossDomain: true, withCredintials: true } }).then(function (value) {});
         }
     });
 });
 define('awesome-schedule-front/routes/login', ['exports', 'ember', 'awesome-schedule-front/models/login'], function (exports, _ember, _awesomeScheduleFrontModelsLogin) {
+
+    //The JS side of the login page, calls the API given the credintials from submit-login called on the login template.
+
     exports['default'] = _ember['default'].Route.extend({
         ajax: _ember['default'].inject.service(),
         model: function model() {},
 
         actions: {
+            //Check the login attempt, if good, go to the coaches page
             submitLoginAttempt: function submitLoginAttempt(info) {
                 return this.get('ajax').request('http://localhost:9029/api/basic_auth', { method: 'POST', data: { username: info[0], password: info[1] }, xhrFields: { crossDomain: true, withCredentials: true } }).then(function (value) {
-                    console.log(value.result.log);
+                    console.log(value.result);
                     if (value.result.log === 1) {
                         window.location.href = '/coach';
                     } else {}
@@ -896,6 +925,7 @@ define('awesome-schedule-front/routes/login', ['exports', 'ember', 'awesome-sche
 define('awesome-schedule-front/routes/test', ['exports', 'ember', 'awesome-schedule-front/models/test'], function (exports, _ember, _awesomeScheduleFrontModelsTest) {
     //import AjaxService from 'ember-ajax/services/ajax';
 
+    //PLEASE IGNORE
     exports['default'] = _ember['default'].Route.extend({
         ajax: _ember['default'].inject.service(),
 
@@ -1191,7 +1221,10 @@ define("awesome-schedule-front/templates/calendar", ["exports"], function (expor
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
       meta: {
-        "fragmentReason": false,
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type", "multiple-nodes"]
+        },
         "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
@@ -1200,7 +1233,7 @@ define("awesome-schedule-front/templates/calendar", ["exports"], function (expor
             "column": 0
           },
           "end": {
-            "line": 101,
+            "line": 104,
             "column": 10
           }
         },
@@ -1212,6 +1245,14 @@ define("awesome-schedule-front/templates/calendar", ["exports"], function (expor
       hasRendered: false,
       buildFragment: function buildFragment(dom) {
         var el0 = dom.createDocumentFragment();
+        var el1 = dom.createComment(" This page is populated by calls to the logo-tile, day-tile, and coach-sidebar components. It forms the calendar page for the admins to see.");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment(" NEED DATABASE is a placeholder that will eventually be filled by calls to the API to fill those dates with classes");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
         var el1 = dom.createElement("section");
         var el2 = dom.createTextNode("\n");
         dom.appendChild(el1, el2);
@@ -1575,7 +1616,7 @@ define("awesome-schedule-front/templates/calendar", ["exports"], function (expor
         return el0;
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var element0 = dom.childAt(fragment, [0]);
+        var element0 = dom.childAt(fragment, [4]);
         var element1 = dom.childAt(element0, [1]);
         var element2 = dom.childAt(element1, [1]);
         var element3 = dom.childAt(element2, [1]);
@@ -1636,7 +1677,7 @@ define("awesome-schedule-front/templates/calendar", ["exports"], function (expor
         morphs[45] = dom.createMorphAt(dom.childAt(element10, [3]), 1, 1);
         return morphs;
       },
-      statements: [["attribute", "class", ["get", "wrapper", ["loc", [null, [1, 18], [1, 25]]]]], ["inline", "logo-tile", [], ["logo", true], ["loc", [null, [6, 14], [6, 37]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Sunday"], ["loc", [null, [7, 17], [7, 68]]]], ["inline", "day-tile", [], ["header", true, "day", "Monday"], ["loc", [null, [8, 17], [8, 54]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Tuesday"], ["loc", [null, [9, 55], [9, 107]]]], ["inline", "day-tile", [], ["header", true, "day", "Wednesday"], ["loc", [null, [10, 55], [10, 95]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Thursday"], ["loc", [null, [11, 55], [11, 108]]]], ["inline", "day-tile", [], ["header", true, "day", "Friday"], ["loc", [null, [12, 55], [12, 92]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Saturday"], ["loc", [null, [13, 55], [13, 108]]]], ["inline", "coach-sidebar", [], ["header", true], ["loc", [null, [19, 2], [19, 33]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [26, 14], [26, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [27, 56], [27, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [28, 17], [28, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [29, 55], [29, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [30, 55], [30, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [31, 55], [31, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [32, 55], [32, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [33, 55], [33, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [39, 2], [39, 34]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [45, 14], [45, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [46, 56], [46, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [47, 17], [47, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [48, 55], [48, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [49, 55], [49, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [50, 55], [50, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [51, 55], [51, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [52, 55], [52, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [58, 2], [58, 34]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [64, 14], [64, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [65, 56], [65, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [66, 17], [66, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [67, 55], [67, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [68, 55], [68, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [69, 55], [69, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [70, 55], [70, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [71, 55], [71, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [77, 2], [77, 34]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [83, 14], [83, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [84, 56], [84, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [85, 17], [85, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [86, 55], [86, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [87, 55], [87, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [88, 55], [88, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [89, 55], [89, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [90, 55], [90, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [96, 2], [96, 34]]]]],
+      statements: [["attribute", "class", ["get", "wrapper", ["loc", [null, [4, 18], [4, 25]]]]], ["inline", "logo-tile", [], ["logo", true], ["loc", [null, [9, 14], [9, 37]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Sunday"], ["loc", [null, [10, 17], [10, 68]]]], ["inline", "day-tile", [], ["header", true, "day", "Monday"], ["loc", [null, [11, 17], [11, 54]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Tuesday"], ["loc", [null, [12, 55], [12, 107]]]], ["inline", "day-tile", [], ["header", true, "day", "Wednesday"], ["loc", [null, [13, 55], [13, 95]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Thursday"], ["loc", [null, [14, 55], [14, 108]]]], ["inline", "day-tile", [], ["header", true, "day", "Friday"], ["loc", [null, [15, 55], [15, 92]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Saturday"], ["loc", [null, [16, 55], [16, 108]]]], ["inline", "coach-sidebar", [], ["header", true], ["loc", [null, [22, 2], [22, 33]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [29, 14], [29, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [30, 56], [30, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [31, 17], [31, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [32, 55], [32, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [33, 55], [33, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [34, 55], [34, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [35, 55], [35, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [36, 55], [36, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [42, 2], [42, 34]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [48, 14], [48, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [49, 56], [49, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [50, 17], [50, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [51, 55], [51, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [52, 55], [52, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [53, 55], [53, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [54, 55], [54, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [55, 55], [55, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [61, 2], [61, 34]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [67, 14], [67, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [68, 56], [68, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [69, 17], [69, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [70, 55], [70, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [71, 55], [71, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [72, 55], [72, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [73, 55], [73, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [74, 55], [74, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [80, 2], [80, 34]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [86, 14], [86, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [87, 56], [87, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [88, 17], [88, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [89, 55], [89, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [90, 55], [90, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [91, 55], [91, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [92, 55], [92, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [93, 55], [93, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [99, 2], [99, 34]]]]],
       locals: [],
       templates: []
     };
@@ -1647,7 +1688,8 @@ define("awesome-schedule-front/templates/coach", ["exports"], function (exports)
     return {
       meta: {
         "fragmentReason": {
-          "name": "triple-curlies"
+          "name": "missing-wrapper",
+          "problems": ["wrong-type", "multiple-nodes"]
         },
         "revision": "Ember@2.4.3",
         "loc": {
@@ -1657,7 +1699,7 @@ define("awesome-schedule-front/templates/coach", ["exports"], function (exports)
             "column": 0
           },
           "end": {
-            "line": 122,
+            "line": 124,
             "column": 0
           }
         },
@@ -1669,6 +1711,14 @@ define("awesome-schedule-front/templates/coach", ["exports"], function (exports)
       hasRendered: false,
       buildFragment: function buildFragment(dom) {
         var el0 = dom.createDocumentFragment();
+        var el1 = dom.createComment(" The Coach's page. The only page coach's can see, will control what the user can see based on if they are an admin or not, as well as displaying class information and profile information");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment(" Again, NEED DATABASE is a placeholder");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
         var el1 = dom.createElement("div");
         dom.setAttribute(el1, "class", "coachWrapper");
         var el2 = dom.createTextNode("\n    \n   \n    ");
@@ -2081,7 +2131,7 @@ define("awesome-schedule-front/templates/coach", ["exports"], function (exports)
         return el0;
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var element0 = dom.childAt(fragment, [0]);
+        var element0 = dom.childAt(fragment, [4]);
         var element1 = dom.childAt(element0, [1]);
         var element2 = dom.childAt(element0, [3, 3]);
         var element3 = dom.childAt(element2, [1]);
@@ -2144,53 +2194,7 @@ define("awesome-schedule-front/templates/coach", ["exports"], function (exports)
         morphs[46] = dom.createMorphAt(dom.childAt(element11, [3]), 1, 1);
         return morphs;
       },
-      statements: [["content", "bio-box", ["loc", [null, [5, 8], [5, 19]]]], ["content", "hour-tracker", ["loc", [null, [6, 7], [6, 23]]]], ["inline", "logo-tile", [], ["logo", true], ["loc", [null, [16, 14], [16, 37]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Sunday"], ["loc", [null, [17, 17], [17, 68]]]], ["inline", "day-tile", [], ["header", true, "day", "Monday"], ["loc", [null, [18, 17], [18, 54]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Tuesday"], ["loc", [null, [19, 55], [19, 107]]]], ["inline", "day-tile", [], ["header", true, "day", "Wednesday"], ["loc", [null, [20, 55], [20, 95]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Thursday"], ["loc", [null, [21, 55], [21, 108]]]], ["inline", "day-tile", [], ["header", true, "day", "Friday"], ["loc", [null, [22, 55], [22, 92]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Saturday"], ["loc", [null, [23, 55], [23, 108]]]], ["inline", "coach-sidebar", [], ["header", true], ["loc", [null, [29, 2], [29, 33]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [36, 14], [36, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [37, 56], [37, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [38, 17], [38, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [39, 55], [39, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [40, 55], [40, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [41, 55], [41, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [42, 55], [42, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [43, 55], [43, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [49, 2], [49, 34]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [55, 14], [55, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [56, 56], [56, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [57, 17], [57, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [58, 55], [58, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [59, 55], [59, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [60, 55], [60, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [61, 55], [61, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [62, 55], [62, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [68, 2], [68, 34]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [74, 14], [74, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [75, 56], [75, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [76, 17], [76, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [77, 55], [77, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [78, 55], [78, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [79, 55], [79, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [80, 55], [80, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [81, 55], [81, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [87, 2], [87, 34]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [93, 14], [93, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [94, 56], [94, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [95, 17], [95, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [96, 55], [96, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [97, 55], [97, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [98, 55], [98, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [99, 55], [99, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [100, 55], [100, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [106, 2], [106, 34]]]]],
-      locals: [],
-      templates: []
-    };
-  })());
-});
-define("awesome-schedule-front/templates/coaches", ["exports"], function (exports) {
-  exports["default"] = Ember.HTMLBars.template((function () {
-    return {
-      meta: {
-        "fragmentReason": {
-          "name": "missing-wrapper",
-          "problems": ["wrong-type"]
-        },
-        "revision": "Ember@2.4.3",
-        "loc": {
-          "source": null,
-          "start": {
-            "line": 1,
-            "column": 0
-          },
-          "end": {
-            "line": 2,
-            "column": 0
-          }
-        },
-        "moduleName": "awesome-schedule-front/templates/coaches.hbs"
-      },
-      isEmpty: false,
-      arity: 0,
-      cachedFragment: null,
-      hasRendered: false,
-      buildFragment: function buildFragment(dom) {
-        var el0 = dom.createDocumentFragment();
-        var el1 = dom.createComment("");
-        dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n");
-        dom.appendChild(el0, el1);
-        return el0;
-      },
-      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var morphs = new Array(1);
-        morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
-        dom.insertBoundary(fragment, 0);
-        return morphs;
-      },
-      statements: [["content", "outlet", ["loc", [null, [1, 0], [1, 10]]]]],
+      statements: [["content", "bio-box", ["loc", [null, [7, 8], [7, 19]]]], ["content", "hour-tracker", ["loc", [null, [8, 7], [8, 23]]]], ["inline", "logo-tile", [], ["logo", true], ["loc", [null, [18, 14], [18, 37]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Sunday"], ["loc", [null, [19, 17], [19, 68]]]], ["inline", "day-tile", [], ["header", true, "day", "Monday"], ["loc", [null, [20, 17], [20, 54]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Tuesday"], ["loc", [null, [21, 55], [21, 107]]]], ["inline", "day-tile", [], ["header", true, "day", "Wednesday"], ["loc", [null, [22, 55], [22, 95]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Thursday"], ["loc", [null, [23, 55], [23, 108]]]], ["inline", "day-tile", [], ["header", true, "day", "Friday"], ["loc", [null, [24, 55], [24, 92]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Saturday"], ["loc", [null, [25, 55], [25, 108]]]], ["inline", "coach-sidebar", [], ["header", true], ["loc", [null, [31, 2], [31, 33]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [38, 14], [38, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [39, 56], [39, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [40, 17], [40, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [41, 55], [41, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [42, 55], [42, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [43, 55], [43, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [44, 55], [44, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [45, 55], [45, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [51, 2], [51, 34]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [57, 14], [57, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [58, 56], [58, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [59, 17], [59, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [60, 55], [60, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [61, 55], [61, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [62, 55], [62, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [63, 55], [63, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [64, 55], [64, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [70, 2], [70, 34]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [76, 14], [76, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [77, 56], [77, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [78, 17], [78, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [79, 55], [79, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [80, 55], [80, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [81, 55], [81, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [82, 55], [82, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [83, 55], [83, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [89, 2], [89, 34]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [95, 14], [95, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [96, 56], [96, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [97, 17], [97, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [98, 55], [98, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [99, 55], [99, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [100, 55], [100, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [101, 55], [101, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [102, 55], [102, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [108, 2], [108, 34]]]]],
       locals: [],
       templates: []
     };
@@ -2212,7 +2216,7 @@ define("awesome-schedule-front/templates/components/bio-box", ["exports"], funct
             "column": 0
           },
           "end": {
-            "line": 16,
+            "line": 18,
             "column": 104
           }
         },
@@ -2225,6 +2229,10 @@ define("awesome-schedule-front/templates/components/bio-box", ["exports"], funct
       buildFragment: function buildFragment(dom) {
         var el0 = dom.createDocumentFragment();
         var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment(" Left third of coach's page. holds information about the particular coach that is logged in");
         dom.appendChild(el0, el1);
         var el1 = dom.createTextNode("\n");
         dom.appendChild(el0, el1);
@@ -2285,14 +2293,14 @@ define("awesome-schedule-front/templates/components/bio-box", ["exports"], funct
         return el0;
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var element0 = dom.childAt(fragment, [2]);
+        var element0 = dom.childAt(fragment, [4]);
         var morphs = new Array(2);
         morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
         morphs[1] = dom.createAttrMorph(element0, 'class');
         dom.insertBoundary(fragment, 0);
         return morphs;
       },
-      statements: [["content", "yield", ["loc", [null, [1, 0], [1, 9]]]], ["attribute", "class", ["get", "bioWrapper", ["loc", [null, [2, 14], [2, 24]]]]]],
+      statements: [["content", "yield", ["loc", [null, [1, 0], [1, 9]]]], ["attribute", "class", ["get", "bioWrapper", ["loc", [null, [4, 14], [4, 24]]]]]],
       locals: [],
       templates: []
     };
@@ -4333,7 +4341,7 @@ define("awesome-schedule-front/templates/components/coach-day", ["exports"], fun
       meta: {
         "fragmentReason": {
           "name": "missing-wrapper",
-          "problems": ["wrong-type"]
+          "problems": ["wrong-type", "multiple-nodes"]
         },
         "revision": "Ember@2.4.3",
         "loc": {
@@ -4343,7 +4351,7 @@ define("awesome-schedule-front/templates/components/coach-day", ["exports"], fun
             "column": 0
           },
           "end": {
-            "line": 2,
+            "line": 3,
             "column": 0
           }
         },
@@ -4356,6 +4364,10 @@ define("awesome-schedule-front/templates/components/coach-day", ["exports"], fun
       buildFragment: function buildFragment(dom) {
         var el0 = dom.createDocumentFragment();
         var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment(" Will Eventually contain a formatted display of the class information for a given day for the coach logged in");
         dom.appendChild(el0, el1);
         var el1 = dom.createTextNode("\n");
         dom.appendChild(el0, el1);
@@ -6763,7 +6775,11 @@ define("awesome-schedule-front/templates/components/hour-tracker", ["exports"], 
         var el0 = dom.createDocumentFragment();
         var el1 = dom.createComment("");
         dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n\n");
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("The hour tracker is for the coach's page, so they can see how many hours worked/paid ");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
         dom.appendChild(el0, el1);
         var el1 = dom.createElement("div");
         dom.setAttribute(el1, "class", "hourTracker");
@@ -6944,7 +6960,7 @@ define("awesome-schedule-front/templates/components/submit-info", ["exports"], f
       meta: {
         "fragmentReason": {
           "name": "missing-wrapper",
-          "problems": ["wrong-type"]
+          "problems": ["wrong-type", "multiple-nodes"]
         },
         "revision": "Ember@2.4.3",
         "loc": {
@@ -6955,7 +6971,7 @@ define("awesome-schedule-front/templates/components/submit-info", ["exports"], f
           },
           "end": {
             "line": 2,
-            "column": 0
+            "column": 120
           }
         },
         "moduleName": "awesome-schedule-front/templates/components/submit-info.hbs"
@@ -6969,6 +6985,8 @@ define("awesome-schedule-front/templates/components/submit-info", ["exports"], f
         var el1 = dom.createComment("");
         dom.appendChild(el0, el1);
         var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment(" Will Hold a formatted button so the Admin or coach can submit information about class scheduling or availability");
         dom.appendChild(el0, el1);
         return el0;
       },
@@ -7012,6 +7030,8 @@ define("awesome-schedule-front/templates/components/submit-login", ["exports"], 
       hasRendered: false,
       buildFragment: function buildFragment(dom) {
         var el0 = dom.createDocumentFragment();
+        var el1 = dom.createComment(" The input and submit ability for the login page. passes this information to submit-login.js which takes it to the login router to go to the API");
+        dom.appendChild(el0, el1);
         var el1 = dom.createTextNode("\n");
         dom.appendChild(el0, el1);
         var el1 = dom.createComment("");
@@ -7030,10 +7050,10 @@ define("awesome-schedule-front/templates/components/submit-login", ["exports"], 
         return el0;
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var element0 = dom.childAt(fragment, [5]);
+        var element0 = dom.childAt(fragment, [6]);
         var morphs = new Array(3);
-        morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
-        morphs[1] = dom.createMorphAt(fragment, 3, 3, contextualElement);
+        morphs[0] = dom.createMorphAt(fragment, 2, 2, contextualElement);
+        morphs[1] = dom.createMorphAt(fragment, 4, 4, contextualElement);
         morphs[2] = dom.createElementMorph(element0);
         return morphs;
       },
@@ -7048,7 +7068,8 @@ define("awesome-schedule-front/templates/login", ["exports"], function (exports)
     return {
       meta: {
         "fragmentReason": {
-          "name": "triple-curlies"
+          "name": "missing-wrapper",
+          "problems": ["wrong-type", "multiple-nodes"]
         },
         "revision": "Ember@2.4.3",
         "loc": {
@@ -7058,7 +7079,7 @@ define("awesome-schedule-front/templates/login", ["exports"], function (exports)
             "column": 0
           },
           "end": {
-            "line": 4,
+            "line": 5,
             "column": 6
           }
         },
@@ -7070,6 +7091,10 @@ define("awesome-schedule-front/templates/login", ["exports"], function (exports)
       hasRendered: false,
       buildFragment: function buildFragment(dom) {
         var el0 = dom.createDocumentFragment();
+        var el1 = dom.createComment(" Login page, calls submit-login component and sends the action to login.js");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
         var el1 = dom.createElement("div");
         dom.setAttribute(el1, "class", "loginWrapper");
         var el2 = dom.createTextNode("\n");
@@ -7089,10 +7114,10 @@ define("awesome-schedule-front/templates/login", ["exports"], function (exports)
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
         var morphs = new Array(1);
-        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [0]), 3, 3);
+        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [2]), 3, 3);
         return morphs;
       },
-      statements: [["inline", "submit-login", [], ["action", "submitLoginAttempt"], ["loc", [null, [3, 0], [3, 44]]]]],
+      statements: [["inline", "submit-login", [], ["action", "submitLoginAttempt"], ["loc", [null, [4, 0], [4, 44]]]]],
       locals: [],
       templates: []
     };
@@ -7102,7 +7127,10 @@ define("awesome-schedule-front/templates/test", ["exports"], function (exports) 
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
       meta: {
-        "fragmentReason": false,
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type", "multiple-nodes"]
+        },
         "revision": "Ember@2.4.3",
         "loc": {
           "source": null,
@@ -7111,7 +7139,7 @@ define("awesome-schedule-front/templates/test", ["exports"], function (exports) 
             "column": 0
           },
           "end": {
-            "line": 12,
+            "line": 13,
             "column": 0
           }
         },
@@ -7123,6 +7151,12 @@ define("awesome-schedule-front/templates/test", ["exports"], function (exports) 
       hasRendered: false,
       buildFragment: function buildFragment(dom) {
         var el0 = dom.createDocumentFragment();
+        var el1 = dom.createComment(" PLEASE IGNORE, TESTING PURPOSE ONLY");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment(" Can be accessed to view at /test");
+        dom.appendChild(el0, el1);
         var el1 = dom.createTextNode("\n\n");
         dom.appendChild(el0, el1);
         var el1 = dom.createElement("div");
@@ -7147,10 +7181,10 @@ define("awesome-schedule-front/templates/test", ["exports"], function (exports) 
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
         var morphs = new Array(1);
-        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [1, 1, 1]), 0, 0);
+        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [4, 1, 1]), 0, 0);
         return morphs;
       },
-      statements: [["content", "test.name", ["loc", [null, [8, 8], [8, 21]]]]],
+      statements: [["content", "test.name", ["loc", [null, [9, 8], [9, 21]]]]],
       locals: [],
       templates: []
     };
@@ -7188,7 +7222,7 @@ catch(err) {
 /* jshint ignore:start */
 
 if (!runningTests) {
-  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+11efde87"});
+  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+362d3bf4"});
 }
 
 /* jshint ignore:end */
