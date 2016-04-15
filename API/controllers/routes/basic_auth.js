@@ -13,7 +13,7 @@ module.exports = function(req,res) {
         // If user/pass combo is successful
 
         // Sends a cookie to the browser that can be used as a Request header required for certain routes
-        res.cookie(rows[0].name, rows[0].isAdmin, { expires: new Date(Date.now() + 60000), httpOnly: false });
+        res.cookie(rows[0].CoID, rows[0].isAdmin, { expires: new Date(Date.now() + 60000), httpOnly: false });
         
         console.log("Successful Login: " + rows[0].name);
 
