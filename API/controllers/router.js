@@ -19,6 +19,7 @@ router.use(function (request, response, next) {
 // Order of typical POST function (route name, allows data reading support, route file to be called)
 
 router.post('/api/basic_auth', urlencodedParser, require('./routes/basic_auth'));
+router.post('/api/coaches/:id', require('./routes/coaches'));
 
 // Allows entire file to be seen with module.exports
 module.exports = router;
