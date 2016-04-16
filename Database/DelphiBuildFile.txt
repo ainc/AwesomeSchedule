@@ -13,6 +13,8 @@ CREATE TABLE IF NOT EXISTS `coaches` (
   `isAdmin` TINYINT(3) NOT NULL COMMENT 'are they an admin? 1 = yes !1 = no',
   `email` VARCHAR(100) NULL,
   `picture` VARCHAR(100) NULL,
+  `username` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(50) NULL,
   PRIMARY KEY (`CoID`),
   UNIQUE INDEX `CoID_UNIQUE` (`CoID` ASC))
 ENGINE = InnoDB
@@ -23,9 +25,9 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `awesomedb`.`rates`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `rates` (
-  `RaID` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'primary key for rates',
-  `rate` FLOAT NOT NULL COMMENT 'rates in Floating point',
-  `class` VARCHAR(100) NULL COMMENT 'What class is this rate for',
+  `RaID` INT(11) NOT NULL AUTO_INCREMENT,
+  `rate` FLOAT NOT NULL,
+  `class` VARCHAR(100) NULL,
   PRIMARY KEY (`RaID`),
   UNIQUE INDEX `RaID_UNIQUE` (`RaID` ASC))
 ENGINE = InnoDB
