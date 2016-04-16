@@ -14,6 +14,7 @@ Router.map(function() {
   this.route('login');
   this.route('coaches');
   this.route('test');
+  this.route('bio-box');
 });
 
 export default Router;

@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import Login from '../models/login';
 
 //The JS side of the login page, calls the API given the credintials from submit-login called on the login template.
 

@@ -6,7 +6,7 @@
 
 /* jshint ignore:end */
 
-define('awesome-schedule-front/adapters/application', ['exports', 'ember-data', 'ember'], function (exports, _emberData, _ember) {
+define('awesome-schedule-front/adapters/application', ['exports', 'ember-data'], function (exports, _emberData) {
 
     //This file is the main interaction with the API, it provides the name of the route for the API, as well as the address the API is hosted on.
     exports['default'] = _emberData['default'].RESTAdapter.extend({
@@ -56,6 +56,7 @@ define('awesome-schedule-front/components/bio-box', ['exports', 'ember'], functi
                         var cookieArray = coo.split('=');
                         console.log(cookieArray[0]);
                 }
+
         });
 });
 define('awesome-schedule-front/components/bs-accordion-item', ['exports', 'ember-bootstrap/components/bs-accordion-item'], function (exports, _emberBootstrapComponentsBsAccordionItem) {
@@ -242,11 +243,20 @@ define('awesome-schedule-front/components/bs-textarea', ['exports', 'ember-boots
 });
 define('awesome-schedule-front/components/coach-day', ['exports', 'ember'], function (exports, _ember) {
 
-        //Unused for now, will become part of the calendar on the coaches page, used for displaying classes
-        //HTML side for this file stored in /templates/components/
-        exports['default'] = _ember['default'].Component.extend({
-                coachTile: 'coachDayTileWrapper'
-        });
+      //Unused for now, will become part of the calendar on the coaches page, used for displaying classes
+      //HTML side for this file stored in /templates/components/
+
+      var get = _ember['default'].get;
+      exports['default'] = _ember['default'].Component.extend({
+            coachTile: 'coachDayTileWrapper',
+            classNames: ['draggableItem'],
+            attributeBindings: ['draggable'],
+            draggable: 'true',
+
+            dragStart: function dragStart(event) {
+                  return event.dataTransfer.setData('text/data', get(this, 'content'));
+            }
+      });
 });
 define('awesome-schedule-front/components/coach-sidebar', ['exports', 'ember'], function (exports, _ember) {
 
@@ -256,17 +266,40 @@ define('awesome-schedule-front/components/coach-sidebar', ['exports', 'ember'], 
 });
 define('awesome-schedule-front/components/day-tile', ['exports', 'ember'], function (exports, _ember) {
 
-               //The tiles on the calendar page, the different wrappers are used depending on the data presented in the calendar
-               //HTML side for this file stored in /templates/components/
+    //The tiles on the calendar page, the different wrappers are used depending on the data presented in the calendar
+    //HTML side for this file stored in /templates/components/
 
-               exports['default'] = _ember['default'].Component.extend({
-                              wrapperSTTS: 'headerTileSTTS',
-                              wrapperMWF: 'headerTileMWF',
-                              wrapperEmptySTTS: 'blankTileSTTS',
-                              wrapperEmptyMWF: 'blankTileMWF',
-                              wrapperFilled: 'colorTile'
+    var set = _ember['default'].set;
+    exports['default'] = _ember['default'].Component.extend({
+        wrapperSTTS: 'headerTileSTTS',
+        wrapperMWF: 'headerTileMWF',
+        wrapperEmptySTTS: 'blankTileSTTS',
+        wrapperEmptyMWF: 'blankTileMWF',
+        wrapperFilled: 'colorTile',
 
-               });
+        //Drag and drop feature
+        className: ['draggableDropzone'],
+        classNameBindings: ['dragClass'],
+        dragClass: 'deactivated',
+
+        dragLeave: function dragLeave(event) {
+            event.preventDefault();
+            set(this, 'dragClass', 'activated');
+        },
+
+        dragOver: function dragOver(event) {
+            event.preventDefault();
+            set(this, 'dragClass', 'deactivated');
+        },
+
+        drop: function drop(event) {
+            var data = event.dataTransfer.getData('text/data');
+            this.sendAction('dropped', data);
+
+            set(this, 'dragClass', 'deactivated');
+        }
+
+    });
 });
 define('awesome-schedule-front/components/ember-wormhole', ['exports', 'ember-wormhole/components/ember-wormhole'], function (exports, _emberWormholeComponentsEmberWormhole) {
   Object.defineProperty(exports, 'default', {
@@ -315,12 +348,21 @@ define('awesome-schedule-front/components/submit-login', ['exports', 'ember'], f
 define('awesome-schedule-front/controllers/array', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Controller;
 });
+define('awesome-schedule-front/controllers/bio-box', ['exports', 'ember'], function (exports, _ember) {
+        exports['default'] = _ember['default'].Controller.extend({});
+});
 define('awesome-schedule-front/controllers/calendar', ['exports', 'ember'], function (exports, _ember) {
 
   //Controllers are used for getting data from the API and displaying it into components. The calendar controller will hold submit calls to the API
   exports['default'] = _ember['default'].Controller.extend({
     wrapper: 'calendarWrapper'
   });
+});
+define('awesome-schedule-front/controllers/coach', ['exports', 'ember'], function (exports, _ember) {
+        exports['default'] = _ember['default'].Controller.extend({
+                coachController: _ember['default'].inject.controller('coach'),
+                coach: _ember['default'].computed.reads('coachController.model')
+        });
 });
 define('awesome-schedule-front/controllers/login', ['exports', 'ember'], function (exports, _ember) {
 
@@ -825,6 +867,9 @@ define("awesome-schedule-front/instance-initializers/ember-data", ["exports", "e
     initialize: _emberDataPrivateInstanceInitializersInitializeStoreService["default"]
   };
 });
+define('awesome-schedule-front/models/coach', ['exports', 'ember'], function (exports, _ember) {
+  exports['default'] = _ember['default'].Object.extend({});
+});
 define('awesome-schedule-front/models/coaches', ['exports', 'ember-data'], function (exports, _emberData) {
 	exports['default'] = _emberData['default'].Model.extend({
 		CoID: _emberData['default'].attr('number'),
@@ -883,25 +928,41 @@ define('awesome-schedule-front/router', ['exports', 'ember', 'awesome-schedule-f
     this.route('login');
     this.route('coaches');
     this.route('test');
+    this.route('bio-box');
   });
 
   exports['default'] = Router;
 });
-define('awesome-schedule-front/routes/coach', ['exports', 'ember'], function (exports, _ember) {
+define('awesome-schedule-front/routes/bio-box', ['exports', 'ember'], function (exports, _ember) {
+  exports['default'] = _ember['default'].Route.extend({});
+});
+define('awesome-schedule-front/routes/coach', ['exports', 'ember', 'awesome-schedule-front/models/coach'], function (exports, _ember, _awesomeScheduleFrontModelsCoach) {
 
     //Performs a test to ensure the user is logged in, passes a true or false to the coach template (when implemented)
     exports['default'] = _ember['default'].Route.extend({
         ajax: _ember['default'].inject.service(),
+
         model: function model() {
             var coo = document.cookie;
             var cookieArray = coo.split('=');
             console.log(cookieArray[0]);
 
-            return this.get('ajax').request('http://localhost:9029/api/coaches/' + cookieArray[0], { method: 'POST', xhrFields: { crossDomain: true, withCredintials: true } }).then(function (value) {});
+            return this.get('ajax').request('http://localhost:9029/api/coaches/' + cookieArray[0], { method: 'POST', xhrFields: { crossDomain: true, withCredintials: true } }).then(function (value) {
+                console.log(value.coach);
+                var user = _awesomeScheduleFrontModelsCoach['default'].create({
+                    name: value.coach.name,
+                    email: value.coach.email,
+                    picture: value.coach.picture,
+                    isActive: value.coach.active
+
+                });
+
+                return user;
+            });
         }
     });
 });
-define('awesome-schedule-front/routes/login', ['exports', 'ember', 'awesome-schedule-front/models/login'], function (exports, _ember, _awesomeScheduleFrontModelsLogin) {
+define('awesome-schedule-front/routes/login', ['exports', 'ember'], function (exports, _ember) {
 
     //The JS side of the login page, calls the API given the credintials from submit-login called on the login template.
 
@@ -1214,6 +1275,52 @@ define("awesome-schedule-front/templates/application", ["exports"], function (ex
       statements: [["block", "link-to", ["calendar"], ["class", "navButton"], 0, null, ["loc", [null, [4, 0], [4, 61]]]], ["block", "link-to", ["admin"], ["class", "navButton"], 1, null, ["loc", [null, [5, 0], [5, 60]]]], ["block", "link-to", ["coach"], ["class", "navButton"], 2, null, ["loc", [null, [6, 0], [6, 62]]]], ["block", "link-to", ["login"], ["class", "navButton"], 3, null, ["loc", [null, [7, 0], [7, 55]]]], ["content", "outlet", ["loc", [null, [11, 0], [11, 10]]]]],
       locals: [],
       templates: [child0, child1, child2, child3]
+    };
+  })());
+});
+define("awesome-schedule-front/templates/bio-box", ["exports"], function (exports) {
+  exports["default"] = Ember.HTMLBars.template((function () {
+    return {
+      meta: {
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type"]
+        },
+        "revision": "Ember@2.4.3",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 2,
+            "column": 0
+          }
+        },
+        "moduleName": "awesome-schedule-front/templates/bio-box.hbs"
+      },
+      isEmpty: false,
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var morphs = new Array(1);
+        morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+        dom.insertBoundary(fragment, 0);
+        return morphs;
+      },
+      statements: [["content", "outlet", ["loc", [null, [1, 0], [1, 10]]]]],
+      locals: [],
+      templates: []
     };
   })());
 });
@@ -2194,7 +2301,7 @@ define("awesome-schedule-front/templates/coach", ["exports"], function (exports)
         morphs[46] = dom.createMorphAt(dom.childAt(element11, [3]), 1, 1);
         return morphs;
       },
-      statements: [["content", "bio-box", ["loc", [null, [7, 8], [7, 19]]]], ["content", "hour-tracker", ["loc", [null, [8, 7], [8, 23]]]], ["inline", "logo-tile", [], ["logo", true], ["loc", [null, [18, 14], [18, 37]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Sunday"], ["loc", [null, [19, 17], [19, 68]]]], ["inline", "day-tile", [], ["header", true, "day", "Monday"], ["loc", [null, [20, 17], [20, 54]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Tuesday"], ["loc", [null, [21, 55], [21, 107]]]], ["inline", "day-tile", [], ["header", true, "day", "Wednesday"], ["loc", [null, [22, 55], [22, 95]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Thursday"], ["loc", [null, [23, 55], [23, 108]]]], ["inline", "day-tile", [], ["header", true, "day", "Friday"], ["loc", [null, [24, 55], [24, 92]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Saturday"], ["loc", [null, [25, 55], [25, 108]]]], ["inline", "coach-sidebar", [], ["header", true], ["loc", [null, [31, 2], [31, 33]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [38, 14], [38, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [39, 56], [39, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [40, 17], [40, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [41, 55], [41, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [42, 55], [42, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [43, 55], [43, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [44, 55], [44, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [45, 55], [45, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [51, 2], [51, 34]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [57, 14], [57, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [58, 56], [58, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [59, 17], [59, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [60, 55], [60, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [61, 55], [61, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [62, 55], [62, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [63, 55], [63, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [64, 55], [64, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [70, 2], [70, 34]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [76, 14], [76, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [77, 56], [77, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [78, 17], [78, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [79, 55], [79, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [80, 55], [80, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [81, 55], [81, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [82, 55], [82, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [83, 55], [83, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [89, 2], [89, 34]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [95, 14], [95, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [96, 56], [96, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [97, 17], [97, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [98, 55], [98, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [99, 55], [99, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [100, 55], [100, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [101, 55], [101, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [102, 55], [102, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [108, 2], [108, 34]]]]],
+      statements: [["inline", "bio-box", [], ["name", ["subexpr", "@mut", [["get", "coach.name", ["loc", [null, [7, 23], [7, 33]]]]], [], []], "email", ["subexpr", "@mut", [["get", "coach.email", ["loc", [null, [7, 40], [7, 51]]]]], [], []], "picture", ["subexpr", "@mut", [["get", "coach.picture", ["loc", [null, [7, 60], [7, 73]]]]], [], []]], ["loc", [null, [7, 8], [7, 75]]]], ["content", "hour-tracker", ["loc", [null, [8, 7], [8, 23]]]], ["inline", "logo-tile", [], ["logo", true], ["loc", [null, [18, 14], [18, 37]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Sunday"], ["loc", [null, [19, 17], [19, 68]]]], ["inline", "day-tile", [], ["header", true, "day", "Monday"], ["loc", [null, [20, 17], [20, 54]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Tuesday"], ["loc", [null, [21, 55], [21, 107]]]], ["inline", "day-tile", [], ["header", true, "day", "Wednesday"], ["loc", [null, [22, 55], [22, 95]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Thursday"], ["loc", [null, [23, 55], [23, 108]]]], ["inline", "day-tile", [], ["header", true, "day", "Friday"], ["loc", [null, [24, 55], [24, 92]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Saturday"], ["loc", [null, [25, 55], [25, 108]]]], ["inline", "coach-sidebar", [], ["header", true], ["loc", [null, [31, 2], [31, 33]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [38, 14], [38, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [39, 56], [39, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [40, 17], [40, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [41, 55], [41, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [42, 55], [42, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [43, 55], [43, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [44, 55], [44, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [45, 55], [45, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [51, 2], [51, 34]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [57, 14], [57, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [58, 56], [58, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [59, 17], [59, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [60, 55], [60, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [61, 55], [61, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [62, 55], [62, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [63, 55], [63, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [64, 55], [64, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [70, 2], [70, 34]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [76, 14], [76, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [77, 56], [77, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [78, 17], [78, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [79, 55], [79, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [80, 55], [80, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [81, 55], [81, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [82, 55], [82, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [83, 55], [83, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [89, 2], [89, 34]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [95, 14], [95, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [96, 56], [96, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [97, 17], [97, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [98, 55], [98, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [99, 55], [99, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [100, 55], [100, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [101, 55], [101, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [102, 55], [102, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [108, 2], [108, 34]]]]],
       locals: [],
       templates: []
     };
@@ -2217,7 +2324,7 @@ define("awesome-schedule-front/templates/components/bio-box", ["exports"], funct
           },
           "end": {
             "line": 18,
-            "column": 104
+            "column": 51
           }
         },
         "moduleName": "awesome-schedule-front/templates/components/bio-box.hbs"
@@ -2241,7 +2348,6 @@ define("awesome-schedule-front/templates/components/bio-box", ["exports"], funct
         dom.appendChild(el1, el2);
         var el2 = dom.createElement("img");
         dom.setAttribute(el2, "class", "profilePic");
-        dom.setAttribute(el2, "src", "assets/images/profPic.png");
         dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n");
         dom.appendChild(el1, el2);
@@ -2275,32 +2381,31 @@ define("awesome-schedule-front/templates/components/bio-box", ["exports"], funct
         dom.appendChild(el0, el1);
         var el1 = dom.createElement("p");
         dom.setAttribute(el1, "class", "contactInfo");
-        var el2 = dom.createTextNode("Rabbit Dale ");
+        var el2 = dom.createComment("");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode(" ");
         dom.appendChild(el1, el2);
         var el2 = dom.createElement("br");
         dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("1024 Basic Ave");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createElement("br");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("gotaluvme07@hotmail.com");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createElement("br");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("1(800-302-4088");
+        var el2 = dom.createComment("");
         dom.appendChild(el1, el2);
         dom.appendChild(el0, el1);
         return el0;
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
         var element0 = dom.childAt(fragment, [4]);
-        var morphs = new Array(2);
+        var element1 = dom.childAt(element0, [1]);
+        var element2 = dom.childAt(fragment, [10]);
+        var morphs = new Array(5);
         morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
         morphs[1] = dom.createAttrMorph(element0, 'class');
+        morphs[2] = dom.createAttrMorph(element1, 'src');
+        morphs[3] = dom.createMorphAt(element2, 0, 0);
+        morphs[4] = dom.createMorphAt(element2, 3, 3);
         dom.insertBoundary(fragment, 0);
         return morphs;
       },
-      statements: [["content", "yield", ["loc", [null, [1, 0], [1, 9]]]], ["attribute", "class", ["get", "bioWrapper", ["loc", [null, [4, 14], [4, 24]]]]]],
+      statements: [["content", "yield", ["loc", [null, [1, 0], [1, 9]]]], ["attribute", "class", ["get", "bioWrapper", ["loc", [null, [4, 14], [4, 24]]]]], ["attribute", "src", ["get", "picture", ["loc", [null, [5, 34], [5, 41]]]]], ["content", "name", ["loc", [null, [18, 25], [18, 33]]]], ["content", "email", ["loc", [null, [18, 38], [18, 47]]]]],
       locals: [],
       templates: []
     };
@@ -7222,7 +7327,7 @@ catch(err) {
 /* jshint ignore:start */
 
 if (!runningTests) {
-  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+362d3bf4"});
+  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+e474656e"});
 }
 
 /* jshint ignore:end */

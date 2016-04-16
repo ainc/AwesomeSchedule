@@ -11,4 +11,7 @@ export default Ember.Component.extend({
             var cookieArray = coo.split('=');
             console.log(cookieArray[0]);
         }
+        
+        
+        
 });
