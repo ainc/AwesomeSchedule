@@ -4,6 +4,7 @@ var app = express();
 var router = express.Router(); // Allows the use of a specific router file
 var bodyParser = require("body-parser"); // Assists in reading data sent to API
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
+var multer = require('multer');
 
 // Uploading profile pictures at 10 MB limit and only one file
 var uploading = multer({
