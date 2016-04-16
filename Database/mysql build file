@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `awesomedb`.`coaches` (
   `password` VARCHAR(50) NULL,
   PRIMARY KEY (`CoID`),
   UNIQUE INDEX `CoID_UNIQUE` (`CoID` ASC),
-  UNIQUE INDEX `username_UNIQUE (`username` ASC))
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -76,7 +76,6 @@ CREATE TABLE IF NOT EXISTS `awesomedb`.`schedule` (
   `payPeriod` INT(11) NOT NULL,
   `startTime` DATETIME NOT NULL,
   `endTime` DATETIME NOT NULL,
-  `unavailable` DATE NULL,
   `rates_RaID` INT(11) NOT NULL,
   `coaches_CoID` INT(11) NOT NULL,
   PRIMARY KEY (`idschedule`, `rates_RaID`, `coaches_CoID`),
@@ -95,6 +94,40 @@ CREATE TABLE IF NOT EXISTS `awesomedb`.`schedule` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `awesomedb`.`qualified`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `awesomedb`.`qualified` (
+  `QualID` INT NOT NULL AUTO_INCREMENT,
+  `class` VARCHAR(45) NOT NULL,
+  `coaches_CoID` INT(11) NOT NULL,
+  PRIMARY KEY (`QualID`, `coaches_CoID`),
+  INDEX `fk_qualified_coaches1_idx` (`coaches_CoID` ASC),
+  CONSTRAINT `fk_qualified_coaches1`
+    FOREIGN KEY (`coaches_CoID`)
+    REFERENCES `awesomedb`.`coaches` (`CoID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `awesomedb`.`unavailable`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `awesomedb`.`unavailable` (
+  `uaID` INT NOT NULL AUTO_INCREMENT,
+  `uaDate` DATE NOT NULL,
+  `coaches_CoID` INT(11) NOT NULL,
+  PRIMARY KEY (`uaID`, `coaches_CoID`),
+  INDEX `fk_unavailable_coaches1_idx` (`coaches_CoID` ASC),
+  CONSTRAINT `fk_unavailable_coaches1`
+    FOREIGN KEY (`coaches_CoID`)
+    REFERENCES `awesomedb`.`coaches` (`CoID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
