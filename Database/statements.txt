@@ -1,6 +1,0 @@
-SELECT name, hoursworked.startTime AS RealStart, hoursworked.endTime AS RealEnd FROM coaches, hoursworked WHERE hoursworked.payPeriod = 1 AND coaches.CoID = hoursworked.coaches_CoID;
-    Where hoursworked.payPeriod = x sorts by payPeriod. Use this to figure out payment. 
-
-SELECT name, schedule.startTime AS ScheduledStart, schedule.endTime AS ScheduledEnd FROM coaches, schedule where coaches.CoID = schedule.coaches_CoID and payPeriod = 1;
-  Where schedule.payPeriod = x sorts by which pay period we are in. Use this to finilize a schedule.
-  
