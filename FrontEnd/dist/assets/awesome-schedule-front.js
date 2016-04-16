@@ -49,13 +49,7 @@ define('awesome-schedule-front/components/bio-box', ['exports', 'ember'], functi
         //HTML side for this file stored in /templates/components/bio-box
         exports['default'] = _ember['default'].Component.extend({
                 bioWrapper: 'bioWrapper',
-                activityButton: 'activityButton',
-                ajax: _ember['default'].inject.service(),
-                model: function model() {
-                        var coo = document.cookie;
-                        var cookieArray = coo.split('=');
-                        console.log(cookieArray[0]);
-                }
+                activityButton: 'activityButton'
 
         });
 });
@@ -631,22 +625,15 @@ define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/mix
     assert.ok(true, 'modules/ember-bootstrap/mixins/type-class.js should pass jshint.');
   });
 });
-define("awesome-schedule-front/helpers/format-date", ["exports"], function (exports) {});
-//import Ember from 'ember';
-//
-//
-// var moment = require('moment');
-//export function formatDate(params/*, hash*/) {
-//  return params;
-//}
-//Ember.Handlebars.registerBoundHelper('currentDate', function() {
-// 
-//  return moment().format('LL');
-//});
-//export default Ember.Helper.helper(formatDate);
-//*/
+define('awesome-schedule-front/helpers/format-date', ['exports', 'ember', 'npm:fecha'], function (exports, _ember, _npmFecha) {
+  exports.formatDate = formatDate;
 
-//FORMAT DATE IS A SMALL FILE MEANT TO HELP WITH MAKING DATES APPEAR AS NEEDED. CURRENTLY COMMENTED OUT BECAUSE IT ISN'T WORKING AS INTENDED, WILL BE UNCOMMENTED FOR PRODUCTION
+  function formatDate(params /*, hash*/) {
+    return _npmFecha['default'].format(new Date(2015, 10, 20), 'dddd MMMM Do, YYYY');
+  }
+
+  exports['default'] = _ember['default'].Helper.helper(formatDate);
+});
 define('awesome-schedule-front/helpers/is-equal', ['exports', 'ember-bootstrap/helpers/is-equal'], function (exports, _emberBootstrapHelpersIsEqual) {
   Object.defineProperty(exports, 'default', {
     enumerable: true,
@@ -1784,7 +1771,7 @@ define("awesome-schedule-front/templates/calendar", ["exports"], function (expor
         morphs[45] = dom.createMorphAt(dom.childAt(element10, [3]), 1, 1);
         return morphs;
       },
-      statements: [["attribute", "class", ["get", "wrapper", ["loc", [null, [4, 18], [4, 25]]]]], ["inline", "logo-tile", [], ["logo", true], ["loc", [null, [9, 14], [9, 37]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Sunday"], ["loc", [null, [10, 17], [10, 68]]]], ["inline", "day-tile", [], ["header", true, "day", "Monday"], ["loc", [null, [11, 17], [11, 54]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Tuesday"], ["loc", [null, [12, 55], [12, 107]]]], ["inline", "day-tile", [], ["header", true, "day", "Wednesday"], ["loc", [null, [13, 55], [13, 95]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Thursday"], ["loc", [null, [14, 55], [14, 108]]]], ["inline", "day-tile", [], ["header", true, "day", "Friday"], ["loc", [null, [15, 55], [15, 92]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Saturday"], ["loc", [null, [16, 55], [16, 108]]]], ["inline", "coach-sidebar", [], ["header", true], ["loc", [null, [22, 2], [22, 33]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [29, 14], [29, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [30, 56], [30, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [31, 17], [31, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [32, 55], [32, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [33, 55], [33, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [34, 55], [34, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [35, 55], [35, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [36, 55], [36, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [42, 2], [42, 34]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [48, 14], [48, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [49, 56], [49, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [50, 17], [50, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [51, 55], [51, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [52, 55], [52, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [53, 55], [53, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [54, 55], [54, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [55, 55], [55, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [61, 2], [61, 34]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [67, 14], [67, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [68, 56], [68, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [69, 17], [69, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [70, 55], [70, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [71, 55], [71, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [72, 55], [72, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [73, 55], [73, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [74, 55], [74, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [80, 2], [80, 34]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [86, 14], [86, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [87, 56], [87, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [88, 17], [88, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [89, 55], [89, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [90, 55], [90, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [91, 55], [91, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [92, 55], [92, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [93, 55], [93, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [99, 2], [99, 34]]]]],
+      statements: [["attribute", "class", ["get", "wrapper", ["loc", [null, [4, 18], [4, 25]]]]], ["inline", "logo-tile", [], ["logo", true], ["loc", [null, [9, 14], [9, 37]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Sunday"], ["loc", [null, [10, 17], [10, 68]]]], ["inline", "day-tile", [], ["header", true, "day", "Monday"], ["loc", [null, [11, 17], [11, 54]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Tuesday"], ["loc", [null, [12, 55], [12, 107]]]], ["inline", "day-tile", [], ["header", true, "day", "Wednesday"], ["loc", [null, [13, 55], [13, 95]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Thursday"], ["loc", [null, [14, 55], [14, 108]]]], ["inline", "day-tile", [], ["header", true, "day", "Friday"], ["loc", [null, [15, 55], [15, 92]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Saturday"], ["loc", [null, [16, 55], [16, 108]]]], ["inline", "coach-sidebar", [], ["header", true], ["loc", [null, [22, 2], [22, 33]]]], ["inline", "logo-tile", [], ["logo", false, "date", ["subexpr", "format-date", [], [], ["loc", [null, [29, 42], [29, 55]]]]], ["loc", [null, [29, 14], [29, 57]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [30, 56], [30, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [31, 17], [31, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [32, 55], [32, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [33, 55], [33, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [34, 55], [34, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [35, 55], [35, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [36, 55], [36, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [42, 2], [42, 34]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [48, 14], [48, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [49, 56], [49, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [50, 17], [50, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [51, 55], [51, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [52, 55], [52, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [53, 55], [53, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [54, 55], [54, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [55, 55], [55, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [61, 2], [61, 34]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [67, 14], [67, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [68, 56], [68, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [69, 17], [69, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [70, 55], [70, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [71, 55], [71, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [72, 55], [72, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [73, 55], [73, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [74, 55], [74, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [80, 2], [80, 34]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [86, 14], [86, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [87, 56], [87, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [88, 17], [88, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [89, 55], [89, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [90, 55], [90, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [91, 55], [91, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [92, 55], [92, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [93, 55], [93, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [99, 2], [99, 34]]]]],
       locals: [],
       templates: []
     };
@@ -6990,6 +6977,8 @@ define("awesome-schedule-front/templates/components/logo-tile", ["exports"], fun
           var el2 = dom.createTextNode(" ");
           dom.appendChild(el1, el2);
           var el2 = dom.createElement("p");
+          var el3 = dom.createComment("");
+          dom.appendChild(el2, el3);
           dom.appendChild(el1, el2);
           var el2 = dom.createTextNode("\n   \n");
           dom.appendChild(el1, el2);
@@ -7000,11 +6989,12 @@ define("awesome-schedule-front/templates/components/logo-tile", ["exports"], fun
         },
         buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
           var element0 = dom.childAt(fragment, [0]);
-          var morphs = new Array(1);
+          var morphs = new Array(2);
           morphs[0] = dom.createAttrMorph(element0, 'class');
+          morphs[1] = dom.createMorphAt(dom.childAt(element0, [3]), 0, 0);
           return morphs;
         },
-        statements: [["attribute", "class", ["get", "weekTile", ["loc", [null, [8, 15], [8, 23]]]]]],
+        statements: [["attribute", "class", ["get", "weekTile", ["loc", [null, [8, 15], [8, 23]]]]], ["content", "date", ["loc", [null, [10, 20], [10, 28]]]]],
         locals: [],
         templates: []
       };
@@ -7327,7 +7317,7 @@ catch(err) {
 /* jshint ignore:start */
 
 if (!runningTests) {
-  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+e474656e"});
+  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+a0e7c6b4"});
 }
 
 /* jshint ignore:end */

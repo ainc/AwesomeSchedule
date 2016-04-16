@@ -23,6 +23,7 @@
     "broccoli-ruby-sass": "^0.4.0",
     "ember-ajax": "0.7.1",
     "ember-bootstrap": "0.6.1",
+    "ember-browserify": "^1.1.8",
     "ember-cli": "2.4.3",
     "ember-cli-app-version": "1.0.0",
     "ember-cli-babel": "^5.1.6",
@@ -40,11 +41,13 @@
     "ember-data": "^2.4.2",
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-export-application-global": "^1.0.5",
-    "ember-load-initializers":"^0.5.1",
+    "ember-load-initializers": "^0.5.1",
     "ember-resolver": "^2.0.3",
+    "fecha": "^2.1.0",
     "loader.js": "^4.0.1"
   },
   "dependencies": {
+    "fecha": "^2.1.0",
     "moment": "^2.12.0"
   }
 }

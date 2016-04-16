@@ -155,7 +155,7 @@ define('awesome-schedule-front/tests/helpers/format-date.jshint', ['exports'], f
   QUnit.module('JSHint - helpers/format-date.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(true, 'helpers/format-date.js should pass jshint.');
+    assert.ok(false, 'helpers/format-date.js should pass jshint.\nhelpers/format-date.js: line 6, col 28, \'params\' is defined but never used.\n\n1 error');
   });
 });
 define('awesome-schedule-front/tests/helpers/module-for-acceptance', ['exports', 'qunit', 'awesome-schedule-front/tests/helpers/start-app', 'awesome-schedule-front/tests/helpers/destroy-app'], function (exports, _qunit, _awesomeScheduleFrontTestsHelpersStartApp, _awesomeScheduleFrontTestsHelpersDestroyApp) {
@@ -1802,7 +1802,7 @@ define('awesome-schedule-front/tests/unit/helpers/format-date-test', ['exports',
 
   // Replace this with your real tests.
   (0, _qunit.test)('it works', function (assert) {
-    var result = (0, _awesomeScheduleFrontHelpersFormatDate.formatDate)(42);
+    var result = (0, _awesomeScheduleFrontHelpersFormatDate.formatDate)([42]);
     assert.ok(result);
   });
 });
