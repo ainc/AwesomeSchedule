@@ -5,6 +5,13 @@ var router = express.Router(); // Allows the use of a specific router file
 var bodyParser = require("body-parser"); // Assists in reading data sent to API
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
+// Uploading profile pictures at 10 MB limit and only one file
+var uploading = multer({
+    dest: __dirname + '../../FrontEnd/public/assets/images/profile_pictures',
+    limits: {fileSize: 10000000, files:1}
+
+});
+
 // Sets up CORS for cross-domain communication with Ember Front-End
 router.use(function (request, response, next) {
     response.header("Access-Control-Allow-Origin", "http://localhost:4200");
