@@ -25,6 +25,15 @@ define('awesome-schedule-front/tests/components/bio-box.jshint', ['exports'], fu
     assert.ok(true, 'components/bio-box.js should pass jshint.');
   });
 });
+define('awesome-schedule-front/tests/components/calendar-view-main.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - components/calendar-view-main.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(false, 'components/calendar-view-main.js should pass jshint.\ncomponents/calendar-view-main.js: line 2, col 8, \'Moment\' is defined but never used.\n\n1 error');
+  });
+});
 define('awesome-schedule-front/tests/components/coach-day.jshint', ['exports'], function (exports) {
   'use strict';
 
@@ -133,6 +142,15 @@ define('awesome-schedule-front/tests/controllers/test.jshint', ['exports'], func
     assert.ok(true, 'controllers/test.js should pass jshint.');
   });
 });
+define('awesome-schedule-front/tests/helpers/day-check.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - helpers/day-check.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'helpers/day-check.js should pass jshint.');
+  });
+});
 define('awesome-schedule-front/tests/helpers/destroy-app', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = destroyApp;
 
@@ -155,7 +173,7 @@ define('awesome-schedule-front/tests/helpers/format-date.jshint', ['exports'], f
   QUnit.module('JSHint - helpers/format-date.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'helpers/format-date.js should pass jshint.\nhelpers/format-date.js: line 6, col 28, \'params\' is defined but never used.\n\n1 error');
+    assert.ok(false, 'helpers/format-date.js should pass jshint.\nhelpers/format-date.js: line 9, col 16, Missing \'new\' prefix when invoking a constructor.\nhelpers/format-date.js: line 12, col 16, Missing \'new\' prefix when invoking a constructor.\nhelpers/format-date.js: line 12, col 23, Missing \'new\' prefix when invoking a constructor.\nhelpers/format-date.js: line 20, col 21, Missing \'new\' prefix when invoking a constructor.\nhelpers/format-date.js: line 22, col 41, Missing \'new\' prefix when invoking a constructor.\nhelpers/format-date.js: line 26, col 16, Missing \'new\' prefix when invoking a constructor.\n\n6 errors');
   });
 });
 define('awesome-schedule-front/tests/helpers/module-for-acceptance', ['exports', 'qunit', 'awesome-schedule-front/tests/helpers/start-app', 'awesome-schedule-front/tests/helpers/destroy-app'], function (exports, _qunit, _awesomeScheduleFrontTestsHelpersStartApp, _awesomeScheduleFrontTestsHelpersDestroyApp) {
@@ -385,6 +403,155 @@ define('awesome-schedule-front/tests/integration/components/bio-box-test.jshint'
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'integration/components/bio-box-test.js should pass jshint.');
+  });
+});
+define('awesome-schedule-front/tests/integration/components/calendar-view-main-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
+
+  (0, _emberQunit.moduleForComponent)('calendar-view-main', 'Integration | Component | calendar view main', {
+    integration: true
+  });
+
+  (0, _emberQunit.test)('it renders', function (assert) {
+    // Set any properties with this.set('myProperty', 'value');
+    // Handle any actions with this.on('myAction', function(val) { ... });
+
+    this.render(Ember.HTMLBars.template((function () {
+      return {
+        meta: {
+          'fragmentReason': {
+            'name': 'missing-wrapper',
+            'problems': ['wrong-type']
+          },
+          'revision': 'Ember@2.4.3',
+          'loc': {
+            'source': null,
+            'start': {
+              'line': 1,
+              'column': 0
+            },
+            'end': {
+              'line': 1,
+              'column': 22
+            }
+          }
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createComment('');
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+          dom.insertBoundary(fragment, 0);
+          dom.insertBoundary(fragment, null);
+          return morphs;
+        },
+        statements: [['content', 'calendar-view-main', ['loc', [null, [1, 0], [1, 22]]]]],
+        locals: [],
+        templates: []
+      };
+    })()));
+
+    assert.equal(this.$().text().trim(), '');
+
+    // Template block usage:
+    this.render(Ember.HTMLBars.template((function () {
+      var child0 = (function () {
+        return {
+          meta: {
+            'fragmentReason': false,
+            'revision': 'Ember@2.4.3',
+            'loc': {
+              'source': null,
+              'start': {
+                'line': 2,
+                'column': 4
+              },
+              'end': {
+                'line': 4,
+                'column': 4
+              }
+            }
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode('      template block text\n');
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+
+      return {
+        meta: {
+          'fragmentReason': {
+            'name': 'missing-wrapper',
+            'problems': ['wrong-type']
+          },
+          'revision': 'Ember@2.4.3',
+          'loc': {
+            'source': null,
+            'start': {
+              'line': 1,
+              'column': 0
+            },
+            'end': {
+              'line': 5,
+              'column': 2
+            }
+          }
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode('\n');
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment('');
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode('  ');
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+          return morphs;
+        },
+        statements: [['block', 'calendar-view-main', [], [], 0, null, ['loc', [null, [2, 4], [4, 27]]]]],
+        locals: [],
+        templates: [child0]
+      };
+    })()));
+
+    assert.equal(this.$().text().trim(), 'template block text');
+  });
+});
+define('awesome-schedule-front/tests/integration/components/calendar-view-main-test.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - integration/components/calendar-view-main-test.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'integration/components/calendar-view-main-test.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/integration/components/coach-calendar-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
@@ -1794,6 +1961,25 @@ define('awesome-schedule-front/tests/unit/helpers/contact-info-test.jshint', ['e
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'unit/helpers/contact-info-test.js should pass jshint.');
+  });
+});
+define('awesome-schedule-front/tests/unit/helpers/day-check-test', ['exports', 'awesome-schedule-front/helpers/day-check', 'qunit'], function (exports, _awesomeScheduleFrontHelpersDayCheck, _qunit) {
+
+  (0, _qunit.module)('Unit | Helper | day check');
+
+  // Replace this with your real tests.
+  (0, _qunit.test)('it works', function (assert) {
+    var result = (0, _awesomeScheduleFrontHelpersDayCheck.dayCheck)([42]);
+    assert.ok(result);
+  });
+});
+define('awesome-schedule-front/tests/unit/helpers/day-check-test.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - unit/helpers/day-check-test.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/helpers/day-check-test.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/unit/helpers/format-date-test', ['exports', 'awesome-schedule-front/helpers/format-date', 'qunit'], function (exports, _awesomeScheduleFrontHelpersFormatDate, _qunit) {

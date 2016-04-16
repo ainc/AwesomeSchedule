@@ -1,0 +1,40 @@
+<!--This is for all of the tiles that can hold classes that are scheduled. First, we check if the week is the current week (first row)-->
+
+<!--If  it is the current week, find out what the current day is and fill the dates in based on that-->
+{{#if thisWeek}}
+<!--Find out what day we are in and use it to get the correct dates for API pulls-->
+{{#if (dayCheck (format-date 'dddd')  'Sunday')}}
+{{logo-tile logo=false date=(format-date 'MMMM Do YYYY')}}
+{{day-tile header=false redDay = true day="NEED DATABASE" date=(format-date 'formatTime' 'MMMM Do YYYY')}}
+{{day-tile header=false day="NEED DATABASE" date=(format-date 'formatTime' (format-date 'addTime' 1))}}
+{{day-tile header=false redDay = true day="NEED DATABASE" date=(format-date 'formatTime' (format-date 'addTime' 2))}}
+{{day-tile header=false day="NEED DATABASE" date=(format-date 'formatTime' (format-date 'addTime' 3))}}
+{{day-tile header=false redDay = true day="NEED DATABASE" date=(format-date 'formatTime' (format-date 'addTime' 4))}}
+{{day-tile header=false day="NEED DATABASE" date=(format-date 'formatTime' (format-date 'addTime' 5))}}
+{{day-tile header=false redDay = true day="NEED DATABASE" date=(format-date 'formatTime' (format-date 'addTime' 6))}}
+{{else if (dayCheck (format-date 'dddd')  'Monday')}}
+
+{{else if (dayCheck (format-date 'dddd')  'Tuesday')}}
+
+{{else if (dayCheck (format-date 'dddd')  'Wednesday')}}
+
+{{else if (dayCheck (format-date 'dddd')  'Thursday')}}
+
+{{else if (dayCheck (format-date 'dddd')  'Friday')}}
+
+{{else if (dayCheck (format-date 'dddd')  'Saturday')}}
+{{logo-tile logo=false date=(format-date 'MMMM Do YYYY')}}
+{{day-tile header=false redDay = true day="NEED DATABASE" date=(format-date 'formatTime' 'MMMM Do YYYY')}}
+{{day-tile header=false day="NEED DATABASE" date=(format-date 'formatTime' (format-date 'addTime' 1))}}
+{{day-tile header=false redDay = true day="NEED DATABASE" date=(format-date 'formatTime' (format-date 'addTime' 2))}}
+{{day-tile header=false day="NEED DATABASE" date=(format-date 'formatTime' (format-date 'addTime' 3))}}
+{{day-tile header=false redDay = true day="NEED DATABASE" date=(format-date 'formatTime' (format-date 'addTime' 4))}}
+{{day-tile header=false day="NEED DATABASE" date=(format-date 'formatTime' (format-date 'addTime' 5))}}
+{{day-tile header=false redDay = true day="NEED DATABASE" date=(format-date 'formatTime' (format-date 'addTime' 6))}}
+
+{{/if}}
+
+
+{{else}}
+
+{{/if}}

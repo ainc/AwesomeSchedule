@@ -235,6 +235,12 @@ define('awesome-schedule-front/components/bs-textarea', ['exports', 'ember-boots
     }
   });
 });
+define('awesome-schedule-front/components/calendar-view-main', ['exports', 'ember', 'npm:moment'], function (exports, _ember, _npmMoment) {
+        exports['default'] = _ember['default'].Component.extend({
+                tagName: 'calendarViewMain'
+
+        });
+});
 define('awesome-schedule-front/components/coach-day', ['exports', 'ember'], function (exports, _ember) {
 
       //Unused for now, will become part of the calendar on the coaches page, used for displaying classes
@@ -254,9 +260,11 @@ define('awesome-schedule-front/components/coach-day', ['exports', 'ember'], func
 });
 define('awesome-schedule-front/components/coach-sidebar', ['exports', 'ember'], function (exports, _ember) {
 
-  //The right side of the calendar page, holds all coaches available to teach.
-  //HTML side for this file stored in /templates/components/
-  exports['default'] = _ember['default'].Component.extend({});
+        //The right side of the calendar page, holds all coaches available to teach.
+        //HTML side for this file stored in /templates/components/
+        exports['default'] = _ember['default'].Component.extend({
+                tagName: 'calendarViewCoaches'
+        });
 });
 define('awesome-schedule-front/components/day-tile', ['exports', 'ember'], function (exports, _ember) {
 
@@ -265,6 +273,7 @@ define('awesome-schedule-front/components/day-tile', ['exports', 'ember'], funct
 
     var set = _ember['default'].set;
     exports['default'] = _ember['default'].Component.extend({
+        tagName: 'dayTileHeader',
         wrapperSTTS: 'headerTileSTTS',
         wrapperMWF: 'headerTileMWF',
         wrapperEmptySTTS: 'blankTileSTTS',
@@ -314,7 +323,8 @@ define('awesome-schedule-front/components/logo-tile', ['exports', 'ember'], func
    //HTML side for this file stored in /templates/components/
    exports['default'] = _ember['default'].Component.extend({
       logoTile: 'logoTileWrapper',
-      weekTile: 'weekTileWrapper'
+      weekTile: 'weekTileWrapper',
+      tagName: 'logoHeader'
 
    });
 });
@@ -625,14 +635,41 @@ define('awesome-schedule-front/ember-bootstrap/tests/modules/ember-bootstrap/mix
     assert.ok(true, 'modules/ember-bootstrap/mixins/type-class.js should pass jshint.');
   });
 });
-define('awesome-schedule-front/helpers/format-date', ['exports', 'ember', 'npm:fecha'], function (exports, _ember, _npmFecha) {
-  exports.formatDate = formatDate;
+define('awesome-schedule-front/helpers/day-check', ['exports', 'ember'], function (exports, _ember) {
+    exports.dayCheck = dayCheck;
 
-  function formatDate(params /*, hash*/) {
-    return _npmFecha['default'].format(new Date(2015, 10, 20), 'dddd MMMM Do, YYYY');
-  }
+    function dayCheck(p1) {
+        if (p1[0] === p1[1]) {
 
-  exports['default'] = _ember['default'].Helper.helper(formatDate);
+            return true;
+        } else {
+
+            return false;
+        }
+    }
+
+    exports['default'] = _ember['default'].Helper.helper(dayCheck);
+});
+define('awesome-schedule-front/helpers/format-date', ['exports', 'ember', 'npm:moment', 'npm:fecha'], function (exports, _ember, _npmMoment, _npmFecha) {
+    exports.formatDate = formatDate;
+
+    //Returns a date based on parameters passed to it
+
+    function formatDate(params) {
+        if (params[0] === 'day') {
+            return (0, _npmMoment['default'])().format(params[1]);
+        } else if (params[0] === 'addTime') {
+            return (0, _npmMoment['default'])((0, _npmMoment['default'])().add(params[1], 'days').calendar()).format('ll');
+        } else if (params[0] === 'subtractTime') {} else if (params[0] === 'formatTime') {
+            console.log((0, _npmMoment['default'])().format(params[1]));
+
+            return _npmFecha['default'].format(_npmFecha['default'].parse((0, _npmMoment['default'])().format(params[1]), 'MMMM Do YYYY'), 'YYYY-MM-DD hh:mm A');
+        } else {
+            return (0, _npmMoment['default'])().format(params[0]);
+        }
+    }
+
+    exports['default'] = _ember['default'].Helper.helper(formatDate);
 });
 define('awesome-schedule-front/helpers/is-equal', ['exports', 'ember-bootstrap/helpers/is-equal'], function (exports, _emberBootstrapHelpersIsEqual) {
   Object.defineProperty(exports, 'default', {
@@ -1265,52 +1302,6 @@ define("awesome-schedule-front/templates/application", ["exports"], function (ex
     };
   })());
 });
-define("awesome-schedule-front/templates/bio-box", ["exports"], function (exports) {
-  exports["default"] = Ember.HTMLBars.template((function () {
-    return {
-      meta: {
-        "fragmentReason": {
-          "name": "missing-wrapper",
-          "problems": ["wrong-type"]
-        },
-        "revision": "Ember@2.4.3",
-        "loc": {
-          "source": null,
-          "start": {
-            "line": 1,
-            "column": 0
-          },
-          "end": {
-            "line": 2,
-            "column": 0
-          }
-        },
-        "moduleName": "awesome-schedule-front/templates/bio-box.hbs"
-      },
-      isEmpty: false,
-      arity: 0,
-      cachedFragment: null,
-      hasRendered: false,
-      buildFragment: function buildFragment(dom) {
-        var el0 = dom.createDocumentFragment();
-        var el1 = dom.createComment("");
-        dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n");
-        dom.appendChild(el0, el1);
-        return el0;
-      },
-      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var morphs = new Array(1);
-        morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
-        dom.insertBoundary(fragment, 0);
-        return morphs;
-      },
-      statements: [["content", "outlet", ["loc", [null, [1, 0], [1, 10]]]]],
-      locals: [],
-      templates: []
-    };
-  })());
-});
 define("awesome-schedule-front/templates/calendar", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
@@ -1327,7 +1318,7 @@ define("awesome-schedule-front/templates/calendar", ["exports"], function (expor
             "column": 0
           },
           "end": {
-            "line": 104,
+            "line": 94,
             "column": 10
           }
         },
@@ -1359,136 +1350,58 @@ define("awesome-schedule-front/templates/calendar", ["exports"], function (expor
         var el4 = dom.createElement("calendarViewMain");
         var el5 = dom.createTextNode("\n        \n		");
         dom.appendChild(el4, el5);
-        var el5 = dom.createElement("logoHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
+        var el5 = dom.createComment("");
         dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n		");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n		");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                                        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                                        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                                        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                                        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                                        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n\n                \n	");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n\n	");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("calendarViewCoaches");
         var el5 = dom.createTextNode("\n		");
         dom.appendChild(el4, el5);
         var el5 = dom.createComment("");
         dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n	");
+        var el5 = dom.createTextNode("\n		");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n                                        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n                                        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n                                        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n                                        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n                                        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n\n                \n	");
         dom.appendChild(el4, el5);
         dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n\n        ");
+        var el4 = dom.createTextNode("\n\n	\n		");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createComment("");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n	\n\n        ");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n    ");
+        var el3 = dom.createTextNode("\n    \n    \n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("calendarRow");
-        var el4 = dom.createTextNode("\n	");
+        var el4 = dom.createTextNode("\n                                        ");
         dom.appendChild(el3, el4);
-        var el4 = dom.createElement("calendarViewMain");
-        var el5 = dom.createTextNode("\n        \n		");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("logoHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                                         ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n		");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                                        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                                        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                                        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                                        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                                        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n\n                \n	");
-        dom.appendChild(el4, el5);
+        var el4 = dom.createComment("");
         dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n\n	");
+        var el4 = dom.createTextNode("\n\n	\n		");
         dom.appendChild(el3, el4);
-        var el4 = dom.createElement("calendarViewCoaches");
-        var el5 = dom.createTextNode("\n		");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createComment("");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n	");
-        dom.appendChild(el4, el5);
+        var el4 = dom.createComment("");
         dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n    ");
+        var el4 = dom.createTextNode("\n	\n    ");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n      ");
@@ -1499,66 +1412,44 @@ define("awesome-schedule-front/templates/calendar", ["exports"], function (expor
         var el4 = dom.createElement("calendarViewMain");
         var el5 = dom.createTextNode("\n        \n		");
         dom.appendChild(el4, el5);
-        var el5 = dom.createElement("logoHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
+        var el5 = dom.createComment("");
         dom.appendChild(el4, el5);
         var el5 = dom.createTextNode("\n                                         ");
         dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
+        var el5 = dom.createComment("");
         dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n		");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                                        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                                        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                                        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                                        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                                        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n\n                \n	");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n\n	");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("calendarViewCoaches");
         var el5 = dom.createTextNode("\n		");
         dom.appendChild(el4, el5);
         var el5 = dom.createComment("");
         dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n	");
+        var el5 = dom.createTextNode("\n                                        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n                                        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n                                        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n                                        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n                                        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n\n                \n	");
         dom.appendChild(el4, el5);
         dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n      ");
+        var el4 = dom.createTextNode("\n\n	\n		");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createComment("");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n	\n      ");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n      ");
@@ -1569,66 +1460,44 @@ define("awesome-schedule-front/templates/calendar", ["exports"], function (expor
         var el4 = dom.createElement("calendarViewMain");
         var el5 = dom.createTextNode("\n        \n		");
         dom.appendChild(el4, el5);
-        var el5 = dom.createElement("logoHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
+        var el5 = dom.createComment("");
         dom.appendChild(el4, el5);
         var el5 = dom.createTextNode("\n                                         ");
         dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
+        var el5 = dom.createComment("");
         dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n		");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                                        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                                        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                                        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                                        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                                        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n\n                \n	");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n\n	");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("calendarViewCoaches");
         var el5 = dom.createTextNode("\n		");
         dom.appendChild(el4, el5);
         var el5 = dom.createComment("");
         dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n	");
+        var el5 = dom.createTextNode("\n                                        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n                                        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n                                        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n                                        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n                                        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n\n                \n	");
         dom.appendChild(el4, el5);
         dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n      ");
+        var el4 = dom.createTextNode("\n\n	\n		");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createComment("");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n	\n      ");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n      ");
@@ -1639,66 +1508,44 @@ define("awesome-schedule-front/templates/calendar", ["exports"], function (expor
         var el4 = dom.createElement("calendarViewMain");
         var el5 = dom.createTextNode("\n        \n		");
         dom.appendChild(el4, el5);
-        var el5 = dom.createElement("logoHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
+        var el5 = dom.createComment("");
         dom.appendChild(el4, el5);
         var el5 = dom.createTextNode("\n                                         ");
         dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
+        var el5 = dom.createComment("");
         dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n		");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                                        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                                        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                                        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                                        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                                        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("dayTileHeader");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n\n                \n	");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n\n	");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("calendarViewCoaches");
         var el5 = dom.createTextNode("\n		");
         dom.appendChild(el4, el5);
         var el5 = dom.createComment("");
         dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n	");
+        var el5 = dom.createTextNode("\n                                        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n                                        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n                                        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n                                        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n                                        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n\n                \n	");
         dom.appendChild(el4, el5);
         dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n	  ");
+        var el4 = dom.createTextNode("\n\n	\n		");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createComment("");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n	\n	  ");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n     \n	");
@@ -1715,63 +1562,55 @@ define("awesome-schedule-front/templates/calendar", ["exports"], function (expor
         var element2 = dom.childAt(element1, [1]);
         var element3 = dom.childAt(element2, [1]);
         var element4 = dom.childAt(element1, [3]);
-        var element5 = dom.childAt(element4, [1]);
-        var element6 = dom.childAt(element1, [5]);
-        var element7 = dom.childAt(element6, [1]);
-        var element8 = dom.childAt(element1, [7]);
-        var element9 = dom.childAt(element8, [1]);
-        var element10 = dom.childAt(element1, [9]);
-        var element11 = dom.childAt(element10, [1]);
-        var morphs = new Array(46);
+        var element5 = dom.childAt(element1, [5]);
+        var element6 = dom.childAt(element5, [1]);
+        var element7 = dom.childAt(element1, [7]);
+        var element8 = dom.childAt(element7, [1]);
+        var element9 = dom.childAt(element1, [9]);
+        var element10 = dom.childAt(element9, [1]);
+        var morphs = new Array(39);
         morphs[0] = dom.createAttrMorph(element0, 'class');
-        morphs[1] = dom.createMorphAt(dom.childAt(element3, [1]), 0, 0);
-        morphs[2] = dom.createMorphAt(dom.childAt(element3, [3]), 0, 0);
-        morphs[3] = dom.createMorphAt(dom.childAt(element3, [5]), 0, 0);
-        morphs[4] = dom.createMorphAt(dom.childAt(element3, [7]), 0, 0);
-        morphs[5] = dom.createMorphAt(dom.childAt(element3, [9]), 0, 0);
-        morphs[6] = dom.createMorphAt(dom.childAt(element3, [11]), 0, 0);
-        morphs[7] = dom.createMorphAt(dom.childAt(element3, [13]), 0, 0);
-        morphs[8] = dom.createMorphAt(dom.childAt(element3, [15]), 0, 0);
-        morphs[9] = dom.createMorphAt(dom.childAt(element2, [3]), 1, 1);
-        morphs[10] = dom.createMorphAt(dom.childAt(element5, [1]), 0, 0);
-        morphs[11] = dom.createMorphAt(dom.childAt(element5, [3]), 0, 0);
-        morphs[12] = dom.createMorphAt(dom.childAt(element5, [5]), 0, 0);
-        morphs[13] = dom.createMorphAt(dom.childAt(element5, [7]), 0, 0);
-        morphs[14] = dom.createMorphAt(dom.childAt(element5, [9]), 0, 0);
-        morphs[15] = dom.createMorphAt(dom.childAt(element5, [11]), 0, 0);
-        morphs[16] = dom.createMorphAt(dom.childAt(element5, [13]), 0, 0);
-        morphs[17] = dom.createMorphAt(dom.childAt(element5, [15]), 0, 0);
-        morphs[18] = dom.createMorphAt(dom.childAt(element4, [3]), 1, 1);
-        morphs[19] = dom.createMorphAt(dom.childAt(element7, [1]), 0, 0);
-        morphs[20] = dom.createMorphAt(dom.childAt(element7, [3]), 0, 0);
-        morphs[21] = dom.createMorphAt(dom.childAt(element7, [5]), 0, 0);
-        morphs[22] = dom.createMorphAt(dom.childAt(element7, [7]), 0, 0);
-        morphs[23] = dom.createMorphAt(dom.childAt(element7, [9]), 0, 0);
-        morphs[24] = dom.createMorphAt(dom.childAt(element7, [11]), 0, 0);
-        morphs[25] = dom.createMorphAt(dom.childAt(element7, [13]), 0, 0);
-        morphs[26] = dom.createMorphAt(dom.childAt(element7, [15]), 0, 0);
-        morphs[27] = dom.createMorphAt(dom.childAt(element6, [3]), 1, 1);
-        morphs[28] = dom.createMorphAt(dom.childAt(element9, [1]), 0, 0);
-        morphs[29] = dom.createMorphAt(dom.childAt(element9, [3]), 0, 0);
-        morphs[30] = dom.createMorphAt(dom.childAt(element9, [5]), 0, 0);
-        morphs[31] = dom.createMorphAt(dom.childAt(element9, [7]), 0, 0);
-        morphs[32] = dom.createMorphAt(dom.childAt(element9, [9]), 0, 0);
-        morphs[33] = dom.createMorphAt(dom.childAt(element9, [11]), 0, 0);
-        morphs[34] = dom.createMorphAt(dom.childAt(element9, [13]), 0, 0);
-        morphs[35] = dom.createMorphAt(dom.childAt(element9, [15]), 0, 0);
-        morphs[36] = dom.createMorphAt(dom.childAt(element8, [3]), 1, 1);
-        morphs[37] = dom.createMorphAt(dom.childAt(element11, [1]), 0, 0);
-        morphs[38] = dom.createMorphAt(dom.childAt(element11, [3]), 0, 0);
-        morphs[39] = dom.createMorphAt(dom.childAt(element11, [5]), 0, 0);
-        morphs[40] = dom.createMorphAt(dom.childAt(element11, [7]), 0, 0);
-        morphs[41] = dom.createMorphAt(dom.childAt(element11, [9]), 0, 0);
-        morphs[42] = dom.createMorphAt(dom.childAt(element11, [11]), 0, 0);
-        morphs[43] = dom.createMorphAt(dom.childAt(element11, [13]), 0, 0);
-        morphs[44] = dom.createMorphAt(dom.childAt(element11, [15]), 0, 0);
-        morphs[45] = dom.createMorphAt(dom.childAt(element10, [3]), 1, 1);
+        morphs[1] = dom.createMorphAt(element3, 1, 1);
+        morphs[2] = dom.createMorphAt(element3, 3, 3);
+        morphs[3] = dom.createMorphAt(element3, 5, 5);
+        morphs[4] = dom.createMorphAt(element3, 7, 7);
+        morphs[5] = dom.createMorphAt(element3, 9, 9);
+        morphs[6] = dom.createMorphAt(element3, 11, 11);
+        morphs[7] = dom.createMorphAt(element3, 13, 13);
+        morphs[8] = dom.createMorphAt(element3, 15, 15);
+        morphs[9] = dom.createMorphAt(element2, 3, 3);
+        morphs[10] = dom.createMorphAt(element4, 1, 1);
+        morphs[11] = dom.createMorphAt(element4, 3, 3);
+        morphs[12] = dom.createMorphAt(element6, 1, 1);
+        morphs[13] = dom.createMorphAt(element6, 3, 3);
+        morphs[14] = dom.createMorphAt(element6, 5, 5);
+        morphs[15] = dom.createMorphAt(element6, 7, 7);
+        morphs[16] = dom.createMorphAt(element6, 9, 9);
+        morphs[17] = dom.createMorphAt(element6, 11, 11);
+        morphs[18] = dom.createMorphAt(element6, 13, 13);
+        morphs[19] = dom.createMorphAt(element6, 15, 15);
+        morphs[20] = dom.createMorphAt(element5, 3, 3);
+        morphs[21] = dom.createMorphAt(element8, 1, 1);
+        morphs[22] = dom.createMorphAt(element8, 3, 3);
+        morphs[23] = dom.createMorphAt(element8, 5, 5);
+        morphs[24] = dom.createMorphAt(element8, 7, 7);
+        morphs[25] = dom.createMorphAt(element8, 9, 9);
+        morphs[26] = dom.createMorphAt(element8, 11, 11);
+        morphs[27] = dom.createMorphAt(element8, 13, 13);
+        morphs[28] = dom.createMorphAt(element8, 15, 15);
+        morphs[29] = dom.createMorphAt(element7, 3, 3);
+        morphs[30] = dom.createMorphAt(element10, 1, 1);
+        morphs[31] = dom.createMorphAt(element10, 3, 3);
+        morphs[32] = dom.createMorphAt(element10, 5, 5);
+        morphs[33] = dom.createMorphAt(element10, 7, 7);
+        morphs[34] = dom.createMorphAt(element10, 9, 9);
+        morphs[35] = dom.createMorphAt(element10, 11, 11);
+        morphs[36] = dom.createMorphAt(element10, 13, 13);
+        morphs[37] = dom.createMorphAt(element10, 15, 15);
+        morphs[38] = dom.createMorphAt(element9, 3, 3);
         return morphs;
       },
-      statements: [["attribute", "class", ["get", "wrapper", ["loc", [null, [4, 18], [4, 25]]]]], ["inline", "logo-tile", [], ["logo", true], ["loc", [null, [9, 14], [9, 37]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Sunday"], ["loc", [null, [10, 17], [10, 68]]]], ["inline", "day-tile", [], ["header", true, "day", "Monday"], ["loc", [null, [11, 17], [11, 54]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Tuesday"], ["loc", [null, [12, 55], [12, 107]]]], ["inline", "day-tile", [], ["header", true, "day", "Wednesday"], ["loc", [null, [13, 55], [13, 95]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Thursday"], ["loc", [null, [14, 55], [14, 108]]]], ["inline", "day-tile", [], ["header", true, "day", "Friday"], ["loc", [null, [15, 55], [15, 92]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Saturday"], ["loc", [null, [16, 55], [16, 108]]]], ["inline", "coach-sidebar", [], ["header", true], ["loc", [null, [22, 2], [22, 33]]]], ["inline", "logo-tile", [], ["logo", false, "date", ["subexpr", "format-date", [], [], ["loc", [null, [29, 42], [29, 55]]]]], ["loc", [null, [29, 14], [29, 57]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [30, 56], [30, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [31, 17], [31, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [32, 55], [32, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [33, 55], [33, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [34, 55], [34, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [35, 55], [35, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [36, 55], [36, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [42, 2], [42, 34]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [48, 14], [48, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [49, 56], [49, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [50, 17], [50, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [51, 55], [51, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [52, 55], [52, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [53, 55], [53, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [54, 55], [54, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [55, 55], [55, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [61, 2], [61, 34]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [67, 14], [67, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [68, 56], [68, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [69, 17], [69, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [70, 55], [70, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [71, 55], [71, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [72, 55], [72, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [73, 55], [73, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [74, 55], [74, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [80, 2], [80, 34]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [86, 14], [86, 38]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [87, 56], [87, 115]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [88, 17], [88, 62]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [89, 55], [89, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [90, 55], [90, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [91, 55], [91, 114]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [92, 55], [92, 100]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [93, 55], [93, 114]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [99, 2], [99, 34]]]]],
+      statements: [["attribute", "class", ["get", "wrapper", ["loc", [null, [4, 18], [4, 25]]]]], ["inline", "logo-tile", [], ["logo", true], ["loc", [null, [9, 2], [9, 25]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Sunday"], ["loc", [null, [10, 2], [10, 53]]]], ["inline", "day-tile", [], ["header", true, "day", "Monday"], ["loc", [null, [11, 2], [11, 39]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Tuesday"], ["loc", [null, [12, 40], [12, 92]]]], ["inline", "day-tile", [], ["header", true, "day", "Wednesday"], ["loc", [null, [13, 40], [13, 80]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Thursday"], ["loc", [null, [14, 40], [14, 93]]]], ["inline", "day-tile", [], ["header", true, "day", "Friday"], ["loc", [null, [15, 40], [15, 77]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Saturday"], ["loc", [null, [16, 40], [16, 93]]]], ["inline", "coach-sidebar", [], ["header", true], ["loc", [null, [22, 2], [22, 33]]]], ["inline", "calendar-view-main", [], ["thisWeek", true], ["loc", [null, [29, 40], [29, 78]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [32, 2], [32, 34]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [38, 2], [38, 26]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [39, 41], [39, 100]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [40, 2], [40, 47]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [41, 40], [41, 99]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [42, 40], [42, 85]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [43, 40], [43, 99]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [44, 40], [44, 85]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [45, 40], [45, 99]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [51, 2], [51, 34]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [57, 2], [57, 26]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [58, 41], [58, 100]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [59, 2], [59, 47]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [60, 40], [60, 99]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [61, 40], [61, 85]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [62, 40], [62, 99]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [63, 40], [63, 85]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [64, 40], [64, 99]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [70, 2], [70, 34]]]], ["inline", "logo-tile", [], ["logo", false], ["loc", [null, [76, 2], [76, 26]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [77, 41], [77, 100]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [78, 2], [78, 47]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [79, 40], [79, 99]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [80, 40], [80, 85]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [81, 40], [81, 99]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE"], ["loc", [null, [82, 40], [82, 85]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE"], ["loc", [null, [83, 40], [83, 99]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [89, 2], [89, 34]]]]],
       locals: [],
       templates: []
     };
@@ -4422,6 +4261,710 @@ define("awesome-schedule-front/templates/components/bs-select", ["exports"], fun
         return morphs;
       },
       statements: [["block", "if", [["get", "prompt", ["loc", [null, [1, 6], [1, 12]]]]], [], 0, null, ["loc", [null, [1, 0], [5, 7]]]], ["block", "each", [["get", "content", ["loc", [null, [7, 8], [7, 15]]]]], ["key", "@identity"], 1, null, ["loc", [null, [7, 0], [12, 9]]]]],
+      locals: [],
+      templates: [child0, child1]
+    };
+  })());
+});
+define("awesome-schedule-front/templates/components/calendar-view-main", ["exports"], function (exports) {
+  exports["default"] = Ember.HTMLBars.template((function () {
+    var child0 = (function () {
+      var child0 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.4.3",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 6,
+                "column": 0
+              },
+              "end": {
+                "line": 15,
+                "column": 0
+              }
+            },
+            "moduleName": "awesome-schedule-front/templates/components/calendar-view-main.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var morphs = new Array(8);
+            morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+            morphs[1] = dom.createMorphAt(fragment, 2, 2, contextualElement);
+            morphs[2] = dom.createMorphAt(fragment, 4, 4, contextualElement);
+            morphs[3] = dom.createMorphAt(fragment, 6, 6, contextualElement);
+            morphs[4] = dom.createMorphAt(fragment, 8, 8, contextualElement);
+            morphs[5] = dom.createMorphAt(fragment, 10, 10, contextualElement);
+            morphs[6] = dom.createMorphAt(fragment, 12, 12, contextualElement);
+            morphs[7] = dom.createMorphAt(fragment, 14, 14, contextualElement);
+            dom.insertBoundary(fragment, 0);
+            return morphs;
+          },
+          statements: [["inline", "logo-tile", [], ["logo", false, "date", ["subexpr", "format-date", ["MMMM Do YYYY"], [], ["loc", [null, [7, 28], [7, 56]]]]], ["loc", [null, [7, 0], [7, 58]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE", "date", ["subexpr", "format-date", ["formatTime", "MMMM Do YYYY"], [], ["loc", [null, [8, 63], [8, 104]]]]], ["loc", [null, [8, 0], [8, 106]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE", "date", ["subexpr", "format-date", ["formatTime", ["subexpr", "format-date", ["addTime", 1], [], ["loc", [null, [9, 75], [9, 100]]]]], [], ["loc", [null, [9, 49], [9, 101]]]]], ["loc", [null, [9, 0], [9, 103]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE", "date", ["subexpr", "format-date", ["formatTime", ["subexpr", "format-date", ["addTime", 2], [], ["loc", [null, [10, 89], [10, 114]]]]], [], ["loc", [null, [10, 63], [10, 115]]]]], ["loc", [null, [10, 0], [10, 117]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE", "date", ["subexpr", "format-date", ["formatTime", ["subexpr", "format-date", ["addTime", 3], [], ["loc", [null, [11, 75], [11, 100]]]]], [], ["loc", [null, [11, 49], [11, 101]]]]], ["loc", [null, [11, 0], [11, 103]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE", "date", ["subexpr", "format-date", ["formatTime", ["subexpr", "format-date", ["addTime", 4], [], ["loc", [null, [12, 89], [12, 114]]]]], [], ["loc", [null, [12, 63], [12, 115]]]]], ["loc", [null, [12, 0], [12, 117]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE", "date", ["subexpr", "format-date", ["formatTime", ["subexpr", "format-date", ["addTime", 5], [], ["loc", [null, [13, 75], [13, 100]]]]], [], ["loc", [null, [13, 49], [13, 101]]]]], ["loc", [null, [13, 0], [13, 103]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE", "date", ["subexpr", "format-date", ["formatTime", ["subexpr", "format-date", ["addTime", 6], [], ["loc", [null, [14, 89], [14, 114]]]]], [], ["loc", [null, [14, 63], [14, 115]]]]], ["loc", [null, [14, 0], [14, 117]]]]],
+          locals: [],
+          templates: []
+        };
+      })();
+      var child1 = (function () {
+        var child0 = (function () {
+          return {
+            meta: {
+              "fragmentReason": false,
+              "revision": "Ember@2.4.3",
+              "loc": {
+                "source": null,
+                "start": {
+                  "line": 15,
+                  "column": 0
+                },
+                "end": {
+                  "line": 17,
+                  "column": 0
+                }
+              },
+              "moduleName": "awesome-schedule-front/templates/components/calendar-view-main.hbs"
+            },
+            isEmpty: false,
+            arity: 0,
+            cachedFragment: null,
+            hasRendered: false,
+            buildFragment: function buildFragment(dom) {
+              var el0 = dom.createDocumentFragment();
+              var el1 = dom.createTextNode("\n");
+              dom.appendChild(el0, el1);
+              return el0;
+            },
+            buildRenderNodes: function buildRenderNodes() {
+              return [];
+            },
+            statements: [],
+            locals: [],
+            templates: []
+          };
+        })();
+        var child1 = (function () {
+          var child0 = (function () {
+            return {
+              meta: {
+                "fragmentReason": false,
+                "revision": "Ember@2.4.3",
+                "loc": {
+                  "source": null,
+                  "start": {
+                    "line": 17,
+                    "column": 0
+                  },
+                  "end": {
+                    "line": 19,
+                    "column": 0
+                  }
+                },
+                "moduleName": "awesome-schedule-front/templates/components/calendar-view-main.hbs"
+              },
+              isEmpty: false,
+              arity: 0,
+              cachedFragment: null,
+              hasRendered: false,
+              buildFragment: function buildFragment(dom) {
+                var el0 = dom.createDocumentFragment();
+                var el1 = dom.createTextNode("\n");
+                dom.appendChild(el0, el1);
+                return el0;
+              },
+              buildRenderNodes: function buildRenderNodes() {
+                return [];
+              },
+              statements: [],
+              locals: [],
+              templates: []
+            };
+          })();
+          var child1 = (function () {
+            var child0 = (function () {
+              return {
+                meta: {
+                  "fragmentReason": false,
+                  "revision": "Ember@2.4.3",
+                  "loc": {
+                    "source": null,
+                    "start": {
+                      "line": 19,
+                      "column": 0
+                    },
+                    "end": {
+                      "line": 21,
+                      "column": 0
+                    }
+                  },
+                  "moduleName": "awesome-schedule-front/templates/components/calendar-view-main.hbs"
+                },
+                isEmpty: false,
+                arity: 0,
+                cachedFragment: null,
+                hasRendered: false,
+                buildFragment: function buildFragment(dom) {
+                  var el0 = dom.createDocumentFragment();
+                  var el1 = dom.createTextNode("\n");
+                  dom.appendChild(el0, el1);
+                  return el0;
+                },
+                buildRenderNodes: function buildRenderNodes() {
+                  return [];
+                },
+                statements: [],
+                locals: [],
+                templates: []
+              };
+            })();
+            var child1 = (function () {
+              var child0 = (function () {
+                return {
+                  meta: {
+                    "fragmentReason": false,
+                    "revision": "Ember@2.4.3",
+                    "loc": {
+                      "source": null,
+                      "start": {
+                        "line": 21,
+                        "column": 0
+                      },
+                      "end": {
+                        "line": 23,
+                        "column": 0
+                      }
+                    },
+                    "moduleName": "awesome-schedule-front/templates/components/calendar-view-main.hbs"
+                  },
+                  isEmpty: false,
+                  arity: 0,
+                  cachedFragment: null,
+                  hasRendered: false,
+                  buildFragment: function buildFragment(dom) {
+                    var el0 = dom.createDocumentFragment();
+                    var el1 = dom.createTextNode("\n");
+                    dom.appendChild(el0, el1);
+                    return el0;
+                  },
+                  buildRenderNodes: function buildRenderNodes() {
+                    return [];
+                  },
+                  statements: [],
+                  locals: [],
+                  templates: []
+                };
+              })();
+              var child1 = (function () {
+                var child0 = (function () {
+                  return {
+                    meta: {
+                      "fragmentReason": false,
+                      "revision": "Ember@2.4.3",
+                      "loc": {
+                        "source": null,
+                        "start": {
+                          "line": 23,
+                          "column": 0
+                        },
+                        "end": {
+                          "line": 25,
+                          "column": 0
+                        }
+                      },
+                      "moduleName": "awesome-schedule-front/templates/components/calendar-view-main.hbs"
+                    },
+                    isEmpty: false,
+                    arity: 0,
+                    cachedFragment: null,
+                    hasRendered: false,
+                    buildFragment: function buildFragment(dom) {
+                      var el0 = dom.createDocumentFragment();
+                      var el1 = dom.createTextNode("\n");
+                      dom.appendChild(el0, el1);
+                      return el0;
+                    },
+                    buildRenderNodes: function buildRenderNodes() {
+                      return [];
+                    },
+                    statements: [],
+                    locals: [],
+                    templates: []
+                  };
+                })();
+                var child1 = (function () {
+                  var child0 = (function () {
+                    return {
+                      meta: {
+                        "fragmentReason": false,
+                        "revision": "Ember@2.4.3",
+                        "loc": {
+                          "source": null,
+                          "start": {
+                            "line": 25,
+                            "column": 0
+                          },
+                          "end": {
+                            "line": 35,
+                            "column": 0
+                          }
+                        },
+                        "moduleName": "awesome-schedule-front/templates/components/calendar-view-main.hbs"
+                      },
+                      isEmpty: false,
+                      arity: 0,
+                      cachedFragment: null,
+                      hasRendered: false,
+                      buildFragment: function buildFragment(dom) {
+                        var el0 = dom.createDocumentFragment();
+                        var el1 = dom.createComment("");
+                        dom.appendChild(el0, el1);
+                        var el1 = dom.createTextNode("\n");
+                        dom.appendChild(el0, el1);
+                        var el1 = dom.createComment("");
+                        dom.appendChild(el0, el1);
+                        var el1 = dom.createTextNode("\n");
+                        dom.appendChild(el0, el1);
+                        var el1 = dom.createComment("");
+                        dom.appendChild(el0, el1);
+                        var el1 = dom.createTextNode("\n");
+                        dom.appendChild(el0, el1);
+                        var el1 = dom.createComment("");
+                        dom.appendChild(el0, el1);
+                        var el1 = dom.createTextNode("\n");
+                        dom.appendChild(el0, el1);
+                        var el1 = dom.createComment("");
+                        dom.appendChild(el0, el1);
+                        var el1 = dom.createTextNode("\n");
+                        dom.appendChild(el0, el1);
+                        var el1 = dom.createComment("");
+                        dom.appendChild(el0, el1);
+                        var el1 = dom.createTextNode("\n");
+                        dom.appendChild(el0, el1);
+                        var el1 = dom.createComment("");
+                        dom.appendChild(el0, el1);
+                        var el1 = dom.createTextNode("\n");
+                        dom.appendChild(el0, el1);
+                        var el1 = dom.createComment("");
+                        dom.appendChild(el0, el1);
+                        var el1 = dom.createTextNode("\n\n");
+                        dom.appendChild(el0, el1);
+                        return el0;
+                      },
+                      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+                        var morphs = new Array(8);
+                        morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+                        morphs[1] = dom.createMorphAt(fragment, 2, 2, contextualElement);
+                        morphs[2] = dom.createMorphAt(fragment, 4, 4, contextualElement);
+                        morphs[3] = dom.createMorphAt(fragment, 6, 6, contextualElement);
+                        morphs[4] = dom.createMorphAt(fragment, 8, 8, contextualElement);
+                        morphs[5] = dom.createMorphAt(fragment, 10, 10, contextualElement);
+                        morphs[6] = dom.createMorphAt(fragment, 12, 12, contextualElement);
+                        morphs[7] = dom.createMorphAt(fragment, 14, 14, contextualElement);
+                        dom.insertBoundary(fragment, 0);
+                        return morphs;
+                      },
+                      statements: [["inline", "logo-tile", [], ["logo", false, "date", ["subexpr", "format-date", ["MMMM Do YYYY"], [], ["loc", [null, [26, 28], [26, 56]]]]], ["loc", [null, [26, 0], [26, 58]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE", "date", ["subexpr", "format-date", ["formatTime", "MMMM Do YYYY"], [], ["loc", [null, [27, 63], [27, 104]]]]], ["loc", [null, [27, 0], [27, 106]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE", "date", ["subexpr", "format-date", ["formatTime", ["subexpr", "format-date", ["addTime", 1], [], ["loc", [null, [28, 75], [28, 100]]]]], [], ["loc", [null, [28, 49], [28, 101]]]]], ["loc", [null, [28, 0], [28, 103]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE", "date", ["subexpr", "format-date", ["formatTime", ["subexpr", "format-date", ["addTime", 2], [], ["loc", [null, [29, 89], [29, 114]]]]], [], ["loc", [null, [29, 63], [29, 115]]]]], ["loc", [null, [29, 0], [29, 117]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE", "date", ["subexpr", "format-date", ["formatTime", ["subexpr", "format-date", ["addTime", 3], [], ["loc", [null, [30, 75], [30, 100]]]]], [], ["loc", [null, [30, 49], [30, 101]]]]], ["loc", [null, [30, 0], [30, 103]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE", "date", ["subexpr", "format-date", ["formatTime", ["subexpr", "format-date", ["addTime", 4], [], ["loc", [null, [31, 89], [31, 114]]]]], [], ["loc", [null, [31, 63], [31, 115]]]]], ["loc", [null, [31, 0], [31, 117]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE", "date", ["subexpr", "format-date", ["formatTime", ["subexpr", "format-date", ["addTime", 5], [], ["loc", [null, [32, 75], [32, 100]]]]], [], ["loc", [null, [32, 49], [32, 101]]]]], ["loc", [null, [32, 0], [32, 103]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE", "date", ["subexpr", "format-date", ["formatTime", ["subexpr", "format-date", ["addTime", 6], [], ["loc", [null, [33, 89], [33, 114]]]]], [], ["loc", [null, [33, 63], [33, 115]]]]], ["loc", [null, [33, 0], [33, 117]]]]],
+                      locals: [],
+                      templates: []
+                    };
+                  })();
+                  return {
+                    meta: {
+                      "fragmentReason": false,
+                      "revision": "Ember@2.4.3",
+                      "loc": {
+                        "source": null,
+                        "start": {
+                          "line": 25,
+                          "column": 0
+                        },
+                        "end": {
+                          "line": 35,
+                          "column": 0
+                        }
+                      },
+                      "moduleName": "awesome-schedule-front/templates/components/calendar-view-main.hbs"
+                    },
+                    isEmpty: false,
+                    arity: 0,
+                    cachedFragment: null,
+                    hasRendered: false,
+                    buildFragment: function buildFragment(dom) {
+                      var el0 = dom.createDocumentFragment();
+                      var el1 = dom.createComment("");
+                      dom.appendChild(el0, el1);
+                      return el0;
+                    },
+                    buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+                      var morphs = new Array(1);
+                      morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+                      dom.insertBoundary(fragment, 0);
+                      dom.insertBoundary(fragment, null);
+                      return morphs;
+                    },
+                    statements: [["block", "if", [["subexpr", "dayCheck", [["subexpr", "format-date", ["dddd"], [], ["loc", [null, [25, 20], [25, 40]]]], "Saturday"], [], ["loc", [null, [25, 10], [25, 53]]]]], [], 0, null, ["loc", [null, [25, 0], [35, 0]]]]],
+                    locals: [],
+                    templates: [child0]
+                  };
+                })();
+                return {
+                  meta: {
+                    "fragmentReason": false,
+                    "revision": "Ember@2.4.3",
+                    "loc": {
+                      "source": null,
+                      "start": {
+                        "line": 23,
+                        "column": 0
+                      },
+                      "end": {
+                        "line": 35,
+                        "column": 0
+                      }
+                    },
+                    "moduleName": "awesome-schedule-front/templates/components/calendar-view-main.hbs"
+                  },
+                  isEmpty: false,
+                  arity: 0,
+                  cachedFragment: null,
+                  hasRendered: false,
+                  buildFragment: function buildFragment(dom) {
+                    var el0 = dom.createDocumentFragment();
+                    var el1 = dom.createComment("");
+                    dom.appendChild(el0, el1);
+                    return el0;
+                  },
+                  buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+                    var morphs = new Array(1);
+                    morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+                    dom.insertBoundary(fragment, 0);
+                    dom.insertBoundary(fragment, null);
+                    return morphs;
+                  },
+                  statements: [["block", "if", [["subexpr", "dayCheck", [["subexpr", "format-date", ["dddd"], [], ["loc", [null, [23, 20], [23, 40]]]], "Friday"], [], ["loc", [null, [23, 10], [23, 51]]]]], [], 0, 1, ["loc", [null, [23, 0], [35, 0]]]]],
+                  locals: [],
+                  templates: [child0, child1]
+                };
+              })();
+              return {
+                meta: {
+                  "fragmentReason": false,
+                  "revision": "Ember@2.4.3",
+                  "loc": {
+                    "source": null,
+                    "start": {
+                      "line": 21,
+                      "column": 0
+                    },
+                    "end": {
+                      "line": 35,
+                      "column": 0
+                    }
+                  },
+                  "moduleName": "awesome-schedule-front/templates/components/calendar-view-main.hbs"
+                },
+                isEmpty: false,
+                arity: 0,
+                cachedFragment: null,
+                hasRendered: false,
+                buildFragment: function buildFragment(dom) {
+                  var el0 = dom.createDocumentFragment();
+                  var el1 = dom.createComment("");
+                  dom.appendChild(el0, el1);
+                  return el0;
+                },
+                buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+                  var morphs = new Array(1);
+                  morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+                  dom.insertBoundary(fragment, 0);
+                  dom.insertBoundary(fragment, null);
+                  return morphs;
+                },
+                statements: [["block", "if", [["subexpr", "dayCheck", [["subexpr", "format-date", ["dddd"], [], ["loc", [null, [21, 20], [21, 40]]]], "Thursday"], [], ["loc", [null, [21, 10], [21, 53]]]]], [], 0, 1, ["loc", [null, [21, 0], [35, 0]]]]],
+                locals: [],
+                templates: [child0, child1]
+              };
+            })();
+            return {
+              meta: {
+                "fragmentReason": false,
+                "revision": "Ember@2.4.3",
+                "loc": {
+                  "source": null,
+                  "start": {
+                    "line": 19,
+                    "column": 0
+                  },
+                  "end": {
+                    "line": 35,
+                    "column": 0
+                  }
+                },
+                "moduleName": "awesome-schedule-front/templates/components/calendar-view-main.hbs"
+              },
+              isEmpty: false,
+              arity: 0,
+              cachedFragment: null,
+              hasRendered: false,
+              buildFragment: function buildFragment(dom) {
+                var el0 = dom.createDocumentFragment();
+                var el1 = dom.createComment("");
+                dom.appendChild(el0, el1);
+                return el0;
+              },
+              buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+                var morphs = new Array(1);
+                morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+                dom.insertBoundary(fragment, 0);
+                dom.insertBoundary(fragment, null);
+                return morphs;
+              },
+              statements: [["block", "if", [["subexpr", "dayCheck", [["subexpr", "format-date", ["dddd"], [], ["loc", [null, [19, 20], [19, 40]]]], "Wednesday"], [], ["loc", [null, [19, 10], [19, 54]]]]], [], 0, 1, ["loc", [null, [19, 0], [35, 0]]]]],
+              locals: [],
+              templates: [child0, child1]
+            };
+          })();
+          return {
+            meta: {
+              "fragmentReason": false,
+              "revision": "Ember@2.4.3",
+              "loc": {
+                "source": null,
+                "start": {
+                  "line": 17,
+                  "column": 0
+                },
+                "end": {
+                  "line": 35,
+                  "column": 0
+                }
+              },
+              "moduleName": "awesome-schedule-front/templates/components/calendar-view-main.hbs"
+            },
+            isEmpty: false,
+            arity: 0,
+            cachedFragment: null,
+            hasRendered: false,
+            buildFragment: function buildFragment(dom) {
+              var el0 = dom.createDocumentFragment();
+              var el1 = dom.createComment("");
+              dom.appendChild(el0, el1);
+              return el0;
+            },
+            buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+              var morphs = new Array(1);
+              morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+              dom.insertBoundary(fragment, 0);
+              dom.insertBoundary(fragment, null);
+              return morphs;
+            },
+            statements: [["block", "if", [["subexpr", "dayCheck", [["subexpr", "format-date", ["dddd"], [], ["loc", [null, [17, 20], [17, 40]]]], "Tuesday"], [], ["loc", [null, [17, 10], [17, 52]]]]], [], 0, 1, ["loc", [null, [17, 0], [35, 0]]]]],
+            locals: [],
+            templates: [child0, child1]
+          };
+        })();
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.4.3",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 15,
+                "column": 0
+              },
+              "end": {
+                "line": 35,
+                "column": 0
+              }
+            },
+            "moduleName": "awesome-schedule-front/templates/components/calendar-view-main.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var morphs = new Array(1);
+            morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+            dom.insertBoundary(fragment, 0);
+            dom.insertBoundary(fragment, null);
+            return morphs;
+          },
+          statements: [["block", "if", [["subexpr", "dayCheck", [["subexpr", "format-date", ["dddd"], [], ["loc", [null, [15, 20], [15, 40]]]], "Monday"], [], ["loc", [null, [15, 10], [15, 51]]]]], [], 0, 1, ["loc", [null, [15, 0], [35, 0]]]]],
+          locals: [],
+          templates: [child0, child1]
+        };
+      })();
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.4.3",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 4,
+              "column": 0
+            },
+            "end": {
+              "line": 38,
+              "column": 0
+            }
+          },
+          "moduleName": "awesome-schedule-front/templates/components/calendar-view-main.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createComment("Find out what day we are in and use it to get the correct dates for API pulls");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(fragment, 2, 2, contextualElement);
+          return morphs;
+        },
+        statements: [["block", "if", [["subexpr", "dayCheck", [["subexpr", "format-date", ["dddd"], [], ["loc", [null, [6, 16], [6, 36]]]], "Sunday"], [], ["loc", [null, [6, 6], [6, 47]]]]], [], 0, 1, ["loc", [null, [6, 0], [35, 7]]]]],
+        locals: [],
+        templates: [child0, child1]
+      };
+    })();
+    var child1 = (function () {
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.4.3",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 38,
+              "column": 0
+            },
+            "end": {
+              "line": 40,
+              "column": 0
+            }
+          },
+          "moduleName": "awesome-schedule-front/templates/components/calendar-view-main.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes() {
+          return [];
+        },
+        statements: [],
+        locals: [],
+        templates: []
+      };
+    })();
+    return {
+      meta: {
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type", "multiple-nodes"]
+        },
+        "revision": "Ember@2.4.3",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 41,
+            "column": 0
+          }
+        },
+        "moduleName": "awesome-schedule-front/templates/components/calendar-view-main.hbs"
+      },
+      isEmpty: false,
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createComment("This is for all of the tiles that can hold classes that are scheduled. First, we check if the week is the current week (first row)");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("If  it is the current week, find out what the current day is and fill the dates in based on that");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var morphs = new Array(1);
+        morphs[0] = dom.createMorphAt(fragment, 4, 4, contextualElement);
+        dom.insertBoundary(fragment, null);
+        return morphs;
+      },
+      statements: [["block", "if", [["get", "thisWeek", ["loc", [null, [4, 6], [4, 14]]]]], [], 0, 1, ["loc", [null, [4, 0], [40, 7]]]]],
       locals: [],
       templates: [child0, child1]
     };
@@ -7317,7 +7860,7 @@ catch(err) {
 /* jshint ignore:start */
 
 if (!runningTests) {
-  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+a0e7c6b4"});
+  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+82bafa00"});
 }
 
 /* jshint ignore:end */

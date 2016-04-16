@@ -6,6 +6,7 @@ import Ember from 'ember';
 var {set} = Ember;
 
 export default Ember.Component.extend({
+                    tagName: 'dayTileHeader',
                     wrapperSTTS: 'headerTileSTTS',
                     wrapperMWF: 'headerTileMWF',
 	wrapperEmptySTTS: 'blankTileSTTS',
