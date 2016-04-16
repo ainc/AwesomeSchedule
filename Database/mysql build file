@@ -130,6 +130,18 @@ CREATE TABLE IF NOT EXISTS `awesomedb`.`unavailable` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `awesomedb`.`classes`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `awesomedb`.`classes` (
+  `ClassID` INT NOT NULL AUTO_INCREMENT,
+  `className` VARCHAR(45) NOT NULL,
+  `classStartTime` DATETIME NOT NULL,
+  `classEndTime` DATETIME NOT NULL,
+  PRIMARY KEY (`ClassID`))
+ENGINE = InnoDB;
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
