@@ -29,7 +29,26 @@ CREATE TABLE IF NOT EXISTS `awesomedb`.`coaches` (
   `isAdmin` TINYINT(3) NOT NULL COMMENT 'are they an admin? 1 = yes !1 = no',
   `email` VARCHAR(100) NULL,
   `picture` VARCHAR(100) NULL,
+  `username` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(50) NULL,
   PRIMARY KEY (`CoID`),
+  UNIQUE INDEX `CoID_UNIQUE` (`CoID` ASC))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `awesomedb`.`hoursworked`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `awesomedb`.`hoursworked` (
+  `HoursWorkedID` INT(11) NOT NULL AUTO_INCREMENT,
+  `payPeriod` INT(11) NOT NULL,
+  `CoID` INT(11) NOT NULL,
+  `startTime` DATETIME NOT NULL,
+  `endTime` DATETIME NOT NULL,
+  PRIMARY KEY (`HoursWorkedID`),
+  UNIQUE INDEX `HoursWorkedID_UNIQUE` (`HoursWorkedID` ASC),
+  UNIQUE INDEX `payPeriod_UNIQUE` (`payPeriod` ASC),
   UNIQUE INDEX `CoID_UNIQUE` (`CoID` ASC))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
