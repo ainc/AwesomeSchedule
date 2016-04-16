@@ -1,6 +1,6 @@
 var provider = require('./mysqlProvider.js');
 
-module.exports.authenticate = function(CoachID){
+module.exports.pullcoach = function(CoachID){
     return new provider.RSVP.Promise(function(resolve, reject) {
         
         provider.connection.query('SELECT * FROM coaches WHERE CoID = ' + provider.connection.escape(CoachID), function(err, rows) {
