@@ -32,7 +32,8 @@ CREATE TABLE IF NOT EXISTS `awesomedb`.`coaches` (
   `username` VARCHAR(45) NOT NULL,
   `password` VARCHAR(50) NULL,
   PRIMARY KEY (`CoID`),
-  UNIQUE INDEX `CoID_UNIQUE` (`CoID` ASC))
+  UNIQUE INDEX `CoID_UNIQUE` (`CoID` ASC),
+  UNIQUE INDEX `username_UNIQUE (`username` ASC))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
