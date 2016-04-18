@@ -12,29 +12,101 @@
 {{day-tile header=false redDay = true day="NEED DATABASE" date=(format-date 'formatTime' (format-date 'addTime' 4))}}
 {{day-tile header=false day="NEED DATABASE" date=(format-date 'formatTime' (format-date 'addTime' 5))}}
 {{day-tile header=false redDay = true day="NEED DATABASE" date=(format-date 'formatTime' (format-date 'addTime' 6))}}
+
+
 {{else if (dayCheck (format-date 'dddd')  'Monday')}}
+{{logo-tile logo=false date=(format-date 'subtractTime' 1)}}
+{{day-tile  redDay = true  date = (format-date 'subtractTime' 1)}}
+{{day-tile                date = (format-date)}}
+{{day-tile  redDay = true  date = (format-date 'addTime' 1)}}
+{{day-tile                date = (format-date 'addTime' 2)}}
+{{day-tile  redDay = true  date = (format-date 'addTime' 3)}}
+{{day-tile                date = (format-date 'addTime' 4)}}
+{{day-tile  redDay = true  date = (format-date 'addTime' 5)}}
 
 {{else if (dayCheck (format-date 'dddd')  'Tuesday')}}
+{{logo-tile logo=false date=(format-date 'subtractTime' 2)}}
+{{day-tile  redDay = true  date = (format-date 'subtractTime' 2)}}
+{{day-tile                date = (format-date 'subtractTime' 1)}}
+{{day-tile  redDay = true  date = (format-date)}}
+{{day-tile                date = (format-date 'addTime' 1)}}
+{{day-tile  redDay = true  date = (format-date 'addTime' 2)}}
+{{day-tile                date = (format-date 'addTime' 3)}}
+{{day-tile  redDay = true  date = (format-date 'addTime' 4)}}
 
 {{else if (dayCheck (format-date 'dddd')  'Wednesday')}}
+{{logo-tile logo=false date=(format-date 'subtractTime' 3)}}
+{{day-tile  redDay = true  date = (format-date 'subtractTime' 3)}}
+{{day-tile                date = (format-date 'subtractTime' 2)}}
+{{day-tile  redDay = true  date = (format-date 'subtractTime' 1)}}
+{{day-tile                date = (format-date)}}
+{{day-tile  redDay = true  date = (format-date 'addTime' 1)}}
+{{day-tile                date = (format-date 'addTime' 2)}}
+{{day-tile  redDay = true  date = (format-date 'addTime' 3)}}
+
+
 
 {{else if (dayCheck (format-date 'dddd')  'Thursday')}}
+{{logo-tile logo=false date=(format-date 'subtractTime' 4)}}
+{{day-tile  redDay = true  date = (format-date 'subtractTime' 4)}}
+{{day-tile                date = (format-date 'subtractTime' 3)}}
+{{day-tile  redDay = true  date = (format-date 'subtractTime' 2)}}
+{{day-tile                date = (format-date 'subtractTime' 1)}}
+{{day-tile  redDay = true  date = (format-date)}}
+{{day-tile                date = (format-date 'addTime' 1)}}
+{{day-tile  redDay = true  date = (format-date 'addTime' 2)}}
 
 {{else if (dayCheck (format-date 'dddd')  'Friday')}}
+{{logo-tile logo=false date=(format-date 'subtractTime' 5)}}
+{{day-tile  redDay = true  date = (format-date 'subtractTime' 5)}}
+{{day-tile                date = (format-date 'subtractTime' 4)}}
+{{day-tile  redDay = true  date = (format-date 'subtractTime' 3)}}
+{{day-tile                date = (format-date 'subtractTime' 2)}}
+{{day-tile  redDay = true  date = (format-date 'subtractTime' 1)}}
+{{day-tile                date = (format-date)}}
+{{day-tile  redDay = true  date = (format-date 'addTime' 1)}}
 
 {{else if (dayCheck (format-date 'dddd')  'Saturday')}}
-{{logo-tile logo=false date=(format-date 'MMMM Do YYYY')}}
-{{day-tile header=false redDay = true day="NEED DATABASE" date=(format-date 'formatTime' 'MMMM Do YYYY')}}
-{{day-tile header=false day="NEED DATABASE" date=(format-date 'formatTime' (format-date 'addTime' 1))}}
-{{day-tile header=false redDay = true day="NEED DATABASE" date=(format-date 'formatTime' (format-date 'addTime' 2))}}
-{{day-tile header=false day="NEED DATABASE" date=(format-date 'formatTime' (format-date 'addTime' 3))}}
-{{day-tile header=false redDay = true day="NEED DATABASE" date=(format-date 'formatTime' (format-date 'addTime' 4))}}
-{{day-tile header=false day="NEED DATABASE" date=(format-date 'formatTime' (format-date 'addTime' 5))}}
-{{day-tile header=false redDay = true day="NEED DATABASE" date=(format-date 'formatTime' (format-date 'addTime' 6))}}
+{{logo-tile logo=false date=(format-date 'subtractTime' 6)}}
+{{day-tile  redDay = true  date = (format-date 'subtractTime' 6)}}
+{{day-tile                date = (format-date 'subtractTime' 5)}}
+{{day-tile  redDay = true  date = (format-date 'subtractTime' 4)}}
+{{day-tile                date = (format-date 'subtractTime' 3)}}
+{{day-tile  redDay = true  date = (format-date 'subtractTime' 2)}}
+{{day-tile                date = (format-date 'subtractTime' 1)}}
+{{day-tile  redDay = true  date = (format-date)}}
 
 {{/if}}
 
 
-{{else}}
+{{else if weekTwo}}
+{{logo-tile logo = false date=(format-date 'W2' 'Su')}}
+{{day-tile redDay = true date = (format-date 'W2' 'Su')}}
+{{day-tile               date = (format-date 'W2' 'M')}}
+{{day-tile redDay = true date = (format-date 'W2' 'Tu')}}
+{{day-tile               date = (format-date 'W2' 'W')}}
+{{day-tile redDay = true date = (format-date 'W2' 'Th')}}
+{{day-tile               date = (format-date 'W2' 'F')}}
+{{day-tile redDay = true date = (format-date 'W2' 'Sa')}}
+
+{{else if weekThree}}
+{{logo-tile logo = false date=(format-date 'W3' 'Su')}}
+{{day-tile redDay = true date = (format-date 'W3' 'Su')}}
+{{day-tile               date = (format-date 'W3' 'M')}}
+{{day-tile redDay = true date = (format-date 'W3' 'Tu')}}
+{{day-tile               date = (format-date 'W3' 'W')}}
+{{day-tile redDay = true date = (format-date 'W3' 'Th')}}
+{{day-tile               date = (format-date 'W3' 'F')}}
+{{day-tile redDay = true date = (format-date 'W3' 'Sa')}}
+
+{{else if weekFour}}
+{{logo-tile logo = false date=(format-date 'W4' 'Su')}}
+{{day-tile redDay = true date = (format-date 'W4' 'Su')}}
+{{day-tile               date = (format-date 'W4' 'M')}}
+{{day-tile redDay = true date = (format-date 'W4' 'Tu')}}
+{{day-tile               date = (format-date 'W4' 'W')}}
+{{day-tile redDay = true date = (format-date 'W4' 'Th')}}
+{{day-tile               date = (format-date 'W4' 'F')}}
+{{day-tile redDay = true date = (format-date 'W4' 'Sa')}}
 
 {{/if}}
