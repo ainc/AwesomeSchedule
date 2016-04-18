@@ -657,83 +657,92 @@ define('awesome-schedule-front/helpers/format-date', ['exports', 'ember', 'npm:m
 
     function formatDate(params) {
         var moment = new _npmMoment['default']();
-        if (params[0] === 'day') {
 
-            return moment.format(params[1]);
-        } else if (params[0] === 'addTime') {
+        //If addTime is the first parameter, add the second param # of days to the current date
+        if (params[0] === 'addTime') {
             var today = new _npmMoment['default']();
             var tomorrow = today.add(params[1], 'days');
             return (0, _npmMoment['default'])(tomorrow).format('YYYY-MM-DD');
-        } else if (params[0] === 'subtractTime') {
-            var today = new _npmMoment['default']();
-            var tomorrow = today.subtract(params[1], 'days');
-            console.log();
-            return (0, _npmMoment['default'])(tomorrow).format('YYYY-MM-DD');
-        } else if (params[0] === 'dddd') {
-            return (0, _npmMoment['default'])().format('dddd');
         }
 
-        //If it is the second week, add 7 days to the moment and get the day of the week.
-        else if (params[0] === 'W2') {
-                var week2 = (0, _npmMoment['default'])(moment.startOf('week')).add(7, 'days');
-
-                switch (params[1]) {
-                    case 'Su':
-                        return week2.format('YYYY-MM-DD');
-                    case 'M':
-                        return (0, _npmMoment['default'])(week2.add(1, 'days')).format('YYYY-MM-DD');
-                    case 'Tu':
-                        return (0, _npmMoment['default'])(week2.add(2, 'days')).format('YYYY-MM-DD');
-                    case 'W':
-                        return (0, _npmMoment['default'])(week2.add(3, 'days')).format('YYYY-MM-DD');
-                    case 'Th':
-                        return (0, _npmMoment['default'])(week2.add(4, 'days')).format('YYYY-MM-DD');
-                    case 'F':
-                        return (0, _npmMoment['default'])(week2.add(5, 'days')).format('YYYY-MM-DD');
-                    case 'Sa':
-                        return (0, _npmMoment['default'])(week2.add(6, 'days')).format('YYYY-MM-DD');
-                }
-            } else if (params[0] === 'W3') {
-                var week3 = (0, _npmMoment['default'])(moment.startOf('week')).add(14, 'days');
-
-                switch (params[1]) {
-                    case 'Su':
-                        return week3.format('YYYY-MM-DD');
-                    case 'M':
-                        return (0, _npmMoment['default'])(week3.add(1, 'days')).format('YYYY-MM-DD');
-                    case 'Tu':
-                        return (0, _npmMoment['default'])(week3.add(2, 'days')).format('YYYY-MM-DD');
-                    case 'W':
-                        return (0, _npmMoment['default'])(week3.add(3, 'days')).format('YYYY-MM-DD');
-                    case 'Th':
-                        return (0, _npmMoment['default'])(week3.add(4, 'days')).format('YYYY-MM-DD');
-                    case 'F':
-                        return (0, _npmMoment['default'])(week3.add(5, 'days')).format('YYYY-MM-DD');
-                    case 'Sa':
-                        return (0, _npmMoment['default'])(week3.add(6, 'days')).format('YYYY-MM-DD');
-                }
-            } else if (params[0] === 'W4') {
-                var week4 = (0, _npmMoment['default'])(moment.startOf('week')).add(21, 'days');
-
-                switch (params[1]) {
-                    case 'Su':
-                        return week4.format('YYYY-MM-DD');
-                    case 'M':
-                        return (0, _npmMoment['default'])(week4.add(1, 'days')).format('YYYY-MM-DD');
-                    case 'Tu':
-                        return (0, _npmMoment['default'])(week4.add(2, 'days')).format('YYYY-MM-DD');
-                    case 'W':
-                        return (0, _npmMoment['default'])(week4.add(3, 'days')).format('YYYY-MM-DD');
-                    case 'Th':
-                        return (0, _npmMoment['default'])(week4.add(4, 'days')).format('YYYY-MM-DD');
-                    case 'F':
-                        return (0, _npmMoment['default'])(week4.add(5, 'days')).format('YYYY-MM-DD');
-                    case 'Sa':
-                        return (0, _npmMoment['default'])(week4.add(6, 'days')).format('YYYY-MM-DD');
-                }
-            } else {
-                return (0, _npmMoment['default'])().format('YYYY-MM-DD');
+        //If subtractTime is the first Parameter, subtract second param # of days from the current date
+        else if (params[0] === 'subtractTime') {
+                var today = new _npmMoment['default']();
+                var tomorrow = today.subtract(params[1], 'days');
+                console.log();
+                return (0, _npmMoment['default'])(tomorrow).format('YYYY-MM-DD');
             }
+
+            //If the first param is dddd, return the current day of the week
+            else if (params[0] === 'dddd') {
+                    return (0, _npmMoment['default'])().format('dddd');
+                }
+
+                //If it is the second week, add 7 days to the moment and get the day of the week.
+                else if (params[0] === 'W2') {
+                        var week2 = (0, _npmMoment['default'])(moment.startOf('week')).add(7, 'days');
+
+                        switch (params[1]) {
+                            case 'Su':
+                                return week2.format('YYYY-MM-DD');
+                            case 'M':
+                                return (0, _npmMoment['default'])(week2.add(1, 'days')).format('YYYY-MM-DD');
+                            case 'Tu':
+                                return (0, _npmMoment['default'])(week2.add(2, 'days')).format('YYYY-MM-DD');
+                            case 'W':
+                                return (0, _npmMoment['default'])(week2.add(3, 'days')).format('YYYY-MM-DD');
+                            case 'Th':
+                                return (0, _npmMoment['default'])(week2.add(4, 'days')).format('YYYY-MM-DD');
+                            case 'F':
+                                return (0, _npmMoment['default'])(week2.add(5, 'days')).format('YYYY-MM-DD');
+                            case 'Sa':
+                                return (0, _npmMoment['default'])(week2.add(6, 'days')).format('YYYY-MM-DD');
+                        }
+                    }
+                    //If it is the third week, add 14 days to the moment and get the day of the week.
+                    else if (params[0] === 'W3') {
+                            var week3 = (0, _npmMoment['default'])(moment.startOf('week')).add(14, 'days');
+
+                            switch (params[1]) {
+                                case 'Su':
+                                    return week3.format('YYYY-MM-DD');
+                                case 'M':
+                                    return (0, _npmMoment['default'])(week3.add(1, 'days')).format('YYYY-MM-DD');
+                                case 'Tu':
+                                    return (0, _npmMoment['default'])(week3.add(2, 'days')).format('YYYY-MM-DD');
+                                case 'W':
+                                    return (0, _npmMoment['default'])(week3.add(3, 'days')).format('YYYY-MM-DD');
+                                case 'Th':
+                                    return (0, _npmMoment['default'])(week3.add(4, 'days')).format('YYYY-MM-DD');
+                                case 'F':
+                                    return (0, _npmMoment['default'])(week3.add(5, 'days')).format('YYYY-MM-DD');
+                                case 'Sa':
+                                    return (0, _npmMoment['default'])(week3.add(6, 'days')).format('YYYY-MM-DD');
+                            }
+                        }
+                        //If it is the fourth week, add 21 days to the moment and get the day of the week.
+                        else if (params[0] === 'W4') {
+                                var week4 = (0, _npmMoment['default'])(moment.startOf('week')).add(21, 'days');
+
+                                switch (params[1]) {
+                                    case 'Su':
+                                        return week4.format('YYYY-MM-DD');
+                                    case 'M':
+                                        return (0, _npmMoment['default'])(week4.add(1, 'days')).format('YYYY-MM-DD');
+                                    case 'Tu':
+                                        return (0, _npmMoment['default'])(week4.add(2, 'days')).format('YYYY-MM-DD');
+                                    case 'W':
+                                        return (0, _npmMoment['default'])(week4.add(3, 'days')).format('YYYY-MM-DD');
+                                    case 'Th':
+                                        return (0, _npmMoment['default'])(week4.add(4, 'days')).format('YYYY-MM-DD');
+                                    case 'F':
+                                        return (0, _npmMoment['default'])(week4.add(5, 'days')).format('YYYY-MM-DD');
+                                    case 'Sa':
+                                        return (0, _npmMoment['default'])(week4.add(6, 'days')).format('YYYY-MM-DD');
+                                }
+                            } else {
+                                return (0, _npmMoment['default'])().format('YYYY-MM-DD');
+                            }
     }
 
     exports['default'] = _ember['default'].Helper.helper(formatDate);
@@ -4281,7 +4290,7 @@ define("awesome-schedule-front/templates/components/calendar-view-main", ["expor
             dom.insertBoundary(fragment, 0);
             return morphs;
           },
-          statements: [["inline", "logo-tile", [], ["logo", false, "date", ["subexpr", "format-date", ["MMMM Do YYYY"], [], ["loc", [null, [7, 28], [7, 56]]]]], ["loc", [null, [7, 0], [7, 58]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE", "date", ["subexpr", "format-date", ["formatTime", "MMMM Do YYYY"], [], ["loc", [null, [8, 63], [8, 104]]]]], ["loc", [null, [8, 0], [8, 106]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE", "date", ["subexpr", "format-date", ["formatTime", ["subexpr", "format-date", ["addTime", 1], [], ["loc", [null, [9, 75], [9, 100]]]]], [], ["loc", [null, [9, 49], [9, 101]]]]], ["loc", [null, [9, 0], [9, 103]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE", "date", ["subexpr", "format-date", ["formatTime", ["subexpr", "format-date", ["addTime", 2], [], ["loc", [null, [10, 89], [10, 114]]]]], [], ["loc", [null, [10, 63], [10, 115]]]]], ["loc", [null, [10, 0], [10, 117]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE", "date", ["subexpr", "format-date", ["formatTime", ["subexpr", "format-date", ["addTime", 3], [], ["loc", [null, [11, 75], [11, 100]]]]], [], ["loc", [null, [11, 49], [11, 101]]]]], ["loc", [null, [11, 0], [11, 103]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE", "date", ["subexpr", "format-date", ["formatTime", ["subexpr", "format-date", ["addTime", 4], [], ["loc", [null, [12, 89], [12, 114]]]]], [], ["loc", [null, [12, 63], [12, 115]]]]], ["loc", [null, [12, 0], [12, 117]]]], ["inline", "day-tile", [], ["header", false, "day", "NEED DATABASE", "date", ["subexpr", "format-date", ["formatTime", ["subexpr", "format-date", ["addTime", 5], [], ["loc", [null, [13, 75], [13, 100]]]]], [], ["loc", [null, [13, 49], [13, 101]]]]], ["loc", [null, [13, 0], [13, 103]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "day", "NEED DATABASE", "date", ["subexpr", "format-date", ["formatTime", ["subexpr", "format-date", ["addTime", 6], [], ["loc", [null, [14, 89], [14, 114]]]]], [], ["loc", [null, [14, 63], [14, 115]]]]], ["loc", [null, [14, 0], [14, 117]]]]],
+          statements: [["inline", "logo-tile", [], ["logo", false, "date", ["subexpr", "format-date", ["MMMM Do YYYY"], [], ["loc", [null, [7, 28], [7, 56]]]]], ["loc", [null, [7, 0], [7, 58]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["formatTime", "MMMM Do YYYY"], [], ["loc", [null, [8, 32], [8, 73]]]]], ["loc", [null, [8, 0], [8, 75]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["formatTime", ["subexpr", "format-date", ["addTime", 1], [], ["loc", [null, [9, 59], [9, 84]]]]], [], ["loc", [null, [9, 33], [9, 85]]]]], ["loc", [null, [9, 0], [9, 87]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["formatTime", ["subexpr", "format-date", ["addTime", 2], [], ["loc", [null, [10, 58], [10, 83]]]]], [], ["loc", [null, [10, 32], [10, 84]]]]], ["loc", [null, [10, 0], [10, 86]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["formatTime", ["subexpr", "format-date", ["addTime", 3], [], ["loc", [null, [11, 59], [11, 84]]]]], [], ["loc", [null, [11, 33], [11, 85]]]]], ["loc", [null, [11, 0], [11, 87]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["formatTime", ["subexpr", "format-date", ["addTime", 4], [], ["loc", [null, [12, 58], [12, 83]]]]], [], ["loc", [null, [12, 32], [12, 84]]]]], ["loc", [null, [12, 0], [12, 86]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["formatTime", ["subexpr", "format-date", ["addTime", 5], [], ["loc", [null, [13, 59], [13, 84]]]]], [], ["loc", [null, [13, 33], [13, 85]]]]], ["loc", [null, [13, 0], [13, 87]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["formatTime", ["subexpr", "format-date", ["addTime", 6], [], ["loc", [null, [14, 58], [14, 83]]]]], [], ["loc", [null, [14, 32], [14, 84]]]]], ["loc", [null, [14, 0], [14, 86]]]]],
           locals: [],
           templates: []
         };
@@ -4993,7 +5002,7 @@ define("awesome-schedule-front/templates/components/calendar-view-main", ["expor
               "column": 0
             },
             "end": {
-              "line": 82,
+              "line": 83,
               "column": 0
             }
           },
@@ -5012,6 +5021,10 @@ define("awesome-schedule-front/templates/components/calendar-view-main", ["expor
           var el1 = dom.createComment("");
           dom.appendChild(el0, el1);
           var el1 = dom.createTextNode("\n\n");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("If we are in week 2,3,4 pass the day into format date as the second parameter");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
           dom.appendChild(el0, el1);
           return el0;
         },
@@ -5034,11 +5047,11 @@ define("awesome-schedule-front/templates/components/calendar-view-main", ["expor
             "loc": {
               "source": null,
               "start": {
-                "line": 82,
+                "line": 83,
                 "column": 0
               },
               "end": {
-                "line": 92,
+                "line": 93,
                 "column": 0
               }
             },
@@ -5097,7 +5110,7 @@ define("awesome-schedule-front/templates/components/calendar-view-main", ["expor
             dom.insertBoundary(fragment, 0);
             return morphs;
           },
-          statements: [["inline", "logo-tile", [], ["logo", false, "date", ["subexpr", "format-date", ["W2", "Su"], [], ["loc", [null, [83, 30], [83, 53]]]]], ["loc", [null, [83, 0], [83, 55]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W2", "Su"], [], ["loc", [null, [84, 32], [84, 55]]]]], ["loc", [null, [84, 0], [84, 57]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W2", "M"], [], ["loc", [null, [85, 32], [85, 54]]]]], ["loc", [null, [85, 0], [85, 56]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W2", "Tu"], [], ["loc", [null, [86, 32], [86, 55]]]]], ["loc", [null, [86, 0], [86, 57]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W2", "W"], [], ["loc", [null, [87, 32], [87, 54]]]]], ["loc", [null, [87, 0], [87, 56]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W2", "Th"], [], ["loc", [null, [88, 32], [88, 55]]]]], ["loc", [null, [88, 0], [88, 57]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W2", "F"], [], ["loc", [null, [89, 32], [89, 54]]]]], ["loc", [null, [89, 0], [89, 56]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W2", "Sa"], [], ["loc", [null, [90, 32], [90, 55]]]]], ["loc", [null, [90, 0], [90, 57]]]]],
+          statements: [["inline", "logo-tile", [], ["logo", false, "date", ["subexpr", "format-date", ["W2", "Su"], [], ["loc", [null, [84, 30], [84, 53]]]]], ["loc", [null, [84, 0], [84, 55]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W2", "Su"], [], ["loc", [null, [85, 32], [85, 55]]]]], ["loc", [null, [85, 0], [85, 57]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W2", "M"], [], ["loc", [null, [86, 32], [86, 54]]]]], ["loc", [null, [86, 0], [86, 56]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W2", "Tu"], [], ["loc", [null, [87, 32], [87, 55]]]]], ["loc", [null, [87, 0], [87, 57]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W2", "W"], [], ["loc", [null, [88, 32], [88, 54]]]]], ["loc", [null, [88, 0], [88, 56]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W2", "Th"], [], ["loc", [null, [89, 32], [89, 55]]]]], ["loc", [null, [89, 0], [89, 57]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W2", "F"], [], ["loc", [null, [90, 32], [90, 54]]]]], ["loc", [null, [90, 0], [90, 56]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W2", "Sa"], [], ["loc", [null, [91, 32], [91, 55]]]]], ["loc", [null, [91, 0], [91, 57]]]]],
           locals: [],
           templates: []
         };
@@ -5111,11 +5124,11 @@ define("awesome-schedule-front/templates/components/calendar-view-main", ["expor
               "loc": {
                 "source": null,
                 "start": {
-                  "line": 92,
+                  "line": 93,
                   "column": 0
                 },
                 "end": {
-                  "line": 102,
+                  "line": 103,
                   "column": 0
                 }
               },
@@ -5174,7 +5187,7 @@ define("awesome-schedule-front/templates/components/calendar-view-main", ["expor
               dom.insertBoundary(fragment, 0);
               return morphs;
             },
-            statements: [["inline", "logo-tile", [], ["logo", false, "date", ["subexpr", "format-date", ["W3", "Su"], [], ["loc", [null, [93, 30], [93, 53]]]]], ["loc", [null, [93, 0], [93, 55]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W3", "Su"], [], ["loc", [null, [94, 32], [94, 55]]]]], ["loc", [null, [94, 0], [94, 57]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W3", "M"], [], ["loc", [null, [95, 32], [95, 54]]]]], ["loc", [null, [95, 0], [95, 56]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W3", "Tu"], [], ["loc", [null, [96, 32], [96, 55]]]]], ["loc", [null, [96, 0], [96, 57]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W3", "W"], [], ["loc", [null, [97, 32], [97, 54]]]]], ["loc", [null, [97, 0], [97, 56]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W3", "Th"], [], ["loc", [null, [98, 32], [98, 55]]]]], ["loc", [null, [98, 0], [98, 57]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W3", "F"], [], ["loc", [null, [99, 32], [99, 54]]]]], ["loc", [null, [99, 0], [99, 56]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W3", "Sa"], [], ["loc", [null, [100, 32], [100, 55]]]]], ["loc", [null, [100, 0], [100, 57]]]]],
+            statements: [["inline", "logo-tile", [], ["logo", false, "date", ["subexpr", "format-date", ["W3", "Su"], [], ["loc", [null, [94, 30], [94, 53]]]]], ["loc", [null, [94, 0], [94, 55]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W3", "Su"], [], ["loc", [null, [95, 32], [95, 55]]]]], ["loc", [null, [95, 0], [95, 57]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W3", "M"], [], ["loc", [null, [96, 32], [96, 54]]]]], ["loc", [null, [96, 0], [96, 56]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W3", "Tu"], [], ["loc", [null, [97, 32], [97, 55]]]]], ["loc", [null, [97, 0], [97, 57]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W3", "W"], [], ["loc", [null, [98, 32], [98, 54]]]]], ["loc", [null, [98, 0], [98, 56]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W3", "Th"], [], ["loc", [null, [99, 32], [99, 55]]]]], ["loc", [null, [99, 0], [99, 57]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W3", "F"], [], ["loc", [null, [100, 32], [100, 54]]]]], ["loc", [null, [100, 0], [100, 56]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W3", "Sa"], [], ["loc", [null, [101, 32], [101, 55]]]]], ["loc", [null, [101, 0], [101, 57]]]]],
             locals: [],
             templates: []
           };
@@ -5188,11 +5201,11 @@ define("awesome-schedule-front/templates/components/calendar-view-main", ["expor
                 "loc": {
                   "source": null,
                   "start": {
-                    "line": 102,
+                    "line": 103,
                     "column": 0
                   },
                   "end": {
-                    "line": 112,
+                    "line": 113,
                     "column": 0
                   }
                 },
@@ -5251,7 +5264,7 @@ define("awesome-schedule-front/templates/components/calendar-view-main", ["expor
                 dom.insertBoundary(fragment, 0);
                 return morphs;
               },
-              statements: [["inline", "logo-tile", [], ["logo", false, "date", ["subexpr", "format-date", ["W4", "Su"], [], ["loc", [null, [103, 30], [103, 53]]]]], ["loc", [null, [103, 0], [103, 55]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W4", "Su"], [], ["loc", [null, [104, 32], [104, 55]]]]], ["loc", [null, [104, 0], [104, 57]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W4", "M"], [], ["loc", [null, [105, 32], [105, 54]]]]], ["loc", [null, [105, 0], [105, 56]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W4", "Tu"], [], ["loc", [null, [106, 32], [106, 55]]]]], ["loc", [null, [106, 0], [106, 57]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W4", "W"], [], ["loc", [null, [107, 32], [107, 54]]]]], ["loc", [null, [107, 0], [107, 56]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W4", "Th"], [], ["loc", [null, [108, 32], [108, 55]]]]], ["loc", [null, [108, 0], [108, 57]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W4", "F"], [], ["loc", [null, [109, 32], [109, 54]]]]], ["loc", [null, [109, 0], [109, 56]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W4", "Sa"], [], ["loc", [null, [110, 32], [110, 55]]]]], ["loc", [null, [110, 0], [110, 57]]]]],
+              statements: [["inline", "logo-tile", [], ["logo", false, "date", ["subexpr", "format-date", ["W4", "Su"], [], ["loc", [null, [104, 30], [104, 53]]]]], ["loc", [null, [104, 0], [104, 55]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W4", "Su"], [], ["loc", [null, [105, 32], [105, 55]]]]], ["loc", [null, [105, 0], [105, 57]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W4", "M"], [], ["loc", [null, [106, 32], [106, 54]]]]], ["loc", [null, [106, 0], [106, 56]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W4", "Tu"], [], ["loc", [null, [107, 32], [107, 55]]]]], ["loc", [null, [107, 0], [107, 57]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W4", "W"], [], ["loc", [null, [108, 32], [108, 54]]]]], ["loc", [null, [108, 0], [108, 56]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W4", "Th"], [], ["loc", [null, [109, 32], [109, 55]]]]], ["loc", [null, [109, 0], [109, 57]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W4", "F"], [], ["loc", [null, [110, 32], [110, 54]]]]], ["loc", [null, [110, 0], [110, 56]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W4", "Sa"], [], ["loc", [null, [111, 32], [111, 55]]]]], ["loc", [null, [111, 0], [111, 57]]]]],
               locals: [],
               templates: []
             };
@@ -5263,11 +5276,11 @@ define("awesome-schedule-front/templates/components/calendar-view-main", ["expor
               "loc": {
                 "source": null,
                 "start": {
-                  "line": 102,
+                  "line": 103,
                   "column": 0
                 },
                 "end": {
-                  "line": 112,
+                  "line": 113,
                   "column": 0
                 }
               },
@@ -5290,7 +5303,7 @@ define("awesome-schedule-front/templates/components/calendar-view-main", ["expor
               dom.insertBoundary(fragment, null);
               return morphs;
             },
-            statements: [["block", "if", [["get", "weekFour", ["loc", [null, [102, 10], [102, 18]]]]], [], 0, null, ["loc", [null, [102, 0], [112, 0]]]]],
+            statements: [["block", "if", [["get", "weekFour", ["loc", [null, [103, 10], [103, 18]]]]], [], 0, null, ["loc", [null, [103, 0], [113, 0]]]]],
             locals: [],
             templates: [child0]
           };
@@ -5302,11 +5315,11 @@ define("awesome-schedule-front/templates/components/calendar-view-main", ["expor
             "loc": {
               "source": null,
               "start": {
-                "line": 92,
+                "line": 93,
                 "column": 0
               },
               "end": {
-                "line": 112,
+                "line": 113,
                 "column": 0
               }
             },
@@ -5329,7 +5342,7 @@ define("awesome-schedule-front/templates/components/calendar-view-main", ["expor
             dom.insertBoundary(fragment, null);
             return morphs;
           },
-          statements: [["block", "if", [["get", "weekThree", ["loc", [null, [92, 10], [92, 19]]]]], [], 0, 1, ["loc", [null, [92, 0], [112, 0]]]]],
+          statements: [["block", "if", [["get", "weekThree", ["loc", [null, [93, 10], [93, 19]]]]], [], 0, 1, ["loc", [null, [93, 0], [113, 0]]]]],
           locals: [],
           templates: [child0, child1]
         };
@@ -5341,11 +5354,11 @@ define("awesome-schedule-front/templates/components/calendar-view-main", ["expor
           "loc": {
             "source": null,
             "start": {
-              "line": 82,
+              "line": 83,
               "column": 0
             },
             "end": {
-              "line": 112,
+              "line": 113,
               "column": 0
             }
           },
@@ -5368,7 +5381,7 @@ define("awesome-schedule-front/templates/components/calendar-view-main", ["expor
           dom.insertBoundary(fragment, null);
           return morphs;
         },
-        statements: [["block", "if", [["get", "weekTwo", ["loc", [null, [82, 10], [82, 17]]]]], [], 0, 1, ["loc", [null, [82, 0], [112, 0]]]]],
+        statements: [["block", "if", [["get", "weekTwo", ["loc", [null, [83, 10], [83, 17]]]]], [], 0, 1, ["loc", [null, [83, 0], [113, 0]]]]],
         locals: [],
         templates: [child0, child1]
       };
@@ -5387,7 +5400,7 @@ define("awesome-schedule-front/templates/components/calendar-view-main", ["expor
             "column": 0
           },
           "end": {
-            "line": 113,
+            "line": 114,
             "column": 0
           }
         },
@@ -5417,7 +5430,7 @@ define("awesome-schedule-front/templates/components/calendar-view-main", ["expor
         dom.insertBoundary(fragment, null);
         return morphs;
       },
-      statements: [["block", "if", [["get", "thisWeek", ["loc", [null, [4, 6], [4, 14]]]]], [], 0, 1, ["loc", [null, [4, 0], [112, 7]]]]],
+      statements: [["block", "if", [["get", "thisWeek", ["loc", [null, [4, 6], [4, 14]]]]], [], 0, 1, ["loc", [null, [4, 0], [113, 7]]]]],
       locals: [],
       templates: [child0, child1]
     };

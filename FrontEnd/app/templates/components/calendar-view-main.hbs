@@ -5,13 +5,13 @@
 <!--Find out what day we are in and use it to get the correct dates for API pulls-->
 {{#if (dayCheck (format-date 'dddd')  'Sunday')}}
 {{logo-tile logo=false date=(format-date 'MMMM Do YYYY')}}
-{{day-tile header=false redDay = true day="NEED DATABASE" date=(format-date 'formatTime' 'MMMM Do YYYY')}}
-{{day-tile header=false day="NEED DATABASE" date=(format-date 'formatTime' (format-date 'addTime' 1))}}
-{{day-tile header=false redDay = true day="NEED DATABASE" date=(format-date 'formatTime' (format-date 'addTime' 2))}}
-{{day-tile header=false day="NEED DATABASE" date=(format-date 'formatTime' (format-date 'addTime' 3))}}
-{{day-tile header=false redDay = true day="NEED DATABASE" date=(format-date 'formatTime' (format-date 'addTime' 4))}}
-{{day-tile header=false day="NEED DATABASE" date=(format-date 'formatTime' (format-date 'addTime' 5))}}
-{{day-tile header=false redDay = true day="NEED DATABASE" date=(format-date 'formatTime' (format-date 'addTime' 6))}}
+{{day-tile  redDay = true  date=(format-date 'formatTime' 'MMMM Do YYYY')}}
+{{day-tile                  date=(format-date 'formatTime' (format-date 'addTime' 1))}}
+{{day-tile  redDay = true  date=(format-date 'formatTime' (format-date 'addTime' 2))}}
+{{day-tile                  date=(format-date 'formatTime' (format-date 'addTime' 3))}}
+{{day-tile  redDay = true  date=(format-date 'formatTime' (format-date 'addTime' 4))}}
+{{day-tile                  date=(format-date 'formatTime' (format-date 'addTime' 5))}}
+{{day-tile  redDay = true  date=(format-date 'formatTime' (format-date 'addTime' 6))}}
 
 
 {{else if (dayCheck (format-date 'dddd')  'Monday')}}
@@ -79,6 +79,7 @@
 {{/if}}
 
 
+<!--If we are in week 2,3,4 pass the day into format date as the second parameter-->
 {{else if weekTwo}}
 {{logo-tile logo = false date=(format-date 'W2' 'Su')}}
 {{day-tile redDay = true date = (format-date 'W2' 'Su')}}

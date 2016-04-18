@@ -5,17 +5,17 @@ import Moment from 'npm:moment';
 //Returns a date based on parameters passed to it
 export function formatDate(params) {
      var moment = new Moment();
-    if(params[0] === 'day'){
-       
-        return moment.format(params[1]);
-    }
-    else if(params[0] === 'addTime'){
+     
+     //If addTime is the first parameter, add the second param # of days to the current date
+    if(params[0] === 'addTime'){
         var today = new Moment();
         var tomorrow = today.add(params[1],'days');
         return Moment(tomorrow).format('YYYY-MM-DD');
         
         
     }
+    
+    //If subtractTime is the first Parameter, subtract second param # of days from the current date
     else if(params[0] ==='subtractTime'){
         var today = new Moment();
         var tomorrow = today.subtract(params[1],'days');
@@ -24,6 +24,8 @@ export function formatDate(params) {
         
         
     }
+    
+    //If the first param is dddd, return the current day of the week
     else if(params[0] === 'dddd'){
         return Moment().format('dddd');
     }
@@ -50,6 +52,7 @@ export function formatDate(params) {
         }
                 
     }
+    //If it is the third week, add 14 days to the moment and get the day of the week.
     else if(params[0] === 'W3'){
         var week3 = Moment(moment.startOf('week')).add(14,'days');
         
@@ -71,6 +74,7 @@ export function formatDate(params) {
         }
                 
     }
+    //If it is the fourth week, add 21 days to the moment and get the day of the week.
         else if(params[0] === 'W4'){
         var week4 = Moment(moment.startOf('week')).add(21,'days');
         
