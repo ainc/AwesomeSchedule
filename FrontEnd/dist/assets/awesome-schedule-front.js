@@ -662,87 +662,89 @@ define('awesome-schedule-front/helpers/format-date', ['exports', 'ember', 'npm:m
         if (params[0] === 'addTime') {
             var today = new _npmMoment['default']();
             var tomorrow = today.add(params[1], 'days');
-            return (0, _npmMoment['default'])(tomorrow).format('YYYY-MM-DD');
+            return new _npmMoment['default'](tomorrow).format('YYYY-MM-DD');
         }
 
         //If subtractTime is the first Parameter, subtract second param # of days from the current date
         else if (params[0] === 'subtractTime') {
-                var today = new _npmMoment['default']();
-                var tomorrow = today.subtract(params[1], 'days');
-                console.log();
-                return (0, _npmMoment['default'])(tomorrow).format('YYYY-MM-DD');
+                var today1 = new _npmMoment['default']();
+                var tomorrow1 = today1.subtract(params[1], 'days');
+
+                return new _npmMoment['default'](tomorrow1).format('YYYY-MM-DD');
             }
 
             //If the first param is dddd, return the current day of the week
             else if (params[0] === 'dddd') {
-                    return (0, _npmMoment['default'])().format('dddd');
+                    return new _npmMoment['default']().format('dddd');
                 }
 
                 //If it is the second week, add 7 days to the moment and get the day of the week.
                 else if (params[0] === 'W2') {
-                        var week2 = (0, _npmMoment['default'])(moment.startOf('week')).add(7, 'days');
+                        var week2 = new _npmMoment['default'](moment.startOf('week')).add(7, 'days');
 
                         switch (params[1]) {
                             case 'Su':
                                 return week2.format('YYYY-MM-DD');
                             case 'M':
-                                return (0, _npmMoment['default'])(week2.add(1, 'days')).format('YYYY-MM-DD');
+                                return new _npmMoment['default'](week2.add(1, 'days')).format('YYYY-MM-DD');
                             case 'Tu':
-                                return (0, _npmMoment['default'])(week2.add(2, 'days')).format('YYYY-MM-DD');
+                                return new _npmMoment['default'](week2.add(2, 'days')).format('YYYY-MM-DD');
                             case 'W':
-                                return (0, _npmMoment['default'])(week2.add(3, 'days')).format('YYYY-MM-DD');
+                                return new _npmMoment['default'](week2.add(3, 'days')).format('YYYY-MM-DD');
                             case 'Th':
-                                return (0, _npmMoment['default'])(week2.add(4, 'days')).format('YYYY-MM-DD');
+                                return new _npmMoment['default'](week2.add(4, 'days')).format('YYYY-MM-DD');
                             case 'F':
-                                return (0, _npmMoment['default'])(week2.add(5, 'days')).format('YYYY-MM-DD');
+                                return new _npmMoment['default'](week2.add(5, 'days')).format('YYYY-MM-DD');
                             case 'Sa':
-                                return (0, _npmMoment['default'])(week2.add(6, 'days')).format('YYYY-MM-DD');
+                                return new _npmMoment['default'](week2.add(6, 'days')).format('YYYY-MM-DD');
                         }
                     }
                     //If it is the third week, add 14 days to the moment and get the day of the week.
                     else if (params[0] === 'W3') {
-                            var week3 = (0, _npmMoment['default'])(moment.startOf('week')).add(14, 'days');
+                            var week3 = new _npmMoment['default'](moment.startOf('week')).add(14, 'days');
 
                             switch (params[1]) {
                                 case 'Su':
                                     return week3.format('YYYY-MM-DD');
                                 case 'M':
-                                    return (0, _npmMoment['default'])(week3.add(1, 'days')).format('YYYY-MM-DD');
+                                    return new _npmMoment['default'](week3.add(1, 'days')).format('YYYY-MM-DD');
                                 case 'Tu':
-                                    return (0, _npmMoment['default'])(week3.add(2, 'days')).format('YYYY-MM-DD');
+                                    return new _npmMoment['default'](week3.add(2, 'days')).format('YYYY-MM-DD');
                                 case 'W':
-                                    return (0, _npmMoment['default'])(week3.add(3, 'days')).format('YYYY-MM-DD');
+                                    return new _npmMoment['default'](week3.add(3, 'days')).format('YYYY-MM-DD');
                                 case 'Th':
-                                    return (0, _npmMoment['default'])(week3.add(4, 'days')).format('YYYY-MM-DD');
+                                    return new _npmMoment['default'](week3.add(4, 'days')).format('YYYY-MM-DD');
                                 case 'F':
-                                    return (0, _npmMoment['default'])(week3.add(5, 'days')).format('YYYY-MM-DD');
+                                    return new _npmMoment['default'](week3.add(5, 'days')).format('YYYY-MM-DD');
                                 case 'Sa':
-                                    return (0, _npmMoment['default'])(week3.add(6, 'days')).format('YYYY-MM-DD');
+                                    return new _npmMoment['default'](week3.add(6, 'days')).format('YYYY-MM-DD');
                             }
                         }
                         //If it is the fourth week, add 21 days to the moment and get the day of the week.
                         else if (params[0] === 'W4') {
-                                var week4 = (0, _npmMoment['default'])(moment.startOf('week')).add(21, 'days');
+                                var week4 = new _npmMoment['default'](moment.startOf('week')).add(21, 'days');
 
                                 switch (params[1]) {
                                     case 'Su':
                                         return week4.format('YYYY-MM-DD');
                                     case 'M':
-                                        return (0, _npmMoment['default'])(week4.add(1, 'days')).format('YYYY-MM-DD');
+                                        return new _npmMoment['default'](week4.add(1, 'days')).format('YYYY-MM-DD');
                                     case 'Tu':
-                                        return (0, _npmMoment['default'])(week4.add(2, 'days')).format('YYYY-MM-DD');
+                                        return new _npmMoment['default'](week4.add(2, 'days')).format('YYYY-MM-DD');
                                     case 'W':
-                                        return (0, _npmMoment['default'])(week4.add(3, 'days')).format('YYYY-MM-DD');
+                                        return new _npmMoment['default'](week4.add(3, 'days')).format('YYYY-MM-DD');
                                     case 'Th':
-                                        return (0, _npmMoment['default'])(week4.add(4, 'days')).format('YYYY-MM-DD');
+                                        return new _npmMoment['default'](week4.add(4, 'days')).format('YYYY-MM-DD');
                                     case 'F':
-                                        return (0, _npmMoment['default'])(week4.add(5, 'days')).format('YYYY-MM-DD');
+                                        return new _npmMoment['default'](week4.add(5, 'days')).format('YYYY-MM-DD');
                                     case 'Sa':
-                                        return (0, _npmMoment['default'])(week4.add(6, 'days')).format('YYYY-MM-DD');
+                                        return new _npmMoment['default'](week4.add(6, 'days')).format('YYYY-MM-DD');
                                 }
-                            } else {
-                                return (0, _npmMoment['default'])().format('YYYY-MM-DD');
                             }
+                            //If no parameters are given, or the parameters are invalid, give back the current date.
+                            else {
+                                    return new _npmMoment['default']().format('YYYY-MM-DD');
+                                }
     }
 
     exports['default'] = _ember['default'].Helper.helper(formatDate);
@@ -8326,7 +8328,7 @@ catch(err) {
 /* jshint ignore:start */
 
 if (!runningTests) {
-  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+5562574f"});
+  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+7f9b8443"});
 }
 
 /* jshint ignore:end */

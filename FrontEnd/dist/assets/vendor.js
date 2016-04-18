@@ -70671,7 +70671,7 @@ define('npm:moment', function(){ return { 'default': require('moment')};})
     return _moment;
 
 }));
-},{}]},{},["./browserify_stubs.js"])
+},{}]},{},["./browserify_stubs.js"]);
 
 ;define("ic-ajax",
   ["ember","exports"],
