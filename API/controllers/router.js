@@ -8,7 +8,7 @@ var multer = require('multer');
 
 // Uploading profile pictures at 10 MB limit and only one file
 var uploading = multer({
-    dest: __dirname + '../../FrontEnd/public/assets/images/profile_pictures',
+    dest: __dirname + '../../../FrontEnd/public/assets/images/profile_pictures',
     limits: {fileSize: 10000000, files:1}
 
 });
@@ -28,6 +28,7 @@ router.use(function (request, response, next) {
 
 router.post('/api/basic_auth', urlencodedParser, require('./routes/basic_auth'));
 router.post('/api/coaches/:id', require('./routes/coaches'));
+router.post('/api/calendar', require('./routes/calendar'));
 
 // Allows entire file to be seen with module.exports
 module.exports = router;
