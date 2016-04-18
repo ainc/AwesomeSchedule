@@ -4,11 +4,11 @@ import Moment from 'npm:moment';
 
 //Returns a date based on parameters passed to it
 export function formatDate(params) {
-     var moment = new Moment();
+     var today = new Moment();
      
      //If addTime is the first parameter, add the second param # of days to the current date
     if(params[0] === 'addTime'){
-        var today = new Moment();
+       
         var tomorrow = today.add(params[1],'days');
         return new Moment(tomorrow).format('YYYY-MM-DD');
         
@@ -17,10 +17,10 @@ export function formatDate(params) {
     
     //If subtractTime is the first Parameter, subtract second param # of days from the current date
     else if(params[0] ==='subtractTime'){
-        var today1 = new Moment();
-        var tomorrow1 = today1.subtract(params[1],'days');
+       
+        var yesterday = today.subtract(params[1],'days');
         
-        return new Moment(tomorrow1).format('YYYY-MM-DD');
+        return new Moment(yesterday).format('YYYY-MM-DD');
         
         
     }
@@ -32,7 +32,7 @@ export function formatDate(params) {
     
     //If it is the second week, add 7 days to the moment and get the day of the week.
     else if(params[0] === 'W2'){
-        var week2 = new Moment(moment.startOf('week')).add(7,'days');
+        var week2 = new Moment(today.startOf('week')).add(7,'days');
         
         switch(params[1]){
             case 'Su':
@@ -54,7 +54,7 @@ export function formatDate(params) {
     }
     //If it is the third week, add 14 days to the moment and get the day of the week.
     else if(params[0] === 'W3'){
-        var week3 = new Moment(moment.startOf('week')).add(14,'days');
+        var week3 = new Moment(today.startOf('week')).add(14,'days');
         
         switch(params[1]){
             case 'Su':
@@ -76,7 +76,7 @@ export function formatDate(params) {
     }
     //If it is the fourth week, add 21 days to the moment and get the day of the week.
         else if(params[0] === 'W4'){
-        var week4 = new Moment(moment.startOf('week')).add(21,'days');
+        var week4 = new Moment(today.startOf('week')).add(21,'days');
         
         switch(params[1]){
             case 'Su':

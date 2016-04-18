@@ -656,21 +656,21 @@ define('awesome-schedule-front/helpers/format-date', ['exports', 'ember', 'npm:m
     //Returns a date based on parameters passed to it
 
     function formatDate(params) {
-        var moment = new _npmMoment['default']();
+        var today = new _npmMoment['default']();
 
         //If addTime is the first parameter, add the second param # of days to the current date
         if (params[0] === 'addTime') {
-            var today = new _npmMoment['default']();
+
             var tomorrow = today.add(params[1], 'days');
             return new _npmMoment['default'](tomorrow).format('YYYY-MM-DD');
         }
 
         //If subtractTime is the first Parameter, subtract second param # of days from the current date
         else if (params[0] === 'subtractTime') {
-                var today1 = new _npmMoment['default']();
-                var tomorrow1 = today1.subtract(params[1], 'days');
 
-                return new _npmMoment['default'](tomorrow1).format('YYYY-MM-DD');
+                var yesterday = today.subtract(params[1], 'days');
+
+                return new _npmMoment['default'](yesterday).format('YYYY-MM-DD');
             }
 
             //If the first param is dddd, return the current day of the week
@@ -680,7 +680,7 @@ define('awesome-schedule-front/helpers/format-date', ['exports', 'ember', 'npm:m
 
                 //If it is the second week, add 7 days to the moment and get the day of the week.
                 else if (params[0] === 'W2') {
-                        var week2 = new _npmMoment['default'](moment.startOf('week')).add(7, 'days');
+                        var week2 = new _npmMoment['default'](today.startOf('week')).add(7, 'days');
 
                         switch (params[1]) {
                             case 'Su':
@@ -701,7 +701,7 @@ define('awesome-schedule-front/helpers/format-date', ['exports', 'ember', 'npm:m
                     }
                     //If it is the third week, add 14 days to the moment and get the day of the week.
                     else if (params[0] === 'W3') {
-                            var week3 = new _npmMoment['default'](moment.startOf('week')).add(14, 'days');
+                            var week3 = new _npmMoment['default'](today.startOf('week')).add(14, 'days');
 
                             switch (params[1]) {
                                 case 'Su':
@@ -722,7 +722,7 @@ define('awesome-schedule-front/helpers/format-date', ['exports', 'ember', 'npm:m
                         }
                         //If it is the fourth week, add 21 days to the moment and get the day of the week.
                         else if (params[0] === 'W4') {
-                                var week4 = new _npmMoment['default'](moment.startOf('week')).add(21, 'days');
+                                var week4 = new _npmMoment['default'](today.startOf('week')).add(21, 'days');
 
                                 switch (params[1]) {
                                     case 'Su':
@@ -8328,7 +8328,7 @@ catch(err) {
 /* jshint ignore:start */
 
 if (!runningTests) {
-  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+7f9b8443"});
+  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+bd6a81a2"});
 }
 
 /* jshint ignore:end */
