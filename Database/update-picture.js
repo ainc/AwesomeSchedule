@@ -1,4 +1,4 @@
-
+//This file is called when the coach wants to add a picture of themselves on the coaches page. The route /assets/images/profile_pictures/ is constant.
 var provider = require('./mysqlProvider.js');
 
 module.exports.updatepicture = function(CoachID, username){
