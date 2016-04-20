@@ -1,3 +1,6 @@
+//This file is called when we want to display the classes on the calander. We only want to see the data for the current month starting from the
+//current date up to 1 month after. This file can be modified by adding arguments to pullclasses and changing the interval of data to select.
+//This can be useful if we want to do something like scroll forwards or backwords on the admin calandar.
 var provider = require('./mysqlProvider.js');
 
 module.exports.pullclasses = function(){
