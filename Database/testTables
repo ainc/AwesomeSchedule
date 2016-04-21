@@ -1,0 +1,113 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+USE `mydb` ;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`coaches`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`coaches` (
+  `CoID` INT NOT NULL AUTO_INCREMENT,
+  `firstName` VARCHAR(45) NOT NULL,
+  `lastName` VARCHAR(45) NOT NULL,
+  `active` TINYINT(1) NULL,
+  `startDate` DATE NOT NULL,
+  `endDate` DATE NULL,
+  `username` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `isAdmin` TINYINT(1) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `picture` VARCHAR(45) NULL,
+  PRIMARY KEY (`CoID`),
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC),
+  UNIQUE INDEX `CoID_UNIQUE` (`CoID` ASC),
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`unavailable`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`unavailable` (
+  `uaID` INT NOT NULL AUTO_INCREMENT,
+  `uaDate` DATE NOT NULL,
+  `coaches_CoID` INT NOT NULL,
+  PRIMARY KEY (`uaID`, `coaches_CoID`),
+  INDEX `fk_unavailable_coaches1_idx` (`coaches_CoID` ASC),
+  CONSTRAINT `fk_unavailable_coaches1`
+    FOREIGN KEY (`coaches_CoID`)
+    REFERENCES `mydb`.`coaches` (`CoID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`classes`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`classes` (
+  `ClassID` INT NOT NULL AUTO_INCREMENT,
+  `className` VARCHAR(45) NOT NULL,
+  `classDate` DATE NOT NULL,
+  `startTime` VARCHAR(45) NOT NULL,
+  `endTime` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`ClassID`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`rates`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`rates` (
+  `RaID` INT NOT NULL AUTO_INCREMENT,
+  `rate` FLOAT NOT NULL,
+  `className` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`RaID`),
+  UNIQUE INDEX `RaID_UNIQUE` (`RaID` ASC),
+  UNIQUE INDEX `className_UNIQUE` (`className` ASC))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`schedule`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`schedule` (
+  `coaches_CoID` INT NOT NULL,
+  `classes_ClassID` INT NOT NULL,
+  `rates_RaID` INT NOT NULL,
+  PRIMARY KEY (`coaches_CoID`, `classes_ClassID`, `rates_RaID`),
+  INDEX `fk_coaches_has_classes_classes1_idx` (`classes_ClassID` ASC),
+  INDEX `fk_coaches_has_classes_coaches_idx` (`coaches_CoID` ASC),
+  INDEX `fk_schedule_rates1_idx` (`rates_RaID` ASC),
+  CONSTRAINT `fk_coaches_has_classes_coaches`
+    FOREIGN KEY (`coaches_CoID`)
+    REFERENCES `mydb`.`coaches` (`CoID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_coaches_has_classes_classes1`
+    FOREIGN KEY (`classes_ClassID`)
+    REFERENCES `mydb`.`classes` (`ClassID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_schedule_rates1`
+    FOREIGN KEY (`rates_RaID`)
+    REFERENCES `mydb`.`rates` (`RaID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
