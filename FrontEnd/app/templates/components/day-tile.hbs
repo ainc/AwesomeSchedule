@@ -13,27 +13,20 @@
 
 <!--Eventually will need an if statement to check if there is information that needs to be added to each day.-->
 {{#if redDay}}
-{{#if dayCheck}}
+
 <div class = {{wrapperEmptySTTS}} id="tile">
-   {{course}}
-   {{increment}}
+    <p class="displayCourse">{{course}}</p>
+
 </div>
+
 {{else}}
-<div class = {{wrapperEmptySTTS}} id="tile">
-    {{date}}
+
+<div class = {{wrapperEmptyMWF}} id="tile">
+    <p class ="displayCourse">{{course}}</p>
+
 </div>
-{{/if}}
-{{else}}
-{{#if dayCheck}}
-<div class = {{wrapperEmptySTTS}} id="tile">
-   {{course}}
-   {{increment}}
-</div>
-{{else}}
-<div class = {{wrapperEmptySTTS}} id="tile">
-    {{date}}
-</div>
-{{/if}}
+
+
 {{/if}}
 {{/if}}
 {{yield}}

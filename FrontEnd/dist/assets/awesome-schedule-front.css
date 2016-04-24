@@ -130,14 +130,17 @@ calendarContainer {
       padding: 0 0 0 0; }
       calendarContainer calendarRow calendarViewMain logoHeader {
         display: table-cell;
-        width: 10%; }
+        width: 10%;
+        vertical-align: top; }
       calendarContainer calendarRow calendarViewMain dayTileHeader {
         display: table-cell;
-        width: 10%; }
+        width: 10%;
+        vertical-align: top; }
       calendarContainer calendarRow calendarViewMain blankTile {
         display: table-cell;
         width: 10%; }
     calendarContainer calendarRow calendarViewCoaches {
+      vertical-align: top;
       display: table-cell;
       width: 16.66667%;
       max-width: 100px;
@@ -151,6 +154,9 @@ calendarContainer {
   border: 1px;
   border-style: solid;
   height: 100%; }
+
+.displayCourse {
+  padding-top: 5px; }
 
 /*-----------------------------END CALENDAR RELATED CSS-------------------------------*/
 /*---------------------------COACH RELATED CSS----------------------------------------*/

@@ -4,10 +4,6 @@
 <section class ={{wrapper}}>
 <calendarContainer>
 
-{{day-tile header = false redDay = true date = calendar.data.[0].classDate}}
-{{day-tile header = false redDay = true date = calendar.data.[1].classDate}}
-{{day-tile header = false redDay = true date = calendar.data.[2].classDate}}
-{{day-tile header = false redDay = true date = calendar.data.[3].classDate}}
 
     <calendarRow>
 	<calendarViewMain>
@@ -36,84 +32,85 @@
         <calendarViewMain>
                 {{#if (dayCheck (format-date 'dddd')  'Sunday') }}
                 {{logo-tile logo=false date=(format-date) }}
-                {{day-tile  redDay = true  date=(format-date)}}
-                {{day-tile                  dayCheck =true course = calendar.data.[calendar.whichCourse].className}}
-                {{day-tile  redDay = true  date = (format-date 'addTime' 2)}}
-                {{day-tile                  date = (format-date 'addTime' 3)}}
-                {{day-tile  redDay = true  date = (format-date 'addTime' 4)}}
-                {{day-tile                  date = (format-date 'addTime' 5)}}
-                {{day-tile  redDay = true  date = (format-date 'addTime' 6)}}
+                {{day-tile  redDay = true  course = (find-course calendar.data (format-date))}}
+                {{day-tile                  course = (find-course calendar.data (format-date 'addTime' 1))}}
+                {{day-tile  redDay = true  course = (find-course calendar.data (format-date 'addTime' 2))}}
+                {{day-tile                  course = (find-course calendar.data (format-date 'addTime' 3))}}
+                {{day-tile  redDay = true  course = (find-course calendar.data (format-date 'addTime' 4))}}
+                {{day-tile                  course = (find-course calendar.data (format-date 'addTime' 5))}}
+                {{day-tile  redDay = true  course = (find-course calendar.data (format-date 'addTime' 6))}}
 
 
                 {{else if (dayCheck (format-date 'dddd')  'Monday') }}
                 {{logo-tile logo=false date=(format-date 'subtractTime' 1) }}
-                {{day-tile  redDay = true  date = (format-date 'subtractTime' 1)}}
-                {{day-tile                date = (format-date)}}
-                {{day-tile  redDay = true  date = (format-date 'addTime' 1)}}
-                {{day-tile                date = (format-date 'addTime' 2)}}
-                {{day-tile  redDay = true  date = (format-date 'addTime' 3)}}
-                {{day-tile                date = (format-date 'addTime' 4)}}
-                {{day-tile  redDay = true  date = (format-date 'addTime' 5)}}
+                {{day-tile  redDay = true  course = (find-course calendar.data (format-date 'subtractTime' 1))}}
+                {{day-tile                course = (find-course calendar.data (format-date))}}
+                {{day-tile  redDay = true  course = (find-course calendar.data (format-date 'addTime' 1))}}
+                {{day-tile                course = (find-course calendar.data (format-date 'addTime' 2))}}
+                {{day-tile  redDay = true  course = (find-course calendar.data (format-date 'addTime' 3))}}
+                {{day-tile                course = (find-course calendar.data (format-date 'addTime' 4))}}
+                {{day-tile  redDay = true  course = (find-course calendar.data (format-date 'addTime' 5))}}
 
                 {{else if (dayCheck (format-date 'dddd')  'Tuesday') }}
                 {{logo-tile logo=false date=(format-date 'subtractTime' 2) }}
-                {{day-tile  redDay = true  date = (format-date 'subtractTime' 2)}}
-                {{day-tile                date = (format-date 'subtractTime' 1)}}
-                {{day-tile  redDay = true  date = (format-date)}}
-                {{day-tile                date = (format-date 'addTime' 1)}}
-                {{day-tile  redDay = true  date = (format-date 'addTime' 2)}}
-                {{day-tile                date = (format-date 'addTime' 3)}}
-                {{day-tile  redDay = true  date = (format-date 'addTime' 4)}}
+                {{day-tile  redDay = true  course = (find-course calendar.data (format-date 'subtractTime' 2))}}
+                {{day-tile                course = (find-course calendar.data (format-date 'subtractTime' 1))}}
+                {{day-tile  redDay = true  course = (find-course calendar.data (format-date))}}
+                {{day-tile                course = (find-course calendar.data (format-date 'addTime' 1))}}
+                {{day-tile  redDay = true  course = (find-course calendar.data (format-date 'addTime' 2))}}
+                {{day-tile                course = (find-course calendar.data (format-date 'addTime' 3))}}
+                {{day-tile  redDay = true  course = (find-course calendar.data (format-date 'addTime' 4))}}
 
                 {{else if (dayCheck (format-date 'dddd')  'Wednesday')}}
                 {{logo-tile logo=false date=(format-date 'subtractTime' 3)}}
-                {{day-tile  redDay = true  date = (format-date 'subtractTime' 3)}}
-                {{day-tile                date = (format-date 'subtractTime' 2)}}
-                {{day-tile  redDay = true  date = (format-date 'subtractTime' 1)}}
-                {{day-tile                date = (format-date)}}
-                {{day-tile  redDay = true  date = (format-date 'addTime' 1)}}
-                {{day-tile                date = (format-date 'addTime' 2)}}
-                {{day-tile  redDay = true  date = (format-date 'addTime' 3)}}
+                {{day-tile  redDay = true  course = (find-course calendar.data (format-date 'subtractTime' 3))}}
+                {{day-tile                course = (find-course calendar.data (format-date 'subtractTime' 2))}}
+                {{day-tile  redDay = true  course = (find-course calendar.data (format-date 'subtractTime' 1))}}
+                {{day-tile                course = (find-course calendar.data (format-date))}}
+                {{day-tile  redDay = true  course = (find-course calendar.data (format-date 'addTime' 1))}}
+                {{day-tile                course = (find-course calendar.data (format-date 'addTime' 2))}}
+                {{day-tile  redDay = true  course = (find-course calendar.data (format-date 'addTime' 3))}}
 
 
 
                 {{else if (dayCheck (format-date 'dddd')  'Thursday') }}
                 {{logo-tile logo=false date=(format-date 'subtractTime' 4) }}
-                {{day-tile  redDay = true  date = (format-date 'subtractTime' 4)}}
-                {{day-tile                date = (format-date 'subtractTime' 3)}}
-                {{day-tile  redDay = true  date = (format-date 'subtractTime' 2)}}
-                {{day-tile                date = (format-date 'subtractTime' 1)}}
-                {{day-tile  redDay = true  date = (format-date)}}
-                {{day-tile                date = (format-date 'addTime' 1)}}
-                {{day-tile  redDay = true  date = (format-date 'addTime' 2)}}
+                {{day-tile  redDay = true  course = (find-course calendar.data (format-date 'subtractTime' 4))}}
+                {{day-tile                course = (find-course calendar.data (format-date 'subtractTime' 3))}}
+                {{day-tile  redDay = true  course = (find-course calendar.data (format-date 'subtractTime' 2))}}
+                {{day-tile                course = (find-course calendar.data (format-date 'subtractTime' 1))}}
+                {{day-tile  redDay = true  course = (find-course calendar.data (format-date))}}
+                {{day-tile                course = (find-course calendar.data (format-date 'addTime' 1))}}
+                {{day-tile  redDay = true  course = (find-course calendar.data (format-date 'addTime' 2))}}
 
                 {{else if (dayCheck (format-date 'dddd')  'Friday') }}
                 {{logo-tile logo=false date=(format-date 'subtractTime' 5) }}
-                {{day-tile  redDay = true  date = (format-date 'subtractTime' 5)}}
-                {{day-tile                date = (format-date 'subtractTime' 4)}}
-                {{day-tile  redDay = true  date = (format-date 'subtractTime' 3)}}
-                {{day-tile                date = (format-date 'subtractTime' 2)}}
-                {{day-tile  redDay = true  date = (format-date 'subtractTime' 1)}}
-                {{day-tile                date = (format-date)}}
-                {{day-tile  redDay = true  date = (format-date 'addTime' 1)}}
+                {{day-tile  redDay = true  course = (find-course calendar.data (format-date 'subtractTime' 5))}}
+                {{day-tile                course = (find-course calendar.data (format-date 'subtractTime' 4))}}
+                {{day-tile  redDay = true  course = (find-course calendar.data (format-date 'subtractTime' 3))}}
+                {{day-tile                course = (find-course calendar.data (format-date 'subtractTime' 2))}}
+                {{day-tile  redDay = true  course = (find-course calendar.data (format-date 'subtractTime' 1))}}
+                {{day-tile                course = (find-course calendar.data (format-date))}}
+                {{day-tile  redDay = true  course = (find-course calendar.data (format-date 'addTime' 1))}}
 
                 {{else if (dayCheck (format-date 'dddd')  'Saturday') }}
                 {{logo-tile logo=false date=(format-date 'subtractTime' 6) }}
-                {{day-tile  redDay = true  date = (format-date 'subtractTime' 6)}}
-                {{day-tile                date = (format-date 'subtractTime' 5)}}
-                {{day-tile  redDay = true  date = (format-date 'subtractTime' 4)}}
-                {{day-tile                date = (format-date 'subtractTime' 3)}}
-                {{day-tile  redDay = true  date = (format-date 'subtractTime' 2)}}
-                {{day-tile                date = (format-date 'subtractTime' 1)}}
-                {{day-tile  redDay = true  date = (format-date)}}
+                {{day-tile  redDay = true  course = (find-course calendar.data (format-date 'subtractTime' 6))}}
+                {{day-tile                course = (find-course calendar.data (format-date 'subtractTime' 5))}}
+                {{day-tile  redDay = true  course = (find-course calendar.data (format-date 'subtractTime' 4))}}
+                {{day-tile                course = (find-course calendar.data (format-date 'subtractTime' 3))}}
+                {{day-tile  redDay = true  course = (find-course calendar.data (format-date 'subtractTime' 2))}}
+                {{day-tile                course = (find-course calendar.data (format-date 'subtractTime' 1))}}
+                {{day-tile  redDay = true  course = (find-course calendar.data (format-date))}}
 
                 {{/if}}
 
                 </calendarViewMain>
         
         <calendarViewCoaches>
+   
             {{coach-sidebar header = false}}
-            {{coach-sidebar header = false}}
+             {{coach-sidebar header = false}}
              {{coach-sidebar header = false}}
         </calendarViewCoaches>
 	
@@ -125,57 +122,60 @@
       <calendarRow>
           <calendarViewMain>
                 {{logo-tile logo = false date=(format-date 'W2' 'Su') }}
-                {{day-tile redDay = true date = (format-date 'W2' 'Su')}}
-                {{day-tile               date = (format-date 'W2' 'M')}}
-                {{day-tile redDay = true date = (format-date 'W2' 'Tu')}}
-                {{day-tile               date = (format-date 'W2' 'W')}}
-                {{day-tile redDay = true date = (format-date 'W2' 'Th')}}
-                {{day-tile               date = (format-date 'W2' 'F')}}
-                {{day-tile redDay = true date = (format-date 'W2' 'Sa')}}
+                {{day-tile redDay = true course = (find-course calendar.data (format-date 'W2' 'Su'))}}
+                {{day-tile               course = (find-course calendar.data (format-date 'W2' 'M'))}}
+                {{day-tile redDay = true course = (find-course calendar.data (format-date 'W2' 'Tu'))}}
+                {{day-tile               course = (find-course calendar.data (format-date 'W2' 'W'))}}
+                {{day-tile redDay = true course = (find-course calendar.data (format-date 'W2' 'Th'))}}
+                {{day-tile               course = (find-course calendar.data (format-date 'W2' 'F'))}}
+                {{day-tile redDay = true course = (find-course calendar.data (format-date 'W2' 'Sa'))}}
                 
                 </calendarViewMain>
 	
         <calendarViewCoaches>
             {{coach-sidebar header = false}}
             {{coach-sidebar header = false}}
-             {{coach-sidebar header = false}}
+            {{coach-sidebar header = false}}
+             
         </calendarViewCoaches>
           
       </calendarRow>
       <calendarRow>
           <calendarViewMain>
                 {{logo-tile logo = false date=(format-date 'W3' 'Su') }}
-                {{day-tile redDay = true date = (format-date 'W3' 'Su')}}
-                {{day-tile               date = (format-date 'W3' 'M')}}
-                {{day-tile redDay = true date = (format-date 'W3' 'Tu')}}
-                {{day-tile               date = (format-date 'W3' 'W')}}
-                {{day-tile redDay = true date = (format-date 'W3' 'Th')}}
-                {{day-tile               date = (format-date 'W3' 'F')}}
-                {{day-tile redDay = true date = (format-date 'W3' 'Sa')}}
+                {{day-tile redDay = true course = (find-course calendar.data (format-date 'W3' 'Su'))}}
+                {{day-tile               course = (find-course calendar.data (format-date 'W3' 'M'))}}
+                {{day-tile redDay = true course = (find-course calendar.data (format-date 'W3' 'Tu'))}}
+                {{day-tile               course = (find-course calendar.data (format-date 'W3' 'W'))}}
+                {{day-tile redDay = true course = (find-course calendar.data (format-date 'W3' 'Th'))}}
+                {{day-tile               course = (find-course calendar.data (format-date 'W3' 'F'))}}
+                {{day-tile redDay = true course = (find-course calendar.data (format-date 'W3' 'Sa'))}}
                 
                 </calendarViewMain>
 
         <calendarViewCoaches>
+         
             {{coach-sidebar header = false}}
-            {{coach-sidebar header = false}}
+             {{coach-sidebar header = false}}
              {{coach-sidebar header = false}}
         </calendarViewCoaches>
       </calendarRow>
       <calendarRow>
           <calendarViewMain>
                 {{logo-tile logo = false date=(format-date 'W4' 'Su') }}
-                {{day-tile redDay = true date = (format-date 'W4' 'Su')}}
-                {{day-tile               date = (format-date 'W4' 'M')}}
-                {{day-tile redDay = true date = (format-date 'W4' 'Tu')}}
-                {{day-tile               date = (format-date 'W4' 'W')}}
-                {{day-tile redDay = true date = (format-date 'W4' 'Th')}}
-                {{day-tile               date = (format-date 'W4' 'F')}}
-                {{day-tile redDay = true date = (format-date 'W4' 'Sa')}}
+                {{day-tile redDay = true course = (find-course calendar.data (format-date 'W4' 'Su'))}}
+                {{day-tile               course = (find-course calendar.data (format-date 'W4' 'M'))}}
+                {{day-tile redDay = true course = (find-course calendar.data (format-date 'W4' 'Tu'))}}
+                {{day-tile               course = (find-course calendar.data (format-date 'W4' 'W'))}}
+                {{day-tile redDay = true course = (find-course calendar.data (format-date 'W4' 'Th'))}}
+                {{day-tile               course = (find-course calendar.data (format-date 'W4' 'F'))}}
+                {{day-tile redDay = true course = (find-course calendar.data (format-date 'W4' 'Sa'))}}
                 
                 </calendarViewMain>
         <calendarViewCoaches>
+    
             {{coach-sidebar header = false}}
-            {{coach-sidebar header = false}}
+             {{coach-sidebar header = false}}
              {{coach-sidebar header = false}}
         </calendarViewCoaches>
 	  </calendarRow>

@@ -6,7 +6,8 @@ export function dayCheck(p1) {
       return true;
   }
   else{
-
+      console.log(p1[0]);
+      console.log(p1[1]);
       return false;
   }
 }

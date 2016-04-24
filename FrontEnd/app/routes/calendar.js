@@ -10,15 +10,14 @@ export default Ember.Route.extend({
         model: function(){
 //                var store =[];
                 return this.get('ajax').request('http://localhost:9029/api/calendar', {method: 'POST',xhrFields:{crossDomain:true,withCredintials:true}}).then(function(value){
-                    console.log(Object.keys(value.calendar.data).length);
-                    console.log(value.calendar.data[0]);
+
                     var allCourse = Course.create({
                        data: value.calendar.data,
                        whichCourse:0,
 
                        
                     });
-                    console.log(allCourse.data);
+
                     return allCourse;
                     
 //                    var size = Object.keys(value.calendar.data).length;

@@ -161,12 +161,13 @@ calendarContainer{
                         height:100%;
                         margin: 0 0 0 0;
                         padding:0 0 0 0;
-                        logoHeader{	@include span-columns(1 of 10); }
-                        dayTileHeader{ @include span-columns(1 of 10);    }
+                        logoHeader{	@include span-columns(1 of 10); vertical-align:top; }
+                        dayTileHeader{ @include span-columns(1 of 10);  vertical-align:top;  }
                         blankTile{ @include span-columns(1 of 10);      }
                     }
 
             calendarViewCoaches{
+                vertical-align:top;
 	@include span-columns(2);
                     max-width:100px;
                  border-left-style:solid;
@@ -184,7 +185,9 @@ calendarContainer{
     border-style:solid;
     height:100%
 }
-
+.displayCourse{
+    padding-top:5px;
+}
 
 
 

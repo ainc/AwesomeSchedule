@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import calendar from '../models/calendar';
 
 //The tiles on the calendar page, the different wrappers are used depending on the data presented in the calendar
 //HTML side for this file stored in /templates/components/
@@ -13,10 +12,8 @@ export default Ember.Component.extend({
 	wrapperEmptySTTS: 'blankTileSTTS',
         wrapperEmptyMWF:'blankTileMWF',
 	wrapperFilled: 'colorTile',
-        //to get the date passed to the component
-        getDate: function(){
-            return this.get('date');
-        },
+
+        
         
         
                     
@@ -47,12 +44,7 @@ export default Ember.Component.extend({
             getCourse: function(){
                 this.sendAction('action',this.get('getDate'));
             },
-            increment: function(){
-           
-            calendar.incrementProperty('whichCourse');
-            console.log(calendar.whichCourse);
-            
-            },
+
         }
 	
 });
