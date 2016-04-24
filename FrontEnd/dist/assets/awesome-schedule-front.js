@@ -267,7 +267,7 @@ define('awesome-schedule-front/components/coach-sidebar', ['exports', 'ember'], 
         //HTML side for this file stored in /templates/components/
         exports['default'] = _ember['default'].Component.extend({});
 });
-define('awesome-schedule-front/components/day-tile', ['exports', 'ember'], function (exports, _ember) {
+define('awesome-schedule-front/components/day-tile', ['exports', 'ember', 'awesome-schedule-front/models/calendar'], function (exports, _ember, _awesomeScheduleFrontModelsCalendar) {
 
     //The tiles on the calendar page, the different wrappers are used depending on the data presented in the calendar
     //HTML side for this file stored in /templates/components/
@@ -310,6 +310,11 @@ define('awesome-schedule-front/components/day-tile', ['exports', 'ember'], funct
         actions: {
             getCourse: function getCourse() {
                 this.sendAction('action', this.get('getDate'));
+            },
+            increment: function increment() {
+
+                _awesomeScheduleFrontModelsCalendar['default'].incrementProperty('whichCourse');
+                console.log(_awesomeScheduleFrontModelsCalendar['default'].whichCourse);
             }
         }
 
@@ -1066,16 +1071,11 @@ define('awesome-schedule-front/routes/calendar', ['exports', 'ember', 'awesome-s
             //                var store =[];
             return this.get('ajax').request('http://localhost:9029/api/calendar', { method: 'POST', xhrFields: { crossDomain: true, withCredintials: true } }).then(function (value) {
                 console.log(Object.keys(value.calendar.data).length);
-                console.log(value.calendar.data);
+                console.log(value.calendar.data[0]);
                 var allCourse = _awesomeScheduleFrontModelsCalendar['default'].create({
                     data: value.calendar.data,
-                    dates: function dates() {
-                        var store = [];
-                        for (var i = 0; i < Object.keys(value.calendar.data).length; i++) {
-                            store.pushObject(value.calendar.data[i].className);
-                        }
-                        return store;
-                    }
+                    whichCourse: 0
+
                 });
                 console.log(allCourse.data);
                 return allCourse;
@@ -1519,7 +1519,7 @@ define("awesome-schedule-front/templates/calendar", ["exports"], function (expor
           morphs[7] = dom.createMorphAt(fragment, 15, 15, contextualElement);
           return morphs;
         },
-        statements: [["inline", "logo-tile", [], ["logo", false, "date", ["subexpr", "format-date", [], [], ["loc", [null, [38, 44], [38, 57]]]]], ["loc", [null, [38, 16], [38, 60]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", [], [], ["loc", [null, [39, 48], [39, 61]]]]], ["loc", [null, [39, 16], [39, 63]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["addTime", 1], [], ["loc", [null, [40, 51], [40, 76]]]]], ["loc", [null, [40, 16], [40, 78]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["addTime", 2], [], ["loc", [null, [41, 50], [41, 75]]]]], ["loc", [null, [41, 16], [41, 77]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["addTime", 3], [], ["loc", [null, [42, 51], [42, 76]]]]], ["loc", [null, [42, 16], [42, 78]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["addTime", 4], [], ["loc", [null, [43, 50], [43, 75]]]]], ["loc", [null, [43, 16], [43, 77]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["addTime", 5], [], ["loc", [null, [44, 51], [44, 76]]]]], ["loc", [null, [44, 16], [44, 78]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["addTime", 6], [], ["loc", [null, [45, 50], [45, 75]]]]], ["loc", [null, [45, 16], [45, 77]]]]],
+        statements: [["inline", "logo-tile", [], ["logo", false, "date", ["subexpr", "format-date", [], [], ["loc", [null, [38, 44], [38, 57]]]]], ["loc", [null, [38, 16], [38, 60]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", [], [], ["loc", [null, [39, 48], [39, 61]]]]], ["loc", [null, [39, 16], [39, 63]]]], ["inline", "day-tile", [], ["dayCheck", true, "course", ["subexpr", "@mut", [["get", "calendar.data.calendar.whichCourse.className", ["loc", [null, [40, 68], [40, 114]]]]], [], []]], ["loc", [null, [40, 16], [40, 116]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["addTime", 2], [], ["loc", [null, [41, 50], [41, 75]]]]], ["loc", [null, [41, 16], [41, 77]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["addTime", 3], [], ["loc", [null, [42, 51], [42, 76]]]]], ["loc", [null, [42, 16], [42, 78]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["addTime", 4], [], ["loc", [null, [43, 50], [43, 75]]]]], ["loc", [null, [43, 16], [43, 77]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["addTime", 5], [], ["loc", [null, [44, 51], [44, 76]]]]], ["loc", [null, [44, 16], [44, 78]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["addTime", 6], [], ["loc", [null, [45, 50], [45, 75]]]]], ["loc", [null, [45, 16], [45, 77]]]]],
         locals: [],
         templates: []
       };
@@ -2632,7 +2632,7 @@ define("awesome-schedule-front/templates/calendar", ["exports"], function (expor
         morphs[50] = dom.createMorphAt(element14, 5, 5);
         return morphs;
       },
-      statements: [["attribute", "class", ["get", "wrapper", ["loc", [null, [4, 18], [4, 25]]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "date", ["subexpr", "@mut", [["get", "calendar.data.0.className", ["loc", [null, [7, 47], [7, 74]]]]], [], []]], ["loc", [null, [7, 0], [7, 76]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "date", ["subexpr", "@mut", [["get", "calendar.data.1.className", ["loc", [null, [8, 47], [8, 74]]]]], [], []]], ["loc", [null, [8, 0], [8, 76]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "date", ["subexpr", "@mut", [["get", "calendar.data.2.className", ["loc", [null, [9, 47], [9, 74]]]]], [], []]], ["loc", [null, [9, 0], [9, 76]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "date", ["subexpr", "@mut", [["get", "calendar.data.3.className", ["loc", [null, [10, 47], [10, 74]]]]], [], []]], ["loc", [null, [10, 0], [10, 76]]]], ["inline", "logo-tile", [], ["logo", true], ["loc", [null, [15, 2], [15, 25]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Sunday"], ["loc", [null, [16, 2], [16, 53]]]], ["inline", "day-tile", [], ["header", true, "day", "Monday"], ["loc", [null, [17, 2], [17, 39]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Tuesday"], ["loc", [null, [18, 16], [18, 68]]]], ["inline", "day-tile", [], ["header", true, "day", "Wednesday"], ["loc", [null, [19, 16], [19, 56]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Thursday"], ["loc", [null, [20, 16], [20, 69]]]], ["inline", "day-tile", [], ["header", true, "day", "Friday"], ["loc", [null, [21, 16], [21, 53]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Saturday"], ["loc", [null, [22, 16], [22, 69]]]], ["inline", "coach-sidebar", [], ["header", true], ["loc", [null, [28, 2], [28, 33]]]], ["block", "if", [["subexpr", "dayCheck", [["subexpr", "format-date", ["dddd"], [], ["loc", [null, [37, 32], [37, 52]]]], "Sunday"], [], ["loc", [null, [37, 22], [37, 63]]]]], [], 0, 1, ["loc", [null, [37, 16], [110, 23]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [115, 12], [115, 44]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [116, 12], [116, 44]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [117, 13], [117, 45]]]], ["inline", "logo-tile", [], ["logo", false, "date", ["subexpr", "format-date", ["W2", "Su"], [], ["loc", [null, [127, 46], [127, 69]]]]], ["loc", [null, [127, 16], [127, 72]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W2", "Su"], [], ["loc", [null, [128, 48], [128, 71]]]]], ["loc", [null, [128, 16], [128, 73]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W2", "M"], [], ["loc", [null, [129, 48], [129, 70]]]]], ["loc", [null, [129, 16], [129, 72]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W2", "Tu"], [], ["loc", [null, [130, 48], [130, 71]]]]], ["loc", [null, [130, 16], [130, 73]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W2", "W"], [], ["loc", [null, [131, 48], [131, 70]]]]], ["loc", [null, [131, 16], [131, 72]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W2", "Th"], [], ["loc", [null, [132, 48], [132, 71]]]]], ["loc", [null, [132, 16], [132, 73]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W2", "F"], [], ["loc", [null, [133, 48], [133, 70]]]]], ["loc", [null, [133, 16], [133, 72]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W2", "Sa"], [], ["loc", [null, [134, 48], [134, 71]]]]], ["loc", [null, [134, 16], [134, 73]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [139, 12], [139, 44]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [140, 12], [140, 44]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [141, 13], [141, 45]]]], ["inline", "logo-tile", [], ["logo", false, "date", ["subexpr", "format-date", ["W3", "Su"], [], ["loc", [null, [147, 46], [147, 69]]]]], ["loc", [null, [147, 16], [147, 72]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W3", "Su"], [], ["loc", [null, [148, 48], [148, 71]]]]], ["loc", [null, [148, 16], [148, 73]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W3", "M"], [], ["loc", [null, [149, 48], [149, 70]]]]], ["loc", [null, [149, 16], [149, 72]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W3", "Tu"], [], ["loc", [null, [150, 48], [150, 71]]]]], ["loc", [null, [150, 16], [150, 73]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W3", "W"], [], ["loc", [null, [151, 48], [151, 70]]]]], ["loc", [null, [151, 16], [151, 72]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W3", "Th"], [], ["loc", [null, [152, 48], [152, 71]]]]], ["loc", [null, [152, 16], [152, 73]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W3", "F"], [], ["loc", [null, [153, 48], [153, 70]]]]], ["loc", [null, [153, 16], [153, 72]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W3", "Sa"], [], ["loc", [null, [154, 48], [154, 71]]]]], ["loc", [null, [154, 16], [154, 73]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [159, 12], [159, 44]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [160, 12], [160, 44]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [161, 13], [161, 45]]]], ["inline", "logo-tile", [], ["logo", false, "date", ["subexpr", "format-date", ["W4", "Su"], [], ["loc", [null, [166, 46], [166, 69]]]]], ["loc", [null, [166, 16], [166, 72]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W4", "Su"], [], ["loc", [null, [167, 48], [167, 71]]]]], ["loc", [null, [167, 16], [167, 73]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W4", "M"], [], ["loc", [null, [168, 48], [168, 70]]]]], ["loc", [null, [168, 16], [168, 72]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W4", "Tu"], [], ["loc", [null, [169, 48], [169, 71]]]]], ["loc", [null, [169, 16], [169, 73]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W4", "W"], [], ["loc", [null, [170, 48], [170, 70]]]]], ["loc", [null, [170, 16], [170, 72]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W4", "Th"], [], ["loc", [null, [171, 48], [171, 71]]]]], ["loc", [null, [171, 16], [171, 73]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W4", "F"], [], ["loc", [null, [172, 48], [172, 70]]]]], ["loc", [null, [172, 16], [172, 72]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W4", "Sa"], [], ["loc", [null, [173, 48], [173, 71]]]]], ["loc", [null, [173, 16], [173, 73]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [177, 12], [177, 44]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [178, 12], [178, 44]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [179, 13], [179, 45]]]]],
+      statements: [["attribute", "class", ["get", "wrapper", ["loc", [null, [4, 18], [4, 25]]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "date", ["subexpr", "@mut", [["get", "calendar.data.0.classDate", ["loc", [null, [7, 47], [7, 74]]]]], [], []]], ["loc", [null, [7, 0], [7, 76]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "date", ["subexpr", "@mut", [["get", "calendar.data.1.classDate", ["loc", [null, [8, 47], [8, 74]]]]], [], []]], ["loc", [null, [8, 0], [8, 76]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "date", ["subexpr", "@mut", [["get", "calendar.data.2.classDate", ["loc", [null, [9, 47], [9, 74]]]]], [], []]], ["loc", [null, [9, 0], [9, 76]]]], ["inline", "day-tile", [], ["header", false, "redDay", true, "date", ["subexpr", "@mut", [["get", "calendar.data.3.classDate", ["loc", [null, [10, 47], [10, 74]]]]], [], []]], ["loc", [null, [10, 0], [10, 76]]]], ["inline", "logo-tile", [], ["logo", true], ["loc", [null, [15, 2], [15, 25]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Sunday"], ["loc", [null, [16, 2], [16, 53]]]], ["inline", "day-tile", [], ["header", true, "day", "Monday"], ["loc", [null, [17, 2], [17, 39]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Tuesday"], ["loc", [null, [18, 16], [18, 68]]]], ["inline", "day-tile", [], ["header", true, "day", "Wednesday"], ["loc", [null, [19, 16], [19, 56]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Thursday"], ["loc", [null, [20, 16], [20, 69]]]], ["inline", "day-tile", [], ["header", true, "day", "Friday"], ["loc", [null, [21, 16], [21, 53]]]], ["inline", "day-tile", [], ["header", true, "redDay", true, "day", "Saturday"], ["loc", [null, [22, 16], [22, 69]]]], ["inline", "coach-sidebar", [], ["header", true], ["loc", [null, [28, 2], [28, 33]]]], ["block", "if", [["subexpr", "dayCheck", [["subexpr", "format-date", ["dddd"], [], ["loc", [null, [37, 32], [37, 52]]]], "Sunday"], [], ["loc", [null, [37, 22], [37, 63]]]]], [], 0, 1, ["loc", [null, [37, 16], [110, 23]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [115, 12], [115, 44]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [116, 12], [116, 44]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [117, 13], [117, 45]]]], ["inline", "logo-tile", [], ["logo", false, "date", ["subexpr", "format-date", ["W2", "Su"], [], ["loc", [null, [127, 46], [127, 69]]]]], ["loc", [null, [127, 16], [127, 72]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W2", "Su"], [], ["loc", [null, [128, 48], [128, 71]]]]], ["loc", [null, [128, 16], [128, 73]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W2", "M"], [], ["loc", [null, [129, 48], [129, 70]]]]], ["loc", [null, [129, 16], [129, 72]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W2", "Tu"], [], ["loc", [null, [130, 48], [130, 71]]]]], ["loc", [null, [130, 16], [130, 73]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W2", "W"], [], ["loc", [null, [131, 48], [131, 70]]]]], ["loc", [null, [131, 16], [131, 72]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W2", "Th"], [], ["loc", [null, [132, 48], [132, 71]]]]], ["loc", [null, [132, 16], [132, 73]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W2", "F"], [], ["loc", [null, [133, 48], [133, 70]]]]], ["loc", [null, [133, 16], [133, 72]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W2", "Sa"], [], ["loc", [null, [134, 48], [134, 71]]]]], ["loc", [null, [134, 16], [134, 73]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [139, 12], [139, 44]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [140, 12], [140, 44]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [141, 13], [141, 45]]]], ["inline", "logo-tile", [], ["logo", false, "date", ["subexpr", "format-date", ["W3", "Su"], [], ["loc", [null, [147, 46], [147, 69]]]]], ["loc", [null, [147, 16], [147, 72]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W3", "Su"], [], ["loc", [null, [148, 48], [148, 71]]]]], ["loc", [null, [148, 16], [148, 73]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W3", "M"], [], ["loc", [null, [149, 48], [149, 70]]]]], ["loc", [null, [149, 16], [149, 72]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W3", "Tu"], [], ["loc", [null, [150, 48], [150, 71]]]]], ["loc", [null, [150, 16], [150, 73]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W3", "W"], [], ["loc", [null, [151, 48], [151, 70]]]]], ["loc", [null, [151, 16], [151, 72]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W3", "Th"], [], ["loc", [null, [152, 48], [152, 71]]]]], ["loc", [null, [152, 16], [152, 73]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W3", "F"], [], ["loc", [null, [153, 48], [153, 70]]]]], ["loc", [null, [153, 16], [153, 72]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W3", "Sa"], [], ["loc", [null, [154, 48], [154, 71]]]]], ["loc", [null, [154, 16], [154, 73]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [159, 12], [159, 44]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [160, 12], [160, 44]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [161, 13], [161, 45]]]], ["inline", "logo-tile", [], ["logo", false, "date", ["subexpr", "format-date", ["W4", "Su"], [], ["loc", [null, [166, 46], [166, 69]]]]], ["loc", [null, [166, 16], [166, 72]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W4", "Su"], [], ["loc", [null, [167, 48], [167, 71]]]]], ["loc", [null, [167, 16], [167, 73]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W4", "M"], [], ["loc", [null, [168, 48], [168, 70]]]]], ["loc", [null, [168, 16], [168, 72]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W4", "Tu"], [], ["loc", [null, [169, 48], [169, 71]]]]], ["loc", [null, [169, 16], [169, 73]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W4", "W"], [], ["loc", [null, [170, 48], [170, 70]]]]], ["loc", [null, [170, 16], [170, 72]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W4", "Th"], [], ["loc", [null, [171, 48], [171, 71]]]]], ["loc", [null, [171, 16], [171, 73]]]], ["inline", "day-tile", [], ["date", ["subexpr", "format-date", ["W4", "F"], [], ["loc", [null, [172, 48], [172, 70]]]]], ["loc", [null, [172, 16], [172, 72]]]], ["inline", "day-tile", [], ["redDay", true, "date", ["subexpr", "format-date", ["W4", "Sa"], [], ["loc", [null, [173, 48], [173, 71]]]]], ["loc", [null, [173, 16], [173, 73]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [177, 12], [177, 44]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [178, 12], [178, 44]]]], ["inline", "coach-sidebar", [], ["header", false], ["loc", [null, [179, 13], [179, 45]]]]],
       locals: [],
       templates: [child0, child1]
     };
@@ -6760,10 +6760,10 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
             return el0;
           },
           buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-            var element3 = dom.childAt(fragment, [0]);
+            var element5 = dom.childAt(fragment, [0]);
             var morphs = new Array(2);
-            morphs[0] = dom.createAttrMorph(element3, 'class');
-            morphs[1] = dom.createMorphAt(element3, 1, 1);
+            morphs[0] = dom.createAttrMorph(element5, 'class');
+            morphs[1] = dom.createMorphAt(element5, 1, 1);
             return morphs;
           },
           statements: [["attribute", "class", ["get", "wrapperSTTS", ["loc", [null, [4, 15], [4, 26]]]]], ["content", "day", ["loc", [null, [5, 4], [5, 11]]]]],
@@ -6809,10 +6809,10 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
             return el0;
           },
           buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-            var element2 = dom.childAt(fragment, [0]);
+            var element4 = dom.childAt(fragment, [0]);
             var morphs = new Array(2);
-            morphs[0] = dom.createAttrMorph(element2, 'class');
-            morphs[1] = dom.createMorphAt(element2, 1, 1);
+            morphs[0] = dom.createAttrMorph(element4, 'class');
+            morphs[1] = dom.createMorphAt(element4, 1, 1);
             return morphs;
           },
           statements: [["attribute", "class", ["get", "wrapperMWF", ["loc", [null, [8, 15], [8, 25]]]]], ["content", "day", ["loc", [null, [9, 4], [9, 11]]]]],
@@ -6861,6 +6861,109 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
     })();
     var child1 = (function () {
       var child0 = (function () {
+        var child0 = (function () {
+          return {
+            meta: {
+              "fragmentReason": false,
+              "revision": "Ember@2.4.3",
+              "loc": {
+                "source": null,
+                "start": {
+                  "line": 16,
+                  "column": 0
+                },
+                "end": {
+                  "line": 21,
+                  "column": 0
+                }
+              },
+              "moduleName": "awesome-schedule-front/templates/components/day-tile.hbs"
+            },
+            isEmpty: false,
+            arity: 0,
+            cachedFragment: null,
+            hasRendered: false,
+            buildFragment: function buildFragment(dom) {
+              var el0 = dom.createDocumentFragment();
+              var el1 = dom.createElement("div");
+              dom.setAttribute(el1, "id", "tile");
+              var el2 = dom.createTextNode("\n   ");
+              dom.appendChild(el1, el2);
+              var el2 = dom.createComment("");
+              dom.appendChild(el1, el2);
+              var el2 = dom.createTextNode("\n   ");
+              dom.appendChild(el1, el2);
+              var el2 = dom.createComment("");
+              dom.appendChild(el1, el2);
+              var el2 = dom.createTextNode("\n");
+              dom.appendChild(el1, el2);
+              dom.appendChild(el0, el1);
+              var el1 = dom.createTextNode("\n");
+              dom.appendChild(el0, el1);
+              return el0;
+            },
+            buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+              var element3 = dom.childAt(fragment, [0]);
+              var morphs = new Array(3);
+              morphs[0] = dom.createAttrMorph(element3, 'class');
+              morphs[1] = dom.createMorphAt(element3, 1, 1);
+              morphs[2] = dom.createMorphAt(element3, 3, 3);
+              return morphs;
+            },
+            statements: [["attribute", "class", ["get", "wrapperEmptySTTS", ["loc", [null, [17, 15], [17, 31]]]]], ["content", "course", ["loc", [null, [18, 3], [18, 13]]]], ["content", "increment", ["loc", [null, [19, 3], [19, 16]]]]],
+            locals: [],
+            templates: []
+          };
+        })();
+        var child1 = (function () {
+          return {
+            meta: {
+              "fragmentReason": false,
+              "revision": "Ember@2.4.3",
+              "loc": {
+                "source": null,
+                "start": {
+                  "line": 21,
+                  "column": 0
+                },
+                "end": {
+                  "line": 25,
+                  "column": 0
+                }
+              },
+              "moduleName": "awesome-schedule-front/templates/components/day-tile.hbs"
+            },
+            isEmpty: false,
+            arity: 0,
+            cachedFragment: null,
+            hasRendered: false,
+            buildFragment: function buildFragment(dom) {
+              var el0 = dom.createDocumentFragment();
+              var el1 = dom.createElement("div");
+              dom.setAttribute(el1, "id", "tile");
+              var el2 = dom.createTextNode("\n    ");
+              dom.appendChild(el1, el2);
+              var el2 = dom.createComment("");
+              dom.appendChild(el1, el2);
+              var el2 = dom.createTextNode("\n");
+              dom.appendChild(el1, el2);
+              dom.appendChild(el0, el1);
+              var el1 = dom.createTextNode("\n");
+              dom.appendChild(el0, el1);
+              return el0;
+            },
+            buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+              var element2 = dom.childAt(fragment, [0]);
+              var morphs = new Array(2);
+              morphs[0] = dom.createAttrMorph(element2, 'class');
+              morphs[1] = dom.createMorphAt(element2, 1, 1);
+              return morphs;
+            },
+            statements: [["attribute", "class", ["get", "wrapperEmptySTTS", ["loc", [null, [22, 15], [22, 31]]]]], ["content", "date", ["loc", [null, [23, 4], [23, 12]]]]],
+            locals: [],
+            templates: []
+          };
+        })();
         return {
           meta: {
             "fragmentReason": false,
@@ -6872,7 +6975,7 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
                 "column": 0
               },
               "end": {
-                "line": 19,
+                "line": 26,
                 "column": 0
               }
             },
@@ -6884,32 +6987,126 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
           hasRendered: false,
           buildFragment: function buildFragment(dom) {
             var el0 = dom.createDocumentFragment();
-            var el1 = dom.createElement("div");
-            dom.setAttribute(el1, "id", "tile");
-            var el2 = dom.createTextNode("\n    ");
-            dom.appendChild(el1, el2);
-            var el2 = dom.createComment("");
-            dom.appendChild(el1, el2);
-            var el2 = dom.createTextNode("\n");
-            dom.appendChild(el1, el2);
-            dom.appendChild(el0, el1);
-            var el1 = dom.createTextNode("\n");
+            var el1 = dom.createComment("");
             dom.appendChild(el0, el1);
             return el0;
           },
           buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-            var element1 = dom.childAt(fragment, [0]);
-            var morphs = new Array(2);
-            morphs[0] = dom.createAttrMorph(element1, 'class');
-            morphs[1] = dom.createMorphAt(element1, 1, 1);
+            var morphs = new Array(1);
+            morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+            dom.insertBoundary(fragment, 0);
+            dom.insertBoundary(fragment, null);
             return morphs;
           },
-          statements: [["attribute", "class", ["get", "wrapperEmptySTTS", ["loc", [null, [16, 15], [16, 31]]]]], ["content", "date", ["loc", [null, [17, 4], [17, 12]]]]],
+          statements: [["block", "if", [["get", "dayCheck", ["loc", [null, [16, 6], [16, 14]]]]], [], 0, 1, ["loc", [null, [16, 0], [25, 7]]]]],
           locals: [],
-          templates: []
+          templates: [child0, child1]
         };
       })();
       var child1 = (function () {
+        var child0 = (function () {
+          return {
+            meta: {
+              "fragmentReason": false,
+              "revision": "Ember@2.4.3",
+              "loc": {
+                "source": null,
+                "start": {
+                  "line": 27,
+                  "column": 0
+                },
+                "end": {
+                  "line": 32,
+                  "column": 0
+                }
+              },
+              "moduleName": "awesome-schedule-front/templates/components/day-tile.hbs"
+            },
+            isEmpty: false,
+            arity: 0,
+            cachedFragment: null,
+            hasRendered: false,
+            buildFragment: function buildFragment(dom) {
+              var el0 = dom.createDocumentFragment();
+              var el1 = dom.createElement("div");
+              dom.setAttribute(el1, "id", "tile");
+              var el2 = dom.createTextNode("\n   ");
+              dom.appendChild(el1, el2);
+              var el2 = dom.createComment("");
+              dom.appendChild(el1, el2);
+              var el2 = dom.createTextNode("\n   ");
+              dom.appendChild(el1, el2);
+              var el2 = dom.createComment("");
+              dom.appendChild(el1, el2);
+              var el2 = dom.createTextNode("\n");
+              dom.appendChild(el1, el2);
+              dom.appendChild(el0, el1);
+              var el1 = dom.createTextNode("\n");
+              dom.appendChild(el0, el1);
+              return el0;
+            },
+            buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+              var element1 = dom.childAt(fragment, [0]);
+              var morphs = new Array(3);
+              morphs[0] = dom.createAttrMorph(element1, 'class');
+              morphs[1] = dom.createMorphAt(element1, 1, 1);
+              morphs[2] = dom.createMorphAt(element1, 3, 3);
+              return morphs;
+            },
+            statements: [["attribute", "class", ["get", "wrapperEmptySTTS", ["loc", [null, [28, 15], [28, 31]]]]], ["content", "course", ["loc", [null, [29, 3], [29, 13]]]], ["content", "increment", ["loc", [null, [30, 3], [30, 16]]]]],
+            locals: [],
+            templates: []
+          };
+        })();
+        var child1 = (function () {
+          return {
+            meta: {
+              "fragmentReason": false,
+              "revision": "Ember@2.4.3",
+              "loc": {
+                "source": null,
+                "start": {
+                  "line": 32,
+                  "column": 0
+                },
+                "end": {
+                  "line": 36,
+                  "column": 0
+                }
+              },
+              "moduleName": "awesome-schedule-front/templates/components/day-tile.hbs"
+            },
+            isEmpty: false,
+            arity: 0,
+            cachedFragment: null,
+            hasRendered: false,
+            buildFragment: function buildFragment(dom) {
+              var el0 = dom.createDocumentFragment();
+              var el1 = dom.createElement("div");
+              dom.setAttribute(el1, "id", "tile");
+              var el2 = dom.createTextNode("\n    ");
+              dom.appendChild(el1, el2);
+              var el2 = dom.createComment("");
+              dom.appendChild(el1, el2);
+              var el2 = dom.createTextNode("\n");
+              dom.appendChild(el1, el2);
+              dom.appendChild(el0, el1);
+              var el1 = dom.createTextNode("\n");
+              dom.appendChild(el0, el1);
+              return el0;
+            },
+            buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+              var element0 = dom.childAt(fragment, [0]);
+              var morphs = new Array(2);
+              morphs[0] = dom.createAttrMorph(element0, 'class');
+              morphs[1] = dom.createMorphAt(element0, 1, 1);
+              return morphs;
+            },
+            statements: [["attribute", "class", ["get", "wrapperEmptySTTS", ["loc", [null, [33, 15], [33, 31]]]]], ["content", "date", ["loc", [null, [34, 4], [34, 12]]]]],
+            locals: [],
+            templates: []
+          };
+        })();
         return {
           meta: {
             "fragmentReason": false,
@@ -6917,11 +7114,11 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
             "loc": {
               "source": null,
               "start": {
-                "line": 19,
+                "line": 26,
                 "column": 0
               },
               "end": {
-                "line": 23,
+                "line": 37,
                 "column": 0
               }
             },
@@ -6933,29 +7130,20 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
           hasRendered: false,
           buildFragment: function buildFragment(dom) {
             var el0 = dom.createDocumentFragment();
-            var el1 = dom.createElement("div");
-            dom.setAttribute(el1, "id", "tile");
-            var el2 = dom.createTextNode("\n    ");
-            dom.appendChild(el1, el2);
-            var el2 = dom.createComment("");
-            dom.appendChild(el1, el2);
-            var el2 = dom.createTextNode("\n");
-            dom.appendChild(el1, el2);
-            dom.appendChild(el0, el1);
-            var el1 = dom.createTextNode("\n");
+            var el1 = dom.createComment("");
             dom.appendChild(el0, el1);
             return el0;
           },
           buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-            var element0 = dom.childAt(fragment, [0]);
-            var morphs = new Array(2);
-            morphs[0] = dom.createAttrMorph(element0, 'class');
-            morphs[1] = dom.createMorphAt(element0, 1, 1);
+            var morphs = new Array(1);
+            morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+            dom.insertBoundary(fragment, 0);
+            dom.insertBoundary(fragment, null);
             return morphs;
           },
-          statements: [["attribute", "class", ["get", "wrapperEmptyMWF", ["loc", [null, [20, 15], [20, 30]]]]], ["content", "date", ["loc", [null, [21, 4], [21, 12]]]]],
+          statements: [["block", "if", [["get", "dayCheck", ["loc", [null, [27, 6], [27, 14]]]]], [], 0, 1, ["loc", [null, [27, 0], [36, 7]]]]],
           locals: [],
-          templates: []
+          templates: [child0, child1]
         };
       })();
       return {
@@ -6969,7 +7157,7 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
               "column": 0
             },
             "end": {
-              "line": 24,
+              "line": 38,
               "column": 0
             }
           },
@@ -7001,7 +7189,7 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
           dom.insertBoundary(fragment, null);
           return morphs;
         },
-        statements: [["block", "if", [["get", "redDay", ["loc", [null, [15, 6], [15, 12]]]]], [], 0, 1, ["loc", [null, [15, 0], [23, 7]]]]],
+        statements: [["block", "if", [["get", "redDay", ["loc", [null, [15, 6], [15, 12]]]]], [], 0, 1, ["loc", [null, [15, 0], [37, 7]]]]],
         locals: [],
         templates: [child0, child1]
       };
@@ -7020,7 +7208,7 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
             "column": 0
           },
           "end": {
-            "line": 26,
+            "line": 40,
             "column": 0
           }
         },
@@ -7050,7 +7238,7 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
         morphs[1] = dom.createMorphAt(fragment, 3, 3, contextualElement);
         return morphs;
       },
-      statements: [["block", "if", [["get", "header", ["loc", [null, [2, 6], [2, 12]]]]], [], 0, 1, ["loc", [null, [2, 0], [24, 7]]]], ["content", "yield", ["loc", [null, [25, 0], [25, 9]]]]],
+      statements: [["block", "if", [["get", "header", ["loc", [null, [2, 6], [2, 12]]]]], [], 0, 1, ["loc", [null, [2, 0], [38, 7]]]], ["content", "yield", ["loc", [null, [39, 0], [39, 9]]]]],
       locals: [],
       templates: [child0, child1]
     };
@@ -9418,7 +9606,7 @@ catch(err) {
 /* jshint ignore:start */
 
 if (!runningTests) {
-  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+6582157e"});
+  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+b2e45317"});
 }
 
 /* jshint ignore:end */
