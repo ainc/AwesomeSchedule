@@ -11,16 +11,12 @@ export default Ember.Route.extend({
 //                var store =[];
                 return this.get('ajax').request('http://localhost:9029/api/calendar', {method: 'POST',xhrFields:{crossDomain:true,withCredintials:true}}).then(function(value){
                     console.log(Object.keys(value.calendar.data).length);
-                    console.log(value.calendar.data);
+                    console.log(value.calendar.data[0]);
                     var allCourse = Course.create({
                        data: value.calendar.data,
-                       dates: function(){
-                           var store = [];
-                           for(var i = 0; i<Object.keys(value.calendar.data).length; i++){
-                               store.pushObject(value.calendar.data[i].className);
-                           }
-                           return store;
-                       }
+                       whichCourse:0,
+
+                       
                     });
                     console.log(allCourse.data);
                     return allCourse;

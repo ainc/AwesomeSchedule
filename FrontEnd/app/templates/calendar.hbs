@@ -4,10 +4,10 @@
 <section class ={{wrapper}}>
 <calendarContainer>
 
-{{day-tile header = false redDay = true date = calendar.data.[0].className}}
-{{day-tile header = false redDay = true date = calendar.data.[1].className}}
-{{day-tile header = false redDay = true date = calendar.data.[2].className}}
-{{day-tile header = false redDay = true date = calendar.data.[3].className}}
+{{day-tile header = false redDay = true date = calendar.data.[0].classDate}}
+{{day-tile header = false redDay = true date = calendar.data.[1].classDate}}
+{{day-tile header = false redDay = true date = calendar.data.[2].classDate}}
+{{day-tile header = false redDay = true date = calendar.data.[3].classDate}}
 
     <calendarRow>
 	<calendarViewMain>
@@ -37,7 +37,7 @@
                 {{#if (dayCheck (format-date 'dddd')  'Sunday') }}
                 {{logo-tile logo=false date=(format-date) }}
                 {{day-tile  redDay = true  date=(format-date)}}
-                {{day-tile                  date = (format-date 'addTime' 1)}}
+                {{day-tile                  dayCheck =true course = calendar.data.[calendar.whichCourse].className}}
                 {{day-tile  redDay = true  date = (format-date 'addTime' 2)}}
                 {{day-tile                  date = (format-date 'addTime' 3)}}
                 {{day-tile  redDay = true  date = (format-date 'addTime' 4)}}

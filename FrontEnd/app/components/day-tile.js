@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import calendar from '../models/calendar';
 
 //The tiles on the calendar page, the different wrappers are used depending on the data presented in the calendar
 //HTML side for this file stored in /templates/components/
@@ -16,6 +17,8 @@ export default Ember.Component.extend({
         getDate: function(){
             return this.get('date');
         },
+        
+        
                     
         //Drag and drop feature
         className:  ['draggableDropzone'],
@@ -43,7 +46,13 @@ export default Ember.Component.extend({
         actions:{
             getCourse: function(){
                 this.sendAction('action',this.get('getDate'));
-            }
+            },
+            increment: function(){
+           
+            calendar.incrementProperty('whichCourse');
+            console.log(calendar.whichCourse);
+            
+            },
         }
 	
 });
