@@ -167,6 +167,15 @@ define('awesome-schedule-front/tests/helpers/destroy-app.jshint', ['exports'], f
     assert.ok(true, 'helpers/destroy-app.js should pass jshint.');
   });
 });
+define('awesome-schedule-front/tests/helpers/find-course.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - helpers/find-course.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'helpers/find-course.js should pass jshint.');
+  });
+});
 define('awesome-schedule-front/tests/helpers/format-date.jshint', ['exports'], function (exports) {
   'use strict';
 
@@ -1753,6 +1762,15 @@ define('awesome-schedule-front/tests/integration/components/submit-login-test.js
     assert.ok(true, 'integration/components/submit-login-test.js should pass jshint.');
   });
 });
+define('awesome-schedule-front/tests/models/calendar.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - models/calendar.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'models/calendar.js should pass jshint.');
+  });
+});
 define('awesome-schedule-front/tests/models/coach.jshint', ['exports'], function (exports) {
   'use strict';
 
@@ -1762,13 +1780,13 @@ define('awesome-schedule-front/tests/models/coach.jshint', ['exports'], function
     assert.ok(true, 'models/coach.js should pass jshint.');
   });
 });
-define('awesome-schedule-front/tests/models/coaches.jshint', ['exports'], function (exports) {
+define('awesome-schedule-front/tests/models/courses.jshint', ['exports'], function (exports) {
   'use strict';
 
-  QUnit.module('JSHint - models/coaches.js');
+  QUnit.module('JSHint - models/courses.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(true, 'models/coaches.js should pass jshint.');
+    assert.ok(true, 'models/courses.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/models/login.jshint', ['exports'], function (exports) {
@@ -1814,6 +1832,15 @@ define('awesome-schedule-front/tests/routes/bio-box.jshint', ['exports'], functi
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'routes/bio-box.js should pass jshint.');
+  });
+});
+define('awesome-schedule-front/tests/routes/calendar.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - routes/calendar.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'routes/calendar.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/routes/coach.jshint', ['exports'], function (exports) {
@@ -1982,6 +2009,25 @@ define('awesome-schedule-front/tests/unit/helpers/day-check-test.jshint', ['expo
     assert.ok(true, 'unit/helpers/day-check-test.js should pass jshint.');
   });
 });
+define('awesome-schedule-front/tests/unit/helpers/find-course-test', ['exports', 'awesome-schedule-front/helpers/find-course', 'qunit'], function (exports, _awesomeScheduleFrontHelpersFindCourse, _qunit) {
+
+  (0, _qunit.module)('Unit | Helper | find course');
+
+  // Replace this with your real tests.
+  (0, _qunit.test)('it works', function (assert) {
+    var result = (0, _awesomeScheduleFrontHelpersFindCourse.findCourse)([42]);
+    assert.ok(result);
+  });
+});
+define('awesome-schedule-front/tests/unit/helpers/find-course-test.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - unit/helpers/find-course-test.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/helpers/find-course-test.js should pass jshint.');
+  });
+});
 define('awesome-schedule-front/tests/unit/helpers/format-date-test', ['exports', 'awesome-schedule-front/helpers/format-date', 'qunit'], function (exports, _awesomeScheduleFrontHelpersFormatDate, _qunit) {
 
   (0, _qunit.module)('Unit | Helper | format date');
@@ -1999,6 +2045,28 @@ define('awesome-schedule-front/tests/unit/helpers/format-date-test.jshint', ['ex
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'unit/helpers/format-date-test.js should pass jshint.');
+  });
+});
+define('awesome-schedule-front/tests/unit/models/calendar-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
+
+  (0, _emberQunit.moduleForModel)('calendar', 'Unit | Model | calendar', {
+    // Specify the other units that are required for this test.
+    needs: []
+  });
+
+  (0, _emberQunit.test)('it exists', function (assert) {
+    var model = this.subject();
+    // let store = this.store();
+    assert.ok(!!model);
+  });
+});
+define('awesome-schedule-front/tests/unit/models/calendar-test.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - unit/models/calendar-test.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/models/calendar-test.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/unit/models/coaches-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
@@ -2021,6 +2089,28 @@ define('awesome-schedule-front/tests/unit/models/coaches-test.jshint', ['exports
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'unit/models/coaches-test.js should pass jshint.');
+  });
+});
+define('awesome-schedule-front/tests/unit/models/courses-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
+
+  (0, _emberQunit.moduleForModel)('courses', 'Unit | Model | courses', {
+    // Specify the other units that are required for this test.
+    needs: []
+  });
+
+  (0, _emberQunit.test)('it exists', function (assert) {
+    var model = this.subject();
+    // let store = this.store();
+    assert.ok(!!model);
+  });
+});
+define('awesome-schedule-front/tests/unit/models/courses-test.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - unit/models/courses-test.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/models/courses-test.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/unit/models/login-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
@@ -2108,6 +2198,27 @@ define('awesome-schedule-front/tests/unit/routes/bio-box-test.jshint', ['exports
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'unit/routes/bio-box-test.js should pass jshint.');
+  });
+});
+define('awesome-schedule-front/tests/unit/routes/calendar-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
+
+  (0, _emberQunit.moduleFor)('route:calendar', 'Unit | Route | calendar', {
+    // Specify the other units that are required for this test.
+    // needs: ['controller:foo']
+  });
+
+  (0, _emberQunit.test)('it exists', function (assert) {
+    var route = this.subject();
+    assert.ok(route);
+  });
+});
+define('awesome-schedule-front/tests/unit/routes/calendar-test.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - unit/routes/calendar-test.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/routes/calendar-test.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/unit/routes/coaches-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {

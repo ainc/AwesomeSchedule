@@ -3,56 +3,181 @@
 
 <section class ={{wrapper}}>
 <calendarContainer>
+
+{{day-tile header = false redDay = true date = calendar.data.[0].className}}
+{{day-tile header = false redDay = true date = calendar.data.[1].className}}
+{{day-tile header = false redDay = true date = calendar.data.[2].className}}
+{{day-tile header = false redDay = true date = calendar.data.[3].className}}
+
     <calendarRow>
 	<calendarViewMain>
         
 		{{logo-tile logo=true}}
 		{{day-tile header=true redDay = true day="Sunday"}}
 		{{day-tile header=true day="Monday"}}
-                                        {{day-tile header=true redDay = true day="Tuesday"}}
-                                        {{day-tile header=true day="Wednesday"}}
-                                        {{day-tile header=true redDay = true day="Thursday"}}
-                                        {{day-tile header=true day="Friday"}}
-                                        {{day-tile header=true redDay = true day="Saturday"}}
+                {{day-tile header=true redDay = true day="Tuesday"}}
+                {{day-tile header=true day="Wednesday"}}
+                {{day-tile header=true redDay = true day="Thursday"}}
+                {{day-tile header=true day="Friday"}}
+                {{day-tile header=true redDay = true day="Saturday"}}
 
                 
 	</calendarViewMain>
 
-	
+        <calendarViewCoaches>
 		{{coach-sidebar header = true}}
+        </calendarViewCoaches>
 	
 
         </calendarRow>
     
     
     <calendarRow>
-                {{calendar-view-main thisWeek = true}}
+        <calendarViewMain>
+                {{#if (dayCheck (format-date 'dddd')  'Sunday') }}
+                {{logo-tile logo=false date=(format-date) }}
+                {{day-tile  redDay = true  date=(format-date)}}
+                {{day-tile                  date = (format-date 'addTime' 1)}}
+                {{day-tile  redDay = true  date = (format-date 'addTime' 2)}}
+                {{day-tile                  date = (format-date 'addTime' 3)}}
+                {{day-tile  redDay = true  date = (format-date 'addTime' 4)}}
+                {{day-tile                  date = (format-date 'addTime' 5)}}
+                {{day-tile  redDay = true  date = (format-date 'addTime' 6)}}
 
+
+                {{else if (dayCheck (format-date 'dddd')  'Monday') }}
+                {{logo-tile logo=false date=(format-date 'subtractTime' 1) }}
+                {{day-tile  redDay = true  date = (format-date 'subtractTime' 1)}}
+                {{day-tile                date = (format-date)}}
+                {{day-tile  redDay = true  date = (format-date 'addTime' 1)}}
+                {{day-tile                date = (format-date 'addTime' 2)}}
+                {{day-tile  redDay = true  date = (format-date 'addTime' 3)}}
+                {{day-tile                date = (format-date 'addTime' 4)}}
+                {{day-tile  redDay = true  date = (format-date 'addTime' 5)}}
+
+                {{else if (dayCheck (format-date 'dddd')  'Tuesday') }}
+                {{logo-tile logo=false date=(format-date 'subtractTime' 2) }}
+                {{day-tile  redDay = true  date = (format-date 'subtractTime' 2)}}
+                {{day-tile                date = (format-date 'subtractTime' 1)}}
+                {{day-tile  redDay = true  date = (format-date)}}
+                {{day-tile                date = (format-date 'addTime' 1)}}
+                {{day-tile  redDay = true  date = (format-date 'addTime' 2)}}
+                {{day-tile                date = (format-date 'addTime' 3)}}
+                {{day-tile  redDay = true  date = (format-date 'addTime' 4)}}
+
+                {{else if (dayCheck (format-date 'dddd')  'Wednesday')}}
+                {{logo-tile logo=false date=(format-date 'subtractTime' 3)}}
+                {{day-tile  redDay = true  date = (format-date 'subtractTime' 3)}}
+                {{day-tile                date = (format-date 'subtractTime' 2)}}
+                {{day-tile  redDay = true  date = (format-date 'subtractTime' 1)}}
+                {{day-tile                date = (format-date)}}
+                {{day-tile  redDay = true  date = (format-date 'addTime' 1)}}
+                {{day-tile                date = (format-date 'addTime' 2)}}
+                {{day-tile  redDay = true  date = (format-date 'addTime' 3)}}
+
+
+
+                {{else if (dayCheck (format-date 'dddd')  'Thursday') }}
+                {{logo-tile logo=false date=(format-date 'subtractTime' 4) }}
+                {{day-tile  redDay = true  date = (format-date 'subtractTime' 4)}}
+                {{day-tile                date = (format-date 'subtractTime' 3)}}
+                {{day-tile  redDay = true  date = (format-date 'subtractTime' 2)}}
+                {{day-tile                date = (format-date 'subtractTime' 1)}}
+                {{day-tile  redDay = true  date = (format-date)}}
+                {{day-tile                date = (format-date 'addTime' 1)}}
+                {{day-tile  redDay = true  date = (format-date 'addTime' 2)}}
+
+                {{else if (dayCheck (format-date 'dddd')  'Friday') }}
+                {{logo-tile logo=false date=(format-date 'subtractTime' 5) }}
+                {{day-tile  redDay = true  date = (format-date 'subtractTime' 5)}}
+                {{day-tile                date = (format-date 'subtractTime' 4)}}
+                {{day-tile  redDay = true  date = (format-date 'subtractTime' 3)}}
+                {{day-tile                date = (format-date 'subtractTime' 2)}}
+                {{day-tile  redDay = true  date = (format-date 'subtractTime' 1)}}
+                {{day-tile                date = (format-date)}}
+                {{day-tile  redDay = true  date = (format-date 'addTime' 1)}}
+
+                {{else if (dayCheck (format-date 'dddd')  'Saturday') }}
+                {{logo-tile logo=false date=(format-date 'subtractTime' 6) }}
+                {{day-tile  redDay = true  date = (format-date 'subtractTime' 6)}}
+                {{day-tile                date = (format-date 'subtractTime' 5)}}
+                {{day-tile  redDay = true  date = (format-date 'subtractTime' 4)}}
+                {{day-tile                date = (format-date 'subtractTime' 3)}}
+                {{day-tile  redDay = true  date = (format-date 'subtractTime' 2)}}
+                {{day-tile                date = (format-date 'subtractTime' 1)}}
+                {{day-tile  redDay = true  date = (format-date)}}
+
+                {{/if}}
+
+                </calendarViewMain>
+        
+        <calendarViewCoaches>
+            {{coach-sidebar header = false}}
+            {{coach-sidebar header = false}}
+             {{coach-sidebar header = false}}
+        </calendarViewCoaches>
 	
-		{{coach-sidebar header = false}}
+		
 	
     </calendarRow>
     
     
       <calendarRow>
-
-                {{calendar-view-main weekTwo = true}}
+          <calendarViewMain>
+                {{logo-tile logo = false date=(format-date 'W2' 'Su') }}
+                {{day-tile redDay = true date = (format-date 'W2' 'Su')}}
+                {{day-tile               date = (format-date 'W2' 'M')}}
+                {{day-tile redDay = true date = (format-date 'W2' 'Tu')}}
+                {{day-tile               date = (format-date 'W2' 'W')}}
+                {{day-tile redDay = true date = (format-date 'W2' 'Th')}}
+                {{day-tile               date = (format-date 'W2' 'F')}}
+                {{day-tile redDay = true date = (format-date 'W2' 'Sa')}}
+                
+                </calendarViewMain>
 	
-		{{coach-sidebar header = false}}
-	
+        <calendarViewCoaches>
+            {{coach-sidebar header = false}}
+            {{coach-sidebar header = false}}
+             {{coach-sidebar header = false}}
+        </calendarViewCoaches>
+          
       </calendarRow>
       <calendarRow>
-               {{calendar-view-main weekThree = true}}
+          <calendarViewMain>
+                {{logo-tile logo = false date=(format-date 'W3' 'Su') }}
+                {{day-tile redDay = true date = (format-date 'W3' 'Su')}}
+                {{day-tile               date = (format-date 'W3' 'M')}}
+                {{day-tile redDay = true date = (format-date 'W3' 'Tu')}}
+                {{day-tile               date = (format-date 'W3' 'W')}}
+                {{day-tile redDay = true date = (format-date 'W3' 'Th')}}
+                {{day-tile               date = (format-date 'W3' 'F')}}
+                {{day-tile redDay = true date = (format-date 'W3' 'Sa')}}
+                
+                </calendarViewMain>
 
-	
-		{{coach-sidebar header = false}}
-	
+        <calendarViewCoaches>
+            {{coach-sidebar header = false}}
+            {{coach-sidebar header = false}}
+             {{coach-sidebar header = false}}
+        </calendarViewCoaches>
       </calendarRow>
       <calendarRow>
-                {{calendar-view-main weekFour = true}}
-	
-		{{coach-sidebar header = false}}
-	
+          <calendarViewMain>
+                {{logo-tile logo = false date=(format-date 'W4' 'Su') }}
+                {{day-tile redDay = true date = (format-date 'W4' 'Su')}}
+                {{day-tile               date = (format-date 'W4' 'M')}}
+                {{day-tile redDay = true date = (format-date 'W4' 'Tu')}}
+                {{day-tile               date = (format-date 'W4' 'W')}}
+                {{day-tile redDay = true date = (format-date 'W4' 'Th')}}
+                {{day-tile               date = (format-date 'W4' 'F')}}
+                {{day-tile redDay = true date = (format-date 'W4' 'Sa')}}
+                
+                </calendarViewMain>
+        <calendarViewCoaches>
+            {{coach-sidebar header = false}}
+            {{coach-sidebar header = false}}
+             {{coach-sidebar header = false}}
+        </calendarViewCoaches>
 	  </calendarRow>
      
 	</calendarContainer>

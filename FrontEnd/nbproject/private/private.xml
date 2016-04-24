@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/Roodey/Documents/Awesome%20Inc/AwesomeSchedule/FrontEnd/app/templates/components/logo-tile.hbs</file>
-            <file>file:/Users/Roodey/Documents/Awesome%20Inc/AwesomeSchedule/FrontEnd/app/helpers/day-check.js</file>
+            <file>file:/Users/Roodey/Documents/Awesome%20Inc/AwesomeSchedule/FrontEnd/app/routes/calendar.js</file>
             <file>file:/Users/Roodey/Documents/Awesome%20Inc/AwesomeSchedule/FrontEnd/app/templates/calendar.hbs</file>
-            <file>file:/Users/Roodey/Documents/Awesome%20Inc/AwesomeSchedule/FrontEnd/app/templates/components/submit-login.hbs</file>
-            <file>file:/Users/Roodey/Documents/Awesome%20Inc/AwesomeSchedule/FrontEnd/app/helpers/format-date.js</file>
-            <file>file:/Users/Roodey/Documents/Awesome%20Inc/AwesomeSchedule/FrontEnd/app/templates/components/calendar-view-main.hbs</file>
+            <file>file:/Users/Roodey/Documents/Awesome%20Inc/AwesomeSchedule/FrontEnd/app/helpers/day-check.js</file>
+            <file>file:/Users/Roodey/Documents/Awesome%20Inc/AwesomeSchedule/FrontEnd/app/helpers/find-course.js</file>
             <file>file:/Users/Roodey/Documents/Awesome%20Inc/AwesomeSchedule/FrontEnd/app/components/calendar-view-main.js</file>
         </group>
     </open-files>
