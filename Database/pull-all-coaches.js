@@ -6,7 +6,7 @@ var provider = require('./mysqlProvider.js');
 module.exports.pullallcoaches = function(){
     return new provider.RSVP.Promise(function(resolve, reject) {
         
-        provider.connection.query('SELECT name, class, uaDate FROM coaches, qualified, unavailable WHERE coaches.CoID = unavailable.coaches_CoID AND coaches.CoID = qualified.coaches_CoID, function(err, rows) {
+        provider.connection.query('SELECT name, class, uaDate FROM coaches, qualified, unavailable WHERE coaches.CoID = unavailable.coaches_CoID AND coaches.CoID = qualified.coaches_CoID', function(err, rows) {
             
             if (err){ throw err;}
             if (!rows.length)
