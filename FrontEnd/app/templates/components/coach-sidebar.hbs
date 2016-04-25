@@ -5,9 +5,12 @@
 </div>	
 {{else}}
 <!-- COACH NAME AND INFORMATION TILE-->
+{{#draggable-object content=this}}
 <div class ="coachPlate">
     <p>{{name}}</p>
+    
 </div>
+{{/draggable-object}}
 {{/if}}
 
 {{yield}}

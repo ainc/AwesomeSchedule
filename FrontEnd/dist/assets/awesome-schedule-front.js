@@ -268,13 +268,8 @@ define('awesome-schedule-front/components/coach-sidebar', ['exports', 'ember'], 
         //HTML side for this file stored in /templates/components/
         exports['default'] = _ember['default'].Component.extend({
                 name: 'Mike Jones',
-                classNames: ['draggableItem'],
-                attributeBindings: ['draggable'],
-                draggable: 'true',
+                needs: 'calendar'
 
-                dragStart: function dragStart(event) {
-                        return event.dataTransfer.setData('text/data', get(this, 'content'));
-                }
         });
 });
 define('awesome-schedule-front/components/day-tile', ['exports', 'ember'], function (exports, _ember) {
@@ -291,36 +286,20 @@ define('awesome-schedule-front/components/day-tile', ['exports', 'ember'], funct
         wrapperEmptyMWF: 'blankTileMWF',
         wrapperFilled: 'colorTile',
 
-        //Drag and drop feature
-        className: ['draggableDropzone'],
-        classNameBindings: ['dragClass'],
-        dragClass: 'deactivated',
-
-        dragLeave: function dragLeave(event) {
-            event.preventDefault();
-            set(this, 'dragClass', 'activated');
-        },
-
-        dragOver: function dragOver(event) {
-            event.preventDefault();
-            set(this, 'dragClass', 'deactivated');
-        },
-
-        drop: function drop(event) {
-            var data = event.dataTransfer.getData('text/data');
-            this.sendAction('dropped', data);
-
-            set(this, 'dragClass', 'deactivated');
-        },
-
         actions: {
-            getCourse: function getCourse() {
-                this.sendAction('action', this.get('getDate'));
+            scheduleInstructor: function scheduleInstructor() {
+                console.log(this.get('course'));
+                this.sendAction('action', this.get('course'));
             }
-
         }
 
     });
+});
+define('awesome-schedule-front/components/draggable-object-target', ['exports', 'ember-drag-drop/components/draggable-object-target'], function (exports, _emberDragDropComponentsDraggableObjectTarget) {
+  exports['default'] = _emberDragDropComponentsDraggableObjectTarget['default'];
+});
+define('awesome-schedule-front/components/draggable-object', ['exports', 'ember-drag-drop/components/draggable-object'], function (exports, _emberDragDropComponentsDraggableObject) {
+  exports['default'] = _emberDragDropComponentsDraggableObject['default'];
 });
 define('awesome-schedule-front/components/ember-wormhole', ['exports', 'ember-wormhole/components/ember-wormhole'], function (exports, _emberWormholeComponentsEmberWormhole) {
   Object.defineProperty(exports, 'default', {
@@ -345,6 +324,12 @@ define('awesome-schedule-front/components/logo-tile', ['exports', 'ember'], func
       tagName: 'logoHeader'
 
    });
+});
+define('awesome-schedule-front/components/object-bin', ['exports', 'ember-drag-drop/components/object-bin'], function (exports, _emberDragDropComponentsObjectBin) {
+  exports['default'] = _emberDragDropComponentsObjectBin['default'];
+});
+define('awesome-schedule-front/components/sortable-objects', ['exports', 'ember-drag-drop/components/sortable-objects'], function (exports, _emberDragDropComponentsSortableObjects) {
+  exports['default'] = _emberDragDropComponentsSortableObjects['default'];
 });
 define('awesome-schedule-front/components/submit-info', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Component.extend({});
@@ -819,6 +804,13 @@ define('awesome-schedule-front/helpers/is-not', ['exports', 'ember-bootstrap/hel
     }
   });
 });
+define("awesome-schedule-front/helpers/log", ["exports"], function (exports) {
+  exports["default"] = function () {
+    //console.debug(str);
+  };
+
+  ;
+});
 define('awesome-schedule-front/helpers/pluralize', ['exports', 'ember-inflector/lib/helpers/pluralize'], function (exports, _emberInflectorLibHelpersPluralize) {
   exports['default'] = _emberInflectorLibHelpersPluralize['default'];
 });
@@ -854,6 +846,17 @@ define('awesome-schedule-front/initializers/container-debug-adapter', ['exports'
 
       app.register('container-debug-adapter:main', _emberResolverContainerDebugAdapter['default']);
       app.inject('container-debug-adapter:main', 'namespace', 'application:main');
+    }
+  };
+});
+define("awesome-schedule-front/initializers/coordinator-setup", ["exports", "awesome-schedule-front/models/coordinator"], function (exports, _awesomeScheduleFrontModelsCoordinator) {
+  exports["default"] = {
+    name: "setup coordinator",
+
+    initialize: function initialize() {
+      var app = arguments[1] || arguments[0];
+      app.register("drag:coordinator", _awesomeScheduleFrontModelsCoordinator["default"]);
+      app.inject("component", "coordinator", "drag:coordinator");
     }
   };
 });
@@ -1023,6 +1026,35 @@ define('awesome-schedule-front/models/calendar', ['exports', 'ember'], function 
 define('awesome-schedule-front/models/coach', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Object.extend({});
 });
+define('awesome-schedule-front/models/coordinator', ['exports', 'ember', 'awesome-schedule-front/models/obj-hash'], function (exports, _ember, _awesomeScheduleFrontModelsObjHash) {
+  exports['default'] = _ember['default'].Object.extend(_ember['default'].Evented, {
+    objectMap: _ember['default'].computed(function () {
+      return _awesomeScheduleFrontModelsObjHash['default'].create();
+    }),
+
+    getObject: function getObject(id, ops) {
+      ops = ops || {};
+      var payload = this.get('objectMap').getObj(id);
+
+      if (payload.ops.source) {
+        payload.ops.source.sendAction('action', payload.obj);
+      }
+
+      if (payload.ops.target) {
+        payload.ops.target.sendAction('action', payload.obj);
+      }
+
+      this.trigger("objectMoved", { obj: payload.obj, source: payload.ops.source, target: ops.target });
+
+      return payload.obj;
+    },
+
+    setObject: function setObject(obj, ops) {
+      ops = ops || {};
+      return this.get('objectMap').add({ obj: obj, ops: ops });
+    }
+  });
+});
 define('awesome-schedule-front/models/courses', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Object.extend({});
 });
@@ -1034,6 +1066,44 @@ define('awesome-schedule-front/models/login', ['exports', 'ember'], function (ex
         init: function init() {}
 
     });
+});
+define('awesome-schedule-front/models/obj-hash', ['exports', 'ember'], function (exports, _ember) {
+  exports['default'] = _ember['default'].Object.extend({
+    content: {},
+    contentLength: 0,
+
+    add: function add(obj) {
+      var id = this.generateId();
+      this.get('content')[id] = obj;
+      this.incrementProperty("contentLength");
+      return id;
+    },
+
+    getObj: function getObj(key) {
+      var res = this.get('content')[key];
+      if (!res) {
+        throw "no obj for key " + key;
+      }
+      return res;
+    },
+
+    generateId: function generateId() {
+      var num = Math.random() * 1000000000000.0;
+      num = parseInt(num);
+      num = "" + num;
+      return num;
+    },
+
+    keys: function keys() {
+      var res = [];
+      for (var key in this.get('content')) {
+        res.push(key);
+      }
+      return _ember['default'].A(res);
+    },
+
+    lengthBinding: "contentLength"
+  });
 });
 define('awesome-schedule-front/models/test', ['exports', 'ember'], function (exports, _ember) {
 
@@ -1211,6 +1281,9 @@ define('awesome-schedule-front/services/ajax', ['exports', 'ember-ajax/services/
       return _emberAjaxServicesAjax['default'];
     }
   });
+});
+define('awesome-schedule-front/services/drag-coordinator', ['exports', 'ember-drag-drop/services/drag-coordinator'], function (exports, _emberDragDropServicesDragCoordinator) {
+  exports['default'] = _emberDragDropServicesDragCoordinator['default'];
 });
 define("awesome-schedule-front/templates/application", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
@@ -6607,6 +6680,55 @@ define("awesome-schedule-front/templates/components/coach-sidebar", ["exports"],
       };
     })();
     var child1 = (function () {
+      var child0 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.4.3",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 8,
+                "column": 0
+              },
+              "end": {
+                "line": 13,
+                "column": 0
+              }
+            },
+            "moduleName": "awesome-schedule-front/templates/components/coach-sidebar.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createElement("div");
+            dom.setAttribute(el1, "class", "coachPlate");
+            var el2 = dom.createTextNode("\n    ");
+            dom.appendChild(el1, el2);
+            var el2 = dom.createElement("p");
+            var el3 = dom.createComment("");
+            dom.appendChild(el2, el3);
+            dom.appendChild(el1, el2);
+            var el2 = dom.createTextNode("\n    \n");
+            dom.appendChild(el1, el2);
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var morphs = new Array(1);
+            morphs[0] = dom.createMorphAt(dom.childAt(fragment, [0, 1]), 0, 0);
+            return morphs;
+          },
+          statements: [["content", "name", ["loc", [null, [10, 7], [10, 15]]]]],
+          locals: [],
+          templates: []
+        };
+      })();
       return {
         meta: {
           "fragmentReason": false,
@@ -6618,7 +6740,7 @@ define("awesome-schedule-front/templates/components/coach-sidebar", ["exports"],
               "column": 0
             },
             "end": {
-              "line": 11,
+              "line": 14,
               "column": 0
             }
           },
@@ -6634,29 +6756,19 @@ define("awesome-schedule-front/templates/components/coach-sidebar", ["exports"],
           dom.appendChild(el0, el1);
           var el1 = dom.createTextNode("\n");
           dom.appendChild(el0, el1);
-          var el1 = dom.createElement("div");
-          dom.setAttribute(el1, "class", "coachPlate");
-          var el2 = dom.createTextNode("\n    ");
-          dom.appendChild(el1, el2);
-          var el2 = dom.createElement("p");
-          var el3 = dom.createComment("");
-          dom.appendChild(el2, el3);
-          dom.appendChild(el1, el2);
-          var el2 = dom.createTextNode("\n");
-          dom.appendChild(el1, el2);
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n");
+          var el1 = dom.createComment("");
           dom.appendChild(el0, el1);
           return el0;
         },
         buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
           var morphs = new Array(1);
-          morphs[0] = dom.createMorphAt(dom.childAt(fragment, [2, 1]), 0, 0);
+          morphs[0] = dom.createMorphAt(fragment, 2, 2, contextualElement);
+          dom.insertBoundary(fragment, null);
           return morphs;
         },
-        statements: [["content", "name", ["loc", [null, [9, 7], [9, 15]]]]],
+        statements: [["block", "draggable-object", [], ["content", ["subexpr", "@mut", [["get", "this", ["loc", [null, [8, 28], [8, 32]]]]], [], []]], 0, null, ["loc", [null, [8, 0], [13, 21]]]]],
         locals: [],
-        templates: []
+        templates: [child0]
       };
     })();
     return {
@@ -6673,7 +6785,7 @@ define("awesome-schedule-front/templates/components/coach-sidebar", ["exports"],
             "column": 0
           },
           "end": {
-            "line": 14,
+            "line": 17,
             "column": 0
           }
         },
@@ -6705,7 +6817,7 @@ define("awesome-schedule-front/templates/components/coach-sidebar", ["exports"],
         morphs[1] = dom.createMorphAt(fragment, 4, 4, contextualElement);
         return morphs;
       },
-      statements: [["block", "if", [["get", "header", ["loc", [null, [2, 6], [2, 12]]]]], [], 0, 1, ["loc", [null, [2, 0], [11, 7]]]], ["content", "yield", ["loc", [null, [13, 0], [13, 9]]]]],
+      statements: [["block", "if", [["get", "header", ["loc", [null, [2, 6], [2, 12]]]]], [], 0, 1, ["loc", [null, [2, 0], [14, 7]]]], ["content", "yield", ["loc", [null, [16, 0], [16, 9]]]]],
       locals: [],
       templates: [child0, child1]
     };
@@ -6861,12 +6973,12 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
               "loc": {
                 "source": null,
                 "start": {
-                  "line": 20,
-                  "column": 4
+                  "line": 16,
+                  "column": 0
                 },
                 "end": {
-                  "line": 22,
-                  "column": 4
+                  "line": 23,
+                  "column": 0
                 }
               },
               "moduleName": "awesome-schedule-front/templates/components/day-tile.hbs"
@@ -6877,14 +6989,30 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
             hasRendered: false,
             buildFragment: function buildFragment(dom) {
               var el0 = dom.createDocumentFragment();
-              var el1 = dom.createTextNode("    \n");
+              var el1 = dom.createElement("div");
+              dom.setAttribute(el1, "id", "tile");
+              var el2 = dom.createTextNode("\n    ");
+              dom.appendChild(el1, el2);
+              var el2 = dom.createElement("p");
+              dom.setAttribute(el2, "class", "displayCourse");
+              var el3 = dom.createComment("");
+              dom.appendChild(el2, el3);
+              dom.appendChild(el1, el2);
+              var el2 = dom.createTextNode("\n\n\n\n");
+              dom.appendChild(el1, el2);
+              dom.appendChild(el0, el1);
+              var el1 = dom.createTextNode("\n");
               dom.appendChild(el0, el1);
               return el0;
             },
-            buildRenderNodes: function buildRenderNodes() {
-              return [];
+            buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+              var element1 = dom.childAt(fragment, [0]);
+              var morphs = new Array(2);
+              morphs[0] = dom.createAttrMorph(element1, 'class');
+              morphs[1] = dom.createMorphAt(dom.childAt(element1, [1]), 0, 0);
+              return morphs;
             },
-            statements: [],
+            statements: [["attribute", "class", ["get", "wrapperEmptySTTS", ["loc", [null, [17, 15], [17, 31]]]]], ["content", "course", ["loc", [null, [18, 29], [18, 39]]]]],
             locals: [],
             templates: []
           };
@@ -6900,7 +7028,7 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
                 "column": 0
               },
               "end": {
-                "line": 26,
+                "line": 24,
                 "column": 0
               }
             },
@@ -6912,37 +7040,18 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
           hasRendered: false,
           buildFragment: function buildFragment(dom) {
             var el0 = dom.createDocumentFragment();
-            var el1 = dom.createTextNode("\n");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createElement("div");
-            dom.setAttribute(el1, "id", "tile");
-            var el2 = dom.createTextNode("\n    ");
-            dom.appendChild(el1, el2);
-            var el2 = dom.createElement("p");
-            dom.setAttribute(el2, "class", "displayCourse");
-            var el3 = dom.createComment("");
-            dom.appendChild(el2, el3);
-            dom.appendChild(el1, el2);
-            var el2 = dom.createTextNode("\n    \n");
-            dom.appendChild(el1, el2);
-            var el2 = dom.createComment("");
-            dom.appendChild(el1, el2);
-            var el2 = dom.createTextNode("\n");
-            dom.appendChild(el1, el2);
-            dom.appendChild(el0, el1);
-            var el1 = dom.createTextNode("\n\n");
+            var el1 = dom.createComment("");
             dom.appendChild(el0, el1);
             return el0;
           },
           buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-            var element1 = dom.childAt(fragment, [1]);
-            var morphs = new Array(3);
-            morphs[0] = dom.createAttrMorph(element1, 'class');
-            morphs[1] = dom.createMorphAt(dom.childAt(element1, [1]), 0, 0);
-            morphs[2] = dom.createMorphAt(element1, 3, 3);
+            var morphs = new Array(1);
+            morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+            dom.insertBoundary(fragment, 0);
+            dom.insertBoundary(fragment, null);
             return morphs;
           },
-          statements: [["attribute", "class", ["get", "wrapperEmptySTTS", ["loc", [null, [17, 15], [17, 31]]]]], ["content", "course", ["loc", [null, [18, 29], [18, 39]]]], ["block", "draggable-dropzone", [], ["dropped", "addUser"], 0, null, ["loc", [null, [20, 4], [22, 27]]]]],
+          statements: [["block", "draggable-object-target", [], ["action", "scheduleInstructor"], 0, null, ["loc", [null, [16, 0], [23, 28]]]]],
           locals: [],
           templates: [child0]
         };
@@ -6956,12 +7065,12 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
               "loc": {
                 "source": null,
                 "start": {
-                  "line": 31,
-                  "column": 4
+                  "line": 25,
+                  "column": 0
                 },
                 "end": {
-                  "line": 33,
-                  "column": 4
+                  "line": 32,
+                  "column": 0
                 }
               },
               "moduleName": "awesome-schedule-front/templates/components/day-tile.hbs"
@@ -6972,14 +7081,30 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
             hasRendered: false,
             buildFragment: function buildFragment(dom) {
               var el0 = dom.createDocumentFragment();
-              var el1 = dom.createTextNode("    \n");
+              var el1 = dom.createElement("div");
+              dom.setAttribute(el1, "id", "tile");
+              var el2 = dom.createTextNode("\n    ");
+              dom.appendChild(el1, el2);
+              var el2 = dom.createElement("p");
+              dom.setAttribute(el2, "class", "displayCourse");
+              var el3 = dom.createComment("");
+              dom.appendChild(el2, el3);
+              dom.appendChild(el1, el2);
+              var el2 = dom.createTextNode("\n    \n\n\n");
+              dom.appendChild(el1, el2);
+              dom.appendChild(el0, el1);
+              var el1 = dom.createTextNode("\n");
               dom.appendChild(el0, el1);
               return el0;
             },
-            buildRenderNodes: function buildRenderNodes() {
-              return [];
+            buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+              var element0 = dom.childAt(fragment, [0]);
+              var morphs = new Array(2);
+              morphs[0] = dom.createAttrMorph(element0, 'class');
+              morphs[1] = dom.createMorphAt(dom.childAt(element0, [1]), 0, 0);
+              return morphs;
             },
-            statements: [],
+            statements: [["attribute", "class", ["get", "wrapperEmptyMWF", ["loc", [null, [26, 15], [26, 30]]]]], ["content", "course", ["loc", [null, [27, 30], [27, 40]]]]],
             locals: [],
             templates: []
           };
@@ -6991,11 +7116,11 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
             "loc": {
               "source": null,
               "start": {
-                "line": 26,
+                "line": 24,
                 "column": 0
               },
               "end": {
-                "line": 38,
+                "line": 34,
                 "column": 0
               }
             },
@@ -7007,37 +7132,19 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
           hasRendered: false,
           buildFragment: function buildFragment(dom) {
             var el0 = dom.createDocumentFragment();
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
             var el1 = dom.createTextNode("\n");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createElement("div");
-            dom.setAttribute(el1, "id", "tile");
-            var el2 = dom.createTextNode("\n    ");
-            dom.appendChild(el1, el2);
-            var el2 = dom.createElement("p");
-            dom.setAttribute(el2, "class", "displayCourse");
-            var el3 = dom.createComment("");
-            dom.appendChild(el2, el3);
-            dom.appendChild(el1, el2);
-            var el2 = dom.createTextNode("\n    \n");
-            dom.appendChild(el1, el2);
-            var el2 = dom.createComment("");
-            dom.appendChild(el1, el2);
-            var el2 = dom.createTextNode("\n");
-            dom.appendChild(el1, el2);
-            dom.appendChild(el0, el1);
-            var el1 = dom.createTextNode("\n\n\n");
             dom.appendChild(el0, el1);
             return el0;
           },
           buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-            var element0 = dom.childAt(fragment, [1]);
-            var morphs = new Array(3);
-            morphs[0] = dom.createAttrMorph(element0, 'class');
-            morphs[1] = dom.createMorphAt(dom.childAt(element0, [1]), 0, 0);
-            morphs[2] = dom.createMorphAt(element0, 3, 3);
+            var morphs = new Array(1);
+            morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+            dom.insertBoundary(fragment, 0);
             return morphs;
           },
-          statements: [["attribute", "class", ["get", "wrapperEmptyMWF", ["loc", [null, [28, 15], [28, 30]]]]], ["content", "course", ["loc", [null, [29, 30], [29, 40]]]], ["block", "draggable-dropzone", [], ["dropped", "addUser"], 0, null, ["loc", [null, [31, 4], [33, 27]]]]],
+          statements: [["block", "draggable-object-target", [], ["action", "scheduleInstructor"], 0, null, ["loc", [null, [25, 0], [32, 28]]]]],
           locals: [],
           templates: [child0]
         };
@@ -7053,7 +7160,7 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
               "column": 0
             },
             "end": {
-              "line": 39,
+              "line": 35,
               "column": 0
             }
           },
@@ -7085,7 +7192,7 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
           dom.insertBoundary(fragment, null);
           return morphs;
         },
-        statements: [["block", "if", [["get", "redDay", ["loc", [null, [15, 6], [15, 12]]]]], [], 0, 1, ["loc", [null, [15, 0], [38, 7]]]]],
+        statements: [["block", "if", [["get", "redDay", ["loc", [null, [15, 6], [15, 12]]]]], [], 0, 1, ["loc", [null, [15, 0], [34, 7]]]]],
         locals: [],
         templates: [child0, child1]
       };
@@ -7104,7 +7211,7 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
             "column": 0
           },
           "end": {
-            "line": 41,
+            "line": 37,
             "column": 0
           }
         },
@@ -7134,7 +7241,289 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
         morphs[1] = dom.createMorphAt(fragment, 3, 3, contextualElement);
         return morphs;
       },
-      statements: [["block", "if", [["get", "header", ["loc", [null, [2, 6], [2, 12]]]]], [], 0, 1, ["loc", [null, [2, 0], [39, 7]]]], ["content", "yield", ["loc", [null, [40, 0], [40, 9]]]]],
+      statements: [["block", "if", [["get", "header", ["loc", [null, [2, 6], [2, 12]]]]], [], 0, 1, ["loc", [null, [2, 0], [35, 7]]]], ["content", "yield", ["loc", [null, [36, 0], [36, 9]]]]],
+      locals: [],
+      templates: [child0, child1]
+    };
+  })());
+});
+define("awesome-schedule-front/templates/components/draggable-object-target", ["exports"], function (exports) {
+  exports["default"] = Ember.HTMLBars.template((function () {
+    var child0 = (function () {
+      return {
+        meta: {
+          "fragmentReason": {
+            "name": "modifiers",
+            "modifiers": ["action"]
+          },
+          "revision": "Ember@2.4.3",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 1,
+              "column": 0
+            },
+            "end": {
+              "line": 5,
+              "column": 0
+            }
+          },
+          "moduleName": "awesome-schedule-front/templates/components/draggable-object-target.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createElement("a");
+          dom.setAttribute(el1, "href", "#");
+          var el2 = dom.createTextNode("\n    ");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createComment("");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode("\n  ");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var element0 = dom.childAt(fragment, [1]);
+          var morphs = new Array(2);
+          morphs[0] = dom.createElementMorph(element0);
+          morphs[1] = dom.createMorphAt(element0, 1, 1);
+          return morphs;
+        },
+        statements: [["element", "action", ["acceptForDrop"], [], ["loc", [null, [2, 14], [2, 40]]]], ["content", "yield", ["loc", [null, [3, 4], [3, 13]]]]],
+        locals: [],
+        templates: []
+      };
+    })();
+    var child1 = (function () {
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.4.3",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 5,
+              "column": 0
+            },
+            "end": {
+              "line": 7,
+              "column": 0
+            }
+          },
+          "moduleName": "awesome-schedule-front/templates/components/draggable-object-target.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+          return morphs;
+        },
+        statements: [["content", "yield", ["loc", [null, [6, 2], [6, 11]]]]],
+        locals: [],
+        templates: []
+      };
+    })();
+    return {
+      meta: {
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type"]
+        },
+        "revision": "Ember@2.4.3",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 8,
+            "column": 0
+          }
+        },
+        "moduleName": "awesome-schedule-front/templates/components/draggable-object-target.hbs"
+      },
+      isEmpty: false,
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var morphs = new Array(1);
+        morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+        dom.insertBoundary(fragment, 0);
+        dom.insertBoundary(fragment, null);
+        return morphs;
+      },
+      statements: [["block", "if", [["get", "enableClicking", ["loc", [null, [1, 6], [1, 20]]]]], [], 0, 1, ["loc", [null, [1, 0], [7, 7]]]]],
+      locals: [],
+      templates: [child0, child1]
+    };
+  })());
+});
+define("awesome-schedule-front/templates/components/draggable-object", ["exports"], function (exports) {
+  exports["default"] = Ember.HTMLBars.template((function () {
+    var child0 = (function () {
+      return {
+        meta: {
+          "fragmentReason": {
+            "name": "modifiers",
+            "modifiers": ["action"]
+          },
+          "revision": "Ember@2.4.3",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 1,
+              "column": 0
+            },
+            "end": {
+              "line": 5,
+              "column": 0
+            }
+          },
+          "moduleName": "awesome-schedule-front/templates/components/draggable-object.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createElement("a");
+          dom.setAttribute(el1, "href", "#");
+          var el2 = dom.createTextNode("\n    ");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createComment("");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode("\n  ");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var element0 = dom.childAt(fragment, [1]);
+          var morphs = new Array(2);
+          morphs[0] = dom.createElementMorph(element0);
+          morphs[1] = dom.createMorphAt(element0, 1, 1);
+          return morphs;
+        },
+        statements: [["element", "action", ["selectForDrag"], [], ["loc", [null, [2, 14], [2, 40]]]], ["content", "yield", ["loc", [null, [3, 4], [3, 13]]]]],
+        locals: [],
+        templates: []
+      };
+    })();
+    var child1 = (function () {
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.4.3",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 5,
+              "column": 0
+            },
+            "end": {
+              "line": 7,
+              "column": 0
+            }
+          },
+          "moduleName": "awesome-schedule-front/templates/components/draggable-object.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+          return morphs;
+        },
+        statements: [["content", "yield", ["loc", [null, [6, 2], [6, 11]]]]],
+        locals: [],
+        templates: []
+      };
+    })();
+    return {
+      meta: {
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type"]
+        },
+        "revision": "Ember@2.4.3",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 7,
+            "column": 7
+          }
+        },
+        "moduleName": "awesome-schedule-front/templates/components/draggable-object.hbs"
+      },
+      isEmpty: false,
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var morphs = new Array(1);
+        morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+        dom.insertBoundary(fragment, 0);
+        dom.insertBoundary(fragment, null);
+        return morphs;
+      },
+      statements: [["block", "if", [["get", "enableClicking", ["loc", [null, [1, 6], [1, 20]]]]], [], 0, 1, ["loc", [null, [1, 0], [7, 7]]]]],
       locals: [],
       templates: [child0, child1]
     };
@@ -9234,6 +9623,234 @@ define("awesome-schedule-front/templates/components/logo-tile", ["exports"], fun
     };
   })());
 });
+define("awesome-schedule-front/templates/components/object-bin", ["exports"], function (exports) {
+  exports["default"] = Ember.HTMLBars.template((function () {
+    var child0 = (function () {
+      var child0 = (function () {
+        var child0 = (function () {
+          return {
+            meta: {
+              "fragmentReason": false,
+              "revision": "Ember@2.4.3",
+              "loc": {
+                "source": null,
+                "start": {
+                  "line": 5,
+                  "column": 4
+                },
+                "end": {
+                  "line": 7,
+                  "column": 4
+                }
+              },
+              "moduleName": "awesome-schedule-front/templates/components/object-bin.hbs"
+            },
+            isEmpty: false,
+            arity: 0,
+            cachedFragment: null,
+            hasRendered: false,
+            buildFragment: function buildFragment(dom) {
+              var el0 = dom.createDocumentFragment();
+              var el1 = dom.createTextNode("      ");
+              dom.appendChild(el0, el1);
+              var el1 = dom.createComment("");
+              dom.appendChild(el0, el1);
+              var el1 = dom.createTextNode("\n");
+              dom.appendChild(el0, el1);
+              return el0;
+            },
+            buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+              var morphs = new Array(1);
+              morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+              return morphs;
+            },
+            statements: [["inline", "yield", [["get", "obj", ["loc", [null, [6, 14], [6, 17]]]]], [], ["loc", [null, [6, 6], [6, 19]]]]],
+            locals: [],
+            templates: []
+          };
+        })();
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.4.3",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 4,
+                "column": 2
+              },
+              "end": {
+                "line": 8,
+                "column": 2
+              }
+            },
+            "moduleName": "awesome-schedule-front/templates/components/object-bin.hbs"
+          },
+          isEmpty: false,
+          arity: 1,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var morphs = new Array(1);
+            morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+            dom.insertBoundary(fragment, 0);
+            dom.insertBoundary(fragment, null);
+            return morphs;
+          },
+          statements: [["block", "draggable-object", [], ["action", "handleObjectDragged", "content", ["subexpr", "@mut", [["get", "obj", ["loc", [null, [5, 61], [5, 64]]]]], [], []]], 0, null, ["loc", [null, [5, 4], [7, 25]]]]],
+          locals: ["obj"],
+          templates: [child0]
+        };
+      })();
+      return {
+        meta: {
+          "fragmentReason": {
+            "name": "missing-wrapper",
+            "problems": ["multiple-nodes", "wrong-type"]
+          },
+          "revision": "Ember@2.4.3",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 1,
+              "column": 0
+            },
+            "end": {
+              "line": 9,
+              "column": 0
+            }
+          },
+          "moduleName": "awesome-schedule-front/templates/components/object-bin.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createElement("div");
+          dom.setAttribute(el1, "class", "object-bin-title");
+          var el2 = dom.createComment("");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createElement("br");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(2);
+          morphs[0] = dom.createMorphAt(dom.childAt(fragment, [1]), 0, 0);
+          morphs[1] = dom.createMorphAt(fragment, 5, 5, contextualElement);
+          dom.insertBoundary(fragment, null);
+          return morphs;
+        },
+        statements: [["content", "name", ["loc", [null, [2, 32], [2, 40]]]], ["block", "each", [["get", "model", ["loc", [null, [4, 10], [4, 15]]]]], [], 0, null, ["loc", [null, [4, 2], [8, 11]]]]],
+        locals: [],
+        templates: [child0]
+      };
+    })();
+    return {
+      meta: {
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type"]
+        },
+        "revision": "Ember@2.4.3",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 10,
+            "column": 0
+          }
+        },
+        "moduleName": "awesome-schedule-front/templates/components/object-bin.hbs"
+      },
+      isEmpty: false,
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var morphs = new Array(1);
+        morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+        dom.insertBoundary(fragment, 0);
+        dom.insertBoundary(fragment, null);
+        return morphs;
+      },
+      statements: [["block", "draggable-object-target", [], ["action", "handleObjectDropped"], 0, null, ["loc", [null, [1, 0], [9, 28]]]]],
+      locals: [],
+      templates: [child0]
+    };
+  })());
+});
+define("awesome-schedule-front/templates/components/sortable-objects", ["exports"], function (exports) {
+  exports["default"] = Ember.HTMLBars.template((function () {
+    return {
+      meta: {
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type"]
+        },
+        "revision": "Ember@2.4.3",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 1,
+            "column": 9
+          }
+        },
+        "moduleName": "awesome-schedule-front/templates/components/sortable-objects.hbs"
+      },
+      isEmpty: false,
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var morphs = new Array(1);
+        morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+        dom.insertBoundary(fragment, 0);
+        dom.insertBoundary(fragment, null);
+        return morphs;
+      },
+      statements: [["content", "yield", ["loc", [null, [1, 0], [1, 9]]]]],
+      locals: [],
+      templates: []
+    };
+  })());
+});
 define("awesome-schedule-front/templates/components/submit-info", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
@@ -9502,7 +10119,7 @@ catch(err) {
 /* jshint ignore:start */
 
 if (!runningTests) {
-  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+9d04c98b"});
+  require("awesome-schedule-front/app")["default"].create({"name":"awesome-schedule-front","version":"0.0.0+ffb9fd41"});
 }
 
 /* jshint ignore:end */

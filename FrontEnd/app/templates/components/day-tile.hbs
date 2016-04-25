@@ -13,27 +13,23 @@
 
 <!--Eventually will need an if statement to check if there is information that needs to be added to each day.-->
 {{#if redDay}}
-
+{{#draggable-object-target action="scheduleInstructor"}}
 <div class = {{wrapperEmptySTTS}} id="tile">
     <p class="displayCourse">{{course}}</p>
-    
-    {{#draggable-dropzone dropped="addUser"}}
-    
-    {{/draggable-dropzone}}
+
+
 
 </div>
-
+{{/draggable-object-target}}
 {{else}}
-
+{{#draggable-object-target action="scheduleInstructor"}}
 <div class = {{wrapperEmptyMWF}} id="tile">
     <p class ="displayCourse">{{course}}</p>
     
-    {{#draggable-dropzone dropped="addUser"}}
-    
-    {{/draggable-dropzone}}
+
 
 </div>
-
+{{/draggable-object-target}}
 
 {{/if}}
 {{/if}}

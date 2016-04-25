@@ -6,11 +6,6 @@ var { get } = Ember;
 //HTML side for this file stored in /templates/components/
 export default Ember.Component.extend({
         name: 'Mike Jones',
-        classNames        : [ 'draggableItem' ],
-        attributeBindings : [ 'draggable' ],
-        draggable         : 'true',
-  
-        dragStart(event) {
-            return event.dataTransfer.setData('text/data', get(this, 'content'));
-        }
+        needs: 'calendar'
+
 });

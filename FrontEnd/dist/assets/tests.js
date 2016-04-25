@@ -49,7 +49,7 @@ define('awesome-schedule-front/tests/components/coach-sidebar.jshint', ['exports
   QUnit.module('JSHint - components/coach-sidebar.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(true, 'components/coach-sidebar.js should pass jshint.');
+    assert.ok(false, 'components/coach-sidebar.js should pass jshint.\ncomponents/coach-sidebar.js: line 4, col 7, \'get\' is defined but never used.\n\n1 error');
   });
 });
 define('awesome-schedule-front/tests/components/day-tile.jshint', ['exports'], function (exports) {
@@ -58,7 +58,7 @@ define('awesome-schedule-front/tests/components/day-tile.jshint', ['exports'], f
   QUnit.module('JSHint - components/day-tile.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(true, 'components/day-tile.js should pass jshint.');
+    assert.ok(false, 'components/day-tile.js should pass jshint.\ncomponents/day-tile.js: line 6, col 6, \'set\' is defined but never used.\n\n1 error');
   });
 });
 define('awesome-schedule-front/tests/components/hour-tracker.jshint', ['exports'], function (exports) {

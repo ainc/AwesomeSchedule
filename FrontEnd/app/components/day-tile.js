@@ -17,34 +17,12 @@ export default Ember.Component.extend({
         
         
                     
-        //Drag and drop feature
-        className:  ['draggableDropzone'],
-        classNameBindings: ['dragClass'],
-        dragClass:  'deactivated',
-
-        dragLeave(event){
-            event.preventDefault();
-            set(this,'dragClass','activated');
-        },
-
-        dragOver(event){
-            event.preventDefault();
-            set(this,'dragClass','deactivated');
-        },
-
-        drop(event){
-            var data = event.dataTransfer.getData('text/data');
-            this.sendAction('dropped',data);
-
-            set(this,'dragClass','deactivated');
-        },
-        
-        
         actions:{
-            getCourse: function(){
-                this.sendAction('action',this.get('getDate'));
-            },
-
+            scheduleInstructor: function(){
+                console.log(this.get('course'));
+                this.sendAction('action',this.get('course'));
+                
+            }
         }
 	
 });
