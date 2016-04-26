@@ -280,30 +280,41 @@ define('awesome-schedule-front/components/coach-sidebar', ['exports', 'ember'], 
 });
 define('awesome-schedule-front/components/day-tile', ['exports', 'ember'], function (exports, _ember) {
 
-       //The tiles on the calendar page, the different wrappers are used depending on the data presented in the calendar
-       //HTML side for this file stored in /templates/components/
+    //The tiles on the calendar page, the different wrappers are used depending on the data presented in the calendar
+    //HTML side for this file stored in /templates/components/
 
-       exports['default'] = _ember['default'].Component.extend({
+    exports['default'] = _ember['default'].Component.extend({
 
-              coaches: _ember['default'].inject.service('coach-info'),
-              tagName: 'dayTileHeader',
-              wrapperSTTS: 'headerTileSTTS',
-              wrapperMWF: 'headerTileMWF',
-              wrapperEmptySTTS: 'blankTileSTTS',
-              wrapperEmptyMWF: 'blankTileMWF',
-              wrapperFilled: 'colorTile',
-              date: "",
-              scheduledCoach: "",
+        coaches: _ember['default'].inject.service('coach-info'),
+        tagName: 'dayTileHeader',
+        wrapperSTTS: 'headerTileSTTS',
+        wrapperMWF: 'headerTileMWF',
+        wrapperEmptySTTS: 'blankTileSTTS',
+        wrapperEmptyMWF: 'blankTileMWF',
+        wrapperFilled: 'colorTile',
+        date: "",
+        scheduledCoach: "",
+        course: "",
+        checkForClasses: function checkForClasses() {
+            console.log(this.get('course'));
+            if (this.get('course') === "") {
+                return false;
+            } else {
+                return true;
+            }
+        },
 
-              actions: {
-                     scheduleInstructor: function scheduleInstructor() {
-                            console.log(_ember['default'].typeOf(this.get('scheduledCoach')));
-                            this.set('scheduledCoach', 'Mike Jones');
-                            this.sendAction('action', this.get('date'), this.get('course'));
-                     }
-              }
+        actions: {
+            scheduleInstructor: function scheduleInstructor() {
+                if (this.get('course') == null) {} else {
 
-       });
+                    this.set('scheduledCoach', 'Mike Jones');
+                    this.sendAction('action', this.get('date'), this.get('course'));
+                }
+            }
+        }
+
+    });
 });
 define('awesome-schedule-front/components/draggable-object-target', ['exports', 'ember-drag-drop/components/draggable-object-target'], function (exports, _emberDragDropComponentsDraggableObjectTarget) {
   exports['default'] = _emberDragDropComponentsDraggableObjectTarget['default'];
@@ -6892,10 +6903,10 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
             return el0;
           },
           buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-            var element3 = dom.childAt(fragment, [0]);
+            var element5 = dom.childAt(fragment, [0]);
             var morphs = new Array(2);
-            morphs[0] = dom.createAttrMorph(element3, 'class');
-            morphs[1] = dom.createMorphAt(element3, 1, 1);
+            morphs[0] = dom.createAttrMorph(element5, 'class');
+            morphs[1] = dom.createMorphAt(element5, 1, 1);
             return morphs;
           },
           statements: [["attribute", "class", ["get", "wrapperSTTS", ["loc", [null, [4, 15], [4, 26]]]]], ["content", "day", ["loc", [null, [5, 4], [5, 11]]]]],
@@ -6941,10 +6952,10 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
             return el0;
           },
           buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-            var element2 = dom.childAt(fragment, [0]);
+            var element4 = dom.childAt(fragment, [0]);
             var morphs = new Array(2);
-            morphs[0] = dom.createAttrMorph(element2, 'class');
-            morphs[1] = dom.createMorphAt(element2, 1, 1);
+            morphs[0] = dom.createAttrMorph(element4, 'class');
+            morphs[1] = dom.createMorphAt(element4, 1, 1);
             return morphs;
           },
           statements: [["attribute", "class", ["get", "wrapperMWF", ["loc", [null, [8, 15], [8, 25]]]]], ["content", "day", ["loc", [null, [9, 4], [9, 11]]]]],
@@ -6994,6 +7005,65 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
     var child1 = (function () {
       var child0 = (function () {
         var child0 = (function () {
+          var child0 = (function () {
+            return {
+              meta: {
+                "fragmentReason": false,
+                "revision": "Ember@2.4.3",
+                "loc": {
+                  "source": null,
+                  "start": {
+                    "line": 17,
+                    "column": 0
+                  },
+                  "end": {
+                    "line": 25,
+                    "column": 0
+                  }
+                },
+                "moduleName": "awesome-schedule-front/templates/components/day-tile.hbs"
+              },
+              isEmpty: false,
+              arity: 0,
+              cachedFragment: null,
+              hasRendered: false,
+              buildFragment: function buildFragment(dom) {
+                var el0 = dom.createDocumentFragment();
+                var el1 = dom.createElement("div");
+                dom.setAttribute(el1, "id", "tile");
+                var el2 = dom.createTextNode("\n    ");
+                dom.appendChild(el1, el2);
+                var el2 = dom.createElement("p");
+                dom.setAttribute(el2, "class", "displayCourse");
+                var el3 = dom.createComment("");
+                dom.appendChild(el2, el3);
+                dom.appendChild(el1, el2);
+                var el2 = dom.createTextNode("\n    ");
+                dom.appendChild(el1, el2);
+                var el2 = dom.createElement("p");
+                var el3 = dom.createComment("");
+                dom.appendChild(el2, el3);
+                dom.appendChild(el1, el2);
+                var el2 = dom.createTextNode("\n\n\n\n");
+                dom.appendChild(el1, el2);
+                dom.appendChild(el0, el1);
+                var el1 = dom.createTextNode("\n");
+                dom.appendChild(el0, el1);
+                return el0;
+              },
+              buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+                var element3 = dom.childAt(fragment, [0]);
+                var morphs = new Array(3);
+                morphs[0] = dom.createAttrMorph(element3, 'class');
+                morphs[1] = dom.createMorphAt(dom.childAt(element3, [1]), 0, 0);
+                morphs[2] = dom.createMorphAt(dom.childAt(element3, [3]), 0, 0);
+                return morphs;
+              },
+              statements: [["attribute", "class", ["get", "wrapperEmptySTTS", ["loc", [null, [18, 15], [18, 31]]]]], ["content", "course", ["loc", [null, [19, 29], [19, 39]]]], ["content", "scheduledCoach", ["loc", [null, [20, 7], [20, 25]]]]],
+              locals: [],
+              templates: []
+            };
+          })();
           return {
             meta: {
               "fragmentReason": false,
@@ -7005,7 +7075,7 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
                   "column": 0
                 },
                 "end": {
-                  "line": 24,
+                  "line": 26,
                   "column": 0
                 }
               },
@@ -7017,6 +7087,191 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
             hasRendered: false,
             buildFragment: function buildFragment(dom) {
               var el0 = dom.createDocumentFragment();
+              var el1 = dom.createComment("");
+              dom.appendChild(el0, el1);
+              return el0;
+            },
+            buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+              var morphs = new Array(1);
+              morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+              dom.insertBoundary(fragment, 0);
+              dom.insertBoundary(fragment, null);
+              return morphs;
+            },
+            statements: [["block", "draggable-object-target", [], ["action", "scheduleInstructor"], 0, null, ["loc", [null, [17, 0], [25, 28]]]]],
+            locals: [],
+            templates: [child0]
+          };
+        })();
+        var child1 = (function () {
+          var child0 = (function () {
+            return {
+              meta: {
+                "fragmentReason": false,
+                "revision": "Ember@2.4.3",
+                "loc": {
+                  "source": null,
+                  "start": {
+                    "line": 27,
+                    "column": 0
+                  },
+                  "end": {
+                    "line": 35,
+                    "column": 0
+                  }
+                },
+                "moduleName": "awesome-schedule-front/templates/components/day-tile.hbs"
+              },
+              isEmpty: false,
+              arity: 0,
+              cachedFragment: null,
+              hasRendered: false,
+              buildFragment: function buildFragment(dom) {
+                var el0 = dom.createDocumentFragment();
+                var el1 = dom.createElement("div");
+                dom.setAttribute(el1, "id", "tile");
+                var el2 = dom.createTextNode("\n    ");
+                dom.appendChild(el1, el2);
+                var el2 = dom.createElement("p");
+                dom.setAttribute(el2, "class", "displayCourse");
+                var el3 = dom.createComment("");
+                dom.appendChild(el2, el3);
+                dom.appendChild(el1, el2);
+                var el2 = dom.createTextNode("\n    ");
+                dom.appendChild(el1, el2);
+                var el2 = dom.createElement("p");
+                var el3 = dom.createComment("");
+                dom.appendChild(el2, el3);
+                dom.appendChild(el1, el2);
+                var el2 = dom.createTextNode("\n    \n\n\n");
+                dom.appendChild(el1, el2);
+                dom.appendChild(el0, el1);
+                var el1 = dom.createTextNode("\n");
+                dom.appendChild(el0, el1);
+                return el0;
+              },
+              buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+                var element2 = dom.childAt(fragment, [0]);
+                var morphs = new Array(3);
+                morphs[0] = dom.createAttrMorph(element2, 'class');
+                morphs[1] = dom.createMorphAt(dom.childAt(element2, [1]), 0, 0);
+                morphs[2] = dom.createMorphAt(dom.childAt(element2, [3]), 0, 0);
+                return morphs;
+              },
+              statements: [["attribute", "class", ["get", "wrapperEmptyMWF", ["loc", [null, [28, 15], [28, 30]]]]], ["content", "course", ["loc", [null, [29, 30], [29, 40]]]], ["content", "scheduledCoach", ["loc", [null, [30, 7], [30, 25]]]]],
+              locals: [],
+              templates: []
+            };
+          })();
+          return {
+            meta: {
+              "fragmentReason": false,
+              "revision": "Ember@2.4.3",
+              "loc": {
+                "source": null,
+                "start": {
+                  "line": 26,
+                  "column": 0
+                },
+                "end": {
+                  "line": 37,
+                  "column": 0
+                }
+              },
+              "moduleName": "awesome-schedule-front/templates/components/day-tile.hbs"
+            },
+            isEmpty: false,
+            arity: 0,
+            cachedFragment: null,
+            hasRendered: false,
+            buildFragment: function buildFragment(dom) {
+              var el0 = dom.createDocumentFragment();
+              var el1 = dom.createComment("");
+              dom.appendChild(el0, el1);
+              var el1 = dom.createTextNode("\n");
+              dom.appendChild(el0, el1);
+              return el0;
+            },
+            buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+              var morphs = new Array(1);
+              morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+              dom.insertBoundary(fragment, 0);
+              return morphs;
+            },
+            statements: [["block", "draggable-object-target", [], ["action", "scheduleInstructor"], 0, null, ["loc", [null, [27, 0], [35, 28]]]]],
+            locals: [],
+            templates: [child0]
+          };
+        })();
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.4.3",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 15,
+                "column": 0
+              },
+              "end": {
+                "line": 39,
+                "column": 0
+              }
+            },
+            "moduleName": "awesome-schedule-front/templates/components/day-tile.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createComment("There are no classes, therefore no reason to schedule a coach");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var morphs = new Array(1);
+            morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+            dom.insertBoundary(fragment, 0);
+            return morphs;
+          },
+          statements: [["block", "if", [["get", "redDay", ["loc", [null, [16, 6], [16, 12]]]]], [], 0, 1, ["loc", [null, [16, 0], [37, 7]]]]],
+          locals: [],
+          templates: [child0, child1]
+        };
+      })();
+      var child1 = (function () {
+        var child0 = (function () {
+          return {
+            meta: {
+              "fragmentReason": false,
+              "revision": "Ember@2.4.3",
+              "loc": {
+                "source": null,
+                "start": {
+                  "line": 40,
+                  "column": 0
+                },
+                "end": {
+                  "line": 50,
+                  "column": 0
+                }
+              },
+              "moduleName": "awesome-schedule-front/templates/components/day-tile.hbs"
+            },
+            isEmpty: false,
+            arity: 0,
+            cachedFragment: null,
+            hasRendered: false,
+            buildFragment: function buildFragment(dom) {
+              var el0 = dom.createDocumentFragment();
+              var el1 = dom.createTextNode("\n");
+              dom.appendChild(el0, el1);
               var el1 = dom.createElement("div");
               dom.setAttribute(el1, "id", "tile");
               var el2 = dom.createTextNode("\n    ");
@@ -7035,64 +7290,24 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
               var el2 = dom.createTextNode("\n\n\n\n");
               dom.appendChild(el1, el2);
               dom.appendChild(el0, el1);
-              var el1 = dom.createTextNode("\n");
+              var el1 = dom.createTextNode("\n\n");
               dom.appendChild(el0, el1);
               return el0;
             },
             buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-              var element1 = dom.childAt(fragment, [0]);
+              var element1 = dom.childAt(fragment, [1]);
               var morphs = new Array(3);
               morphs[0] = dom.createAttrMorph(element1, 'class');
               morphs[1] = dom.createMorphAt(dom.childAt(element1, [1]), 0, 0);
               morphs[2] = dom.createMorphAt(dom.childAt(element1, [3]), 0, 0);
               return morphs;
             },
-            statements: [["attribute", "class", ["get", "wrapperEmptySTTS", ["loc", [null, [17, 15], [17, 31]]]]], ["content", "course", ["loc", [null, [18, 29], [18, 39]]]], ["content", "scheduledCoach", ["loc", [null, [19, 7], [19, 25]]]]],
+            statements: [["attribute", "class", ["get", "wrapperEmptySTTS", ["loc", [null, [42, 15], [42, 31]]]]], ["content", "course", ["loc", [null, [43, 29], [43, 39]]]], ["content", "scheduledCoach", ["loc", [null, [44, 7], [44, 25]]]]],
             locals: [],
             templates: []
           };
         })();
-        return {
-          meta: {
-            "fragmentReason": false,
-            "revision": "Ember@2.4.3",
-            "loc": {
-              "source": null,
-              "start": {
-                "line": 15,
-                "column": 0
-              },
-              "end": {
-                "line": 25,
-                "column": 0
-              }
-            },
-            "moduleName": "awesome-schedule-front/templates/components/day-tile.hbs"
-          },
-          isEmpty: false,
-          arity: 0,
-          cachedFragment: null,
-          hasRendered: false,
-          buildFragment: function buildFragment(dom) {
-            var el0 = dom.createDocumentFragment();
-            var el1 = dom.createComment("");
-            dom.appendChild(el0, el1);
-            return el0;
-          },
-          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-            var morphs = new Array(1);
-            morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
-            dom.insertBoundary(fragment, 0);
-            dom.insertBoundary(fragment, null);
-            return morphs;
-          },
-          statements: [["block", "draggable-object-target", [], ["action", "scheduleInstructor"], 0, null, ["loc", [null, [16, 0], [24, 28]]]]],
-          locals: [],
-          templates: [child0]
-        };
-      })();
-      var child1 = (function () {
-        var child0 = (function () {
+        var child1 = (function () {
           return {
             meta: {
               "fragmentReason": false,
@@ -7100,11 +7315,11 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
               "loc": {
                 "source": null,
                 "start": {
-                  "line": 26,
+                  "line": 50,
                   "column": 0
                 },
                 "end": {
-                  "line": 34,
+                  "line": 61,
                   "column": 0
                 }
               },
@@ -7116,6 +7331,8 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
             hasRendered: false,
             buildFragment: function buildFragment(dom) {
               var el0 = dom.createDocumentFragment();
+              var el1 = dom.createTextNode("\n");
+              dom.appendChild(el0, el1);
               var el1 = dom.createElement("div");
               dom.setAttribute(el1, "id", "tile");
               var el2 = dom.createTextNode("\n    ");
@@ -7134,19 +7351,19 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
               var el2 = dom.createTextNode("\n    \n\n\n");
               dom.appendChild(el1, el2);
               dom.appendChild(el0, el1);
-              var el1 = dom.createTextNode("\n");
+              var el1 = dom.createTextNode("\n\n\n");
               dom.appendChild(el0, el1);
               return el0;
             },
             buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-              var element0 = dom.childAt(fragment, [0]);
+              var element0 = dom.childAt(fragment, [1]);
               var morphs = new Array(3);
               morphs[0] = dom.createAttrMorph(element0, 'class');
               morphs[1] = dom.createMorphAt(dom.childAt(element0, [1]), 0, 0);
               morphs[2] = dom.createMorphAt(dom.childAt(element0, [3]), 0, 0);
               return morphs;
             },
-            statements: [["attribute", "class", ["get", "wrapperEmptyMWF", ["loc", [null, [27, 15], [27, 30]]]]], ["content", "course", ["loc", [null, [28, 30], [28, 40]]]], ["content", "scheduledCoach", ["loc", [null, [29, 7], [29, 25]]]]],
+            statements: [["attribute", "class", ["get", "wrapperEmptyMWF", ["loc", [null, [52, 15], [52, 30]]]]], ["content", "course", ["loc", [null, [53, 30], [53, 40]]]], ["content", "scheduledCoach", ["loc", [null, [54, 7], [54, 25]]]]],
             locals: [],
             templates: []
           };
@@ -7158,11 +7375,11 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
             "loc": {
               "source": null,
               "start": {
-                "line": 25,
+                "line": 39,
                 "column": 0
               },
               "end": {
-                "line": 36,
+                "line": 63,
                 "column": 0
               }
             },
@@ -7186,9 +7403,9 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
             dom.insertBoundary(fragment, 0);
             return morphs;
           },
-          statements: [["block", "draggable-object-target", [], ["action", "scheduleInstructor"], 0, null, ["loc", [null, [26, 0], [34, 28]]]]],
+          statements: [["block", "if", [["get", "redDay", ["loc", [null, [40, 6], [40, 12]]]]], [], 0, 1, ["loc", [null, [40, 0], [61, 7]]]]],
           locals: [],
-          templates: [child0]
+          templates: [child0, child1]
         };
       })();
       return {
@@ -7202,7 +7419,7 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
               "column": 0
             },
             "end": {
-              "line": 37,
+              "line": 64,
               "column": 0
             }
           },
@@ -7234,7 +7451,7 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
           dom.insertBoundary(fragment, null);
           return morphs;
         },
-        statements: [["block", "if", [["get", "redDay", ["loc", [null, [15, 6], [15, 12]]]]], [], 0, 1, ["loc", [null, [15, 0], [36, 7]]]]],
+        statements: [["block", "if", [["get", "checkForClasses", ["loc", [null, [15, 6], [15, 21]]]]], [], 0, 1, ["loc", [null, [15, 0], [63, 7]]]]],
         locals: [],
         templates: [child0, child1]
       };
@@ -7253,7 +7470,7 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
             "column": 0
           },
           "end": {
-            "line": 39,
+            "line": 66,
             "column": 0
           }
         },
@@ -7283,7 +7500,7 @@ define("awesome-schedule-front/templates/components/day-tile", ["exports"], func
         morphs[1] = dom.createMorphAt(fragment, 3, 3, contextualElement);
         return morphs;
       },
-      statements: [["block", "if", [["get", "header", ["loc", [null, [2, 6], [2, 12]]]]], [], 0, 1, ["loc", [null, [2, 0], [37, 7]]]], ["content", "yield", ["loc", [null, [38, 0], [38, 9]]]]],
+      statements: [["block", "if", [["get", "header", ["loc", [null, [2, 6], [2, 12]]]]], [], 0, 1, ["loc", [null, [2, 0], [64, 7]]]], ["content", "yield", ["loc", [null, [65, 0], [65, 9]]]]],
       locals: [],
       templates: [child0, child1]
     };

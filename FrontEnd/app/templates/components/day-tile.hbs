@@ -12,6 +12,7 @@
 {{else}} <!--Its not a header tile, populate it with information-->
 
 <!--Eventually will need an if statement to check if there is information that needs to be added to each day.-->
+{{#if checkForClasses}}
 {{#if redDay}}
 {{#draggable-object-target action="scheduleInstructor"}}
 <div class = {{wrapperEmptySTTS}} id="tile">
@@ -32,6 +33,32 @@
 
 </div>
 {{/draggable-object-target}}
+
+{{/if}}
+<!--There are no classes, therefore no reason to schedule a coach-->
+{{else}}
+{{#if redDay}}
+
+<div class = {{wrapperEmptySTTS}} id="tile">
+    <p class="displayCourse">{{course}}</p>
+    <p>{{scheduledCoach}}</p>
+
+
+
+</div>
+
+{{else}}
+
+<div class = {{wrapperEmptyMWF}} id="tile">
+    <p class ="displayCourse">{{course}}</p>
+    <p>{{scheduledCoach}}</p>
+    
+
+
+</div>
+
+
+{{/if}}
 
 {{/if}}
 {{/if}}

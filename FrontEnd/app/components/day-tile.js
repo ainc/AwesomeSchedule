@@ -17,6 +17,16 @@ export default Ember.Component.extend({
 	wrapperFilled: 'colorTile',
         date:"",
         scheduledCoach:"",
+        course:"",
+        checkForClasses: function(){
+            console.log(this.get('course'));
+          if(this.get('course') === ""){
+              return false;
+          }
+          else{
+              return true;
+          }
+        },
         
         
         
@@ -24,9 +34,14 @@ export default Ember.Component.extend({
                     
         actions:{
             scheduleInstructor: function(){
-                console.log(Ember.typeOf(this.get('scheduledCoach')));
+                if(this.get('course') == null){
+                    
+                }
+                else{
+                
                 this.set('scheduledCoach','Mike Jones');
                 this.sendAction('action',this.get('date'),this.get('course'));
+                }
                 
             }
         }
