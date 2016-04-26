@@ -49,7 +49,7 @@ define('awesome-schedule-front/tests/components/coach-sidebar.jshint', ['exports
   QUnit.module('JSHint - components/coach-sidebar.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'components/coach-sidebar.js should pass jshint.\ncomponents/coach-sidebar.js: line 4, col 7, \'get\' is defined but never used.\n\n1 error');
+    assert.ok(true, 'components/coach-sidebar.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/components/day-tile.jshint', ['exports'], function (exports) {
@@ -58,7 +58,7 @@ define('awesome-schedule-front/tests/components/day-tile.jshint', ['exports'], f
   QUnit.module('JSHint - components/day-tile.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'components/day-tile.js should pass jshint.\ncomponents/day-tile.js: line 6, col 6, \'set\' is defined but never used.\n\n1 error');
+    assert.ok(true, 'components/day-tile.js should pass jshint.');
   });
 });
 define('awesome-schedule-front/tests/components/hour-tracker.jshint', ['exports'], function (exports) {
@@ -1870,6 +1870,15 @@ define('awesome-schedule-front/tests/routes/test.jshint', ['exports'], function 
     assert.ok(true, 'routes/test.js should pass jshint.');
   });
 });
+define('awesome-schedule-front/tests/services/coach-info.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - services/coach-info.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'services/coach-info.js should pass jshint.');
+  });
+});
 define('awesome-schedule-front/tests/test-helper', ['exports', 'awesome-schedule-front/tests/helpers/resolver', 'ember-qunit'], function (exports, _awesomeScheduleFrontTestsHelpersResolver, _emberQunit) {
 
   (0, _emberQunit.setResolver)(_awesomeScheduleFrontTestsHelpersResolver['default']);
@@ -2282,6 +2291,28 @@ define('awesome-schedule-front/tests/unit/routes/test-test.jshint', ['exports'],
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'unit/routes/test-test.js should pass jshint.');
+  });
+});
+define('awesome-schedule-front/tests/unit/services/coach-info-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
+
+  (0, _emberQunit.moduleFor)('service:coach-info', 'Unit | Service | coach info', {
+    // Specify the other units that are required for this test.
+    // needs: ['service:foo']
+  });
+
+  // Replace this with your real tests.
+  (0, _emberQunit.test)('it exists', function (assert) {
+    var service = this.subject();
+    assert.ok(service);
+  });
+});
+define('awesome-schedule-front/tests/unit/services/coach-info-test.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - unit/services/coach-info-test.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/services/coach-info-test.js should pass jshint.');
   });
 });
 /* jshint ignore:start */
