@@ -1,13 +1,13 @@
 <!--This component is for the sidebar on the right that will hold the coaches for dragging into the schedule-->
 {{#if header}}
 <div class = {{coachHeaderTile}}>
-     <p>Coaches</p>
+     <p class="coachTitleBar">Coaches</p>
 </div>	
 {{else}}
 <!-- COACH NAME AND INFORMATION TILE-->
 {{#draggable-object content=this}}
 <div class ="coachPlate">
-    <p>{{name}}</p>
+    <p class="coachName">{{name}}</p>
     
 </div>
 {{/draggable-object}}

@@ -18,18 +18,8 @@ export default Ember.Component.extend({
         date:"",
         scheduledCoach:"",
         course:"",
-        checkForClasses: function(){
-            console.log(this.get('course'));
-          if(this.get('course') === ""){
-              return false;
-          }
-          else{
-              return true;
-          }
-        },
         
-        
-        
+
         
                     
         actions:{

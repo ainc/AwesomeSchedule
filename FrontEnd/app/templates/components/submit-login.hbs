@@ -1,4 +1,4 @@
 <!-- The input and submit ability for the login page. passes this information to submit-login.js which takes it to the login router to go to the API-->
 {{input value=username placeholder="Username/Email"}}
-{{input value=password placeholder="Password"}}
+{{input value=password type="password" placeholder="Password"}}
 <button class ="SubmitLogin" {{action "submit" }}>Submit</button>
