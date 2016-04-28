@@ -14,7 +14,7 @@
 <!--Eventually will need an if statement to check if there is information that needs to be added to each day.-->
 
 {{#if redDay}}
-{{#draggable-object-target action="scheduleInstructor"}}
+{{#draggable-object-target action="scheduleInstructor" dragOverAction="dragOver" dragOutAction="dragOut"}}
 <div class = {{wrapperEmptySTTS}} id="tile">
     <p class="displayCourse">{{course}}</p>
     <p class ="courseInfo">{{scheduledCoach}}</p>
@@ -25,7 +25,7 @@
 </div>
 {{/draggable-object-target}}
 {{else}}
-{{#draggable-object-target action="scheduleInstructor"}}
+{{#draggable-object-target action="scheduleInstructor" dragOverAction="dragOver" dragOutAction="dragOut"}}
 <div class = {{wrapperEmptyMWF}} id="tile">
     <p class ="displayCourse">{{course}}</p>
     <p class ="courseInfo">{{scheduledCoach}}</p>

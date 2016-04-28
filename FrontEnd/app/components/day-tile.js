@@ -15,6 +15,7 @@ export default Ember.Component.extend({
 	wrapperEmptySTTS: 'blankTileSTTS',
         wrapperEmptyMWF:'blankTileMWF',
 	wrapperFilled: 'colorTile',
+        
         date:"",
         scheduledCoach:"",
         course:"",
@@ -23,17 +24,35 @@ export default Ember.Component.extend({
         
                     
         actions:{
-            scheduleInstructor: function(){
+            scheduleInstructor: function(info){
+                console.log(info.element.firstElementChild.innerText);
                 if(this.get('course') == null){
                     
                 }
                 else{
                 
-                this.set('scheduledCoach','Mike Jones');
+                this.set('scheduledCoach',info.element.firstElementChild.innerText);
                 this.sendAction('action',this.get('date'),this.get('course'));
                 }
                 
-            }
+            },
+            dragOver:function(){
+                if(this.get('redDay')){
+                    this.set('wrapperEmptySTTS','dragOverDay');
+                }else{
+                    this.set('wrapperEmptyMWF','dragOverDay');
+                }    
+                
+                
+            },
+            dragOut:function(){
+              if(this.get('redDay')){
+                  this.set('wrapperEmptySTTS','blankTileSTTS');
+              }else{
+                  this.set('wrapperEmptyMWF','blankTileMWF');
+              }  
+                
+            },
         }
 	
 });

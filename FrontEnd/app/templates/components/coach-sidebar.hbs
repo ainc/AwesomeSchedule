@@ -4,13 +4,22 @@
      <p class="coachTitleBar">Coaches</p>
 </div>	
 {{else}}
-<!-- COACH NAME AND INFORMATION TILE-->
-{{#draggable-object content=this}}
-<div class ="coachPlate">
-    <p class="coachName">{{name}}</p>
+{{#if removeCoach}}
+<div class="coachPlate">
+    {{#draggable-object content=this}}{{name}}
+    <img src="assets/images/removeCoach.png">
+    {{/draggable-object}}
     
 </div>
-{{/draggable-object}}
-{{/if}}
 
+{{else}}
+<!-- COACH NAME AND INFORMATION TILE-->
+
+<div class ="coachPlate">
+    <p class="coachName">{{#draggable-object content=this}}{{name}}{{/draggable-object}}</p>
+    
+</div>
+
+{{/if}}
+{{/if}}
 {{yield}}

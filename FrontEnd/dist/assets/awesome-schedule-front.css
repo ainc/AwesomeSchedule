@@ -6,14 +6,17 @@ html {
 
 :root {
   --main-red-color: #C30017;
-  --main-gray-color: #CCCCCC; }
+  --main-grayText-color: #CCCCCC;
+  --main-background-color: #191919;
+  --main-gray2-color: #999999;
+  --main-gray-color: E2E0E0; }
 
 .ember-application {
-  background-color: white; }
+  background-color: var(--main-background-color); }
 
 /*Navigation buttons at the top of the page*/
 .navButton {
-  background-color: #d81213;
+  background-color: var(--main-red-color);
   padding: 10px;
   border-radius: 4px;
   text-decoration: none;
@@ -68,7 +71,7 @@ html {
   height: 100px; }
 
 .weekIntro {
-  color: var(--main-gray-color);
+  color: var(--main-grayText-color);
   padding-top: 25px;
   font-family: inherit;
   font-size: larger;
@@ -94,7 +97,7 @@ html {
 .headerTileMWF {
   min-width: 100%;
   height: 80px;
-  background-color: #ABABAB;
+  background-color: var(--main-gray2-color);
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: white;
@@ -104,7 +107,7 @@ html {
   min-width: 100%;
   min-height: 100px;
   height: 100%;
-  background-color: #E2E0E0;
+  background-color: var(main-gray-color);
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: white;
@@ -114,7 +117,17 @@ html {
   min-width: 100%;
   min-height: 100px;
   height: 100%;
-  background-color: #ABABAB;
+  background-color: var(--main-gray2-color);
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: white;
+  position: relative; }
+
+.dragOverDay {
+  min-width: 100%;
+  min-height: 100px;
+  height: 100%;
+  background-color: #4DD9FF;
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: white;
@@ -172,7 +185,8 @@ calendarContainer {
       border-left-width: 2px;
       border-left-color: black;
       float: none;
-      height: 100%; }
+      height: 100%;
+      background-color: var(--main-gray-color); }
 
 .coachPlate {
   border: 1px;
