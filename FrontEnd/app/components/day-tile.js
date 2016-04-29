@@ -25,14 +25,19 @@ export default Ember.Component.extend({
                     
         actions:{
             scheduleInstructor: function(info){
-                console.log(info.element.firstElementChild.innerText);
-                if(this.get('course') == null){
-                    
-                }
-                else{
                 
-                this.set('scheduledCoach',info.element.firstElementChild.innerText);
-                this.sendAction('action',this.get('date'),this.get('course'));
+                if((info.element.firstElementChild.innerText === ("Academy"+"\n"+"\n"))||(info.element.firstElementChild.innerText === ("Mentorship"+"\n"+"\n")) || (info.element.firstElementChild.innerText === ("Tutoring"+"\n"+"\n"))){
+                    this.set('course',info.element.firstElementChild.innerText);
+                    
+                }else{
+                    if(this.get('course') == null){
+
+                    }
+                    else{
+
+                    this.set('scheduledCoach',info.element.firstElementChild.innerText);
+                    this.sendAction('action',this.get('date'),this.get('course'));
+                    }
                 }
                 
             },

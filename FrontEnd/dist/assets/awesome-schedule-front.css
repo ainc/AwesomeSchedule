@@ -20,7 +20,7 @@ html {
   padding: 10px;
   border-radius: 4px;
   text-decoration: none;
-  color: white;
+  color: var(--main-grayText-color);
   font-size: 16px;
   font-family: monospace; }
 
