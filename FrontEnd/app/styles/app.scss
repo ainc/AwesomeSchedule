@@ -9,7 +9,7 @@
  --main-grayText-color:#CCCCCC;
  --main-background-color:#191919;
  --main-gray2-color:#999999;
- --main-gray-color:E2E0E0;
+ --main-gray-color:#E2E0E0;
 }
 //change back to this value at the end
 .ember-application{
@@ -57,8 +57,9 @@
     max-height:80px;
     vertical-align: top;
     padding-left:10px;
-    
+       
 }
+
         
 
 /*Logo Tile Wrapper. this and weekTileWrapper make up the left most column.*/
@@ -277,7 +278,7 @@ calendarContainer{
 
 //Section 1. Profile information and hour tracker.
 .coachLeftSide{
-    @include span-columns(4);
+    @include span-columns(3);
     padding-left:20px;
     padding-top:15px;
     
@@ -285,11 +286,41 @@ calendarContainer{
 
 //Section 2. Calendar for classes and scheduling
 .coachCalendar{
-    @include span-columns(7);
+    @include span-columns(8);
     vertical-align:top;
     padding-top:30px;
     padding-bottom:30px;
+    .coachCalendarRow{
+        @include fill-parent();
+        logoHeader{@include span-columns(1 of 8);}
+        coachDayTile{@include span-columns(1 of 8);}
+    }
     
+}
+#logoC{
+    max-width:100%;
+    vertical-align: top;    
+    width:98px;
+    background-color:var(--main-gray-color);
+    border-bottom:white;
+    border-bottom-style:solid;
+ 
+       
+}
+.daysOfWeekC{
+    text-align:center;
+    padding-top:20px;
+    font-size:large;
+    font-weight:400;
+    color:var(--main-grayText-color);
+}
+
+coachDayTile{
+    vertical-align: top;
+    background-color:var(--main-gray2-color);
+    border-style:solid;
+    border-width:1px;
+    border-color:var(--main-gray-color);
 }
 
 

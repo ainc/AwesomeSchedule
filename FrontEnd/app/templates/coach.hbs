@@ -11,109 +11,135 @@
     
     
     <div class="coachCalendar">                      <!--For calendar, subscribe button. -->
-       <calendarContainer style = "vertical-align: top; padding-top:20px">
-    <calendarRow>
-	<calendarViewMain>
         
-		<logoHeader>{{logo-tile logo=true}}</logoHeader>
-		<dayTileHeader>{{day-tile header=true redDay = true day="Sunday"}}</dayTileHeader>
-		<dayTileHeader>{{day-tile header=true day="Monday"}}</dayTileHeader>
-                                        <dayTileHeader>{{day-tile header=true redDay = true day="Tuesday"}}</dayTileHeader>
-                                        <dayTileHeader>{{day-tile header=true day="Wednesday"}}</dayTileHeader>
-                                        <dayTileHeader>{{day-tile header=true redDay = true day="Thursday"}}</dayTileHeader>
-                                        <dayTileHeader>{{day-tile header=true day="Friday"}}</dayTileHeader>
-                                        <dayTileHeader>{{day-tile header=true redDay = true day="Saturday"}}</dayTileHeader>
+        <div class="coachCalendarRow">
+            {{logo-tile coachLogo=true }}
+            {{coach-day header=true day="Sunday"}}
+            {{coach-day header=true day="Monday"}}
+            {{coach-day header=true day="Tuesday"}}
+            {{coach-day header=true day="Wednesday"}}
+            {{coach-day header=true day="Thursday"}}
+            {{coach-day header=true day="Friday"}}
+            {{coach-day header=true day="Saturday"}}
+        </div>
+
+        <div class ="coachCalendarRow">
+		{{#if (dayCheck (format-date 'dddd')  'Sunday') }}
+                {{logo-tile logo=false date=(format-date) }}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+
+
+                {{else if (dayCheck (format-date 'dddd')  'Monday') }}
+                {{logo-tile logo=false date=(format-date 'subtractTime' 1) }}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+
+                {{else if (dayCheck (format-date 'dddd')  'Tuesday') }}
+                {{logo-tile logo=false date=(format-date 'subtractTime' 2) }}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+
+                {{else if (dayCheck (format-date 'dddd')  'Wednesday')}}
+                {{logo-tile logo=false date=(format-date 'subtractTime' 3)}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+
+
+
+                {{else if (dayCheck (format-date 'dddd')  'Thursday') }}
+                {{logo-tile logo=false date=(format-date 'subtractTime' 4) }}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+
+                {{else if (dayCheck (format-date 'dddd')  'Friday') }}
+                {{logo-tile logo=false date=(format-date 'subtractTime' 5) }}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+
+                {{else if (dayCheck (format-date 'dddd')  'Saturday') }}
+                {{logo-tile logo=false date=(format-date 'subtractTime' 6) }}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+
+                {{/if}}
+        </div>
+        
+        <div class ="coachCalendarRow">
+		{{logo-tile logo=false date=(format-date 'W2' 'Su')}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+        </div>
+        
+        <div class ="coachCalendarRow">
+		{{logo-tile logo=false date=(format-date 'W3' 'Su')}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+        </div>
+        
+        <div class ="coachCalendarRow">
+		{{logo-tile logo=false date=(format-date 'W4' 'Su')}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+                {{coach-day}}
+        </div>
+
 
                 
-	</calendarViewMain>
 
-	<calendarViewCoaches>
-		{{coach-sidebar header = true}}
-	</calendarViewCoaches>
-
-        </calendarRow>
-    <calendarRow>
-	<calendarViewMain>
-        
-		<logoHeader>{{logo-tile logo=false}}</logoHeader>
-                                         <dayTileHeader>{{day-tile header=false redDay = true day="NEED DATABASE"}}</dayTileHeader>
-		<dayTileHeader>{{day-tile header=false day="NEED DATABASE"}}</dayTileHeader>
-                                        <dayTileHeader>{{day-tile header=false redDay = true day="NEED DATABASE"}}</dayTileHeader>
-                                        <dayTileHeader>{{day-tile header=false day="NEED DATABASE"}}</dayTileHeader>
-                                        <dayTileHeader>{{day-tile header=false redDay = true day="NEED DATABASE"}}</dayTileHeader>
-                                        <dayTileHeader>{{day-tile header=false day="NEED DATABASE"}}</dayTileHeader>
-                                        <dayTileHeader>{{day-tile header=false redDay = true day="NEED DATABASE"}}</dayTileHeader>
-
-                
-	</calendarViewMain>
-
-	<calendarViewCoaches>
-		{{coach-sidebar header = false}}
-	</calendarViewCoaches>
-    </calendarRow>
-      <calendarRow>
-    <calendarViewMain>
-        
-		<logoHeader>{{logo-tile logo=false}}</logoHeader>
-                                         <dayTileHeader>{{day-tile header=false redDay = true day="NEED DATABASE"}}</dayTileHeader>
-		<dayTileHeader>{{day-tile header=false day="NEED DATABASE"}}</dayTileHeader>
-                                        <dayTileHeader>{{day-tile header=false redDay = true day="NEED DATABASE"}}</dayTileHeader>
-                                        <dayTileHeader>{{day-tile header=false day="NEED DATABASE"}}</dayTileHeader>
-                                        <dayTileHeader>{{day-tile header=false redDay = true day="NEED DATABASE"}}</dayTileHeader>
-                                        <dayTileHeader>{{day-tile header=false day="NEED DATABASE"}}</dayTileHeader>
-                                        <dayTileHeader>{{day-tile header=false redDay = true day="NEED DATABASE"}}</dayTileHeader>
-
-                
-	</calendarViewMain>
-
-	<calendarViewCoaches>
-		{{coach-sidebar header = false}}
-	</calendarViewCoaches>
-      </calendarRow>
-      <calendarRow>
-    <calendarViewMain>
-        
-		<logoHeader>{{logo-tile logo=false}}</logoHeader>
-                                         <dayTileHeader>{{day-tile header=false redDay = true day="NEED DATABASE"}}</dayTileHeader>
-		<dayTileHeader>{{day-tile header=false day="NEED DATABASE"}}</dayTileHeader>
-                                        <dayTileHeader>{{day-tile header=false redDay = true day="NEED DATABASE"}}</dayTileHeader>
-                                        <dayTileHeader>{{day-tile header=false day="NEED DATABASE"}}</dayTileHeader>
-                                        <dayTileHeader>{{day-tile header=false redDay = true day="NEED DATABASE"}}</dayTileHeader>
-                                        <dayTileHeader>{{day-tile header=false day="NEED DATABASE"}}</dayTileHeader>
-                                        <dayTileHeader>{{day-tile header=false redDay = true day="NEED DATABASE"}}</dayTileHeader>
-
-                
-	</calendarViewMain>
-
-	<calendarViewCoaches>
-		{{coach-sidebar header = false}}
-	</calendarViewCoaches>
-      </calendarRow>
-      <calendarRow>
-    <calendarViewMain>
-        
-		<logoHeader>{{logo-tile logo=false}}</logoHeader>
-                                         <dayTileHeader>{{day-tile header=false redDay = true day="NEED DATABASE"}}</dayTileHeader>
-		<dayTileHeader>{{day-tile header=false day="NEED DATABASE"}}</dayTileHeader>
-                                        <dayTileHeader>{{day-tile header=false redDay = true day="NEED DATABASE"}}</dayTileHeader>
-                                        <dayTileHeader>{{day-tile header=false day="NEED DATABASE"}}</dayTileHeader>
-                                        <dayTileHeader>{{day-tile header=false redDay = true day="NEED DATABASE"}}</dayTileHeader>
-                                        <dayTileHeader>{{day-tile header=false day="NEED DATABASE"}}</dayTileHeader>
-                                        <dayTileHeader>{{day-tile header=false redDay = true day="NEED DATABASE"}}</dayTileHeader>
-
-                
-	</calendarViewMain>
-
-	<calendarViewCoaches>
-		{{coach-sidebar header = false}}
-	</calendarViewCoaches>
-	  </calendarRow>
-     
-	</calendarContainer>
     </div>
     
     
-    <div class="coachRightSide">                         <!--For unsubscribe button-->
+    <div class="coachRightSide">                         <!--For unsubscribe button, unavailable button.-->
         
     </div>
     
